@@ -1,0 +1,15 @@
+{
+    "variants": {
+		"facing=north,lit=false":	{ "model": "cyclic:block/dropper"},
+		"facing=north,lit=true":	{ "model": "cyclic:block/dropper_on" },
+	
+		"facing=east,lit=false":	{ "model": "cyclic:block/dropper", "y": 90 },
+		"facing=east,lit=true":		{ "model": "cyclic:block/dropper_on", "y": 90 },
+	
+		"facing=south,lit=false":	{ "model": "cyclic:block/dropper" , "y": 180 },
+		"facing=south,lit=true":	{ "model": "cyclic:block/dropper_on" , "y": 180 },
+	
+		"facing=west,lit=false":	{ "model": "cyclic:block/dropper", "y": 270 },
+		"facing=west,lit=true":		{ "model": "cyclic:block/dropper_on", "y": 270 }
+    }
+}

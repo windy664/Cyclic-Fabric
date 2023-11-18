@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "c": {
+      "item": "minecraft:redstone"
+    },
+    "r": {
+      "item": "minecraft:rail"
+    }
+  },
+  "pattern": [
+    "r r",
+    "rcr",
+    "r r"
+  ],
+  "result": {
+    "count": 8,
+    "item": "cyclic:conveyor"
+  },
+  "show_notification": true
+}

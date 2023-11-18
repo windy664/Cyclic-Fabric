@@ -1,0 +1,26 @@
+{
+	"parent": "block/block",
+
+	"textures": {
+		"side": "blocks/stone",
+		"base_up": "blocks/stone",
+		"down": "blocks/stone",
+		"particle": "blocks/stone"
+	},
+
+	"elements": [
+		{
+			"name": "Base",
+			"from": [ 0, 0, 0 ], 
+			"to": [ 16, 2, 16 ], 
+			"faces": {
+				"north": { "texture": "#base_up" },
+				"east": { "texture": "#base_up" },
+				"south": { "texture": "#base_up" },
+				"west": { "texture": "#base_up" },
+				"up": { "texture": "#base_up" },
+				"down": { "texture": "#down", "cullface": "down" }
+			}
+		}
+	]
+}

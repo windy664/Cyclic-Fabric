@@ -1,0 +1,403 @@
+{
+    "variants": {
+	
+ "facing=north,color=white,type=straight": { "model": "cyclic:block/conveyor/conveyor_white_straight" },
+ "facing=east,color=white,type=straight": { "model": "cyclic:block/conveyor/conveyor_white_straight" ,"y":90},
+ "facing=south,color=white,type=straight": { "model": "cyclic:block/conveyor/conveyor_white_straight","y":180 },
+ "facing=west,color=white,type=straight": { "model": "cyclic:block/conveyor/conveyor_white_straight","y":270 },
+        
+ "facing=north,color=white,type=down": { "model": "cyclic:block/conveyor/conveyor_white_down" },
+ "facing=east,color=white,type=down": { "model": "cyclic:block/conveyor/conveyor_white_down" ,"y":90},
+ "facing=south,color=white,type=down": { "model": "cyclic:block/conveyor/conveyor_white_down","y":180 },
+ "facing=west,color=white,type=down": { "model": "cyclic:block/conveyor/conveyor_white_down","y":270 },
+ "facing=north,color=white,type=up": { "model": "cyclic:block/conveyor/conveyor_white_up"   },
+ "facing=east,color=white,type=up": { "model": "cyclic:block/conveyor/conveyor_white_up" ,"y":90},
+ "facing=south,color=white,type=up": { "model": "cyclic:block/conveyor/conveyor_white_up","y":180 },
+ "facing=west,color=white,type=up": { "model": "cyclic:block/conveyor/conveyor_white_up" ,"y":270 },
+        
+ "facing=north,color=white,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_white_corner_left" ,"y":90},
+ "facing=east,color=white,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_white_corner_left" ,"y":180},
+ "facing=south,color=white,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_white_corner_left" ,"y":270 },
+ "facing=west,color=white,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_white_corner_left","y":0 },
+ "facing=north,color=white,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_white_corner_right","y":270 },
+ "facing=east,color=white,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_white_corner_right" ,"y":0},
+ "facing=south,color=white,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_white_corner_right","y":90 },
+ "facing=west,color=white,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_white_corner_right","y":180 },
+ 
+  "facing=north,color=orange,type=straight": { "model": "cyclic:block/conveyor/conveyor_orange_straight" },
+ "facing=east,color=orange,type=straight": { "model": "cyclic:block/conveyor/conveyor_orange_straight" ,"y":90},
+ "facing=south,color=orange,type=straight": { "model": "cyclic:block/conveyor/conveyor_orange_straight","y":180 },
+ "facing=west,color=orange,type=straight": { "model": "cyclic:block/conveyor/conveyor_orange_straight","y":270 },
+        
+ "facing=north,color=orange,type=down": { "model": "cyclic:block/conveyor/conveyor_orange_down" },
+ "facing=east,color=orange,type=down": { "model": "cyclic:block/conveyor/conveyor_orange_down" ,"y":90},
+ "facing=south,color=orange,type=down": { "model": "cyclic:block/conveyor/conveyor_orange_down","y":180 },
+ "facing=west,color=orange,type=down": { "model": "cyclic:block/conveyor/conveyor_orange_down","y":270 },
+ "facing=north,color=orange,type=up": { "model": "cyclic:block/conveyor/conveyor_orange_up"   },
+ "facing=east,color=orange,type=up": { "model": "cyclic:block/conveyor/conveyor_orange_up" ,"y":90},
+ "facing=south,color=orange,type=up": { "model": "cyclic:block/conveyor/conveyor_orange_up","y":180 },
+ "facing=west,color=orange,type=up": { "model": "cyclic:block/conveyor/conveyor_orange_up" ,"y":270 },
+        
+ "facing=north,color=orange,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_orange_corner_left" ,"y":90},
+ "facing=east,color=orange,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_orange_corner_left" ,"y":180},
+ "facing=south,color=orange,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_orange_corner_left" ,"y":270 },
+ "facing=west,color=orange,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_orange_corner_left","y":0 },
+ "facing=north,color=orange,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_orange_corner_right","y":270 },
+ "facing=east,color=orange,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_orange_corner_right" ,"y":0},
+ "facing=south,color=orange,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_orange_corner_right","y":90 },
+ "facing=west,color=orange,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_orange_corner_right","y":180 },
+ 
+ 
+  "facing=north,color=magenta,type=straight": { "model": "cyclic:block/conveyor/conveyor_magenta_straight" },
+ "facing=east,color=magenta,type=straight": { "model": "cyclic:block/conveyor/conveyor_magenta_straight" ,"y":90},
+ "facing=south,color=magenta,type=straight": { "model": "cyclic:block/conveyor/conveyor_magenta_straight","y":180 },
+ "facing=west,color=magenta,type=straight": { "model": "cyclic:block/conveyor/conveyor_magenta_straight","y":270 },
+        
+ "facing=north,color=magenta,type=down": { "model": "cyclic:block/conveyor/conveyor_magenta_down" },
+ "facing=east,color=magenta,type=down": { "model": "cyclic:block/conveyor/conveyor_magenta_down" ,"y":90},
+ "facing=south,color=magenta,type=down": { "model": "cyclic:block/conveyor/conveyor_magenta_down","y":180 },
+ "facing=west,color=magenta,type=down": { "model": "cyclic:block/conveyor/conveyor_magenta_down","y":270 },
+ "facing=north,color=magenta,type=up": { "model": "cyclic:block/conveyor/conveyor_magenta_up"   },
+ "facing=east,color=magenta,type=up": { "model": "cyclic:block/conveyor/conveyor_magenta_up" ,"y":90},
+ "facing=south,color=magenta,type=up": { "model": "cyclic:block/conveyor/conveyor_magenta_up","y":180 },
+ "facing=west,color=magenta,type=up": { "model": "cyclic:block/conveyor/conveyor_magenta_up" ,"y":270 },
+        
+ "facing=north,color=magenta,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_magenta_corner_left" ,"y":90},
+ "facing=east,color=magenta,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_magenta_corner_left" ,"y":180},
+ "facing=south,color=magenta,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_magenta_corner_left" ,"y":270 },
+ "facing=west,color=magenta,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_magenta_corner_left","y":0 },
+ "facing=north,color=magenta,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_magenta_corner_right","y":270 },
+ "facing=east,color=magenta,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_magenta_corner_right" ,"y":0},
+ "facing=south,color=magenta,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_magenta_corner_right","y":90 },
+ "facing=west,color=magenta,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_magenta_corner_right","y":180 },
+ 
+ 
+  "facing=north,color=light_blue,type=straight": { "model": "cyclic:block/conveyor/conveyor_light_blue_straight" },
+ "facing=east,color=light_blue,type=straight": { "model": "cyclic:block/conveyor/conveyor_light_blue_straight" ,"y":90},
+ "facing=south,color=light_blue,type=straight": { "model": "cyclic:block/conveyor/conveyor_light_blue_straight","y":180 },
+ "facing=west,color=light_blue,type=straight": { "model": "cyclic:block/conveyor/conveyor_light_blue_straight","y":270 },
+        
+ "facing=north,color=light_blue,type=down": { "model": "cyclic:block/conveyor/conveyor_light_blue_down" },
+ "facing=east,color=light_blue,type=down": { "model": "cyclic:block/conveyor/conveyor_light_blue_down" ,"y":90},
+ "facing=south,color=light_blue,type=down": { "model": "cyclic:block/conveyor/conveyor_light_blue_down","y":180 },
+ "facing=west,color=light_blue,type=down": { "model": "cyclic:block/conveyor/conveyor_light_blue_down","y":270 },
+ "facing=north,color=light_blue,type=up": { "model": "cyclic:block/conveyor/conveyor_light_blue_up"   },
+ "facing=east,color=light_blue,type=up": { "model": "cyclic:block/conveyor/conveyor_light_blue_up" ,"y":90},
+ "facing=south,color=light_blue,type=up": { "model": "cyclic:block/conveyor/conveyor_light_blue_up","y":180 },
+ "facing=west,color=light_blue,type=up": { "model": "cyclic:block/conveyor/conveyor_light_blue_up" ,"y":270 },
+        
+ "facing=north,color=light_blue,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_light_blue_corner_left" ,"y":90},
+ "facing=east,color=light_blue,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_light_blue_corner_left" ,"y":180},
+ "facing=south,color=light_blue,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_light_blue_corner_left" ,"y":270 },
+ "facing=west,color=light_blue,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_light_blue_corner_left","y":0 },
+ "facing=north,color=light_blue,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_light_blue_corner_right","y":270 },
+ "facing=east,color=light_blue,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_light_blue_corner_right" ,"y":0},
+ "facing=south,color=light_blue,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_light_blue_corner_right","y":90 },
+ "facing=west,color=light_blue,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_light_blue_corner_right","y":180 },
+ 
+
+ "facing=north,color=yellow,type=straight": { "model": "cyclic:block/conveyor/conveyor_yellow_straight" },
+ "facing=east,color=yellow,type=straight": { "model": "cyclic:block/conveyor/conveyor_yellow_straight" ,"y":90},
+ "facing=south,color=yellow,type=straight": { "model": "cyclic:block/conveyor/conveyor_yellow_straight","y":180 },
+ "facing=west,color=yellow,type=straight": { "model": "cyclic:block/conveyor/conveyor_yellow_straight","y":270 },
+        
+ "facing=north,color=yellow,type=down": { "model": "cyclic:block/conveyor/conveyor_yellow_down" },
+ "facing=east,color=yellow,type=down": { "model": "cyclic:block/conveyor/conveyor_yellow_down" ,"y":90},
+ "facing=south,color=yellow,type=down": { "model": "cyclic:block/conveyor/conveyor_yellow_down","y":180 },
+ "facing=west,color=yellow,type=down": { "model": "cyclic:block/conveyor/conveyor_yellow_down","y":270 },
+ "facing=north,color=yellow,type=up": { "model": "cyclic:block/conveyor/conveyor_yellow_up"   },
+ "facing=east,color=yellow,type=up": { "model": "cyclic:block/conveyor/conveyor_yellow_up" ,"y":90},
+ "facing=south,color=yellow,type=up": { "model": "cyclic:block/conveyor/conveyor_yellow_up","y":180 },
+ "facing=west,color=yellow,type=up": { "model": "cyclic:block/conveyor/conveyor_yellow_up" ,"y":270 },
+        
+ "facing=north,color=yellow,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_yellow_corner_left" ,"y":90},
+ "facing=east,color=yellow,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_yellow_corner_left" ,"y":180},
+ "facing=south,color=yellow,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_yellow_corner_left" ,"y":270 },
+ "facing=west,color=yellow,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_yellow_corner_left","y":0 },
+ "facing=north,color=yellow,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_yellow_corner_right","y":270 },
+ "facing=east,color=yellow,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_yellow_corner_right" ,"y":0},
+ "facing=south,color=yellow,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_yellow_corner_right","y":90 },
+ "facing=west,color=yellow,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_yellow_corner_right","y":180 },
+ 
+ 
+  "facing=north,color=pink,type=straight": { "model": "cyclic:block/conveyor/conveyor_pink_straight" },
+ "facing=east,color=pink,type=straight": { "model": "cyclic:block/conveyor/conveyor_pink_straight" ,"y":90},
+ "facing=south,color=pink,type=straight": { "model": "cyclic:block/conveyor/conveyor_pink_straight","y":180 },
+ "facing=west,color=pink,type=straight": { "model": "cyclic:block/conveyor/conveyor_pink_straight","y":270 },
+        
+ "facing=north,color=pink,type=down": { "model": "cyclic:block/conveyor/conveyor_pink_down" },
+ "facing=east,color=pink,type=down": { "model": "cyclic:block/conveyor/conveyor_pink_down" ,"y":90},
+ "facing=south,color=pink,type=down": { "model": "cyclic:block/conveyor/conveyor_pink_down","y":180 },
+ "facing=west,color=pink,type=down": { "model": "cyclic:block/conveyor/conveyor_pink_down","y":270 },
+ "facing=north,color=pink,type=up": { "model": "cyclic:block/conveyor/conveyor_pink_up"   },
+ "facing=east,color=pink,type=up": { "model": "cyclic:block/conveyor/conveyor_pink_up" ,"y":90},
+ "facing=south,color=pink,type=up": { "model": "cyclic:block/conveyor/conveyor_pink_up","y":180 },
+ "facing=west,color=pink,type=up": { "model": "cyclic:block/conveyor/conveyor_pink_up" ,"y":270 },
+        
+ "facing=north,color=pink,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_pink_corner_left" ,"y":90},
+ "facing=east,color=pink,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_pink_corner_left" ,"y":180},
+ "facing=south,color=pink,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_pink_corner_left" ,"y":270 },
+ "facing=west,color=pink,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_pink_corner_left","y":0 },
+ "facing=north,color=pink,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_pink_corner_right","y":270 },
+ "facing=east,color=pink,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_pink_corner_right" ,"y":0},
+ "facing=south,color=pink,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_pink_corner_right","y":90 },
+ "facing=west,color=pink,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_pink_corner_right","y":180 },
+ 
+ 
+ 
+  "facing=north,color=gray,type=straight": { "model": "cyclic:block/conveyor/conveyor_gray_straight" },
+ "facing=east,color=gray,type=straight": { "model": "cyclic:block/conveyor/conveyor_gray_straight" ,"y":90},
+ "facing=south,color=gray,type=straight": { "model": "cyclic:block/conveyor/conveyor_gray_straight","y":180 },
+ "facing=west,color=gray,type=straight": { "model": "cyclic:block/conveyor/conveyor_gray_straight","y":270 },
+        
+ "facing=north,color=gray,type=down": { "model": "cyclic:block/conveyor/conveyor_gray_down" },
+ "facing=east,color=gray,type=down": { "model": "cyclic:block/conveyor/conveyor_gray_down" ,"y":90},
+ "facing=south,color=gray,type=down": { "model": "cyclic:block/conveyor/conveyor_gray_down","y":180 },
+ "facing=west,color=gray,type=down": { "model": "cyclic:block/conveyor/conveyor_gray_down","y":270 },
+ "facing=north,color=gray,type=up": { "model": "cyclic:block/conveyor/conveyor_gray_up"   },
+ "facing=east,color=gray,type=up": { "model": "cyclic:block/conveyor/conveyor_gray_up" ,"y":90},
+ "facing=south,color=gray,type=up": { "model": "cyclic:block/conveyor/conveyor_gray_up","y":180 },
+ "facing=west,color=gray,type=up": { "model": "cyclic:block/conveyor/conveyor_gray_up" ,"y":270 },
+        
+ "facing=north,color=gray,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_gray_corner_left" ,"y":90},
+ "facing=east,color=gray,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_gray_corner_left" ,"y":180},
+ "facing=south,color=gray,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_gray_corner_left" ,"y":270 },
+ "facing=west,color=gray,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_gray_corner_left","y":0 },
+ "facing=north,color=gray,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_gray_corner_right","y":270 },
+ "facing=east,color=gray,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_gray_corner_right" ,"y":0},
+ "facing=south,color=gray,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_gray_corner_right","y":90 },
+ "facing=west,color=gray,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_gray_corner_right","y":180 },
+ 
+ 
+ 
+ "facing=north,color=light_gray,type=straight": { "model": "cyclic:block/conveyor/conveyor_light_gray_straight" },
+ "facing=east,color=light_gray,type=straight": { "model": "cyclic:block/conveyor/conveyor_light_gray_straight" ,"y":90},
+ "facing=south,color=light_gray,type=straight": { "model": "cyclic:block/conveyor/conveyor_light_gray_straight","y":180 },
+ "facing=west,color=light_gray,type=straight": { "model": "cyclic:block/conveyor/conveyor_light_gray_straight","y":270 },
+        
+ "facing=north,color=light_gray,type=down": { "model": "cyclic:block/conveyor/conveyor_light_gray_down" },
+ "facing=east,color=light_gray,type=down": { "model": "cyclic:block/conveyor/conveyor_light_gray_down" ,"y":90},
+ "facing=south,color=light_gray,type=down": { "model": "cyclic:block/conveyor/conveyor_light_gray_down","y":180 },
+ "facing=west,color=light_gray,type=down": { "model": "cyclic:block/conveyor/conveyor_light_gray_down","y":270 },
+ "facing=north,color=light_gray,type=up": { "model": "cyclic:block/conveyor/conveyor_light_gray_up"   },
+ "facing=east,color=light_gray,type=up": { "model": "cyclic:block/conveyor/conveyor_light_gray_up" ,"y":90},
+ "facing=south,color=light_gray,type=up": { "model": "cyclic:block/conveyor/conveyor_light_gray_up","y":180 },
+ "facing=west,color=light_gray,type=up": { "model": "cyclic:block/conveyor/conveyor_light_gray_up" ,"y":270 },
+        
+ "facing=north,color=light_gray,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_light_gray_corner_left" ,"y":90},
+ "facing=east,color=light_gray,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_light_gray_corner_left" ,"y":180},
+ "facing=south,color=light_gray,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_light_gray_corner_left" ,"y":270 },
+ "facing=west,color=light_gray,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_light_gray_corner_left","y":0 },
+ "facing=north,color=light_gray,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_light_gray_corner_right","y":270 },
+ "facing=east,color=light_gray,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_light_gray_corner_right" ,"y":0},
+ "facing=south,color=light_gray,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_light_gray_corner_right","y":90 },
+ "facing=west,color=light_gray,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_light_gray_corner_right","y":180 },
+ 
+ 
+  "facing=north,color=cyan,type=straight": { "model": "cyclic:block/conveyor/conveyor_cyan_straight" },
+ "facing=east,color=cyan,type=straight": { "model": "cyclic:block/conveyor/conveyor_cyan_straight" ,"y":90},
+ "facing=south,color=cyan,type=straight": { "model": "cyclic:block/conveyor/conveyor_cyan_straight","y":180 },
+ "facing=west,color=cyan,type=straight": { "model": "cyclic:block/conveyor/conveyor_cyan_straight","y":270 },
+        
+ "facing=north,color=cyan,type=down": { "model": "cyclic:block/conveyor/conveyor_cyan_down" },
+ "facing=east,color=cyan,type=down": { "model": "cyclic:block/conveyor/conveyor_cyan_down" ,"y":90},
+ "facing=south,color=cyan,type=down": { "model": "cyclic:block/conveyor/conveyor_cyan_down","y":180 },
+ "facing=west,color=cyan,type=down": { "model": "cyclic:block/conveyor/conveyor_cyan_down","y":270 },
+ "facing=north,color=cyan,type=up": { "model": "cyclic:block/conveyor/conveyor_cyan_up"   },
+ "facing=east,color=cyan,type=up": { "model": "cyclic:block/conveyor/conveyor_cyan_up" ,"y":90},
+ "facing=south,color=cyan,type=up": { "model": "cyclic:block/conveyor/conveyor_cyan_up","y":180 },
+ "facing=west,color=cyan,type=up": { "model": "cyclic:block/conveyor/conveyor_cyan_up" ,"y":270 },
+        
+ "facing=north,color=cyan,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_cyan_corner_left" ,"y":90},
+ "facing=east,color=cyan,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_cyan_corner_left" ,"y":180},
+ "facing=south,color=cyan,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_cyan_corner_left" ,"y":270 },
+ "facing=west,color=cyan,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_cyan_corner_left","y":0 },
+ "facing=north,color=cyan,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_cyan_corner_right","y":270 },
+ "facing=east,color=cyan,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_cyan_corner_right" ,"y":0},
+ "facing=south,color=cyan,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_cyan_corner_right","y":90 },
+ "facing=west,color=cyan,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_cyan_corner_right","y":180 },
+ 
+ 
+ 
+ 
+ "facing=north,color=brown,type=straight": { "model": "cyclic:block/conveyor/conveyor_brown_straight" },
+ "facing=east,color=brown,type=straight": { "model": "cyclic:block/conveyor/conveyor_brown_straight" ,"y":90},
+ "facing=south,color=brown,type=straight": { "model": "cyclic:block/conveyor/conveyor_brown_straight","y":180 },
+ "facing=west,color=brown,type=straight": { "model": "cyclic:block/conveyor/conveyor_brown_straight","y":270 },
+        
+ "facing=north,color=brown,type=down": { "model": "cyclic:block/conveyor/conveyor_brown_down" },
+ "facing=east,color=brown,type=down": { "model": "cyclic:block/conveyor/conveyor_brown_down" ,"y":90},
+ "facing=south,color=brown,type=down": { "model": "cyclic:block/conveyor/conveyor_brown_down","y":180 },
+ "facing=west,color=brown,type=down": { "model": "cyclic:block/conveyor/conveyor_brown_down","y":270 },
+ "facing=north,color=brown,type=up": { "model": "cyclic:block/conveyor/conveyor_brown_up"   },
+ "facing=east,color=brown,type=up": { "model": "cyclic:block/conveyor/conveyor_brown_up" ,"y":90},
+ "facing=south,color=brown,type=up": { "model": "cyclic:block/conveyor/conveyor_brown_up","y":180 },
+ "facing=west,color=brown,type=up": { "model": "cyclic:block/conveyor/conveyor_brown_up" ,"y":270 },
+        
+ "facing=north,color=brown,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_brown_corner_left" ,"y":90},
+ "facing=east,color=brown,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_brown_corner_left" ,"y":180},
+ "facing=south,color=brown,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_brown_corner_left" ,"y":270 },
+ "facing=west,color=brown,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_brown_corner_left","y":0 },
+ "facing=north,color=brown,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_brown_corner_right","y":270 },
+ "facing=east,color=brown,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_brown_corner_right" ,"y":0},
+ "facing=south,color=brown,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_brown_corner_right","y":90 },
+ "facing=west,color=brown,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_brown_corner_right","y":180 },
+ 
+ 
+ 
+  "facing=north,color=green,type=straight": { "model": "cyclic:block/conveyor/conveyor_green_straight" },
+ "facing=east,color=green,type=straight": { "model": "cyclic:block/conveyor/conveyor_green_straight" ,"y":90},
+ "facing=south,color=green,type=straight": { "model": "cyclic:block/conveyor/conveyor_green_straight","y":180 },
+ "facing=west,color=green,type=straight": { "model": "cyclic:block/conveyor/conveyor_green_straight","y":270 },
+        
+ "facing=north,color=green,type=down": { "model": "cyclic:block/conveyor/conveyor_green_down" },
+ "facing=east,color=green,type=down": { "model": "cyclic:block/conveyor/conveyor_green_down" ,"y":90},
+ "facing=south,color=green,type=down": { "model": "cyclic:block/conveyor/conveyor_green_down","y":180 },
+ "facing=west,color=green,type=down": { "model": "cyclic:block/conveyor/conveyor_green_down","y":270 },
+ "facing=north,color=green,type=up": { "model": "cyclic:block/conveyor/conveyor_green_up"   },
+ "facing=east,color=green,type=up": { "model": "cyclic:block/conveyor/conveyor_green_up" ,"y":90},
+ "facing=south,color=green,type=up": { "model": "cyclic:block/conveyor/conveyor_green_up","y":180 },
+ "facing=west,color=green,type=up": { "model": "cyclic:block/conveyor/conveyor_green_up" ,"y":270 },
+        
+ "facing=north,color=green,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_green_corner_left" ,"y":90},
+ "facing=east,color=green,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_green_corner_left" ,"y":180},
+ "facing=south,color=green,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_green_corner_left" ,"y":270 },
+ "facing=west,color=green,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_green_corner_left","y":0 },
+ "facing=north,color=green,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_green_corner_right","y":270 },
+ "facing=east,color=green,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_green_corner_right" ,"y":0},
+ "facing=south,color=green,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_green_corner_right","y":90 },
+ "facing=west,color=green,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_green_corner_right","y":180 },
+ 
+ 
+ 
+ 
+  "facing=north,color=black,type=straight": { "model": "cyclic:block/conveyor/conveyor_black_straight" },
+ "facing=east,color=black,type=straight": { "model": "cyclic:block/conveyor/conveyor_black_straight" ,"y":90},
+ "facing=south,color=black,type=straight": { "model": "cyclic:block/conveyor/conveyor_black_straight","y":180 },
+ "facing=west,color=black,type=straight": { "model": "cyclic:block/conveyor/conveyor_black_straight","y":270 },
+        
+ "facing=north,color=black,type=down": { "model": "cyclic:block/conveyor/conveyor_black_down" },
+ "facing=east,color=black,type=down": { "model": "cyclic:block/conveyor/conveyor_black_down" ,"y":90},
+ "facing=south,color=black,type=down": { "model": "cyclic:block/conveyor/conveyor_black_down","y":180 },
+ "facing=west,color=black,type=down": { "model": "cyclic:block/conveyor/conveyor_black_down","y":270 },
+ "facing=north,color=black,type=up": { "model": "cyclic:block/conveyor/conveyor_black_up"   },
+ "facing=east,color=black,type=up": { "model": "cyclic:block/conveyor/conveyor_black_up" ,"y":90},
+ "facing=south,color=black,type=up": { "model": "cyclic:block/conveyor/conveyor_black_up","y":180 },
+ "facing=west,color=black,type=up": { "model": "cyclic:block/conveyor/conveyor_black_up" ,"y":270 },
+        
+ "facing=north,color=black,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_black_corner_left" ,"y":90},
+ "facing=east,color=black,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_black_corner_left" ,"y":180},
+ "facing=south,color=black,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_black_corner_left" ,"y":270 },
+ "facing=west,color=black,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_black_corner_left","y":0 },
+ "facing=north,color=black,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_black_corner_right","y":270 },
+ "facing=east,color=black,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_black_corner_right" ,"y":0},
+ "facing=south,color=black,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_black_corner_right","y":90 },
+ "facing=west,color=black,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_black_corner_right","y":180 },
+ 
+
+
+
+        
+ "facing=north,color=blue,type=straight": { "model": "cyclic:block/conveyor/conveyor_blue_straight" },
+ "facing=east,color=blue,type=straight": { "model": "cyclic:block/conveyor/conveyor_blue_straight" ,"y":90},
+ "facing=south,color=blue,type=straight": { "model": "cyclic:block/conveyor/conveyor_blue_straight","y":180 },
+ "facing=west,color=blue,type=straight": { "model": "cyclic:block/conveyor/conveyor_blue_straight","y":270 },
+        
+ "facing=north,color=blue,type=down": { "model": "cyclic:block/conveyor/conveyor_blue_down" },
+ "facing=east,color=blue,type=down": { "model": "cyclic:block/conveyor/conveyor_blue_down" ,"y":90},
+ "facing=south,color=blue,type=down": { "model": "cyclic:block/conveyor/conveyor_blue_down","y":180 },
+ "facing=west,color=blue,type=down": { "model": "cyclic:block/conveyor/conveyor_blue_down","y":270 },
+        
+ "facing=north,color=blue,type=up": { "model": "cyclic:block/conveyor/conveyor_blue_up"   },
+ "facing=east,color=blue,type=up": { "model": "cyclic:block/conveyor/conveyor_blue_up" ,"y":90},
+ "facing=south,color=blue,type=up": { "model": "cyclic:block/conveyor/conveyor_blue_up","y":180 },
+ "facing=west,color=blue,type=up": { "model": "cyclic:block/conveyor/conveyor_blue_up" ,"y":270 },
+        
+ "facing=north,color=blue,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_blue_corner_left" ,"y":90},
+ "facing=east,color=blue,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_blue_corner_left" ,"y":180},
+ "facing=south,color=blue,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_blue_corner_left" ,"y":270 },
+ "facing=west,color=blue,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_blue_corner_left","y":0 },
+ "facing=north,color=blue,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_blue_corner_right","y":270 },
+ "facing=east,color=blue,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_blue_corner_right" ,"y":0},
+ "facing=south,color=blue,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_blue_corner_right","y":90 },
+ "facing=west,color=blue,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_blue_corner_right","y":180 },
+ 
+ 
+ 
+  "facing=north,color=purple,type=straight": { "model": "cyclic:block/conveyor/conveyor_purple_straight" },
+ "facing=east,color=purple,type=straight": { "model": "cyclic:block/conveyor/conveyor_purple_straight" ,"y":90},
+ "facing=south,color=purple,type=straight": { "model": "cyclic:block/conveyor/conveyor_purple_straight","y":180 },
+ "facing=west,color=purple,type=straight": { "model": "cyclic:block/conveyor/conveyor_purple_straight","y":270 },
+        
+ "facing=north,color=purple,type=down": { "model": "cyclic:block/conveyor/conveyor_purple_down" },
+ "facing=east,color=purple,type=down": { "model": "cyclic:block/conveyor/conveyor_purple_down" ,"y":90},
+ "facing=south,color=purple,type=down": { "model": "cyclic:block/conveyor/conveyor_purple_down","y":180 },
+ "facing=west,color=purple,type=down": { "model": "cyclic:block/conveyor/conveyor_purple_down","y":270 },
+       
+ "facing=north,color=purple,type=up": { "model": "cyclic:block/conveyor/conveyor_purple_up"   },
+ "facing=east,color=purple,type=up": { "model": "cyclic:block/conveyor/conveyor_purple_up" ,"y":90},
+ "facing=south,color=purple,type=up": { "model": "cyclic:block/conveyor/conveyor_purple_up","y":180 },
+ "facing=west,color=purple,type=up": { "model": "cyclic:block/conveyor/conveyor_purple_up","y":270 },
+        
+
+ "facing=north,color=purple,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_purple_corner_left" ,"y":90},
+ "facing=east,color=purple,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_purple_corner_left" ,"y":180},
+ "facing=south,color=purple,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_purple_corner_left" ,"y":270 },
+ "facing=west,color=purple,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_purple_corner_left","y":0 },
+ "facing=north,color=purple,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_purple_corner_right","y":270 },
+ "facing=east,color=purple,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_purple_corner_right" ,"y":0},
+ "facing=south,color=purple,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_purple_corner_right","y":90 },
+ "facing=west,color=purple,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_purple_corner_right","y":180 },
+ 
+ 
+ 
+ "facing=north,color=lime,type=straight": { "model": "cyclic:block/conveyor/conveyor_lime_straight" },
+ "facing=east,color=lime,type=straight": { "model": "cyclic:block/conveyor/conveyor_lime_straight" ,"y":90},
+ "facing=south,color=lime,type=straight": { "model": "cyclic:block/conveyor/conveyor_lime_straight","y":180 },
+ "facing=west,color=lime,type=straight": { "model": "cyclic:block/conveyor/conveyor_lime_straight","y":270 },
+        
+ "facing=north,color=lime,type=down": { "model": "cyclic:block/conveyor/conveyor_lime_down" },
+ "facing=east,color=lime,type=down": { "model": "cyclic:block/conveyor/conveyor_lime_down" ,"y":90},
+ "facing=south,color=lime,type=down": { "model": "cyclic:block/conveyor/conveyor_lime_down","y":180 },
+ "facing=west,color=lime,type=down": { "model": "cyclic:block/conveyor/conveyor_lime_down","y":270 },
+        
+ "facing=north,color=lime,type=up": { "model": "cyclic:block/conveyor/conveyor_lime_up"    },
+ "facing=east,color=lime,type=up": { "model": "cyclic:block/conveyor/conveyor_lime_up" ,"y":90 },
+ "facing=south,color=lime,type=up": { "model": "cyclic:block/conveyor/conveyor_lime_up","y":180 },
+ "facing=west,color=lime,type=up": { "model": "cyclic:block/conveyor/conveyor_lime_up","y":270 },
+        
+ "facing=north,color=lime,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_lime_corner_left" ,"y":90},
+ "facing=east,color=lime,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_lime_corner_left" ,"y":180},
+ "facing=south,color=lime,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_lime_corner_left" ,"y":270 },
+ "facing=west,color=lime,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_lime_corner_left","y":0 },
+ "facing=north,color=lime,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_lime_corner_right","y":270 },
+ "facing=east,color=lime,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_lime_corner_right" ,"y":0},
+ "facing=south,color=lime,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_lime_corner_right","y":90 },
+ "facing=west,color=lime,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_lime_corner_right","y":180 },
+ 
+  "facing=north,color=red,type=straight": { "model": "cyclic:block/conveyor/conveyor_red_straight" },
+ "facing=east,color=red,type=straight": { "model": "cyclic:block/conveyor/conveyor_red_straight" ,"y":90},
+ "facing=south,color=red,type=straight": { "model": "cyclic:block/conveyor/conveyor_red_straight","y":180 },
+ "facing=west,color=red,type=straight": { "model": "cyclic:block/conveyor/conveyor_red_straight","y":270 },
+        
+ "facing=north,color=red,type=down": { "model": "cyclic:block/conveyor/conveyor_red_down" },
+ "facing=east,color=red,type=down": { "model": "cyclic:block/conveyor/conveyor_red_down" ,"y":90},
+ "facing=south,color=red,type=down": { "model": "cyclic:block/conveyor/conveyor_red_down","y":180 },
+ "facing=west,color=red,type=down": { "model": "cyclic:block/conveyor/conveyor_red_down","y":270 },
+        
+ "facing=north,color=red,type=up": { "model": "cyclic:block/conveyor/conveyor_red_up"   },
+ "facing=east,color=red,type=up": { "model": "cyclic:block/conveyor/conveyor_red_up" ,"y":90 },
+ "facing=south,color=red,type=up": { "model": "cyclic:block/conveyor/conveyor_red_up","y":180 },
+ "facing=west,color=red,type=up": { "model": "cyclic:block/conveyor/conveyor_red_up","y":270 },
+        
+ "facing=north,color=red,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_red_corner_left" ,"y":90},
+ "facing=east,color=red,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_red_corner_left" ,"y":180},
+ "facing=south,color=red,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_red_corner_left" ,"y": 270 },
+ "facing=west,color=red,type=corner_left": { "model": "cyclic:block/conveyor/conveyor_red_corner_left","y":0 },
+ "facing=north,color=red,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_red_corner_right","y":270 },
+ "facing=east,color=red,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_red_corner_right" ,"y":0},
+ "facing=south,color=red,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_red_corner_right","y":90 },
+ "facing=west,color=red,type=corner_right": { "model": "cyclic:block/conveyor/conveyor_red_corner_right","y":180 }
+ 
+    }
+}

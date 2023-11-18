@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "cyclic",
+	"version": "${version}",
+	"name": "Cyclic",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "MIT",
+	"icon": "assets/cyclic/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.knsh.cyclic.Cyclic"
+		],
+		"client": [
+			"net.knsh.cyclic.client.CyclicClient"
+		],
+		"fabric-datagen": [
+			"net.knsh.cyclic.datagen.CyclicDataGenerator"
+		]
+	},
+	"mixins": [
+		"cyclic.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.14.24",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
