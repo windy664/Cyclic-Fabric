@@ -1,4 +1,4 @@
-<h1 align="center"> Cyclic Fabric <br>
-  <br>
-</h1>
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+<h1 align="center"> Cyclic Fabric</h1>
+<p align="center">An unoffical <b>W.I.P.</b> port of the Cyclic mod for Fabric</p>
+
+Currently very incomplete!
