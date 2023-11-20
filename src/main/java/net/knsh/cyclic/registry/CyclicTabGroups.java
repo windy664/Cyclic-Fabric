@@ -27,6 +27,7 @@ public class CyclicTabGroups {
                 entries.accept(CyclicBlocks.TRASH.block());
                 entries.accept(CyclicBlocks.HOPPER.block());
                 entries.accept(CyclicBlocks.FLUIDHOPPER.block());
+                entries.accept(CyclicBlocks.HOPPERGOLD.block());
             }))
             .build();
 

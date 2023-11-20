@@ -14,7 +14,7 @@ repositories {
 	maven { url = "https://maven.parchmentmc.org" } // Parchment mappings
 	maven { url = "https://maven.quiltmc.org/repository/release" } // Quilt Mappings
 	maven { url = "https://maven.terraformersmc.com/" } // ModMenu, EMI
-	maven { url = "https://maven.ladysnake.org/releases" }
+	maven { url = "https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1" } // DevAuth
 }
 
 loom {
@@ -56,13 +56,15 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"
-	modLocalRuntime "dev.emi:emi-fabric:${emi_version}"
-	modImplementation ("com.terraformersmc:modmenu:${project.modmenu_version}")
-
 	include modApi("teamreborn:energy:${project.teamreborn_energy}") {
 		transitive = false
 	}
+
+	// dev util stuff
+	modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"
+	modLocalRuntime "dev.emi:emi-fabric:${emi_version}"
+	modImplementation ("com.terraformersmc:modmenu:${project.modmenu_version}")
+	modRuntimeOnly("me.djtheredstoner:DevAuth-fabric:${project.devauth_version}")
 }
 
 processResources {

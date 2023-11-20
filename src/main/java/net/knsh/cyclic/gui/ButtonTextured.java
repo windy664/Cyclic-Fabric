@@ -14,12 +14,12 @@ public class ButtonTextured extends Button implements IHasTooltip {
     public int xOffset = 0;
     public int yOffset = 0;
 
-    public ButtonTextured(int xPos, int yPos, int width, int height, String displayString, OnPress handler, CreateNarration narrationSupplier) {
-        super(xPos, yPos, width, height, Component.translatable(displayString), handler, narrationSupplier);
+    public ButtonTextured(int xPos, int yPos, int width, int height, String displayString, OnPress handler) {
+        super(xPos, yPos, width, height, Component.translatable(displayString), handler, textSupplier -> textSupplier.get());
     }
 
-    public ButtonTextured(int xPos, int yPos, int width, int height, TextureEnum tid, String tooltip, OnPress handler, CreateNarration narrationSupplier) {
-        super(xPos, yPos, width, height, Component.translatable(""), handler, narrationSupplier);
+    public ButtonTextured(int xPos, int yPos, int width, int height, TextureEnum tid, String tooltip, OnPress handler) {
+        super(xPos, yPos, width, height, Component.translatable(""), handler, textSupplier -> textSupplier.get());
         this.setTooltip(tooltip);
         this.setTextureId(tid);
     }

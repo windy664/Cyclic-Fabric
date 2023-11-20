@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.knsh.cyclic.block.BlockEntityCyclic;
 import net.knsh.cyclic.network.PacketIdentifiers;
+import net.knsh.cyclic.network.packets.PacketTileData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 
@@ -15,20 +16,14 @@ public class ButtonMachineField extends ButtonMachine {
     private String tooltipPrefix;
 
     public ButtonMachineField(int xPos, int yPos, int field, BlockPos pos) {
-        this(xPos, yPos, field, pos, TextureEnum.REDSTONE_ON, TextureEnum.REDSTONE_NEEDED, "gui.cyclic.redstone", textSupplier -> textSupplier.get());
+        this(xPos, yPos, field, pos, TextureEnum.REDSTONE_ON, TextureEnum.REDSTONE_NEEDED, "gui.cyclic.redstone");
     }
 
-    public ButtonMachineField(int xPos, int yPos, int field, BlockPos pos, TextureEnum toff, TextureEnum tonn, String tooltipPrefix, CreateNarration narrationSupplier) {
+    public ButtonMachineField(int xPos, int yPos, int field, BlockPos pos, TextureEnum toff, TextureEnum tonn, String tooltipPrefix) {
         super(xPos, yPos, 20, 20, "", (p) -> {
             //save included
-            FriendlyByteBuf buf = PacketByteBufs.create();
-            buf.writeInt(field);
-            buf.writeBlockPos(pos);
-            buf.writeBoolean(true);
-
-            ClientPlayNetworking.send(PacketIdentifiers.TILE_DATA, buf);
-
-        }, narrationSupplier);
+            ClientPlayNetworking.send(PacketIdentifiers.TILE_DATA, PacketTileData.encode(new PacketTileData(field, pos)));
+        });
         this.tilePos = pos;
         this.setTileField(field);
         this.textureZero = toff;

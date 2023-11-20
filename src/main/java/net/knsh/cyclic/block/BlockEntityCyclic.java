@@ -9,13 +9,16 @@ import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import net.knsh.cyclic.library.capabilities.FluidTankBase;
 import net.knsh.cyclic.library.core.IHasEnergy;
 import net.knsh.cyclic.library.core.IHasFluid;
+import net.knsh.cyclic.util.ImplementedInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Container;
+import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -23,7 +26,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class BlockEntityCyclic extends BlockEntity implements IHasFluid, IHasEnergy {
+public abstract class BlockEntityCyclic extends BlockEntity implements IHasFluid {
     public static final String NBTINV = "inv";
     public static final String NBTFLUID = "fluid";
     public static final String NBTENERGY = "energy";
@@ -35,16 +38,6 @@ public abstract class BlockEntityCyclic extends BlockEntity implements IHasFluid
 
     public BlockEntityCyclic(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-    }
-
-    @Override
-    public int getEnergy() {
-        return 0;
-    }
-
-    @Override
-    public void setEnergy(int value) {
-
     }
 
     public int getTimer() {

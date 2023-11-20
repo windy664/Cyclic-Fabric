@@ -4,7 +4,6 @@ import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
-import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.BlockEntityCyclic;
 import net.knsh.cyclic.fluid.FluidXpJuiceHolder;
 import net.knsh.cyclic.library.capabilities.FluidTankBase;
@@ -47,7 +46,6 @@ public class AnvilVoidBlockEntity extends BlockEntityCyclic implements ExtendedS
         super(CyclicBlocks.ANVILVOID.blockEntity(), pos, state);
         this.needsRedstone = 1;
         tank.fluidBlockIdentifier = FluidXpJuiceHolder.NAME;
-        Cyclic.LOGGER.info(String.valueOf(getContainerSize()));
     }
 
     @Override

@@ -13,11 +13,14 @@ import net.knsh.cyclic.block.hoppergold.GoldHopperBlockEntity;
 import net.knsh.cyclic.library.capabilities.FluidTankBase;
 import net.knsh.cyclic.registry.CyclicBlockEntities;
 import net.knsh.cyclic.registry.CyclicBlocks;
+import net.knsh.cyclic.util.ImplementedInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -60,7 +63,7 @@ public class SimpleHopperBlockEntity extends BlockEntityCyclic implements Hopper
 
     @Override
     public ItemStack getItem(int slot) {
-        return null;
+        return ItemStack.EMPTY;
     }
 
     @Override
