@@ -26,7 +26,7 @@ public class AnvilVoidScreen extends ScreenBase<AnvilVoidScreenHandler> {
         left = leftPos + 6;
         top = topPos + 6;
         btnRedstone = addRenderableWidget(
-                new ButtonMachineField(left, top, AnvilVoidBlockEntity.Fields.REDSTONE.ordinal(), menu.blockEntity.getBlockPos())
+                new ButtonMachineField(left, top, AnvilVoidBlockEntity.Fields.REDSTONE.ordinal(), menu.tile.getBlockPos())
         );
     }
 
@@ -35,8 +35,8 @@ public class AnvilVoidScreen extends ScreenBase<AnvilVoidScreenHandler> {
         this.renderBackground(context);
         super.render(context, mouseX, mouseY, delta);
         this.renderTooltip(context, mouseX, mouseY);
-        btnRedstone.onValueUpdate(menu.blockEntity);
-        fluid.renderHoveredToolTip(context, mouseX, mouseY, menu.blockEntity.getFluid());
+        btnRedstone.onValueUpdate(menu.tile);
+        fluid.renderHoveredToolTip(context, mouseX, mouseY, menu.tile.getFluid());
     }
 
     @Override
@@ -50,6 +50,6 @@ public class AnvilVoidScreen extends ScreenBase<AnvilVoidScreenHandler> {
         this.drawBackground(context, CyclicTextures.INVENTORY);
         this.drawSlot(context, 54, 34);
         this.drawSlotLarge(context, 104, 30);
-        fluid.draw(context, menu.blockEntity.getFluid());
+        fluid.draw(context, menu.tile.getFluid());
     }
 }

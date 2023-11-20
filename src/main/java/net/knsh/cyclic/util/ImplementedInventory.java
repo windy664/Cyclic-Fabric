@@ -2,7 +2,6 @@ package net.knsh.cyclic.util;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
-import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Player;
@@ -13,7 +12,6 @@ import org.jetbrains.annotations.Nullable;
  * A simple {@code SidedInventory} implementation with only default methods + an item list getter.
  *
  * <h2>Reading and writing to tags</h2>
- * Use {@link ContainerHelper#saveAllItems(net.minecraft.nbt.CompoundTag, NonNullList)} and {@link ContainerHelper#loadAllItems(net.minecraft.nbt.CompoundTag, NonNullList)}
  * on {@linkplain #getItems() the item list}.
  *
  * License: <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>
@@ -162,7 +160,6 @@ public interface ImplementedInventory extends WorldlyContainer {
     /**
      * Removes the current stack in the {@code slot} and returns it.
      *
-     * <p>The default implementation uses {@link ContainerHelper#takeItem(java.util.List, int)}
      *
      * @param slot the slot
      * @return the removed stack
@@ -175,7 +172,6 @@ public interface ImplementedInventory extends WorldlyContainer {
     /**
      * Replaces the current stack in the {@code slot} with the provided stack.
      *
-     * <p>If the stack is too big for this inventory ({@link Container#getMaxStackSize()}),
      * it gets resized to this inventory's maximum amount.
      *
      * @param slot the slot
@@ -187,6 +183,7 @@ public interface ImplementedInventory extends WorldlyContainer {
         if (stack.getCount() > getMaxStackSize()) {
             stack.setCount(getMaxStackSize());
         }
+        setChanged();
     }
 
     /**

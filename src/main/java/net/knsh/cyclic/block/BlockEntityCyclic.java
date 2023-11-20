@@ -23,7 +23,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class BlockEntityCyclic extends BlockEntity implements Container, IHasFluid, IHasEnergy {
+public abstract class BlockEntityCyclic extends BlockEntity implements IHasFluid, IHasEnergy {
     public static final String NBTINV = "inv";
     public static final String NBTFLUID = "fluid";
     public static final String NBTENERGY = "energy";
@@ -139,44 +139,12 @@ public abstract class BlockEntityCyclic extends BlockEntity implements Container
     }
 
     @Override
-    public void setFluid(FluidVariant fluid) {}
+    public void setFluid(FluidVariant fluid) {
 
-    @Override
-    public void setFluidAmount(long amount) {}
-
-    @Override
-    public int getContainerSize() {
-        return 0;
     }
 
     @Override
-    public boolean isEmpty() {
-        return true;
+    public void setFluidAmount(long amount) {
+
     }
-
-    @Override
-    public ItemStack getItem(int slot) {
-        return ItemStack.EMPTY;
-    }
-
-    @Override
-    public ItemStack removeItem(int slot, int amount) {
-        return ItemStack.EMPTY;
-    }
-
-    @Override
-    public ItemStack removeItemNoUpdate(int slot) {
-        return ItemStack.EMPTY;
-    }
-
-    @Override
-    public void setItem(int slot, ItemStack stack) {}
-
-    @Override
-    public boolean stillValid(Player player) {
-        return false;
-    }
-
-    @Override
-    public void clearContent() {}
 }

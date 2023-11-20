@@ -47,7 +47,6 @@ public class AnvilVoidBlock extends BlockCyclic {
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
-
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new AnvilVoidBlockEntity(pos, state);

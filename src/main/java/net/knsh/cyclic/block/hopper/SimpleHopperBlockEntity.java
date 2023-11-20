@@ -1,6 +1,7 @@
 package net.knsh.cyclic.block.hopper;
 
 import net.fabricmc.fabric.api.lookup.v1.block.BlockApiLookup;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
@@ -8,6 +9,8 @@ import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.knsh.cyclic.block.BlockEntityCyclic;
+import net.knsh.cyclic.block.hoppergold.GoldHopperBlockEntity;
+import net.knsh.cyclic.library.capabilities.FluidTankBase;
 import net.knsh.cyclic.registry.CyclicBlockEntities;
 import net.knsh.cyclic.registry.CyclicBlocks;
 import net.minecraft.core.BlockPos;
@@ -16,9 +19,11 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.Hopper;
 import net.minecraft.world.level.block.entity.HopperBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -40,8 +45,42 @@ public class SimpleHopperBlockEntity extends BlockEntityCyclic implements Hopper
         super(CyclicBlocks.HOPPER.blockEntity(), pos, state);
     }
 
+    public SimpleHopperBlockEntity(BlockEntityType<GoldHopperBlockEntity> t, BlockPos pos, BlockState state) {
+        super(t, pos, state);
+    }
+
     public int getContainerSize() {
         return 1;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
+    @Override
+    public ItemStack getItem(int slot) {
+        return null;
+    }
+
+    @Override
+    public ItemStack removeItem(int slot, int amount) {
+        return null;
+    }
+
+    @Override
+    public ItemStack removeItemNoUpdate(int slot) {
+        return null;
+    }
+
+    @Override
+    public void setItem(int slot, ItemStack stack) {
+
+    }
+
+    @Override
+    public boolean stillValid(Player player) {
+        return false;
     }
 
     public Storage<ItemVariant> getStorage() {
@@ -105,7 +144,7 @@ public class SimpleHopperBlockEntity extends BlockEntityCyclic implements Hopper
                     getStorage(),
                     target,
                     itemVariant -> true,
-                    1,
+                    getFlow(),
                     null
             ) == 1) {
                 return true;
@@ -124,7 +163,7 @@ public class SimpleHopperBlockEntity extends BlockEntityCyclic implements Hopper
                     source,
                     getStorage(),
                     itemVariant -> true,
-                    1,
+                    getFlow(),
                     null
             );
             return moved >= 1;
@@ -174,5 +213,10 @@ public class SimpleHopperBlockEntity extends BlockEntityCyclic implements Hopper
     @Override
     public double getLevelZ() {
         return this.getBlockPos().getZ();
+    }
+
+    @Override
+    public void clearContent() {
+
     }
 }

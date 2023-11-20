@@ -10,12 +10,9 @@ import net.minecraft.world.inventory.MenuType;
 
 public class CyclicScreens {
     public static MenuType<AnvilVoidScreenHandler> ANVIL_VOID;
-    //public static MenuType<CableItemScreenHandler> ITEM_PIPE;
 
     public static void register() {
         ANVIL_VOID = Registry.register(BuiltInRegistries.MENU, new ResourceLocation(Cyclic.MOD_ID, "anvil_void"),
-                new ExtendedScreenHandlerType<>(AnvilVoidScreenHandler::new));
-        //ITEM_PIPE = Registry.register(BuiltInRegistries.MENU, new ResourceLocation(Cyclic.MOD_ID, "item_pipe"),
-                //new ExtendedScreenHandlerType<>(CableItemScreenHandler::new));
+                new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new AnvilVoidScreenHandler(syncId, inventory, inventory.player.level(), buf.readBlockPos()))));
     }
 }

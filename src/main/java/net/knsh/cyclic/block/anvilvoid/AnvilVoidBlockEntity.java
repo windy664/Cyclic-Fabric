@@ -4,10 +4,10 @@ import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
+import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.BlockEntityCyclic;
 import net.knsh.cyclic.fluid.FluidXpJuiceHolder;
 import net.knsh.cyclic.library.capabilities.FluidTankBase;
-import net.knsh.cyclic.registry.CyclicBlockEntities;
 import net.knsh.cyclic.registry.CyclicBlocks;
 import net.knsh.cyclic.registry.CyclicFluids;
 import net.knsh.cyclic.util.forgeport.FluidFabricToForge;
@@ -20,7 +20,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -41,18 +41,13 @@ public class AnvilVoidBlockEntity extends BlockEntityCyclic implements ExtendedS
     public static int FLUIDPAY = 25;
 
     private final NonNullList<ItemStack> inventory = NonNullList.withSize(2, ItemStack.EMPTY);
-    private final FluidVariant xpFluid = FluidVariant.of(CyclicFluids.STILL_XP);
     private final FluidTankBase tank = new FluidTankBase(this, (int) CAPACITY) {};
 
     public AnvilVoidBlockEntity(BlockPos pos, BlockState state) {
         super(CyclicBlocks.ANVILVOID.blockEntity(), pos, state);
         this.needsRedstone = 1;
         tank.fluidBlockIdentifier = FluidXpJuiceHolder.NAME;
-    }
-
-    @Override
-    public NonNullList<ItemStack> getItems() {
-        return this.inventory;
+        Cyclic.LOGGER.info(String.valueOf(getContainerSize()));
     }
 
     @Override
@@ -63,7 +58,7 @@ public class AnvilVoidBlockEntity extends BlockEntityCyclic implements ExtendedS
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int syncId, Inventory playerInventory, Player player) {
-        return new AnvilVoidScreenHandler(syncId, playerInventory, this);
+        return new AnvilVoidScreenHandler(syncId, playerInventory, this, level, worldPosition);
     }
 
     @Override
@@ -72,19 +67,24 @@ public class AnvilVoidBlockEntity extends BlockEntityCyclic implements ExtendedS
     }
 
     @Override
+    public NonNullList<ItemStack> getItems() {
+        return inventory;
+    }
+
+    @Override
     public void load(CompoundTag nbt) {
-        super.load(nbt);
         tank.variant = FluidVariant.fromNbt(nbt.getCompound("fluidVariant"));
         tank.amount = nbt.getLong("amount");
         ContainerHelper.loadAllItems(nbt, inventory);
+        super.load(nbt);
     }
 
     @Override
     public void saveAdditional(CompoundTag nbt) {
+        super.saveAdditional(nbt);
         nbt.put("fluidVariant", tank.variant.toNbt());
         nbt.putLong("amount", tank.amount);
         ContainerHelper.saveAllItems(nbt, inventory);
-        super.saveAdditional(nbt);
     }
 
     public static <E extends BlockEntity> void tick(Level world, BlockPos blockPos, BlockState state, AnvilVoidBlockEntity entity) {
