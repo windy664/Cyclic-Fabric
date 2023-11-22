@@ -2,14 +2,15 @@
 	"schemaVersion": 1,
 	"id": "cyclic",
 	"version": "${version}",
-	"name": "Cyclic",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "Cyclic Fabric",
+	"description": "A Fabric port of Cyclic by KnownSH",
 	"authors": [
-		"Me!"
+		"KnownSH",
+		"Lothrazar [Forge]"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/KnownSH/Cyclic-Fabric",
+		"issues": "https://github.com/KnownSH/Cyclic-Fabric/issues"
 	},
 	"license": "MIT",
 	"icon": "assets/cyclic/icon.png",

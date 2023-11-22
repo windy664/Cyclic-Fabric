@@ -2,10 +2,12 @@ package net.knsh.cyclic.block;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.knsh.cyclic.util.ImplementedInventory;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -33,6 +35,21 @@ public class BlockCyclic extends BaseEntityBlock implements EntityBlock {
     protected BlockCyclic setHasGui() {
         this.hasGui = true;
         return this;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        if (state.getBlock() != newState.getBlock()) {
+            BlockEntity tileentity = world.getBlockEntity(pos);
+            if (tileentity instanceof ImplementedInventory inventory) {
+                for (int i = 0; i < inventory.getContainerSize(); ++i) {
+                    Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), inventory.getItem(i));
+                }
+                world.updateNeighbourForOutputSignal(pos, this);
+            }
+            super.onRemove(state, world, pos, newState, movedByPiston);
+        }
     }
 
     @Override

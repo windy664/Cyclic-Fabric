@@ -41,6 +41,6 @@ public class GeneratorFuelScreenHandler extends ScreenHandlerBase {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(tile.getLevel(), tile.getBlockPos()), playerEntity, CyclicBlocks.GENERATOR_FUEL.block());
+        return this.inventory.stillValid(player);
     }
 }

@@ -8,6 +8,8 @@ import net.knsh.cyclic.block.anvilvoid.AnvilVoidBlock;
 import net.knsh.cyclic.block.anvilvoid.AnvilVoidBlockEntity;
 import net.knsh.cyclic.block.conveyor.ConveyorBlock;
 import net.knsh.cyclic.block.conveyor.ConveyorBlockEntity;
+import net.knsh.cyclic.block.crafter.CrafterBlock;
+import net.knsh.cyclic.block.crafter.CrafterBlockEntity;
 import net.knsh.cyclic.block.generatorfuel.GeneratorFuelBlock;
 import net.knsh.cyclic.block.generatorfuel.GeneratorFuelBlockEntity;
 import net.knsh.cyclic.block.hopper.SimpleHopperBlock;
@@ -36,6 +38,7 @@ public class CyclicBlocks {
     public static ItemBlockEntity<FluidHopperBlockEntity> FLUIDHOPPER = registerBlockEntity("hopper_fluid", FluidHopperBlockEntity::new, new FluidHopperBlock(FabricBlockSettings.create()));
     public static ItemBlockEntity<GoldHopperBlockEntity> HOPPERGOLD = registerBlockEntity("hopper_gold", GoldHopperBlockEntity::new, new GoldHopperBlock(FabricBlockSettings.create()));
     public static ItemBlockEntity<GeneratorFuelBlockEntity> GENERATOR_FUEL = registerBlockEntity("generator_fuel", GeneratorFuelBlockEntity::new, new GeneratorFuelBlock(FabricBlockSettings.create()));
+    public static ItemBlockEntity<CrafterBlockEntity> CRAFTER = registerBlockEntity("crafter", CrafterBlockEntity::new, new CrafterBlock(FabricBlockSettings.create()));
 
     public static void register() {}
 

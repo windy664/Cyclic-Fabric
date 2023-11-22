@@ -15,6 +15,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -50,7 +51,6 @@ public class GeneratorFuelBlockEntity extends BlockEntityCyclic implements Exten
             return false;
         }
     };
-    private final BlockApiLookup<EnergyStorage, @Nullable Direction> blockApiLookup = EnergyStorage.SIDED;
 
     final int factor = 1;
     private int burnTimeMax = 0; //only non zero if processing
@@ -99,7 +99,7 @@ public class GeneratorFuelBlockEntity extends BlockEntityCyclic implements Exten
         }
         if (this.energy.amount > 0) {
             for (Direction side : Direction.values()) {
-                EnergyStorage target = blockApiLookup.find(level, worldPosition, side);
+                EnergyStorage target = EnergyStorage.SIDED.find(level, worldPosition, side);
                 if (target == null) {
                     continue;
                 }

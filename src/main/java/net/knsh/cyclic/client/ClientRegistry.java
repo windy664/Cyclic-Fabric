@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.knsh.cyclic.block.anvilvoid.AnvilVoidScreen;
 import net.knsh.cyclic.block.conveyor.ConveyorItemRenderer;
+import net.knsh.cyclic.block.crafter.CrafterScreen;
 import net.knsh.cyclic.block.generatorfuel.GeneratorFuelScreen;
 import net.knsh.cyclic.fluid.FluidXpJuiceHolder;
 import net.knsh.cyclic.registry.CyclicEntities;
@@ -31,5 +32,6 @@ public class ClientRegistry {
         // Screens
         MenuScreens.register(CyclicScreens.ANVIL_VOID, AnvilVoidScreen::new);
         MenuScreens.register(CyclicScreens.GENERATOR_FUEL, GeneratorFuelScreen::new);
+        MenuScreens.register(CyclicScreens.CRAFTER, CrafterScreen::new);
     }
 }

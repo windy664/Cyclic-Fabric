@@ -1,7 +1,6 @@
 package net.knsh.cyclic.block.hopper;
 
 import net.fabricmc.fabric.api.lookup.v1.block.BlockApiLookup;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
@@ -10,17 +9,12 @@ import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.knsh.cyclic.block.BlockEntityCyclic;
 import net.knsh.cyclic.block.hoppergold.GoldHopperBlockEntity;
-import net.knsh.cyclic.library.capabilities.FluidTankBase;
-import net.knsh.cyclic.registry.CyclicBlockEntities;
 import net.knsh.cyclic.registry.CyclicBlocks;
-import net.knsh.cyclic.util.ImplementedInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -30,6 +24,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.Hopper;
 import net.minecraft.world.level.block.entity.HopperBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -62,7 +57,7 @@ public class SimpleHopperBlockEntity extends BlockEntityCyclic implements Hopper
     }
 
     @Override
-    public ItemStack getItem(int slot) {
+    public @NotNull ItemStack getItem(int slot) {
         return ItemStack.EMPTY;
     }
 
@@ -90,7 +85,7 @@ public class SimpleHopperBlockEntity extends BlockEntityCyclic implements Hopper
         return inventoryWrapper;
     }
 
-    public Direction getTopDirection(BlockState state) {
+    public Direction getTopDirection() {
         return Direction.UP;
     }
 
@@ -157,7 +152,7 @@ public class SimpleHopperBlockEntity extends BlockEntityCyclic implements Hopper
     }
 
     protected boolean extract(Level level, BlockPos blockPos, BlockState blockState) {
-        Direction direction = getTopDirection(blockState);
+        Direction direction = getTopDirection();
         BlockPos sourcePos = blockPos.relative(direction);
         Storage<ItemVariant> source = blockApiLookup.find(level, sourcePos, direction.getOpposite());
 

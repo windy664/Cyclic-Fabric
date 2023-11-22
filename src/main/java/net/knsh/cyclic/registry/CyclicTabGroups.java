@@ -30,6 +30,7 @@ public class CyclicTabGroups {
                 entries.accept(CyclicBlocks.FLUIDHOPPER.block());
                 entries.accept(CyclicBlocks.HOPPERGOLD.block());
                 entries.accept(CyclicBlocks.GENERATOR_FUEL.block());
+                entries.accept(CyclicBlocks.CRAFTER.block());
             }))
             .build();
 

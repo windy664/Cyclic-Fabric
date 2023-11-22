@@ -9,7 +9,7 @@ import net.knsh.cyclic.fluid.FluidXpJuiceHolder;
 import net.knsh.cyclic.library.capabilities.FluidTankBase;
 import net.knsh.cyclic.registry.CyclicBlocks;
 import net.knsh.cyclic.registry.CyclicFluids;
-import net.knsh.cyclic.util.forgeport.FluidFabricToForge;
+import net.knsh.cyclic.util.forge.FluidFabricToForge;
 import net.knsh.cyclic.util.ImplementedInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;

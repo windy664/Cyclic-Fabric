@@ -4,7 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.library.capabilities.FluidTankBase;
 import net.knsh.cyclic.library.render.FluidRenderMap;
-import net.knsh.cyclic.util.forgeport.FluidFabricToForge;
+import net.knsh.cyclic.util.forge.FluidFabricToForge;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
