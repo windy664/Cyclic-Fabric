@@ -36,7 +36,6 @@ public class CrafterBlock extends BlockCyclic {
 
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        // drop from all inv
         level.updateNeighbourForOutputSignal(pos, this);
         super.onRemove(state, level, pos, newState, movedByPiston);
     }

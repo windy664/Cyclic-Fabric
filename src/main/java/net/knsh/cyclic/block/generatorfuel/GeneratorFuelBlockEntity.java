@@ -39,7 +39,7 @@ public class GeneratorFuelBlockEntity extends BlockEntityCyclic implements Exten
     static final int MAX = MENERGY * 10;
     public static int RF_PER_TICK = 80;
 
-    private static NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
+    private final NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
     SimpleEnergyStorage energy = new SimpleEnergyStorage(MAX, MAX, MAX) {
         @Override
         protected void onFinalCommit() {
@@ -58,18 +58,17 @@ public class GeneratorFuelBlockEntity extends BlockEntityCyclic implements Exten
 
     public GeneratorFuelBlockEntity(BlockPos pos, BlockState state) {
         super(CyclicBlocks.GENERATOR_FUEL.blockEntity(), pos, state);
-        this.needsRedstone = 0;
     }
 
     public static void serverTick(Level level, BlockPos blockPos, BlockState blockState, GeneratorFuelBlockEntity e) {
-        e.tick(blockState);
+        e.tick();
     }
 
     public static <E extends BlockEntity> void clientTick(Level level, BlockPos blockPos, BlockState blockState, GeneratorFuelBlockEntity e) {
-        e.tick(blockState);
+        e.tick();
     }
 
-    public void tick(BlockState state) {
+    public void tick() {
         if (this.flowing == 1) {
             //export
         }
@@ -93,7 +92,7 @@ public class GeneratorFuelBlockEntity extends BlockEntityCyclic implements Exten
                 if (amount == RF_PER_TICK) {
                     setLitProperty(true);
                 }
-                level.sendBlockUpdated(worldPosition, state, getBlockState(), Block.UPDATE_CLIENTS);
+                level.sendBlockUpdated(getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_CLIENTS);
                 transaction.commit();
             }
         }
@@ -111,7 +110,7 @@ public class GeneratorFuelBlockEntity extends BlockEntityCyclic implements Exten
                             MAX,
                             null
                     );
-                    level.sendBlockUpdated(worldPosition, targetBlockState, targetBlockState, Block.UPDATE_CLIENTS);
+                    level.sendBlockUpdated(getBlockPos().relative(side), targetBlockState, targetBlockState, Block.UPDATE_CLIENTS);
                 }
             }
         }
@@ -153,13 +152,13 @@ public class GeneratorFuelBlockEntity extends BlockEntityCyclic implements Exten
 
     @Nullable
     @Override
-    public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new GeneratorFuelScreenHandler(i, inventory, this, level, worldPosition);
+    public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player player) {
+        return new GeneratorFuelScreenHandler(i, playerInventory, this, level, worldPosition);
     }
 
     @Override
     public void writeScreenOpeningData(ServerPlayer player, FriendlyByteBuf buf) {
-        buf.writeBlockPos(this.worldPosition);
+        buf.writeBlockPos(this.getBlockPos());
     }
 
     @Override

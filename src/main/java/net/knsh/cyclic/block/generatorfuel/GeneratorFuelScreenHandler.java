@@ -27,14 +27,14 @@ public class GeneratorFuelScreenHandler extends ScreenHandlerBase {
         this.playerEntity = playerInventory.player;
         this.playerInventory = playerInventory;
 
-        addSlot(new Slot(inventory, 0, 75, 35) {
+        this.addSlot(new Slot(inventory, 0, 75, 35) {
             @Override
             public void setChanged() {
                 tile.setChanged();
             }
         });
 
-        this.endInv = 0;
+        this.endInv = inventory.getContainerSize();
         layoutPlayerInventorySlots(playerInventory, 8, 84);
         this.trackAllIntFields(tile, GeneratorFuelBlockEntity.Fields.values().length);
     }
