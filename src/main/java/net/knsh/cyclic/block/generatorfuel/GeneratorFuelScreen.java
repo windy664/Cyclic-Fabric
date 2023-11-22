@@ -45,7 +45,7 @@ public class GeneratorFuelScreen extends ScreenBase<GeneratorFuelScreenHandler> 
         this.renderBackground(ms);
         super.render(ms, mouseX, mouseY, partialTicks);
         this.renderTooltip(ms, mouseX, mouseY);
-        energy.renderHoveredToolTip(ms, mouseX, mouseY, (int) menu.tile.getEnergy());
+        energy.renderHoveredToolTip(ms, mouseX, mouseY, (int) menu.tile.getEnergy().amount);
         progress.renderHoveredToolTip(ms, mouseX, mouseY, menu.tile.getField(GeneratorFuelBlockEntity.Fields.TIMER.ordinal()));
         btnRedstone.onValueUpdate(menu.tile);
     }
@@ -65,6 +65,6 @@ public class GeneratorFuelScreen extends ScreenBase<GeneratorFuelScreenHandler> 
         this.drawSlotLarge(ms, 70, 30);
         progress.max = menu.tile.getField(GeneratorFuelBlockEntity.Fields.BURNMAX.ordinal());
         progress.draw(ms, menu.tile.getField(GeneratorFuelBlockEntity.Fields.TIMER.ordinal()));
-        energy.draw(ms, menu.tile.getEnergy());
+        energy.draw(ms, menu.tile.getEnergy().amount);
     }
 }

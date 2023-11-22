@@ -27,9 +27,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class BlockEntityCyclic extends BlockEntity implements IHasFluid {
-    public static final String NBTINV = "inv";
-    public static final String NBTFLUID = "fluid";
-    public static final String NBTENERGY = "energy";
     public static final int MENERGY = 64 * 1000;
     protected int flowing = 1;
     protected int needsRedstone = 1;
