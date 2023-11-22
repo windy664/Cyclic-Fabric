@@ -3,7 +3,6 @@ package net.knsh.cyclic.block.crafter;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.knsh.cyclic.block.BlockEntityCyclic;
-import net.knsh.cyclic.block.generatorfuel.GeneratorFuelBlockEntity;
 import net.knsh.cyclic.data.PreviewOutlineType;
 import net.knsh.cyclic.registry.CyclicBlocks;
 import net.knsh.cyclic.util.forge.ForgeImplementedInventory;

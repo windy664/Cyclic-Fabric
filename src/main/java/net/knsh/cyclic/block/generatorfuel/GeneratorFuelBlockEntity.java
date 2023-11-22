@@ -97,19 +97,21 @@ public class GeneratorFuelBlockEntity extends BlockEntityCyclic implements Exten
                 transaction.commit();
             }
         }
-        if (this.energy.amount > 0) {
+        if (energy.getAmount() > 0) {
             for (Direction side : Direction.values()) {
-                EnergyStorage target = EnergyStorage.SIDED.find(level, worldPosition, side);
+                EnergyStorage target = EnergyStorage.SIDED.find(level, getBlockPos().relative(side), side.getOpposite());
                 if (target == null) {
                     continue;
                 }
                 if (target.supportsInsertion() && target.getAmount() < target.getCapacity()) {
+                    BlockState targetBlockState = level.getBlockState(getBlockPos().relative(side));
                     EnergyStorageUtil.move(
                             getEnergy(),
                             target,
                             MAX,
                             null
                     );
+                    level.sendBlockUpdated(worldPosition, targetBlockState, targetBlockState, Block.UPDATE_CLIENTS);
                 }
             }
         }
@@ -120,7 +122,6 @@ public class GeneratorFuelBlockEntity extends BlockEntityCyclic implements Exten
         ItemStack stack = getItem(0);
         final int factor = 1;
         int burnTimeTicks = factor * AbstractFurnaceBlockEntity.getFuel().getOrDefault(stack.getItem(), 0);
-        Cyclic.LOGGER.info(String.valueOf(burnTimeTicks));
         if (burnTimeTicks > 0) {
             this.burnTimeMax = burnTimeTicks;
             this.burnTime = this.burnTimeMax;
