@@ -2,6 +2,7 @@ package net.knsh.cyclic.network.packets;
 
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.BlockEntityCyclic;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;

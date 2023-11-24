@@ -31,7 +31,7 @@ public class BeaconPotionScreen extends ScreenBase<BeaconPotionScreenHandler> {
         btnEntity = addRenderableWidget(new ButtonMachine(x, y, 60, 20, "", (p) -> {
             int f = BeaconPotionBlockEntity.Fields.ENTITYTYPE.ordinal();
             ClientPlayNetworking.send(PacketIdentifiers.TILE_DATA,
-                    PacketTileData.encode(new PacketTileData(menu.tile.getField(f) + 1, menu.tile.getBlockPos())));
+                    PacketTileData.encode(new PacketTileData(f,menu.tile.getField(f) + 1, menu.tile.getBlockPos())));
         }));
     }
 

@@ -1,6 +1,7 @@
 package net.knsh.cyclic.block.beaconpotion;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.BlockEntityCyclic;
 import net.knsh.cyclic.item.datacard.EntityDataCard;
 import net.knsh.cyclic.library.data.EntityFilterType;
@@ -191,40 +192,30 @@ public class BeaconPotionBlockEntity extends BlockEntityCyclic implements Extend
     @Override
     public void setField(int field, int value) {
         switch (Fields.values()[field]) {
-            case REDSTONE:
-                this.needsRedstone = value % 2;
-                break;
-            case TIMER:
-                this.timer = value;
-                break;
-            case ENTITYTYPE:
+            case REDSTONE -> this.needsRedstone = value % 2;
+            case TIMER -> this.timer = value;
+            case ENTITYTYPE -> {
                 value = value % EntityFilterType.values().length;
                 this.entityFilter = EntityFilterType.values()[value];
-                break;
-            case RANGE:
+            }
+            case RANGE -> {
                 if (value > MAX_RADIUS) {
                     radius = MAX_RADIUS;
-                }
-                else {
+                } else {
                     this.radius = Math.min(value, MAX_RADIUS);
                 }
-                break;
+            }
         }
     }
 
     @Override
     public int getField(int id) {
-        switch (Fields.values()[id]) {
-            case REDSTONE:
-                return this.needsRedstone;
-            case TIMER:
-                return this.timer;
-            case ENTITYTYPE:
-                return this.entityFilter.ordinal();
-            case RANGE:
-                return this.radius;
-        }
-        return -1;
+        return switch (Fields.values()[id]) {
+            case REDSTONE -> this.needsRedstone;
+            case TIMER -> this.timer;
+            case ENTITYTYPE -> this.entityFilter.ordinal();
+            case RANGE -> this.radius;
+        };
     }
 
     @Override
