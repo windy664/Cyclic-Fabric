@@ -1,4 +1,4 @@
-package net.knsh.cyclic.util.forge;
+package net.knsh.cyclic.util.forge.items;
 
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;

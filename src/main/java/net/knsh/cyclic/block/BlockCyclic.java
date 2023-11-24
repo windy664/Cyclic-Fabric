@@ -8,17 +8,22 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -37,6 +42,10 @@ public class BlockCyclic extends BaseEntityBlock implements EntityBlock {
         return this;
     }
 
+    public float[] getBeaconColorMultiplier(BlockState state, LevelReader level, BlockPos pos, BlockPos beaconPos) {
+        return null;
+    }
+
     @SuppressWarnings("deprecation")
     @Override
     public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean movedByPiston) {
@@ -50,6 +59,21 @@ public class BlockCyclic extends BaseEntityBlock implements EntityBlock {
             }
             super.onRemove(state, world, pos, newState, movedByPiston);
         }
+    }
+
+    @Override
+    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (this.hasGui) {
+            if (!world.isClientSide) {
+                MenuProvider screenHandlerFactory = state.getMenuProvider(world, pos);
+
+                if (screenHandlerFactory != null) {
+                    player.openMenu(screenHandlerFactory);
+                }
+            }
+            return InteractionResult.SUCCESS;
+        }
+        return super.use(state, world, pos, player, hand, hit);
     }
 
     @Override

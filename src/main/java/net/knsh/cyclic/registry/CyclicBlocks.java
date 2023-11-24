@@ -6,6 +6,8 @@ import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityT
 import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.anvilvoid.AnvilVoidBlock;
 import net.knsh.cyclic.block.anvilvoid.AnvilVoidBlockEntity;
+import net.knsh.cyclic.block.beaconpotion.BeaconPotionBlock;
+import net.knsh.cyclic.block.beaconpotion.BeaconPotionBlockEntity;
 import net.knsh.cyclic.block.conveyor.ConveyorBlock;
 import net.knsh.cyclic.block.conveyor.ConveyorBlockEntity;
 import net.knsh.cyclic.block.crafter.CrafterBlock;
@@ -38,6 +40,7 @@ public class CyclicBlocks {
     public static ItemBlockEntity<GoldHopperBlockEntity> HOPPERGOLD = registerBlockEntity("hopper_gold", GoldHopperBlockEntity::new, new GoldHopperBlock(FabricBlockSettings.create()));
     public static ItemBlockEntity<GeneratorFuelBlockEntity> GENERATOR_FUEL = registerBlockEntity("generator_fuel", GeneratorFuelBlockEntity::new, new GeneratorFuelBlock(FabricBlockSettings.create()));
     public static ItemBlockEntity<CrafterBlockEntity> CRAFTER = registerBlockEntity("crafter", CrafterBlockEntity::new, new CrafterBlock(FabricBlockSettings.create()));
+    public static ItemBlockEntity<BeaconPotionBlockEntity> BEACON = registerBlockEntity("beacon", BeaconPotionBlockEntity::new, new BeaconPotionBlock(FabricBlockSettings.create()));
 
     public static void register() {}
 

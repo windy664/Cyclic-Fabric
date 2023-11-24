@@ -16,6 +16,7 @@ public class CyclicTabGroups {
             .title(Component.translatable("itemGroup." + Cyclic.MOD_ID + "items"))
             .displayItems((displayContext, entries) -> {
                 entries.accept(CyclicItems.GEM_AMBER);
+                entries.accept(CyclicItems.ENTITY_DATA);
             })
             .build();
 
@@ -31,6 +32,7 @@ public class CyclicTabGroups {
                 entries.accept(CyclicBlocks.HOPPERGOLD.block());
                 entries.accept(CyclicBlocks.GENERATOR_FUEL.block());
                 entries.accept(CyclicBlocks.CRAFTER.block());
+                entries.accept(CyclicBlocks.BEACON.block());
             }))
             .build();
 

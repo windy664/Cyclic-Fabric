@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.knsh.cyclic.block.BlockEntityCyclic;
 import net.knsh.cyclic.data.PreviewOutlineType;
 import net.knsh.cyclic.registry.CyclicBlocks;
-import net.knsh.cyclic.util.forge.ForgeImplementedInventory;
+import net.knsh.cyclic.util.forge.items.ForgeImplementedInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;

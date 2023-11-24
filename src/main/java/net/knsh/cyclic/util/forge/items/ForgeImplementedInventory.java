@@ -1,4 +1,4 @@
-package net.knsh.cyclic.util.forge;
+package net.knsh.cyclic.util.forge.items;
 
 import net.knsh.cyclic.util.ImplementedInventory;
 import net.minecraft.world.item.ItemStack;
