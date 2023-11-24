@@ -9,21 +9,15 @@ import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import net.knsh.cyclic.block.beaconpotion.BeamParams;
 import net.knsh.cyclic.library.capabilities.FluidTankBase;
-import net.knsh.cyclic.library.core.IHasEnergy;
 import net.knsh.cyclic.library.core.IHasFluid;
 import net.knsh.cyclic.library.util.SoundUtil;
-import net.knsh.cyclic.util.ImplementedInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.Container;
-import net.minecraft.world.WorldlyContainer;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -64,10 +58,10 @@ public abstract class BlockEntityCyclic extends BlockEntity implements IHasFluid
         if (!state.hasProperty(BlockCyclic.LIT)) {
             return;
         }
-        //boolean previous = state.get(BlockBreaker.LIT);
-        //if (previous != lit) {
-        //    this.level.setBlockAndUpdate(worldPosition, st.setValue(BlockBreaker.LIT, lit));
-        //}
+        boolean previous = state.getValue(BlockCyclic.LIT);
+        if (previous != lit) {
+            this.level.setBlockAndUpdate(worldPosition, state.setValue(BlockCyclic.LIT, lit));
+        }
     }
 
     @Nullable
@@ -147,8 +141,8 @@ public abstract class BlockEntityCyclic extends BlockEntity implements IHasFluid
         for (int yLoop = 0; yLoop < 10 && blockpos.getY() <= surfaceHeight; ++yLoop) {
             BlockState blockstate = level.getBlockState(blockpos);
             // important: start one up OR give your beacon block an override to getBeaconColorMultiplier
-            if (blockstate.getBlock() instanceof BlockCyclic) {
-                float[] colorMult = ((BlockCyclic) blockstate.getBlock()).getBeaconColorMultiplier(blockstate, level, blockpos, pos);
+            if (level.getBlockState(pos).getBlock() instanceof BlockCyclic) {
+                float[] colorMult = ((BlockCyclic) level.getBlockState(pos).getBlock()).getBeaconColorMultiplier(blockstate, level, blockpos, pos);
                 if (colorMult != null) {
                     if (beamParams.checkingBeamSections.size() <= 1) {
                         beaconblockentity$beaconbeamsection = new BeaconBlockEntity.BeaconBeamSection(colorMult);
@@ -157,7 +151,7 @@ public abstract class BlockEntityCyclic extends BlockEntity implements IHasFluid
                     else if (beaconblockentity$beaconbeamsection != null) {
                         float[] col = beaconblockentity$beaconbeamsection.getColor();
                         if (Arrays.equals(colorMult, col)) {
-                            //beaconblockentity$beaconbeamsection.increaseHeight();
+                            //((BeaconBeamSectionMixin) beaconblockentity$beaconbeamsection).increaseHeight();
                         } else {
                             beaconblockentity$beaconbeamsection = new BeaconBlockEntity.BeaconBeamSection(new float[] { (col[0] + colorMult[0]) / 2.0F, (col[1] + colorMult[1]) / 2.0F, (col[2] + colorMult[2]) / 2.0F });
                             beamParams.checkingBeamSections.add(beaconblockentity$beaconbeamsection);
@@ -169,8 +163,7 @@ public abstract class BlockEntityCyclic extends BlockEntity implements IHasFluid
                         beamParams.lastCheckY = surfaceHeight;
                         break;
                     }
-                    if (beaconblockentity$beaconbeamsection != null) {}
-                    //beaconblockentity$beaconbeamsection.increaseHeight();
+                    //((BeaconBeamSectionMixin) beaconblockentity$beaconbeamsection).increaseHeight();
                 }
                 blockpos = blockpos.above();
                 ++beamParams.lastCheckY;

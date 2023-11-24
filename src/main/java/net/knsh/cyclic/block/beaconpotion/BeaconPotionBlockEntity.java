@@ -81,6 +81,8 @@ public class BeaconPotionBlockEntity extends BlockEntityCyclic implements Extend
                 if (newEffects.size() > 0) {
                     pullFromItem(newEffects);
                 }
+            } else {
+                setLitProperty(false);
             }
             return;
         }
@@ -89,7 +91,7 @@ public class BeaconPotionBlockEntity extends BlockEntityCyclic implements Extend
 
     private void pullFromItem(List<MobEffectInstance> newEffects) {
         //add new effects
-        this.timer = TICKS_PER_DURATION;
+        //this.timer = TICKS_PER_DURATION;
         setLitProperty(true);
         //first read all potins
         int maxDur = 0;
@@ -99,6 +101,7 @@ public class BeaconPotionBlockEntity extends BlockEntityCyclic implements Extend
                 maxDur = Math.max(eff.getDuration(), maxDur);
             }
         }
+        this.timer = maxDur;
         extractItem(1, 1, false);
     }
 
@@ -243,7 +246,7 @@ public class BeaconPotionBlockEntity extends BlockEntityCyclic implements Extend
     public List<String> getPotionDisplay() {
         List<String> list = new ArrayList<>();
         for (MobEffectInstance eff : this.effects) {
-            list.add(eff.getDescriptionId());
+            list.add(Component.translatable(eff.getDescriptionId()).getString());
         }
         return list;
     }
