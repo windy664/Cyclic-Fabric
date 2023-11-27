@@ -2,7 +2,7 @@ package net.knsh.cyclic.block.anvilvoid;
 
 import net.knsh.cyclic.gui.ButtonMachineField;
 import net.knsh.cyclic.gui.ScreenBase;
-import net.knsh.cyclic.library.FluidBar;
+import net.knsh.cyclic.gui.FluidBar;
 import net.knsh.cyclic.registry.CyclicTextures;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;

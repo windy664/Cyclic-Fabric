@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.knsh.cyclic.block.antipotion.RenderAntiBeacon;
 import net.knsh.cyclic.block.anvilvoid.AnvilVoidScreen;
 import net.knsh.cyclic.block.beaconpotion.BeaconPotionScreen;
 import net.knsh.cyclic.block.beaconpotion.RenderBeaconPotion;
@@ -35,6 +36,7 @@ public class ClientRegistry {
 
         // Block Entity Renderers
         BlockEntityRenderers.register(CyclicBlocks.BEACON.blockEntity(), RenderBeaconPotion::new);
+        BlockEntityRenderers.register(CyclicBlocks.ANTI_BEACON.blockEntity(), RenderAntiBeacon::new);
 
         // Entity Model Renderers
         EntityRendererRegistry.register(CyclicEntities.CONVEYOR_ITEM, ConveyorItemRenderer::new);

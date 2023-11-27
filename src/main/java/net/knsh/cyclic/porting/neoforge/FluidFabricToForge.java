@@ -1,4 +1,4 @@
-package net.knsh.cyclic.util.forge;
+package net.knsh.cyclic.porting.neoforge;
 
 public class FluidFabricToForge  {
     public static long toMiliBuckets(long droplets) {

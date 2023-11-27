@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.knsh.cyclic.block.BlockEntityCyclic;
 import net.knsh.cyclic.data.PreviewOutlineType;
 import net.knsh.cyclic.registry.CyclicBlocks;
-import net.knsh.cyclic.util.forge.items.ForgeImplementedInventory;
+import net.knsh.cyclic.porting.neoforge.items.ForgeImplementedInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -28,6 +28,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.ForgeConfigSpec;
 import org.jetbrains.annotations.Nullable;
 import team.reborn.energy.api.base.SimpleEnergyStorage;
 
@@ -38,7 +39,7 @@ import java.util.List;
 public class CrafterBlockEntity extends BlockEntityCyclic implements ExtendedScreenHandlerFactory, ForgeImplementedInventory {
     static final int MAX = 64000;
     public static final int TIMER_FULL = 40;
-    public static int POWERCONF = 500;
+    public static ForgeConfigSpec.IntValue POWERCONF;
 
     public static final int IO_NUM_ROWS = 5;
     public static final int IO_NUM_COLS = 2;
@@ -115,7 +116,7 @@ public class CrafterBlockEntity extends BlockEntityCyclic implements ExtendedScr
         setLitProperty(true);
         if (this.level.isClientSide())
             return;
-        if (energy.getCapacity() < POWERCONF && POWERCONF > 0)
+        if (energy.getCapacity() < POWERCONF.get() && POWERCONF.get() > 0)
             return;
         if (timer < 0)
             timer = 0;
@@ -133,7 +134,7 @@ public class CrafterBlockEntity extends BlockEntityCyclic implements ExtendedScr
                 if (doCraft(lastValidRecipe)) {
                     this.timer = TIMER_FULL;
                     try (Transaction transaction = Transaction.openOuter()) {
-                        this.energy.extract(POWERCONF, transaction);
+                        this.energy.extract(POWERCONF.get(), transaction);
                         transaction.commit();
                     }
                     depositOutput(recipeOutput, OUTPUT);

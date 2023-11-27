@@ -2,10 +2,9 @@ package net.knsh.cyclic.block;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.knsh.cyclic.util.ImplementedInventory;
+import net.knsh.cyclic.library.ImplementedInventory;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;

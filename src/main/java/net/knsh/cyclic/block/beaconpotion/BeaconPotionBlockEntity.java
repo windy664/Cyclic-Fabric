@@ -1,12 +1,11 @@
 package net.knsh.cyclic.block.beaconpotion;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
-import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.BlockEntityCyclic;
 import net.knsh.cyclic.item.datacard.EntityDataCard;
 import net.knsh.cyclic.library.data.EntityFilterType;
 import net.knsh.cyclic.registry.CyclicBlocks;
-import net.knsh.cyclic.util.forge.items.ForgeImplementedInventory;
+import net.knsh.cyclic.porting.neoforge.items.ForgeImplementedInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;

@@ -2,6 +2,7 @@ package net.knsh.cyclic;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.knsh.cyclic.config.ConfigRegistry;
 import net.knsh.cyclic.network.CyclicC2S;
 import net.knsh.cyclic.registry.*;
 import org.slf4j.Logger;
@@ -13,6 +14,10 @@ public class Cyclic implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		ConfigRegistry cfg = new ConfigRegistry();
+		cfg.setupMain();
+		cfg.setupClient();
+
 		CyclicBlocks.register();
 		CyclicBlockEntities.register();
 		CyclicEntities.register();

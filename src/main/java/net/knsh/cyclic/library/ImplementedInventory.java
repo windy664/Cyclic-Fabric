@@ -1,4 +1,4 @@
-package net.knsh.cyclic.util;
+package net.knsh.cyclic.library;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;

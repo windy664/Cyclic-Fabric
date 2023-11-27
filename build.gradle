@@ -16,6 +16,7 @@ repositories {
 	maven { url = "https://maven.terraformersmc.com/" } // ModMenu, EMI
 	maven { url = "https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1" } // DevAuth
 	maven { url = 'https://maven.ladysnake.org/releases' } // CCA
+	maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" } // Forge Config Port
 }
 
 loom {
@@ -60,6 +61,8 @@ dependencies {
 	include modApi("teamreborn:energy:${project.teamreborn_energy}") {
 		transitive = false
 	}
+
+	modApi "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${project.forgeconfig_version}"
 
 	//include modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca_version}")
 	//include modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}")

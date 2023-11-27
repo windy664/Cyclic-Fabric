@@ -1,6 +1,6 @@
-package net.knsh.cyclic.util.forge.items;
+package net.knsh.cyclic.porting.neoforge.items;
 
-import net.knsh.cyclic.util.ImplementedInventory;
+import net.knsh.cyclic.library.ImplementedInventory;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 

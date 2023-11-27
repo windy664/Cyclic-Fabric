@@ -1,12 +1,10 @@
 package net.knsh.cyclic.block.generatorfuel;
 
-import net.fabricmc.fabric.api.lookup.v1.block.BlockApiLookup;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
-import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.BlockEntityCyclic;
 import net.knsh.cyclic.registry.CyclicBlocks;
-import net.knsh.cyclic.util.ImplementedInventory;
+import net.knsh.cyclic.library.ImplementedInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -15,7 +13,6 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -25,6 +22,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.ForgeConfigSpec;
 import org.jetbrains.annotations.Nullable;
 import team.reborn.energy.api.EnergyStorage;
 import team.reborn.energy.api.EnergyStorageUtil;
@@ -37,7 +35,7 @@ public class GeneratorFuelBlockEntity extends BlockEntityCyclic implements Exten
     }
 
     static final int MAX = MENERGY * 10;
-    public static int RF_PER_TICK = 80;
+    public static ForgeConfigSpec.IntValue RF_PER_TICK;
 
     private final NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
     SimpleEnergyStorage energy = new SimpleEnergyStorage(MAX, MAX, MAX) {
@@ -85,11 +83,11 @@ public class GeneratorFuelBlockEntity extends BlockEntityCyclic implements Exten
         if (this.burnTime == 0) {
             tryComsumeFuel();
         }
-        if (this.burnTime > 0 && this.energy.amount + RF_PER_TICK <= this.energy.capacity) {
+        if (this.burnTime > 0 && this.energy.amount + RF_PER_TICK.get() <= this.energy.capacity) {
             this.burnTime--;
             try (Transaction transaction = Transaction.openOuter()) {
-                long amount = energy.insert(RF_PER_TICK, transaction);
-                if (amount == RF_PER_TICK) {
+                long amount = energy.insert(RF_PER_TICK.get(), transaction);
+                if (amount == RF_PER_TICK.get()) {
                     setLitProperty(true);
                 }
                 level.sendBlockUpdated(getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_CLIENTS);

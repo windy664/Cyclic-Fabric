@@ -31,7 +31,7 @@ public class CrafterScreen extends ScreenBase<CrafterScreenHandler> {
         int x, y;
         energy.guiLeft = progress.guiLeft = leftPos;
         energy.guiTop = progress.guiTop = topPos;
-        energy.visible = CrafterBlockEntity.POWERCONF > 0;
+        energy.visible = CrafterBlockEntity.POWERCONF.get() > 0;
         x = leftPos + 6;
         y = topPos + 6;
         btnRedstone = addRenderableWidget(new ButtonMachineField(x, y, CrafterBlockEntity.Fields.REDSTONE.ordinal(), menu.tile.getBlockPos()));
