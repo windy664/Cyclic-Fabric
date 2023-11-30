@@ -4,6 +4,8 @@ import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.antipotion.AntiBeaconBlockEntity;
+import net.knsh.cyclic.block.anvil.AnvilAutoBlockEntity;
+import net.knsh.cyclic.block.anvilmagma.AnvilMagmaBlockEntity;
 import net.knsh.cyclic.block.crafter.CrafterBlockEntity;
 import net.knsh.cyclic.block.generatorfuel.GeneratorFuelBlockEntity;
 import net.knsh.cyclic.library.config.ConfigTemplate;
@@ -54,6 +56,8 @@ public class ConfigRegistry extends ConfigTemplate {
         GeneratorFuelBlockEntity.RF_PER_TICK = CFG.comment("RF energy per tick generated while burning furnace fuel in this machine.  Burn time in ticks is the same as furnace values, so 1 coal = 1600 ticks")
                 .defineInRange("generator_fuel.rf_per_tick", 80, 1, 6400);
         CrafterBlockEntity.POWERCONF = CFG.comment("Power per use crafter").defineInRange("crafter.energy_cost", 500, 0, 64000);
+        AnvilAutoBlockEntity.POWERCONF = CFG.comment("Power per repair anvil").defineInRange("anvil.energy_cost", 250, 0, 64000);
+        AnvilMagmaBlockEntity.FLUIDCOST = CFG.comment("Cost of magma fluid per action").defineInRange("anvil_magma.fluid_cost", 100, 1, 64000);
 
         COMMON_CONFIG = CFG.build();
     }

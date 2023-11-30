@@ -7,10 +7,16 @@ import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.antipotion.AntiBeaconBlock;
 import net.knsh.cyclic.block.antipotion.AntiBeaconBlockEntity;
 import net.knsh.cyclic.block.antipotion.MilkSpongeBlock;
+import net.knsh.cyclic.block.anvil.AnvilAutoBlock;
+import net.knsh.cyclic.block.anvil.AnvilAutoBlockEntity;
+import net.knsh.cyclic.block.anvilmagma.AnvilMagmaBlock;
+import net.knsh.cyclic.block.anvilmagma.AnvilMagmaBlockEntity;
 import net.knsh.cyclic.block.anvilvoid.AnvilVoidBlock;
 import net.knsh.cyclic.block.anvilvoid.AnvilVoidBlockEntity;
 import net.knsh.cyclic.block.beaconpotion.BeaconPotionBlock;
 import net.knsh.cyclic.block.beaconpotion.BeaconPotionBlockEntity;
+import net.knsh.cyclic.block.cable.item.ItemCableBlock;
+import net.knsh.cyclic.block.cable.item.ItemCableBlockEntity;
 import net.knsh.cyclic.block.conveyor.ConveyorBlock;
 import net.knsh.cyclic.block.conveyor.ConveyorBlockEntity;
 import net.knsh.cyclic.block.crafter.CrafterBlock;
@@ -32,6 +38,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
@@ -50,7 +57,10 @@ public class CyclicBlocks {
     public static ItemBlockEntity<GeneratorFuelBlockEntity> GENERATOR_FUEL = registerBlockEntity("generator_fuel", GeneratorFuelBlockEntity::new, new GeneratorFuelBlock(FabricBlockSettings.create()));
     public static ItemBlockEntity<CrafterBlockEntity> CRAFTER = registerBlockEntity("crafter", CrafterBlockEntity::new, new CrafterBlock(FabricBlockSettings.create()));
     public static ItemBlockEntity<BeaconPotionBlockEntity> BEACON = registerBlockEntity("beacon", BeaconPotionBlockEntity::new, new BeaconPotionBlock(FabricBlockSettings.create()));
+    public static ItemBlockEntity<AnvilMagmaBlockEntity> ANVIL_MAGMA = registerBlockEntity("anvil_magma", AnvilMagmaBlockEntity::new, new AnvilMagmaBlock(FabricBlockSettings.create().sound(SoundType.ANVIL)));
+    public static ItemBlockEntity<AnvilAutoBlockEntity> ANVIL = registerBlockEntity("anvil", AnvilAutoBlockEntity::new, new AnvilAutoBlock(FabricBlockSettings.create().sound(SoundType.ANVIL)));
     public static ItemBlockEntity<AntiBeaconBlockEntity> ANTI_BEACON = registerBlockEntity("anti_beacon", AntiBeaconBlockEntity::new, new AntiBeaconBlock(FabricBlockSettings.create().luminance(p -> 2)));
+    public static ItemBlockEntity<ItemCableBlockEntity> ITEM_PIPE = registerBlockEntity("item_pipe", ItemCableBlockEntity::new, new ItemCableBlock(FabricBlockSettings.create()));
 
     public static ItemBlock SPONGE_MILK = registerBlock("sponge_milk", new MilkSpongeBlock(FabricBlockSettings.create().luminance(p -> 1)));
 

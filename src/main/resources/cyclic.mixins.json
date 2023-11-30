@@ -3,7 +3,8 @@
   "package": "net.knsh.cyclic.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "ExampleMixin"
+    "ExampleMixin",
+    "common.ServerPlayerAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

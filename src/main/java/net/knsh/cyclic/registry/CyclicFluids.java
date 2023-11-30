@@ -2,7 +2,9 @@ package net.knsh.cyclic.registry;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.knsh.cyclic.Cyclic;
+import net.knsh.cyclic.fluid.FluidMagmaHolder;
 import net.knsh.cyclic.fluid.FluidXpJuiceHolder;
+import net.knsh.cyclic.fluid.block.MagmaFluidBlock;
 import net.knsh.cyclic.fluid.block.XpJuiceFluidBlock;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -19,6 +21,11 @@ public class CyclicFluids {
     public static Block XP_BLOCK;
     public static Item XP_BUCKET;
 
+    public static FlowingFluid STILL_MAGMA;
+    public static FlowingFluid FLOWING_MAGMA;
+    public static Block MAGMA_BLOCK;
+    public static Item MAGMA_BUCKET;
+
     public static void register() {
         STILL_XP = Registry.register(BuiltInRegistries.FLUID, new ResourceLocation(Cyclic.MOD_ID + ":block/fluid/xpjuice_still"), new FluidXpJuiceHolder.Still());
         FLOWING_XP = Registry.register(BuiltInRegistries.FLUID, new ResourceLocation(Cyclic.MOD_ID + ":block/fluid/xpjuice_flow"), new FluidXpJuiceHolder.Flowing());
@@ -26,5 +33,12 @@ public class CyclicFluids {
                 new XpJuiceFluidBlock(STILL_XP, FabricBlockSettings.of().liquid().lightLevel(s -> 8).strength(100.0F).noLootTable()));
         XP_BUCKET = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(Cyclic.MOD_ID, "xpjuice_bucket"),
                 new BucketItem(STILL_XP, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+
+        STILL_MAGMA = Registry.register(BuiltInRegistries.FLUID, new ResourceLocation(Cyclic.MOD_ID, "magma_still"), new FluidMagmaHolder.Still());
+        FLOWING_MAGMA = Registry.register(BuiltInRegistries.FLUID, new ResourceLocation(Cyclic.MOD_ID, "magma_flowing"), new FluidMagmaHolder.Flowing());
+        MAGMA_BLOCK = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Cyclic.MOD_ID, "magma_block"),
+                new MagmaFluidBlock(STILL_MAGMA, FabricBlockSettings.of().liquid().lightLevel(s -> 8).strength(100.0F).noLootTable()));
+        MAGMA_BUCKET = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(Cyclic.MOD_ID, "magma_bucket"),
+                new BucketItem(STILL_MAGMA, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
     }
 }

@@ -23,6 +23,7 @@ public class Cyclic implements ModInitializer {
 		CyclicEntities.register();
 		CyclicFluids.register();
 		CyclicItems.register();
+		CyclicSounds.register();
 		CyclicScreens.register();
 		CyclicTabGroups.register();
 		CyclicC2S.register();

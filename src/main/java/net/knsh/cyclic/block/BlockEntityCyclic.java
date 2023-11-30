@@ -4,13 +4,17 @@ import com.google.common.collect.Lists;
 import net.fabricmc.fabric.api.lookup.v1.block.BlockApiLookup;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
+import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
+import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
+import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.knsh.cyclic.block.beaconpotion.BeamParams;
 import net.knsh.cyclic.library.capabilities.FluidTankBase;
 import net.knsh.cyclic.library.core.IHasFluid;
 import net.knsh.cyclic.library.util.SoundUtil;
+import net.knsh.cyclic.porting.neoforge.items.ForgeImplementedInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -18,6 +22,7 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -29,6 +34,7 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
 public abstract class BlockEntityCyclic extends BlockEntity implements IHasFluid {
     public static final int MENERGY = 64 * 1000;
@@ -62,6 +68,58 @@ public abstract class BlockEntityCyclic extends BlockEntity implements IHasFluid
         if (previous != lit) {
             this.level.setBlockAndUpdate(worldPosition, state.setValue(BlockCyclic.LIT, lit));
         }
+    }
+
+    public boolean moveItems(Direction myFacingDir, int max, InventoryStorage handlerHere) {
+        return moveItems(myFacingDir, worldPosition.relative(myFacingDir), max, handlerHere, 0);
+    }
+
+    public boolean moveItems(Direction myFacingDir, BlockPos posTarget, int max, InventoryStorage handlerHere, int theslot) {
+        if (this.level.isClientSide()) {
+            return false;
+        }
+        if (handlerHere == null) {
+            return false;
+        }
+        Direction themFacingMe = myFacingDir.getOpposite();
+        BlockEntity tileTarget = level.getBlockEntity(posTarget);
+        if (tileTarget == null) {
+            return false;
+        }
+        Storage<ItemVariant> handlerOutput = ItemStorage.SIDED.find(level, tileTarget.getBlockPos(), themFacingMe);
+        if (handlerOutput == null) {
+            return false;
+        }
+        //first simulate/
+        ItemStack drain;
+        try (Transaction transaction = Transaction.openOuter()) {
+            drain = handlerHere.getSlot(theslot).getResource().toStack();
+            if (drain.isEmpty()) {
+                transaction.abort();
+            } else {
+                long amount = handlerHere.getSlot(theslot).extract(ItemVariant.of(drain), max, transaction);
+                drain.shrink((int) amount);
+                transaction.commit();
+            }
+        }
+        //ItemStack drain = handlerHere.extractItem(theslot, max, true); // handlerHere.getStackInSlot(theslot).copy();
+        int sizeStarted = drain.getCount();
+        if (!drain.isEmpty()) {
+            //now push it into output, but find out what was ACTUALLY taken
+            try (Transaction transaction = Transaction.openOuter()) {
+                long amount = handlerOutput.insert(ItemVariant.of(drain), 64, transaction);
+                drain.shrink((int) amount);
+                transaction.commit();
+            }
+        }
+        int sizeAfter = sizeStarted - drain.getCount();
+        if (sizeAfter > 0) {
+            try (Transaction transaction = Transaction.openOuter()) {
+                handlerHere.getSlot(theslot).extract(handlerHere.getSlot(theslot).getResource(), sizeAfter, transaction);
+                transaction.commit();
+            }
+        }
+        return sizeAfter > 0;
     }
 
     @Nullable
@@ -114,14 +172,20 @@ public abstract class BlockEntityCyclic extends BlockEntity implements IHasFluid
             Storage<ItemVariant> itemHandlerFrom = blockApiLookup.find(level, posTarget, extractSide.getOpposite());
             if (itemHandlerFrom != null) {
                 itemHandlerFrom.forEach((itemVariantStorageView -> {
-                    long moved;
-                    ItemStack simStack = itemVariantStorageView.getResource().toStack();
-                    moved = StorageUtil.simulateExtract(itemVariantStorageView, itemVariantStorageView.getResource(), qty, null);
-                    simStack.shrink((int) moved);
-                    if (simStack.isEmpty()) {
-                        return;
+                    if (!itemVariantStorageView.getResource().isBlank()){
+                        long moved;
+                        ItemStack simStack = itemVariantStorageView.getResource().toStack();
+                        try (Transaction transaction = Transaction.openOuter()) {
+                            moved = StorageUtil.simulateExtract(itemVariantStorageView, itemVariantStorageView.getResource(), qty, transaction);
+                            transaction.commit();
+                        }
+                        simStack.shrink((int) moved);
+                        if (simStack.isEmpty()) {
+                            return;
+                        }
+                        StorageUtil.move(itemHandlerFrom, myself, itemVariant -> true, qty, null);
                     }
-                    StorageUtil.move(itemHandlerFrom, myself, itemVariant -> true, qty, null);
+
                 }));
             }
         }
