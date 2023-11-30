@@ -1,18 +1,14 @@
-package net.knsh.cyclic.block.cable.item;
+package net.knsh.cyclic.block.cable.energy;
 
-import net.fabricmc.fabric.api.lookup.v1.block.BlockApiLookup;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
-import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
 import net.knsh.cyclic.block.cable.CableBase;
 import net.knsh.cyclic.block.cable.EnumConnectType;
 import net.knsh.cyclic.block.cable.ShapeCache;
 import net.knsh.cyclic.registry.CyclicBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.Container;
-import net.minecraft.world.Containers;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -28,48 +24,27 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+import team.reborn.energy.api.EnergyStorage;
 
-public class ItemCableBlock extends CableBase {
-    private final BlockApiLookup<Storage<ItemVariant>, @Nullable Direction> blockApiLookup = ItemStorage.SIDED;
-    public ItemCableBlock(Properties settings) {
+public class EnergyCableBlock extends CableBase {
+    public EnergyCableBlock(Properties settings) {
         super(settings.strength(0.5F));
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         return ShapeCache.getOrCreate(state, CableBase::createShape);
     }
 
     @Override
-    public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-        if (state.getBlock() != newState.getBlock()) {
-            ItemCableBlockEntity tileentity = (ItemCableBlockEntity) worldIn.getBlockEntity(pos);
-            if (tileentity != null) {
-                if (tileentity.getItems() != null) {
-                    Containers.dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileentity.getItems().get(0));
-                }
-                for (Direction dir : Direction.values()) {
-                    Storage<ItemVariant> items = blockApiLookup.find(worldIn, pos.relative(dir), dir.getOpposite());
-                    if (items != null) {
-                        items.forEach((itemVariantStorageView -> {
-                            Containers.dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), itemVariantStorageView.getResource().toStack());
-                        }));
-                    }
-                }
-            }
-            worldIn.updateNeighbourForOutputSignal(pos, this);
-        }
-        super.onRemove(state, worldIn, pos, newState, isMoving);
+    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new EnergyCableBlockEntity(pos, state);
     }
 
+    @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new ItemCableBlockEntity(pos, state);
-    }
-
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-        return createTickerHelper(type, CyclicBlocks.ITEM_PIPE.blockEntity(), world.isClientSide ? ItemCableBlockEntity::clientTick : ItemCableBlockEntity::serverTick);
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+        return createTickerHelper(blockEntityType, CyclicBlocks.ENERGY_PIPE.blockEntity(), level.isClientSide ? EnergyCableBlockEntity::clientTick : EnergyCableBlockEntity::serverTick);
     }
 
     @Override
@@ -82,8 +57,8 @@ public class ItemCableBlock extends CableBase {
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         for (Direction d : Direction.values()) {
             BlockEntity facingTile = level.getBlockEntity(pos.relative(d));
-            Storage<ItemVariant> cap = facingTile == null ? null : blockApiLookup.find(level, facingTile.getBlockPos(), d.getOpposite());
-            if (cap != null) {
+            EnergyStorage energy = facingTile == null ? null : EnergyStorage.SIDED.find(level, facingTile.getBlockPos(), d.getOpposite());
+            if (energy != null) {
                 state = state.setValue(FACING_TO_PROPERTY_MAP.get(d), EnumConnectType.INVENTORY);
                 level.setBlockAndUpdate(pos, state);
             }
@@ -96,13 +71,13 @@ public class ItemCableBlock extends CableBase {
         EnumProperty<EnumConnectType> property = FACING_TO_PROPERTY_MAP.get(facing);
         EnumConnectType oldProp = stateIn.getValue(property);
         if (oldProp.isBlocked() || oldProp.isExtraction()) {
-            //  updateConnection(world, currentPos, facing, oldProp);
+            //      updateConnection(world, currentPos, facing, oldProp);
             return stateIn;
         }
-
-        if (isItem(stateIn, facing, facingState, world, currentPos, facingPos)) {
+        if (isEnergy(stateIn, facing, facingState, world, currentPos, facingPos)) {
             BlockState with = stateIn.setValue(property, EnumConnectType.INVENTORY);
             if (world instanceof Level && world.getBlockState(currentPos).getBlock() == this) {
+                //hack to force {any} -> inventory IF its here
                 ((Level) world).setBlockAndUpdate(currentPos, with);
             }
             return with;
@@ -112,13 +87,13 @@ public class ItemCableBlock extends CableBase {
         }
     }
 
-    private boolean isItem(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor world, BlockPos currentPos, BlockPos facingPos) {
+    private boolean isEnergy(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor world, BlockPos currentPos, BlockPos facingPos) {
         if (facing == null) {
             return false;
         }
         BlockEntity neighbor = world.getBlockEntity(facingPos);
         if (world.isClientSide() || neighbor == null) return false;
-        Storage<ItemVariant> cap = blockApiLookup.find(world.getServer().getLevel(Level.OVERWORLD), neighbor.getBlockPos(), facing.getOpposite());
+        EnergyStorage cap = EnergyStorage.SIDED.find(world.getServer().getLevel(Level.OVERWORLD), neighbor.getBlockPos(), facing.getOpposite());
         if (cap != null) {
             return true;
         }

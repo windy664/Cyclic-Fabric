@@ -10,6 +10,7 @@ import net.knsh.cyclic.block.anvilmagma.AnvilMagmaScreen;
 import net.knsh.cyclic.block.anvilvoid.AnvilVoidScreen;
 import net.knsh.cyclic.block.beaconpotion.BeaconPotionScreen;
 import net.knsh.cyclic.block.beaconpotion.RenderBeaconPotion;
+import net.knsh.cyclic.block.cable.fluid.FluidCableScreen;
 import net.knsh.cyclic.block.cable.item.ItemCableScreen;
 import net.knsh.cyclic.block.conveyor.ConveyorItemRenderer;
 import net.knsh.cyclic.block.crafter.CrafterScreen;
@@ -60,6 +61,7 @@ public class ClientRegistry {
         MenuScreens.register(CyclicScreens.GENERATOR_FUEL, GeneratorFuelScreen::new);
         MenuScreens.register(CyclicScreens.CRAFTER, CrafterScreen::new);
         MenuScreens.register(CyclicScreens.BEACON, BeaconPotionScreen::new);
-        //MenuScreens.register(CyclicScreens.ITEM_PIPE, ItemCableScreen::new);
+        MenuScreens.register(CyclicScreens.ITEM_PIPE, ItemCableScreen::new);
+        MenuScreens.register(CyclicScreens.FLUID_PIPE, FluidCableScreen::new);
     }
 }

@@ -1,4 +1,4 @@
-package net.knsh.cyclic.block.cable.item;
+package net.knsh.cyclic.block.cable.fluid;
 
 import net.knsh.cyclic.gui.ScreenBase;
 import net.knsh.cyclic.registry.CyclicTextures;
@@ -6,8 +6,8 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
-public class ItemCableScreen extends ScreenBase<ItemCableScreenHandler> {
-    public ItemCableScreen(ItemCableScreenHandler screenContainer, Inventory inv, Component titleIn) {
+public class FluidCableScreen extends ScreenBase<FluidCableScreenHandler> {
+    public FluidCableScreen(FluidCableScreenHandler screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);
     }
 

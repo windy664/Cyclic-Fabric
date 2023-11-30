@@ -164,8 +164,8 @@ public class ItemCableBlockEntity extends BlockEntityCyclic implements ExtendedS
 
     @Nullable
     @Override
-    public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return null;
+    public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player player) {
+        return new ItemCableScreenHandler(i, playerInventory, this, level, worldPosition);
     }
 
     @Override

@@ -144,7 +144,11 @@ public class CableBase extends BlockCyclic implements SimpleWaterloggedBlock {
                 if (!world.isClientSide) {
                     BlockEntity tileEntity = world.getBlockEntity(pos);
                     if (tileEntity instanceof MenuProvider) {
-                        NetworkHooks.openScreen((ServerPlayer) player, (MenuProvider) tileEntity);
+                        MenuProvider screenHandlerFactory = state.getMenuProvider(world, pos);
+
+                        if (screenHandlerFactory != null) {
+                            player.openMenu(screenHandlerFactory);
+                        }
                     }
                     else {
                         throw new IllegalStateException("Our named container provider is missing!");
@@ -158,6 +162,10 @@ public class CableBase extends BlockCyclic implements SimpleWaterloggedBlock {
         rotateFromWrench(state, world, pos, player, hit);
         player.swing(hand);
         return super.use(state, world, pos, player, hand, hit);
+    }
+
+    public static void crouchClick(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+        rotateFromWrench(state, level, pos, player, hit);
     }
 
     private static void rotateFromWrench(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {

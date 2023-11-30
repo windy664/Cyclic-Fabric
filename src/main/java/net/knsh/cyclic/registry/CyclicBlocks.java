@@ -15,6 +15,10 @@ import net.knsh.cyclic.block.anvilvoid.AnvilVoidBlock;
 import net.knsh.cyclic.block.anvilvoid.AnvilVoidBlockEntity;
 import net.knsh.cyclic.block.beaconpotion.BeaconPotionBlock;
 import net.knsh.cyclic.block.beaconpotion.BeaconPotionBlockEntity;
+import net.knsh.cyclic.block.cable.energy.EnergyCableBlock;
+import net.knsh.cyclic.block.cable.energy.EnergyCableBlockEntity;
+import net.knsh.cyclic.block.cable.fluid.FluidCableBlock;
+import net.knsh.cyclic.block.cable.fluid.FluidCableBlockEntity;
 import net.knsh.cyclic.block.cable.item.ItemCableBlock;
 import net.knsh.cyclic.block.cable.item.ItemCableBlockEntity;
 import net.knsh.cyclic.block.conveyor.ConveyorBlock;
@@ -61,6 +65,8 @@ public class CyclicBlocks {
     public static ItemBlockEntity<AnvilAutoBlockEntity> ANVIL = registerBlockEntity("anvil", AnvilAutoBlockEntity::new, new AnvilAutoBlock(FabricBlockSettings.create().sound(SoundType.ANVIL)));
     public static ItemBlockEntity<AntiBeaconBlockEntity> ANTI_BEACON = registerBlockEntity("anti_beacon", AntiBeaconBlockEntity::new, new AntiBeaconBlock(FabricBlockSettings.create().luminance(p -> 2)));
     public static ItemBlockEntity<ItemCableBlockEntity> ITEM_PIPE = registerBlockEntity("item_pipe", ItemCableBlockEntity::new, new ItemCableBlock(FabricBlockSettings.create()));
+    public static ItemBlockEntity<FluidCableBlockEntity> FLUID_PIPE = registerBlockEntity("fluid_pipe", FluidCableBlockEntity::new, new FluidCableBlock(FabricBlockSettings.create()));
+    public static ItemBlockEntity<EnergyCableBlockEntity> ENERGY_PIPE = registerBlockEntity("energy_pipe", EnergyCableBlockEntity::new, new EnergyCableBlock(FabricBlockSettings.create()));
 
     public static ItemBlock SPONGE_MILK = registerBlock("sponge_milk", new MilkSpongeBlock(FabricBlockSettings.create().luminance(p -> 1)));
 

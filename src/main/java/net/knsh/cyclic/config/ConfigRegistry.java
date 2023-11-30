@@ -6,9 +6,12 @@ import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.antipotion.AntiBeaconBlockEntity;
 import net.knsh.cyclic.block.anvil.AnvilAutoBlockEntity;
 import net.knsh.cyclic.block.anvilmagma.AnvilMagmaBlockEntity;
+import net.knsh.cyclic.block.cable.energy.EnergyCableBlockEntity;
+import net.knsh.cyclic.block.cable.fluid.FluidCableBlockEntity;
 import net.knsh.cyclic.block.crafter.CrafterBlockEntity;
 import net.knsh.cyclic.block.generatorfuel.GeneratorFuelBlockEntity;
 import net.knsh.cyclic.library.config.ConfigTemplate;
+import net.knsh.cyclic.porting.neoforge.FluidFabricToForge;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.config.ModConfig;
 
@@ -58,6 +61,15 @@ public class ConfigRegistry extends ConfigTemplate {
         CrafterBlockEntity.POWERCONF = CFG.comment("Power per use crafter").defineInRange("crafter.energy_cost", 500, 0, 64000);
         AnvilAutoBlockEntity.POWERCONF = CFG.comment("Power per repair anvil").defineInRange("anvil.energy_cost", 250, 0, 64000);
         AnvilMagmaBlockEntity.FLUIDCOST = CFG.comment("Cost of magma fluid per action").defineInRange("anvil_magma.fluid_cost", 100, 1, 64000);
+
+        FluidCableBlockEntity.BUFFERSIZE = CFG.comment("How many buckets of buffer fluid the fluid cable can hold (for each direction. for example 2 here means 2000ub in each face)")
+                .defineInRange("cables.fluid.buffer", (int) FluidFabricToForge.toDroplets(16), (int) FluidFabricToForge.toDroplets(1), (int) FluidFabricToForge.toDroplets(32));
+        FluidCableBlockEntity.TRANSFER_RATE = CFG.comment("How many fluid units per tick can flow through these cables each tick (1 bucket = 1000) including normal flow and extraction mode")
+                .defineInRange("cables.fluid.flow", (int) FluidFabricToForge.toDroplets(1000), (int) FluidFabricToForge.toDroplets(100), (int) FluidFabricToForge.toDroplets(32 * 1000));
+        EnergyCableBlockEntity.BUFFERSIZE = CFG.comment("How much buffer the energy cables hold (must not be smaller than flow)")
+                .defineInRange("cables.energy.buffer", 320000, 10, 320000 * 4);
+        EnergyCableBlockEntity.TRANSFER_RATE = CFG.comment("How fast energy flows in these cables (must not be greater than buffer)")
+                .defineInRange("cables.energy.flow", 10000, 1000, 32 * 10000);
 
         COMMON_CONFIG = CFG.build();
     }

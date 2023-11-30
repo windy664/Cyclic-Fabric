@@ -1,4 +1,4 @@
-package net.knsh.cyclic.block.cable.item;
+package net.knsh.cyclic.block.cable.fluid;
 
 import net.knsh.cyclic.gui.ScreenHandlerBase;
 import net.knsh.cyclic.registry.CyclicScreens;
@@ -10,21 +10,21 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.level.Level;
 
-public class ItemCableScreenHandler extends ScreenHandlerBase {
-    ItemCableBlockEntity tile;
+public class FluidCableScreenHandler extends ScreenHandlerBase {
+    protected FluidCableBlockEntity tile;
     private final Container inventory;
 
-    public ItemCableScreenHandler(int syncId, Inventory playerInventory, Level world, BlockPos pos) {
+    public FluidCableScreenHandler(int syncId, Inventory playerInventory, Level world, BlockPos pos) {
         this(syncId, playerInventory, new SimpleContainer(1), world, pos);
     }
 
-    public ItemCableScreenHandler(int syncId, Inventory playerInventory, Container inventorysent, Level world, BlockPos pos) {
-        super(CyclicScreens.ITEM_PIPE, syncId);
-        tile = (ItemCableBlockEntity) world.getBlockEntity(pos);
+    public FluidCableScreenHandler(int syncId, Inventory playerInventory, Container inventorysent, Level world, BlockPos pos) {
+        super(CyclicScreens.FLUID_PIPE, syncId);
+        tile = (FluidCableBlockEntity) world.getBlockEntity(pos);
         this.playerEntity = playerInventory.player;
         this.playerInventory = playerInventory;
         this.inventory = inventorysent;
-        this.endInv = inventorysent.getContainerSize();
+        this.endInv = inventory.getContainerSize();
 
         addSlot(new Slot(inventory, 0, 80, 29) {
 

@@ -1,12 +1,12 @@
 package net.knsh.cyclic.registry;
 
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.anvil.AnvilAutoScreenHandler;
 import net.knsh.cyclic.block.anvilmagma.AnvilMagmaScreenHandler;
 import net.knsh.cyclic.block.anvilvoid.AnvilVoidScreenHandler;
 import net.knsh.cyclic.block.beaconpotion.BeaconPotionScreenHandler;
+import net.knsh.cyclic.block.cable.fluid.FluidCableScreenHandler;
 import net.knsh.cyclic.block.cable.item.ItemCableScreenHandler;
 import net.knsh.cyclic.block.crafter.CrafterScreenHandler;
 import net.knsh.cyclic.block.generatorfuel.GeneratorFuelScreenHandler;
@@ -29,8 +29,10 @@ public class CyclicScreens {
             new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new AnvilMagmaScreenHandler(syncId, inventory, inventory.player.level(), buf.readBlockPos()))));
     public static MenuType<AnvilAutoScreenHandler> ANVIL = registerScreen("anvil",
             new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new AnvilAutoScreenHandler(syncId, inventory, inventory.player.level(), buf.readBlockPos()))));
-    //public static MenuType<ItemCableScreenHandler> ITEM_PIPE = registerScreen("item_pipe",
-            //new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new ItemCableScreenHandler(syncId, inventory, inventory.player.level(), buf.readBlockPos()))));
+    public static MenuType<ItemCableScreenHandler> ITEM_PIPE = registerScreen("item_pipe",
+            new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new ItemCableScreenHandler(syncId, inventory, inventory.player.level(), buf.readBlockPos()))));
+    public static MenuType<FluidCableScreenHandler> FLUID_PIPE = registerScreen("fluid_pipe",
+            new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new FluidCableScreenHandler(syncId, inventory, inventory.player.level(), buf.readBlockPos()))));
 
     private static <T extends ScreenHandlerBase> MenuType<T> registerScreen(String id, ExtendedScreenHandlerType factory) {
         return Registry.register(BuiltInRegistries.MENU, new ResourceLocation(Cyclic.MOD_ID, id), factory);
