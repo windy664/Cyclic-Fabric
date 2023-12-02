@@ -13,6 +13,8 @@ import net.knsh.cyclic.block.anvilmagma.AnvilMagmaBlock;
 import net.knsh.cyclic.block.anvilmagma.AnvilMagmaBlockEntity;
 import net.knsh.cyclic.block.anvilvoid.AnvilVoidBlock;
 import net.knsh.cyclic.block.anvilvoid.AnvilVoidBlockEntity;
+import net.knsh.cyclic.block.battery.BatteryBlock;
+import net.knsh.cyclic.block.battery.BatteryBlockEntity;
 import net.knsh.cyclic.block.beaconpotion.BeaconPotionBlock;
 import net.knsh.cyclic.block.beaconpotion.BeaconPotionBlockEntity;
 import net.knsh.cyclic.block.cable.energy.EnergyCableBlock;
@@ -67,6 +69,7 @@ public class CyclicBlocks {
     public static ItemBlockEntity<ItemCableBlockEntity> ITEM_PIPE = registerBlockEntity("item_pipe", ItemCableBlockEntity::new, new ItemCableBlock(FabricBlockSettings.create()));
     public static ItemBlockEntity<FluidCableBlockEntity> FLUID_PIPE = registerBlockEntity("fluid_pipe", FluidCableBlockEntity::new, new FluidCableBlock(FabricBlockSettings.create()));
     public static ItemBlockEntity<EnergyCableBlockEntity> ENERGY_PIPE = registerBlockEntity("energy_pipe", EnergyCableBlockEntity::new, new EnergyCableBlock(FabricBlockSettings.create()));
+    public static BaseBlockEntity<BatteryBlockEntity> BATTERY = registerBaseBlockEntity("battery", BatteryBlockEntity::new, new BatteryBlock(FabricBlockSettings.create()));
 
     public static ItemBlock SPONGE_MILK = registerBlock("sponge_milk", new MilkSpongeBlock(FabricBlockSettings.create().luminance(p -> 1)));
 
@@ -74,6 +77,16 @@ public class CyclicBlocks {
 
     private static Block register(String id, Block block) {
         return Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Cyclic.MOD_ID, id), block);
+    }
+
+    private static <T extends BlockEntity> BaseBlockEntity<T> registerBaseBlockEntity(String id, FabricBlockEntityTypeBuilder.Factory<T> factory, Block block) {
+        Block registeredBlock = register(id, block);
+        INSTANCE.add(registeredBlock);
+
+        return new BaseBlockEntity<>(
+                Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(Cyclic.MOD_ID, id), FabricBlockEntityTypeBuilder.create(factory, block).build()),
+                registeredBlock
+        );
     }
 
     private static <T extends BlockEntity> ItemBlockEntity<T> registerBlockEntity(String id, FabricBlockEntityTypeBuilder.Factory<T> factory, Block block) {
@@ -97,6 +110,7 @@ public class CyclicBlocks {
         );
     }
 
+    public record BaseBlockEntity<T extends BlockEntity>(BlockEntityType<T> blockEntity, Block block) {}
     public record ItemBlockEntity<T extends BlockEntity>(BlockEntityType<T> blockEntity, Block block, Item item) {}
     public record ItemBlock(Block block, Item item) {}
 }

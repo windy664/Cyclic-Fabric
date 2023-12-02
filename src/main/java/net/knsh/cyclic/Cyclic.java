@@ -2,6 +2,8 @@ package net.knsh.cyclic;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
+import net.knsh.cyclic.api.ItemApi;
 import net.knsh.cyclic.config.ConfigRegistry;
 import net.knsh.cyclic.event.ItemEvents;
 import net.knsh.cyclic.network.CyclicC2S;
@@ -30,5 +32,7 @@ public class Cyclic implements ModInitializer {
 		CyclicC2S.register();
 
 		ItemEvents.register();
+
+		ItemApi.init();
 	}
 }

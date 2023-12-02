@@ -111,9 +111,9 @@ public class AnvilMagmaBlockEntity extends BlockEntityCyclic implements Extended
 
     @Override
     protected void saveAdditional(CompoundTag tag) {
-        ContainerHelper.saveAllItems(tag, inventory);
         tag.put("fluidVariant", tank.variant.toNbt());
         tag.putLong("amount", tank.amount);
+        ContainerHelper.saveAllItems(tag, inventory);
         super.saveAdditional(tag);
     }
 

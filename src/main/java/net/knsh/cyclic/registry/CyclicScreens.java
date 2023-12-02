@@ -5,6 +5,7 @@ import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.anvil.AnvilAutoScreenHandler;
 import net.knsh.cyclic.block.anvilmagma.AnvilMagmaScreenHandler;
 import net.knsh.cyclic.block.anvilvoid.AnvilVoidScreenHandler;
+import net.knsh.cyclic.block.battery.BatteryScreenHandler;
 import net.knsh.cyclic.block.beaconpotion.BeaconPotionScreenHandler;
 import net.knsh.cyclic.block.cable.fluid.FluidCableScreenHandler;
 import net.knsh.cyclic.block.cable.item.ItemCableScreenHandler;
@@ -33,6 +34,8 @@ public class CyclicScreens {
             new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new ItemCableScreenHandler(syncId, inventory, inventory.player.level(), buf.readBlockPos()))));
     public static MenuType<FluidCableScreenHandler> FLUID_PIPE = registerScreen("fluid_pipe",
             new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new FluidCableScreenHandler(syncId, inventory, inventory.player.level(), buf.readBlockPos()))));
+    public static MenuType<BatteryScreenHandler> BATTERY = registerScreen("battery",
+            new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new BatteryScreenHandler(syncId, inventory, inventory.player.level(), buf.readBlockPos()))));
 
     private static <T extends ScreenHandlerBase> MenuType<T> registerScreen(String id, ExtendedScreenHandlerType factory) {
         return Registry.register(BuiltInRegistries.MENU, new ResourceLocation(Cyclic.MOD_ID, id), factory);
