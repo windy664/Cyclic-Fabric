@@ -4,7 +4,9 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "ExampleMixin",
-    "common.ServerPlayerAccessor"
+    "common.LivingEntityMixin",
+    "common.ServerPlayerAccessor",
+    "common.ThrownEnderpearlMixin"
   ],
   "injectors": {
     "defaultRequire": 1

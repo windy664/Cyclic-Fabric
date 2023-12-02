@@ -10,6 +10,7 @@ import net.knsh.cyclic.block.cable.energy.EnergyCableBlockEntity;
 import net.knsh.cyclic.block.cable.fluid.FluidCableBlockEntity;
 import net.knsh.cyclic.block.crafter.CrafterBlockEntity;
 import net.knsh.cyclic.block.generatorfuel.GeneratorFuelBlockEntity;
+import net.knsh.cyclic.enchant.TravellerEnchant;
 import net.knsh.cyclic.library.config.ConfigTemplate;
 import net.knsh.cyclic.porting.neoforge.FluidFabricToForge;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -44,7 +45,10 @@ public class ConfigRegistry extends ConfigTemplate {
 
     private static void initConfig() {
         final ForgeConfigSpec.Builder CFG = builder();
-
+        CFG.comment(WALL, " Enchantment related configs (if disabled, they may still show up as NBT on books and such but have functions disabled and are not obtainable in survival)", WALL)
+                .push("enchantment");
+        TravellerEnchant.CFG = CFG.comment("If true, then the traveller enchantment will be enabled.  This enchantment reduces damage from cactus, sweet berry bushes, and fall damage. It also prevents elytra damage when flying.").define(TravellerEnchant.ID + ".enabled", true);
+        CFG.pop(); //enchantment
         CFG.comment(WALL, " Block specific configs", WALL).push("blocks");
         AntiBeaconBlockEntity.HARMFUL_POTIONS = CFG.comment("If true, then all potions marked as harmful/negative will be used in addition to the 'anti_beacon.potion_list' for cures and immunities  (used by both sponge and artemisbeacon).")
                 .define("harmful_potions", true);
