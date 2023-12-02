@@ -24,6 +24,7 @@ public class Cyclic implements ModInitializer {
 		CyclicBlocks.register();
 		CyclicBlockEntities.register();
 		CyclicEntities.register();
+		CyclicEnchants.register();
 		CyclicFluids.register();
 		CyclicItems.register();
 		CyclicSounds.register();
