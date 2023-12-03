@@ -26,8 +26,7 @@ import java.util.Optional;
 public class BlockMixin {
     @ModifyReturnValue(
             method = "getDrops(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/item/ItemStack;)Ljava/util/List;",
-            at = @At("RETURN")
-    )
+            at = @At("RETURN"))
     private static List<ItemStack> getDrops(List<ItemStack> original, BlockState state, ServerLevel level, BlockPos pos, @Nullable BlockEntity blockEntity, @Nullable Entity entity, ItemStack tool) {
         if (EnchantmentHelper.getItemEnchantmentLevel(CyclicEnchants.AUTOSMELT, tool) < 1) return original;
 

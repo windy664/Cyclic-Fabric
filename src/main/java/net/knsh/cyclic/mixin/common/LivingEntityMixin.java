@@ -33,8 +33,7 @@ public abstract class LivingEntityMixin {
                     value = "INVOKE",
                     target = "Lnet/minecraft/world/damagesource/DamageSource;getEntity()Lnet/minecraft/world/entity/Entity;"
             ),
-            ordinal = 1
-    )
+            ordinal = 1)
     private float cyclic$onLivingDamageEvent(float DamageAmount, @Local(ordinal = 0) DamageSource damageSource) {
         LivingDamageEvent livingDamageEvent = CommonHooks.onLivingDamage(entity, damageSource, DamageAmount);
         if (!livingDamageEvent.isCanceled()) {
@@ -43,13 +42,19 @@ public abstract class LivingEntityMixin {
         return 0f;
     }
 
-    @WrapOperation(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;actuallyHurt(Lnet/minecraft/world/damagesource/DamageSource;F)V"))
+    @WrapOperation(
+            method = "hurt",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/LivingEntity;actuallyHurt(Lnet/minecraft/world/damagesource/DamageSource;F)V"))
     private void beforeActuallyHurt(LivingEntity instance, DamageSource damageSource, float damageAmount, @NotNull Operation<Void> original) {
         damageAmount = BeforeDamageCallback.BEFORE_DAMAGE.invoker().beforeDamage(damageSource, damageAmount);
         original.call(instance, damageSource, damageAmount);
     }
 
-    @Inject(method = "tick", at = @At("HEAD"))
+    @Inject(
+            method = "tick",
+            at = @At("HEAD"))
     private void tick(CallbackInfo ci) {
         if (!(entity instanceof Player)) return;
         Player player = (Player) entity;

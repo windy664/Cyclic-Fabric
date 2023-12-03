@@ -5,7 +5,9 @@
   "mixins": [
     "common.BlockMixin",
     "common.LivingEntityMixin",
+    "common.MobMixin",
     "common.ServerPlayerAccessor",
+    "common.StartAttackingMixin",
     "common.ThrownEnderpearlMixin"
   ],
   "injectors": {

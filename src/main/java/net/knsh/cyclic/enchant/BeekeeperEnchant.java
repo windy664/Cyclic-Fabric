@@ -1,5 +1,6 @@
 package net.knsh.cyclic.enchant;
 
+import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.library.enchant.EnchantmentCyclic;
 import net.knsh.cyclic.porting.neoforge.events.SubscribeEvent;
 import net.knsh.cyclic.porting.neoforge.events.experimental.LivingChangeTargetEvent;
@@ -46,7 +47,7 @@ public class BeekeeperEnchant extends EnchantmentCyclic {
         return 2;
     }
 
-    @SubscribeEvent // Yes this actually works
+    @SubscribeEvent
     public void onEntityTick(LivingChangeTargetEvent event) {
         if (!isEnabled()) {
             return;

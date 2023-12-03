@@ -11,6 +11,7 @@ import net.knsh.cyclic.block.cable.fluid.FluidCableBlockEntity;
 import net.knsh.cyclic.block.crafter.CrafterBlockEntity;
 import net.knsh.cyclic.block.generatorfuel.GeneratorFuelBlockEntity;
 import net.knsh.cyclic.enchant.AutoSmeltEnchant;
+import net.knsh.cyclic.enchant.BeekeeperEnchant;
 import net.knsh.cyclic.enchant.ReachEnchant;
 import net.knsh.cyclic.enchant.TravellerEnchant;
 import net.knsh.cyclic.library.config.ConfigTemplate;
@@ -53,6 +54,7 @@ public class ConfigRegistry extends ConfigTemplate {
         AutoSmeltEnchant.CFG = CFG.comment("If true, then the auto smelt enchantment will be enabled. \nThis enchantment will smelt blocks as they are mined.").define(AutoSmeltEnchant.ID + ".enabled", true);
         ReachEnchant.CFG = CFG.comment("If true, then the reach enchantment will be enabled. \nThis enchantment increases the reach of the player by 5 blocks.").define(ReachEnchant.ID + ".enabled", true);
         ReachEnchant.REACH_BOOST = CFG.comment("How much reach to add to the player (in blocks). \nDefault is 11.").defineInRange(ReachEnchant.ID + ".reach_boost", 11, 0, 20);
+        BeekeeperEnchant.CFG = CFG.comment("If true, then the beekeeper enchantment will be enabled. \nThis enchantment makes bees not attack the player.").define(BeekeeperEnchant.ID + ".enabled", true);
         CFG.pop(); //enchantment
         CFG.comment(WALL, " Block specific configs", WALL).push("blocks");
         AntiBeaconBlockEntity.HARMFUL_POTIONS = CFG.comment("If true, then all potions marked as harmful/negative will be used in addition to the 'anti_beacon.potion_list' for cures and immunities  (used by both sponge and artemisbeacon).")
