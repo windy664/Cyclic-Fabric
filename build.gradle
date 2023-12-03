@@ -15,8 +15,9 @@ repositories {
 	maven { url = "https://maven.quiltmc.org/repository/release" } // Quilt Mappings
 	maven { url = "https://maven.terraformersmc.com/" } // ModMenu, EMI
 	maven { url = "https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1" } // DevAuth
-	maven { url = 'https://maven.ladysnake.org/releases' } // CCA
 	maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" } // Forge Config Port
+	maven { url = "https://maven.jamieswhiteshirt.com/libs-release" } // Reach Entity Attributes
+	maven { url = "https://api.modrinth.com/maven" } // Forge Config Screens
 }
 
 loom {
@@ -54,25 +55,19 @@ dependencies {
 		it.officialMojangMappings { nameSyntheticMembers = false }
 	})
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-
-	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	include modApi("teamreborn:energy:${project.teamreborn_energy}") {
-		transitive = false
-	}
-
+	include modApi("teamreborn:energy:${project.teamreborn_energy}") { transitive = false }
 	modApi "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${project.forgeconfig_version}"
 	include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.2.1")))
-
-	//include modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca_version}")
-	//include modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}")
+	include modImplementation("com.jamieswhiteshirt:reach-entity-attributes:${project.reachentityattributes_version}")
 
 	// dev util stuff
 	modCompileOnly "dev.emi:emi-fabric:${emi_version}:api"
 	modLocalRuntime "dev.emi:emi-fabric:${emi_version}"
-	modImplementation ("com.terraformersmc:modmenu:${project.modmenu_version}")
-	modRuntimeOnly("me.djtheredstoner:DevAuth-fabric:${project.devauth_version}")
+	modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+	modImplementation "maven.modrinth:5WeWGLoJ:v8.0.2-1.20.1-Fabric"
+	modRuntimeOnly "me.djtheredstoner:DevAuth-fabric:${project.devauth_version}"
 }
 
 processResources {

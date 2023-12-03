@@ -3,7 +3,6 @@
   "package": "net.knsh.cyclic.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "ExampleMixin",
     "common.BlockMixin",
     "common.LivingEntityMixin",
     "common.ServerPlayerAccessor",
