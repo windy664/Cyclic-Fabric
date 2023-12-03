@@ -27,6 +27,7 @@ public class Cyclic implements ModInitializer {
 		CyclicEnchants.register();
 		CyclicFluids.register();
 		CyclicItems.register();
+		CyclicLootModifiers.register();
 		CyclicSounds.register();
 		CyclicScreens.register();
 		CyclicTabGroups.register();
