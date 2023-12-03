@@ -2,7 +2,6 @@ package net.knsh.cyclic;
 
 import net.fabricmc.api.ModInitializer;
 
-import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.knsh.cyclic.api.ItemApi;
 import net.knsh.cyclic.config.ConfigRegistry;
 import net.knsh.cyclic.event.ItemEvents;
@@ -27,7 +26,6 @@ public class Cyclic implements ModInitializer {
 		CyclicEnchants.register();
 		CyclicFluids.register();
 		CyclicItems.register();
-		CyclicLootModifiers.register();
 		CyclicSounds.register();
 		CyclicScreens.register();
 		CyclicTabGroups.register();
