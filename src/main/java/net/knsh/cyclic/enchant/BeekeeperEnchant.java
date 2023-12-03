@@ -1,6 +1,7 @@
 package net.knsh.cyclic.enchant;
 
 import net.knsh.cyclic.library.enchant.EnchantmentCyclic;
+import net.knsh.cyclic.porting.neoforge.NeoForge;
 import net.knsh.cyclic.porting.neoforge.bus.api.EventPriority;
 import net.knsh.cyclic.porting.neoforge.bus.api.SubscribeEvent;
 import net.knsh.cyclic.porting.neoforge.events.LivingChangeTargetEvent;
@@ -20,6 +21,7 @@ public class BeekeeperEnchant extends EnchantmentCyclic {
 
     public BeekeeperEnchant() {
         super(Enchantment.Rarity.VERY_RARE, EnchantmentCategory.ARMOR_HEAD, new EquipmentSlot[]{EquipmentSlot.HEAD});
+        NeoForge.EVENT_BUS.register(this);
     }
 
     @Override

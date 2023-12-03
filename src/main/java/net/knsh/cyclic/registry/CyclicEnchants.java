@@ -24,10 +24,6 @@ public class CyclicEnchants {
     public static void register() {}
 
     private static Enchantment registerEnchant(String id, Enchantment enchant) {
-        if (Objects.equals(id, "beekeeper")) {
-            Cyclic.FORGE_EVENTS.register(enchant);
-        }
-
         return Registry.register(BuiltInRegistries.ENCHANTMENT, new ResourceLocation(Cyclic.MOD_ID, id), enchant);
     }
 }

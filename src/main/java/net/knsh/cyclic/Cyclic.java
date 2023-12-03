@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 public class Cyclic implements ModInitializer {
 	public static final String MOD_ID = "cyclic";
     public static final Logger LOGGER = LoggerFactory.getLogger("cyclic");
-	public static final EventSubscriptionHandler FORGE_EVENTS = new EventSubscriptionHandler();
 
 	@Override
 	public void onInitialize() {
