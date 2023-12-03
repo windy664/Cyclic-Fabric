@@ -16,15 +16,18 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-package net.knsh.cyclic.porting.neoforge.events;
+package net.knsh.cyclic.porting.neoforge.bus;
 
-import net.fabricmc.fabric.api.event.Event;
-import net.knsh.cyclic.Cyclic;
+import net.knsh.cyclic.porting.neoforge.bus.api.EventPriority;
+import net.knsh.cyclic.porting.neoforge.bus.api.ForgeEvent;
+import net.knsh.cyclic.porting.neoforge.bus.fabric.EventPriorityResources;
+import net.knsh.cyclic.porting.neoforge.bus.api.IEventClassChecker;
+import net.knsh.cyclic.porting.neoforge.bus.api.SubscribeEvent;
+import net.minecraft.resources.ResourceLocation;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.Arrays;
 import java.util.stream.Stream;
 
 public class EventSubscriptionHandler {
@@ -93,7 +96,16 @@ public class EventSubscriptionHandler {
 
     private void register(Class<?> eventType, Object target, Method method) {
         try {
-            eventType.getMethod("doEventRegister", Method.class, Object.class).invoke(null, method, target);
+            EventPriority priority = method.getAnnotation(SubscribeEvent.class).priority();
+            ResourceLocation priorityIdentifier = switch (priority) {
+                case HIGHEST -> EventPriorityResources.HIGHEST;
+                case HIGH -> EventPriorityResources.HIGH;
+                case NORMAL -> EventPriorityResources.NORMAL;
+                case LOW -> EventPriorityResources.LOW;
+                case LOWEST -> EventPriorityResources.LOWEST;
+            };
+
+            eventType.getMethod("doEventRegister", Method.class, Object.class, ResourceLocation.class).invoke(null, method, target, priorityIdentifier);
         } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }

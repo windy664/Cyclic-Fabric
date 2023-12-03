@@ -5,7 +5,6 @@ import net.knsh.cyclic.enchant.AutoSmeltEnchant;
 import net.knsh.cyclic.enchant.BeekeeperEnchant;
 import net.knsh.cyclic.enchant.ReachEnchant;
 import net.knsh.cyclic.enchant.TravellerEnchant;
-import net.knsh.cyclic.porting.neoforge.events.EventSubscriptionHandler;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;

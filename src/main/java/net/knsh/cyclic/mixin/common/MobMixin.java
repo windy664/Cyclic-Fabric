@@ -4,7 +4,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.porting.neoforge.common.CommonHooks;
-import net.knsh.cyclic.porting.neoforge.events.experimental.LivingChangeTargetEvent;
+import net.knsh.cyclic.porting.neoforge.events.LivingChangeTargetEvent;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import org.objectweb.asm.Opcodes;

@@ -6,7 +6,7 @@ import net.knsh.cyclic.api.ItemApi;
 import net.knsh.cyclic.config.ConfigRegistry;
 import net.knsh.cyclic.event.ItemEvents;
 import net.knsh.cyclic.network.CyclicC2S;
-import net.knsh.cyclic.porting.neoforge.events.EventSubscriptionHandler;
+import net.knsh.cyclic.porting.neoforge.bus.EventSubscriptionHandler;
 import net.knsh.cyclic.registry.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -3,7 +3,7 @@ package net.knsh.cyclic.mixin.common;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import net.knsh.cyclic.porting.neoforge.common.CommonHooks;
-import net.knsh.cyclic.porting.neoforge.events.experimental.LivingChangeTargetEvent;
+import net.knsh.cyclic.porting.neoforge.events.LivingChangeTargetEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;

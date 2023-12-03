@@ -1,24 +1,27 @@
-package net.knsh.cyclic.porting.neoforge.events.experimental;
+package net.knsh.cyclic.porting.neoforge.events;
 
 import net.fabricmc.fabric.api.event.Event;
-import net.fabricmc.fabric.api.event.EventFactory;
-import net.knsh.cyclic.porting.neoforge.events.ForgeEvent;
+import net.knsh.cyclic.porting.neoforge.bus.api.ForgeEvent;
+import net.knsh.cyclic.porting.neoforge.bus.api.ICancellableEvent;
+import net.knsh.cyclic.porting.neoforge.bus.fabric.ForgeEventFactory;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class LivingChangeTargetEvent implements ForgeEvent {
-    public static final Event<LivingChangeTarget> EVENT = EventFactory.createArrayBacked(LivingChangeTarget.class, (listeners) -> (event) -> {
+public class LivingChangeTargetEvent extends ForgeEvent implements ICancellableEvent {
+    public static final Event<LivingChangeTarget> EVENT = ForgeEventFactory.create(LivingChangeTarget.class, (listeners) -> (event) -> {
         for (LivingChangeTarget listener : listeners) {
             listener.onLivingChangeTarget(event);
         }
         return event;
     });
 
-    public static void doEventRegister(Method method, Object object) {
-        EVENT.register((event) -> {
+    @SuppressWarnings("unused")
+    public static void doEventRegister(Method method, Object object, ResourceLocation priority) {
+        EVENT.register(priority, (event) -> {
             try {
                 method.invoke(object, event);
             } catch (IllegalAccessException | InvocationTargetException e) {
@@ -37,21 +40,12 @@ public class LivingChangeTargetEvent implements ForgeEvent {
     private final LivingEntity originalTarget;
     private LivingEntity newTarget;
     private Entity entity;
-    private boolean canceled = false;
 
     public LivingChangeTargetEvent(LivingEntity entity, LivingEntity originalTarget, ILivingTargetType targetType) {
         this.entity = entity;
         this.originalTarget = originalTarget;
         this.newTarget = originalTarget;
         this.targetType = targetType;
-    }
-
-    public void setCanceled(Boolean bool) {
-        this.canceled = bool;
-    }
-
-    public boolean isCanceled() {
-        return this.canceled;
     }
 
     public Entity getEntity() {

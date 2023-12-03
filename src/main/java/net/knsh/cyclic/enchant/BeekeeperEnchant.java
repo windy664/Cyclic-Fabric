@@ -1,10 +1,10 @@
 package net.knsh.cyclic.enchant;
 
-import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.library.enchant.EnchantmentCyclic;
-import net.knsh.cyclic.porting.neoforge.events.SubscribeEvent;
-import net.knsh.cyclic.porting.neoforge.events.experimental.LivingChangeTargetEvent;
-import net.knsh.cyclic.porting.neoforge.events.experimental.LivingDamageEvent;
+import net.knsh.cyclic.porting.neoforge.bus.api.EventPriority;
+import net.knsh.cyclic.porting.neoforge.bus.api.SubscribeEvent;
+import net.knsh.cyclic.porting.neoforge.events.LivingChangeTargetEvent;
+import net.knsh.cyclic.porting.neoforge.events.LivingDamageEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -63,7 +63,7 @@ public class BeekeeperEnchant extends EnchantmentCyclic {
         }
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onLivingDamageEvent(LivingDamageEvent event) {
         if (!isEnabled()) {
             return;

@@ -1,24 +1,27 @@
-package net.knsh.cyclic.porting.neoforge.events.experimental;
+package net.knsh.cyclic.porting.neoforge.events;
 
 import net.fabricmc.fabric.api.event.Event;
-import net.fabricmc.fabric.api.event.EventFactory;
+import net.knsh.cyclic.porting.neoforge.bus.api.ForgeEvent;
+import net.knsh.cyclic.porting.neoforge.bus.api.ICancellableEvent;
+import net.knsh.cyclic.porting.neoforge.bus.fabric.ForgeEventFactory;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class LivingDamageEvent {
-    public static final Event<LivingDamage> EVENT = EventFactory.createArrayBacked(LivingDamage.class, (listeners) -> (event) -> {
+public class LivingDamageEvent extends ForgeEvent implements ICancellableEvent {
+    public static final Event<LivingDamage> EVENT = ForgeEventFactory.create(LivingDamage.class, (listeners) -> (event) -> {
         for (LivingDamage listener : listeners) {
             listener.onLivingDamage(event);
         }
         return event;
     });
 
-    public static void doEventRegister(Method method, Object object) {
-        EVENT.register((event) -> {
+    @SuppressWarnings("unused")
+    public static void doEventRegister(Method method, Object object, ResourceLocation priority) {
+        EVENT.register(priority, (event) -> {
             try {
                 method.invoke(object, event);
             } catch (IllegalAccessException | InvocationTargetException e) {
@@ -36,20 +39,11 @@ public class LivingDamageEvent {
     private final DamageSource source;
     private float amount;
     private LivingEntity entity;
-    private boolean canceled = false;
 
     public LivingDamageEvent(LivingEntity entity, DamageSource source, float amount) {
         this.entity = entity;
         this.source = source;
         this.amount = amount;
-    }
-
-    public void setCanceled(Boolean bool) {
-        this.canceled = bool;
-    }
-
-    public boolean isCanceled() {
-        return this.canceled;
     }
 
     public LivingEntity getEntity() {
