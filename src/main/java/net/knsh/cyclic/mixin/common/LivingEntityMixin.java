@@ -52,9 +52,14 @@ public abstract class LivingEntityMixin {
         original.call(instance, damageSource, damageAmount);
     }
 
-    @Inject(
-            method = "tick",
-            at = @At("HEAD"))
+    @Inject(method = "die", at = @At("HEAD"), cancellable = true)
+    private void cyclic$onLivingDeathEvent(DamageSource damageSource, CallbackInfo ci) {
+        if (CommonHooks.onLivingDeath(entity, damageSource)) {
+            ci.cancel();
+        }
+    }
+
+    @Inject(method = "tick", at = @At("HEAD"))
     private void tick(CallbackInfo ci) {
         if (!(entity instanceof Player)) return;
         Player player = (Player) entity;

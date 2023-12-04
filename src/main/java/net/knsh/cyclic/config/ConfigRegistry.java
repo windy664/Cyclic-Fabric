@@ -1,7 +1,6 @@
 package net.knsh.cyclic.config;
 
 import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
-import net.fabricmc.loader.api.FabricLoader;
 import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.antipotion.AntiBeaconBlockEntity;
 import net.knsh.cyclic.block.anvil.AnvilAutoBlockEntity;
@@ -10,16 +9,13 @@ import net.knsh.cyclic.block.cable.energy.EnergyCableBlockEntity;
 import net.knsh.cyclic.block.cable.fluid.FluidCableBlockEntity;
 import net.knsh.cyclic.block.crafter.CrafterBlockEntity;
 import net.knsh.cyclic.block.generatorfuel.GeneratorFuelBlockEntity;
-import net.knsh.cyclic.enchant.AutoSmeltEnchant;
-import net.knsh.cyclic.enchant.BeekeeperEnchant;
-import net.knsh.cyclic.enchant.ReachEnchant;
-import net.knsh.cyclic.enchant.TravellerEnchant;
+import net.knsh.cyclic.enchant.*;
 import net.knsh.cyclic.library.config.ConfigTemplate;
 import net.knsh.cyclic.porting.neoforge.FluidFabricToForge;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.config.ModConfig;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class ConfigRegistry extends ConfigTemplate {
     private static ForgeConfigSpec COMMON_CONFIG;
@@ -29,6 +25,10 @@ public class ConfigRegistry extends ConfigTemplate {
         COMMON_CONFIG.setConfig(setup(Cyclic.MOD_ID));
         ForgeConfigRegistry.INSTANCE.register(Cyclic.MOD_ID, ModConfig.Type.COMMON, ConfigRegistry.COMMON_CONFIG);
     }
+
+    // Defaults
+    private static final List<String> BEHEADING = new ArrayList<>();
+    private static ForgeConfigSpec.ConfigValue<List<? extends String>> BEHEADING_SKINS;
 
     public void setupClient() {
         //CLIENT_CONFIG.setConfig(setup(Cyclic.MOD_ID + "-client"));
@@ -43,13 +43,46 @@ public class ConfigRegistry extends ConfigTemplate {
     }
 
     private static void buildDefaults() {
-        // later
+        //http://minecraft.gamepedia.com/Player.dat_format#Player_Heads
+        //mhf https://twitter.com/Marc_IRL/status/542330244473311232  https://pastebin.com/5mug6EBu
+        //other https://www.planetminecraft.com/blog/minecraft-playerheads-2579899/
+        //NBT image data from  http://www.minecraft-heads.com/custom/heads/animals/6746-llama
+        BEHEADING.add("minecraft:blaze:MHF_Blaze");
+        BEHEADING.add("minecraft:cat:MHF_Ocelot");
+        BEHEADING.add("minecraft:cave_spider:MHF_CaveSpider");
+        BEHEADING.add("minecraft:chicken:MHF_Chicken");
+        BEHEADING.add("minecraft:cow:MHF_Cow");
+        BEHEADING.add("minecraft:enderman:MHF_Enderman");
+        BEHEADING.add("minecraft:ghast:MHF_Ghast");
+        BEHEADING.add("minecraft:iron_golem:MHF_Golem");
+        BEHEADING.add("minecraft:magma_cube:MHF_LavaSlime");
+        BEHEADING.add("minecraft:mooshroom:MHF_MushroomCow");
+        BEHEADING.add("minecraft:ocelot:MHF_Ocelot");
+        BEHEADING.add("minecraft:pig:MHF_Pig");
+        BEHEADING.add("minecraft:zombie_pigman:MHF_PigZombie");
+        BEHEADING.add("minecraft:sheep:MHF_Sheep");
+        BEHEADING.add("minecraft:slime:MHF_Slime");
+        BEHEADING.add("minecraft:spider:MHF_Spider");
+        BEHEADING.add("minecraft:squid:MHF_Squid");
+        BEHEADING.add("minecraft:villager:MHF_Villager");
+        BEHEADING.add("minecraft:witch:MHF_Witch");
+        BEHEADING.add("minecraft:wolf:MHF_Wolf");
+        BEHEADING.add("minecraft:guardian:MHF_Guardian");
+        BEHEADING.add("minecraft:elder_guardian:MHF_Guardian");
+        BEHEADING.add("minecraft:snow_golem:MHF_SnowGolem");
+        BEHEADING.add("minecraft:silverfish:MHF_Silverfish");
+        BEHEADING.add("minecraft:endermite:MHF_Endermite");
     }
 
     private static void initConfig() {
         final ForgeConfigSpec.Builder CFG = builder();
         CFG.comment(WALL, " Enchantment related configs (if disabled, they may still show up as NBT on books and such but have functions disabled and are not obtainable in survival)", WALL)
                 .push("enchantment");
+        BeheadingEnchant.CFG = CFG.comment("If true, then the beheading enchantment will be enabled. \nThis enchantment increases the chance of mob heads dropping when killing mobs.").define(BeheadingEnchant.ID + ".enabled", true);
+        BEHEADING_SKINS = CFG.comment("Beheading enchant add player skin head drop, add any mob id and any skin").defineList(BeheadingEnchant.ID + ".EntityMHF", BEHEADING,
+                it -> it instanceof String);
+        BeheadingEnchant.PERCDROP = CFG.comment("Base perecentage chance to drop a head on kill").defineInRange(BeheadingEnchant.ID + ".percent", 20, 1, 99);
+        BeheadingEnchant.PERCPERLEVEL = CFG.comment("Percentage increase per level of enchant. Formula [percent + (level - 1) * per_level] ").defineInRange(BeheadingEnchant.ID + ".per_level", 25, 1, 99);
         TravellerEnchant.CFG = CFG.comment("If true, then the traveller enchantment will be enabled. \nThis enchantment reduces damage from cactus, sweet berry bushes, and fall damage. It also prevents elytra damage when flying.").define(TravellerEnchant.ID + ".enabled", true);
         AutoSmeltEnchant.CFG = CFG.comment("If true, then the auto smelt enchantment will be enabled. \nThis enchantment will smelt blocks as they are mined.").define(AutoSmeltEnchant.ID + ".enabled", true);
         ReachEnchant.CFG = CFG.comment("If true, then the reach enchantment will be enabled. \nThis enchantment increases the reach of the player by 5 blocks.").define(ReachEnchant.ID + ".enabled", true);
@@ -83,5 +116,21 @@ public class ConfigRegistry extends ConfigTemplate {
                 .defineInRange("cables.energy.flow", 10000, 1000, 32 * 10000);
 
         COMMON_CONFIG = CFG.build();
+    }
+
+    public static Map<String, String> getMappedBeheading() {
+        Map<String, String> mappedBeheading = new HashMap<String, String>();
+        for (String s : BEHEADING_SKINS.get()) {
+            try {
+                String[] stuff = s.split(":");
+                String entity = stuff[0] + ":" + stuff[1];
+                String skin = stuff[2];
+                mappedBeheading.put(entity, skin);
+            }
+            catch (Exception e) {
+                Cyclic.LOGGER.error("Beheading Enchantment: Invalid config entry " + s);
+            }
+        }
+        return mappedBeheading;
     }
 }

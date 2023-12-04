@@ -1,10 +1,7 @@
 package net.knsh.cyclic.registry;
 
 import net.knsh.cyclic.Cyclic;
-import net.knsh.cyclic.enchant.AutoSmeltEnchant;
-import net.knsh.cyclic.enchant.BeekeeperEnchant;
-import net.knsh.cyclic.enchant.ReachEnchant;
-import net.knsh.cyclic.enchant.TravellerEnchant;
+import net.knsh.cyclic.enchant.*;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -20,6 +17,7 @@ public class CyclicEnchants {
     public static Enchantment AUTOSMELT = registerEnchant("auto_smelt", new AutoSmeltEnchant());
     public static Enchantment REACH = registerEnchant("reach", new ReachEnchant());
     public static Enchantment BEEKEEPER = registerEnchant("beekeeper", new BeekeeperEnchant());
+    public static Enchantment BEHEADING = registerEnchant("beheading", new BeheadingEnchant());
 
     public static void register() {}
 

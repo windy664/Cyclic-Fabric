@@ -6,7 +6,9 @@
     "common.BlockMixin",
     "common.LivingEntityMixin",
     "common.MobMixin",
+    "common.PlayerMixin",
     "common.ServerPlayerAccessor",
+    "common.ServerPlayerMixin",
     "common.StartAttackingMixin",
     "common.ThrownEnderpearlMixin"
   ],
