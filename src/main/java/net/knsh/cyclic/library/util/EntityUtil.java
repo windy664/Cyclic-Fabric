@@ -2,6 +2,8 @@ package net.knsh.cyclic.library.util;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.phys.AABB;
 
 public class EntityUtil {
@@ -13,6 +15,10 @@ public class EntityUtil {
         return new AABB(
                 x - hRadius, y - vRadius, z - hRadius,
                 x + hRadius, y + vRadius, z + hRadius);
+    }
+
+    public static void setCooldownItem(Player player, Item item, int cooldown) {
+        player.getCooldowns().addCooldown(item, cooldown);
     }
 
     public static float getYawFromFacing(Direction currentFacing) {

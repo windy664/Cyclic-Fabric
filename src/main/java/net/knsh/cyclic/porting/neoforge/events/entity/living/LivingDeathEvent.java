@@ -1,13 +1,13 @@
-package net.knsh.cyclic.porting.neoforge.events;
+package net.knsh.cyclic.porting.neoforge.events.entity.living;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.knsh.cyclic.porting.neoforge.bus.api.ICancellableEvent;
 import net.knsh.cyclic.porting.neoforge.bus.fabric.ForgeEventFactory;
+import net.knsh.cyclic.porting.neoforge.bus.fabric.SimpleEventHandler;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -36,16 +36,8 @@ public class LivingDeathEvent extends LivingEvent implements ICancellableEvent {
         return event;
     });
 
-    @SuppressWarnings("unused")
-    public static void doEventRegister(Method method, Object object, ResourceLocation priority) {
-        EVENT.register(priority, (event) -> {
-            try {
-                method.invoke(object, event);
-            } catch (IllegalAccessException | InvocationTargetException e) {
-                throw new RuntimeException(e);
-            }
-            return event;
-        });
+    public static void onSubscription(Method method, Object object, ResourceLocation priority) {
+        EVENT.register(priority, (event) -> SimpleEventHandler.create(method, object, priority, event));
     }
 
     @FunctionalInterface

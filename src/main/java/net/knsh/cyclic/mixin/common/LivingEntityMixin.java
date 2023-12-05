@@ -8,7 +8,7 @@ import net.knsh.cyclic.event.fabric.BeforeDamageCallback;
 import net.knsh.cyclic.library.util.AttributesUtil;
 import net.knsh.cyclic.library.util.EnchantUtil;
 import net.knsh.cyclic.porting.neoforge.common.CommonHooks;
-import net.knsh.cyclic.porting.neoforge.events.LivingDamageEvent;
+import net.knsh.cyclic.porting.neoforge.events.entity.living.LivingDamageEvent;
 import net.knsh.cyclic.registry.CyclicEnchants;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;

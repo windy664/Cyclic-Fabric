@@ -7,7 +7,7 @@
     "common.LivingEntityMixin",
     "common.MobMixin",
     "common.PlayerMixin",
-    "common.ServerPlayerAccessor",
+    "common.ServerPlayerGameModeMixin",
     "common.ServerPlayerMixin",
     "common.StartAttackingMixin",
     "common.ThrownEnderpearlMixin"

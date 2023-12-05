@@ -105,7 +105,7 @@ public class EventSubscriptionHandler {
                 case LOWEST -> EventPriorityResources.LOWEST;
             };
 
-            eventType.getMethod("doEventRegister", Method.class, Object.class, ResourceLocation.class).invoke(null, method, target, priorityIdentifier);
+            eventType.getMethod("onSubscription", Method.class, Object.class, ResourceLocation.class).invoke(null, method, target, priorityIdentifier);
         } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }

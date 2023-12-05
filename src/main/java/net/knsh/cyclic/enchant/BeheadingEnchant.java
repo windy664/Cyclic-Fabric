@@ -1,17 +1,14 @@
 package net.knsh.cyclic.enchant;
 
-import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.config.ConfigRegistry;
 import net.knsh.cyclic.library.enchant.EnchantmentCyclic;
 import net.knsh.cyclic.library.util.ItemStackUtil;
 import net.knsh.cyclic.library.util.TagDataUtil;
 import net.knsh.cyclic.porting.neoforge.NeoForge;
 import net.knsh.cyclic.porting.neoforge.bus.api.SubscribeEvent;
-import net.knsh.cyclic.porting.neoforge.events.LivingDeathEvent;
+import net.knsh.cyclic.porting.neoforge.events.entity.living.LivingDeathEvent;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;

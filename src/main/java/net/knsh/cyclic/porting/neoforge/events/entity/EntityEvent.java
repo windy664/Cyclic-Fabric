@@ -2,7 +2,7 @@
  * Copyright (c) Forge Development LLC and contributors
  * SPDX-License-Identifier: LGPL-2.1-only
  */
-package net.knsh.cyclic.porting.neoforge.events;
+package net.knsh.cyclic.porting.neoforge.events.entity;
 
 import net.knsh.cyclic.porting.neoforge.bus.api.ForgeEvent;
 import net.minecraft.core.SectionPos;

@@ -29,6 +29,8 @@ public class ConfigRegistry extends ConfigTemplate {
     // Defaults
     private static final List<String> BEHEADING = new ArrayList<>();
     private static ForgeConfigSpec.ConfigValue<List<? extends String>> BEHEADING_SKINS;
+    private static final List<String> DISARM_IGNORE = new ArrayList<>();
+    private static ForgeConfigSpec.ConfigValue<List<? extends String>> DISARM_IGNORE_LIST;
 
     public void setupClient() {
         //CLIENT_CONFIG.setConfig(setup(Cyclic.MOD_ID + "-client"));
@@ -88,6 +90,12 @@ public class ConfigRegistry extends ConfigTemplate {
         ReachEnchant.CFG = CFG.comment("If true, then the reach enchantment will be enabled. \nThis enchantment increases the reach of the player by 5 blocks.").define(ReachEnchant.ID + ".enabled", true);
         ReachEnchant.REACH_BOOST = CFG.comment("How much reach to add to the player (in blocks). \nDefault is 11.").defineInRange(ReachEnchant.ID + ".reach_boost", 11, 0, 20);
         BeekeeperEnchant.CFG = CFG.comment("If true, then the beekeeper enchantment will be enabled. \nThis enchantment makes bees not attack the player.").define(BeekeeperEnchant.ID + ".enabled", true);
+        DisarmEnchant.CFG = CFG.comment("If true, then the disarm enchantment will be enabled. \nThis enchantment has a chance to disarm the target when attacking.").define(DisarmEnchant.ID + ".enabled", true);
+        DisarmEnchant.PERCENTPERLEVEL = CFG.comment("Enchant level drop rate.  % = drop + (level-1)*drop").defineInRange(DisarmEnchant.ID + ".percentPerLevel", 15, 1, 100);
+        EnderPearlEnchant.CFG = CFG.comment("If true, then the ender pearl enchantment will be enabled. \nThis enchantment allows the player to throw ender pearls when right clicking a weapon.").define(EnderPearlEnchant.ID + ".enabled", true);
+        DISARM_IGNORE_LIST = CFG.comment("Mobs in this list cannot be disarmed and have their weapon stolen by the disarm enchantment")
+                .defineList(DisarmEnchant.ID + ".ingoredMobs", DISARM_IGNORE,
+                        it -> it instanceof String);
         CFG.pop(); //enchantment
         CFG.comment(WALL, " Block specific configs", WALL).push("blocks");
         AntiBeaconBlockEntity.HARMFUL_POTIONS = CFG.comment("If true, then all potions marked as harmful/negative will be used in addition to the 'anti_beacon.potion_list' for cures and immunities  (used by both sponge and artemisbeacon).")
@@ -116,6 +124,11 @@ public class ConfigRegistry extends ConfigTemplate {
                 .defineInRange("cables.energy.flow", 10000, 1000, 32 * 10000);
 
         COMMON_CONFIG = CFG.build();
+    }
+
+    @SuppressWarnings("unchecked")
+    public static List<String> getDisarmIgnoreList() {
+        return (List<String>) DISARM_IGNORE_LIST.get();
     }
 
     public static Map<String, String> getMappedBeheading() {

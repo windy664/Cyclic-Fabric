@@ -2,8 +2,9 @@
  * Copyright (c) Forge Development LLC and contributors
  * SPDX-License-Identifier: LGPL-2.1-only
  */
-package net.knsh.cyclic.porting.neoforge.events;
+package net.knsh.cyclic.porting.neoforge.events.entity.living;
 
+import net.knsh.cyclic.porting.neoforge.events.entity.EntityEvent;
 import net.minecraft.world.entity.LivingEntity;
 
 public class LivingEvent extends EntityEvent {
