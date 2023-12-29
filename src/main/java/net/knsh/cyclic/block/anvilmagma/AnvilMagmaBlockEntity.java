@@ -1,11 +1,15 @@
 package net.knsh.cyclic.block.anvilmagma;
 
+import io.github.fabricators_of_create.porting_lib.util.FluidStack;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.knsh.cyclic.block.BlockEntityCyclic;
+import net.knsh.cyclic.fluid.FluidMagmaHolder;
+import net.knsh.cyclic.fluid.FluidXpJuiceHolder;
 import net.knsh.cyclic.library.capabilities.FluidTankBase;
+import net.knsh.cyclic.library.capabilities.ForgeFluidTankBase;
 import net.knsh.cyclic.library.util.ItemStackUtil;
 import net.knsh.cyclic.porting.neoforge.items.ForgeImplementedInventory;
 import net.knsh.cyclic.registry.CyclicBlocks;
@@ -24,8 +28,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.ForgeConfigSpec;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.function.Predicate;
 
 public class AnvilMagmaBlockEntity extends BlockEntityCyclic implements ExtendedScreenHandlerFactory, ForgeImplementedInventory {
     enum Fields {
@@ -35,22 +42,7 @@ public class AnvilMagmaBlockEntity extends BlockEntityCyclic implements Extended
     public static final int CAPACITY = (int) (64 * FluidConstants.BUCKET);
     public static ForgeConfigSpec.IntValue FLUIDCOST;
     private final NonNullList<ItemStack> inventory = NonNullList.withSize(2, ItemStack.EMPTY);
-    public FluidTankBase tank = new FluidTankBase(this, CAPACITY) {
-        @Override
-        protected void onFinalCommit() {
-            AnvilMagmaBlockEntity.this.setChanged();
-        }
-
-        @Override
-        protected boolean canInsert(FluidVariant variant) {
-            return variant == FluidVariant.of(CyclicFluids.STILL_MAGMA.getFlowing());
-        }
-
-        @Override
-        protected boolean canExtract(FluidVariant variant) {
-            return false;
-        }
-    };
+    public ForgeFluidTankBase tank = new ForgeFluidTankBase(this, CAPACITY, isFluidValid());
 
     public AnvilMagmaBlockEntity(BlockPos pos, BlockState state) {
         super(CyclicBlocks.ANVIL_MAGMA.blockEntity(), pos, state);
@@ -160,17 +152,24 @@ public class AnvilMagmaBlockEntity extends BlockEntityCyclic implements Extended
         return new AnvilMagmaContainer(i, playerInventory, this, level, worldPosition);
     }
 
-    public FluidTankBase getTank() {
+    public ForgeFluidTankBase getTank() {
         return tank;
     }
 
-    @Override
-    public void setFluid(FluidVariant fluid) {
-        tank.variant = fluid;
+    public Predicate<FluidStack> isFluidValid() {
+        return p -> {
+            Fluid fluid = p.getFluid();
+            return fluid == CyclicFluids.STILL_MAGMA;
+        };
     }
 
     @Override
-    public FluidTankBase getFluid() {
-        return getTank();
+    public void setFluid(FluidStack fluid) {
+        tank.setFluid(fluid);
+    }
+
+    @Override
+    public FluidStack getFluid() {
+        return tank.getFluid();
     }
 }

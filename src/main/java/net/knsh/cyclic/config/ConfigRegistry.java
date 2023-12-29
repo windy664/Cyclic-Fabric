@@ -34,7 +34,7 @@ public class ConfigRegistry extends ConfigTemplate {
 
     public void setupClient() {
         //CLIENT_CONFIG.setConfig(setup(Cyclic.MOD_ID + "-client"));
-        //ForgeConfigRegistry.INSTANCE.register(Cyclic.MOD_ID, ModConfig.Type.CLIENT, ConfigRegistry.CLIENT_CONFIG);
+        //ForgeConfigRegistry.ITEM_INSTANCE.register(Cyclic.MOD_ID, ModConfig.Type.CLIENT, ConfigRegistry.CLIENT_CONFIG);
     }
 
     private static final String WALL = "####################################################################################";

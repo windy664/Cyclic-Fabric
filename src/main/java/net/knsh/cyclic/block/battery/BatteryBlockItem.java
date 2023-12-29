@@ -1,7 +1,7 @@
 package net.knsh.cyclic.block.battery;
 
 import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
-import net.knsh.cyclic.api.ItemApi;
+import net.knsh.cyclic.lookups.CyclicItemLookup;
 import net.knsh.cyclic.registry.CyclicTextures;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -26,7 +26,7 @@ public class BatteryBlockItem extends BlockItem implements BatteryImplementation
 
     @Override
     public boolean isBarVisible(ItemStack stack) {
-        EnergyStorage energy = ItemApi.BATTERY_ITEM.find(stack, null).getEnergy();
+        EnergyStorage energy = CyclicItemLookup.BATTERY_ITEM.find(stack, null).getEnergy();
         return energy != null && energy.getAmount() > 0;
     }
 
@@ -34,7 +34,7 @@ public class BatteryBlockItem extends BlockItem implements BatteryImplementation
     public int getBarWidth(ItemStack stack) {
         float current = 0;
         float max = 0;
-        EnergyStorage energy = ItemApi.BATTERY_ITEM.find(stack, null).getEnergy();
+        EnergyStorage energy = CyclicItemLookup.BATTERY_ITEM.find(stack, null).getEnergy();
         if (energy != null) {
             current = energy.getAmount();
             max = energy.getCapacity();
@@ -54,7 +54,7 @@ public class BatteryBlockItem extends BlockItem implements BatteryImplementation
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
         long current = 0;
         long energyttmax = 0;
-        EnergyStorage storage = ItemApi.BATTERY_ITEM.find(stack, null).getEnergy();
+        EnergyStorage storage = CyclicItemLookup.BATTERY_ITEM.find(stack, null).getEnergy();
         if (storage != null) {
             current = storage.getAmount();
             energyttmax = storage.getCapacity();

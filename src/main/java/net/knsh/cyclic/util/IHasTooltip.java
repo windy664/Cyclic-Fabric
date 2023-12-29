@@ -1,4 +1,4 @@
-package net.knsh.cyclic.api;
+package net.knsh.cyclic.util;
 
 import java.util.List;
 import net.minecraft.network.chat.Component;

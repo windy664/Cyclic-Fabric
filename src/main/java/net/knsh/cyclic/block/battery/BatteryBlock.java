@@ -1,7 +1,7 @@
 package net.knsh.cyclic.block.battery;
 
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
-import net.knsh.cyclic.api.ItemApi;
+import net.knsh.cyclic.lookups.CyclicItemLookup;
 import net.knsh.cyclic.block.BlockCyclic;
 import net.knsh.cyclic.registry.CyclicBlocks;
 import net.minecraft.core.BlockPos;
@@ -48,7 +48,7 @@ public class BatteryBlock extends BlockCyclic {
         super.playerDestroy(level, player, pos, state, blockEntity, tool);
         ItemStack newStackBattery = new ItemStack(this);
         if (blockEntity instanceof BatteryBlockEntity battery) {
-            EnergyStorage newStackEnergy = ItemApi.BATTERY_ITEM.find(newStackBattery, null).getEnergy();
+            EnergyStorage newStackEnergy = CyclicItemLookup.BATTERY_ITEM.find(newStackBattery, null).getEnergy();
             if (newStackEnergy instanceof BatteryImplementation) {
                 ((BatteryImplementation) newStackEnergy).setEnergy(battery.getEnergy().getAmount());
             } else {
@@ -80,9 +80,9 @@ public class BatteryBlock extends BlockCyclic {
     @Override
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         long current = 0;
-        EnergyStorage storage = ItemApi.BATTERY_ITEM.find(stack, null).getEnergy();
-        if (stack.hasTag() && stack.getTag().contains(BatteryImplementation.NBTENERGY)) {
-            current = stack.getTag().getLong(BatteryImplementation.NBTENERGY);
+        EnergyStorage storage = CyclicItemLookup.BATTERY_ITEM.find(stack, null).getEnergy();
+        if (stack.hasTag() && stack.getTag().contains(BatteryImplementation.NBTENERGYS)) {
+            current = stack.getTag().getLong(BatteryImplementation.NBTENERGYS);
         } else if (storage != null) {
             current = storage.getAmount();
         }

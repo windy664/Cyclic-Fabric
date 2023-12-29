@@ -2,7 +2,7 @@ package net.knsh.cyclic.item.crafting;
 
 import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandler;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
-import net.knsh.cyclic.api.ItemHandlerCap;
+import net.knsh.cyclic.lookups.types.ItemHandlerLookup;
 import net.knsh.cyclic.item.ItemCyclic;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -11,7 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class CraftingBagItem extends ItemCyclic implements ItemHandlerCap {
+public class CraftingBagItem extends ItemCyclic implements ItemHandlerLookup {
     private final int slots = 9;
     private final ItemStackHandler inventory = new ItemStackHandler(slots) {
         @Override

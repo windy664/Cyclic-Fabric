@@ -4,8 +4,8 @@ import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandle
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.knsh.cyclic.Cyclic;
-import net.knsh.cyclic.api.ItemHandlerCap;
-import net.knsh.cyclic.api.ItemApi;
+import net.knsh.cyclic.lookups.CyclicItemLookup;
+import net.knsh.cyclic.lookups.types.ItemHandlerLookup;
 import net.knsh.cyclic.data.IContainerCraftingAction;
 import net.knsh.cyclic.gui.ContainerBase;
 import net.knsh.cyclic.registry.CyclicItems;
@@ -58,7 +58,7 @@ public class CraftingBagContainer extends ContainerBase implements IContainerCra
                 });
             }
         }
-        ItemHandlerCap handler = ItemApi.ITEM_HANDLER.find(bag, null);
+        ItemHandlerLookup handler = CyclicItemLookup.ITEM_HANDLER.find(bag, null);
 
         if (handler != null) {
             ItemStackHandler h = handler.getItemHandler();
@@ -77,7 +77,7 @@ public class CraftingBagContainer extends ContainerBase implements IContainerCra
         super.removed(player);
         this.craftResult.setItem(0, ItemStack.EMPTY);
         if (player.level().isClientSide == false) {
-            ItemHandlerCap parentHandler = ItemApi.ITEM_HANDLER.find(bag, null);
+            ItemHandlerLookup parentHandler = CyclicItemLookup.ITEM_HANDLER.find(bag, null);
             if (parentHandler != null) {
                 ItemStackHandler handler = parentHandler.getItemHandler();
                 for (int i = 0; i < 9; i++) {

@@ -2,7 +2,8 @@ package net.knsh.cyclic;
 
 import net.fabricmc.api.ModInitializer;
 
-import net.knsh.cyclic.api.ItemApi;
+import net.knsh.cyclic.lookups.CyclicItemLookup;
+import net.knsh.cyclic.lookups.CyclicLookup;
 import net.knsh.cyclic.config.ConfigRegistry;
 import net.knsh.cyclic.event.ItemEvents;
 import net.knsh.cyclic.network.CyclicC2S;
@@ -23,6 +24,7 @@ public class Cyclic implements ModInitializer {
 		CyclicBlocks.register();
 		CyclicBlockEntities.register();
 		CyclicEntities.register();
+		CyclicRecipeTypes.register();
 		CyclicEnchants.register();
 		CyclicFluids.register();
 		CyclicItems.register();
@@ -33,6 +35,7 @@ public class Cyclic implements ModInitializer {
 
 		ItemEvents.register();
 
-		ItemApi.init();
+		CyclicItemLookup.init();
+		CyclicLookup.init();
 	}
 }

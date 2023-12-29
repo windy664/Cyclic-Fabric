@@ -11,6 +11,7 @@ import net.knsh.cyclic.block.cable.fluid.FluidCableContainer;
 import net.knsh.cyclic.block.cable.item.ItemCableContainer;
 import net.knsh.cyclic.block.crafter.CrafterContainer;
 import net.knsh.cyclic.block.generatorfuel.GeneratorFuelContainer;
+import net.knsh.cyclic.block.melter.ContainerMelter;
 import net.knsh.cyclic.gui.ContainerBase;
 import net.knsh.cyclic.item.crafting.CraftingBagContainer;
 import net.knsh.cyclic.item.crafting.simple.CraftingStickContainer;
@@ -42,6 +43,8 @@ public class CyclicScreens {
             new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new CraftingBagContainer(syncId, inventory, inventory.player, buf.readInt()))));
     public static MenuType<CraftingStickContainer> CRAFTING_STICK = registerScreen("crafting_stick",
             new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new CraftingStickContainer(syncId, inventory, inventory.player, buf.readInt()))));
+    public static MenuType<ContainerMelter> MELTER = registerScreen("melter",
+            new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new ContainerMelter(syncId, inventory.player.level(), buf.readBlockPos(), inventory, inventory.player))));
 
     private static <T extends ContainerBase> MenuType<T> registerScreen(String id, ExtendedScreenHandlerType factory) {
         return Registry.register(BuiltInRegistries.MENU, new ResourceLocation(Cyclic.MOD_ID, id), factory);

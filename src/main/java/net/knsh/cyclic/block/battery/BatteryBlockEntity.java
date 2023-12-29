@@ -3,7 +3,7 @@ package net.knsh.cyclic.block.battery;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
-import net.knsh.cyclic.api.ItemApi;
+import net.knsh.cyclic.lookups.CyclicItemLookup;
 import net.knsh.cyclic.block.BlockEntityCyclic;
 import net.knsh.cyclic.porting.neoforge.items.ForgeImplementedInventory;
 import net.knsh.cyclic.registry.CyclicBlocks;
@@ -81,7 +81,7 @@ public class BatteryBlockEntity extends BlockEntityCyclic implements ExtendedScr
             return;
         }
         ItemStack slotItem = getItem(0);
-        BatteryImplementation batteryImplementation = ItemApi.BATTERY_ITEM.find(slotItem, null);
+        BatteryImplementation batteryImplementation = CyclicItemLookup.BATTERY_ITEM.find(slotItem, null);
         if (batteryImplementation == null) {
             return;
         }

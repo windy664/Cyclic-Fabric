@@ -35,8 +35,11 @@ import net.knsh.cyclic.block.hopperfluid.FluidHopperBlock;
 import net.knsh.cyclic.block.hopperfluid.FluidHopperBlockEntity;
 import net.knsh.cyclic.block.hoppergold.GoldHopperBlock;
 import net.knsh.cyclic.block.hoppergold.GoldHopperBlockEntity;
+import net.knsh.cyclic.block.melter.BlockMelter;
+import net.knsh.cyclic.block.melter.TileMelter;
 import net.knsh.cyclic.block.trash.TrashBlock;
 import net.knsh.cyclic.block.trash.TrashBlockEntity;
+import net.knsh.cyclic.lookups.Lookup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -52,7 +55,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class CyclicBlocks {
-    public static Collection<ItemLike> INSTANCE = new ArrayList<>();
+    public static Collection<ItemLike> ITEM_INSTANCE = new ArrayList<>();
+    public static Collection<Block> BLOCK_INSTANCE = new ArrayList<>();
 
     public static ItemBlockEntity<ConveyorBlockEntity> CONVEYOR = registerBlockEntity("conveyor", ConveyorBlockEntity::new, new ConveyorBlock(FabricBlockSettings.create()));
     public static ItemBlockEntity<AnvilVoidBlockEntity> ANVILVOID = registerBlockEntity("anvil_void", AnvilVoidBlockEntity::new, new AnvilVoidBlock(FabricBlockSettings.create()));
@@ -70,18 +74,20 @@ public class CyclicBlocks {
     public static ItemBlockEntity<FluidCableBlockEntity> FLUID_PIPE = registerBlockEntity("fluid_pipe", FluidCableBlockEntity::new, new FluidCableBlock(FabricBlockSettings.create()));
     public static ItemBlockEntity<EnergyCableBlockEntity> ENERGY_PIPE = registerBlockEntity("energy_pipe", EnergyCableBlockEntity::new, new EnergyCableBlock(FabricBlockSettings.create()));
     public static BaseBlockEntity<BatteryBlockEntity> BATTERY = registerBaseBlockEntity("battery", BatteryBlockEntity::new, new BatteryBlock(FabricBlockSettings.create()));
+    public static ItemBlockEntity<TileMelter> MELTER = registerBlockEntity("melter", TileMelter::new, new BlockMelter(FabricBlockSettings.create()));
 
     public static ItemBlock SPONGE_MILK = registerBlock("sponge_milk", new MilkSpongeBlock(FabricBlockSettings.create().luminance(p -> 1)));
 
     public static void register() {}
 
     private static Block register(String id, Block block) {
+        BLOCK_INSTANCE.add(block);
         return Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Cyclic.MOD_ID, id), block);
     }
 
     private static <T extends BlockEntity> BaseBlockEntity<T> registerBaseBlockEntity(String id, FabricBlockEntityTypeBuilder.Factory<T> factory, Block block) {
         Block registeredBlock = register(id, block);
-        INSTANCE.add(registeredBlock);
+        ITEM_INSTANCE.add(registeredBlock);
 
         return new BaseBlockEntity<>(
                 Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(Cyclic.MOD_ID, id), FabricBlockEntityTypeBuilder.create(factory, block).build()),
@@ -91,18 +97,20 @@ public class CyclicBlocks {
 
     private static <T extends BlockEntity> ItemBlockEntity<T> registerBlockEntity(String id, FabricBlockEntityTypeBuilder.Factory<T> factory, Block block) {
         Block registeredBlock = register(id, block);
-        INSTANCE.add(registeredBlock);
+        ITEM_INSTANCE.add(registeredBlock);
 
-        return new ItemBlockEntity<>(
+        ItemBlockEntity<T> itemBlockEntity = new ItemBlockEntity<>(
                 Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(Cyclic.MOD_ID, id), FabricBlockEntityTypeBuilder.create(factory, block).build()),
                 registeredBlock,
                 Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(Cyclic.MOD_ID, id), new BlockItem(block, new FabricItemSettings()))
         );
+
+        return itemBlockEntity;
     }
 
     private static ItemBlock registerBlock(String id, Block block) {
         Block registeredBlock = register(id, block);
-        INSTANCE.add(registeredBlock);
+        ITEM_INSTANCE.add(registeredBlock);
 
         return new ItemBlock(
                 registeredBlock,

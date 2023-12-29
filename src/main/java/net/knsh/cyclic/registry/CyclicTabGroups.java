@@ -19,7 +19,7 @@ public class CyclicTabGroups {
     public static final CreativeModeTab TAB_BLOCKS = FabricItemGroup.builder()
             .icon(() -> new ItemStack(CyclicBlocks.TRASH.block()))
             .title(Component.translatable("itemGroup." + Cyclic.MOD_ID))
-            .displayItems(((displayContext, entries) -> CyclicBlocks.INSTANCE.forEach(entries::accept)))
+            .displayItems(((displayContext, entries) -> CyclicBlocks.ITEM_INSTANCE.forEach(entries::accept)))
             .build();
 
     public static void register() {

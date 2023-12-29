@@ -36,7 +36,7 @@ public class AnvilVoidScreen extends ScreenBase<AnvilVoidContainer> {
         super.render(context, mouseX, mouseY, delta);
         this.renderTooltip(context, mouseX, mouseY);
         btnRedstone.onValueUpdate(menu.tile);
-        fluid.renderHoveredToolTip(context, mouseX, mouseY, menu.tile.getFluid());
+        //fluid.renderHoveredToolTip(context, mouseX, mouseY, menu.tile.getFluid());
     }
 
     @Override
@@ -50,6 +50,6 @@ public class AnvilVoidScreen extends ScreenBase<AnvilVoidContainer> {
         this.drawBackground(context, CyclicTextures.INVENTORY);
         this.drawSlot(context, 54, 34);
         this.drawSlotLarge(context, 104, 30);
-        fluid.draw(context, menu.tile.getFluid());
+        //fluid.draw(context, menu.tile.getFluid());
     }
 }

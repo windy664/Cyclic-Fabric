@@ -3,6 +3,7 @@ package net.knsh.cyclic.gui;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.library.capabilities.FluidTankBase;
+import net.knsh.cyclic.library.capabilities.ForgeFluidTankBase;
 import net.knsh.cyclic.library.render.FluidRenderMap;
 import net.knsh.cyclic.porting.neoforge.FluidFabricToForge;
 import net.minecraft.client.gui.Font;
@@ -53,7 +54,7 @@ public class FluidBar {
         this.width = width;
     }
 
-    public void draw(GuiGraphics gg, FluidTankBase tank) {
+    public void draw(GuiGraphics gg, ForgeFluidTankBase tank) {
         final int u = 0, v = 0, x = guiLeft + getX(), y = guiTop + getY();
         gg.blit(FLUID_WIDGET,
                 x, y, u, v,
@@ -89,7 +90,7 @@ public class FluidBar {
     }
 
 
-    public void renderHoveredToolTip(GuiGraphics ms, int mouseX, int mouseY, FluidTankBase current) {
+    public void renderHoveredToolTip(GuiGraphics ms, int mouseX, int mouseY, ForgeFluidTankBase current) {
         if (this.isMouseover(mouseX, mouseY)) {
             this.renderTooltip(ms, mouseX, mouseY, current);
         }
@@ -104,13 +105,13 @@ public class FluidBar {
     }
 
 
-    public void renderTooltip(GuiGraphics gg, int mouseX, int mouseY, FluidTankBase current) {
+    public void renderTooltip(GuiGraphics gg, int mouseX, int mouseY, ForgeFluidTankBase current) {
         String tt = emtpyTooltip;
         if (current.getAmount() > 0) {
             tt = FluidFabricToForge.toMiliBuckets(current.getAmount()) + "/" + FluidFabricToForge.toMiliBuckets(current.getCapacity());
         }
         List<Component> list = new ArrayList<>();
-        list.add(Component.nullToEmpty(tt + " " + Component.translatable(current.fluidBlockIdentifier).getString()));
+        //list.add(Component.nullToEmpty(tt + " " + Component.translatable(current.fluidBlockIdentifier).getString()));
         gg.renderComponentTooltip(font, list, mouseX, mouseY);
     }
 }

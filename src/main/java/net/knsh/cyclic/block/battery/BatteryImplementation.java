@@ -5,7 +5,7 @@ import net.minecraft.nbt.CompoundTag;
 import team.reborn.energy.api.EnergyStorage;
 
 public interface BatteryImplementation extends EnergyStorage {
-    String NBTENERGY = "energy";
+    String NBTENERGYS = "energy";
 
     BatteryImplementation getEnergy();
 
@@ -24,12 +24,12 @@ public interface BatteryImplementation extends EnergyStorage {
 
     default CompoundTag serializeNBT() {
         CompoundTag tag = new CompoundTag();
-        tag.putLong(NBTENERGY, getAmount());
+        tag.putLong(NBTENERGYS, getAmount());
         return tag;
     }
 
     default void deserializeNBTT(net.minecraft.nbt.Tag nbt) {
         CompoundTag real = (CompoundTag) nbt;
-        setEnergy(real.getLong(NBTENERGY));
+        setEnergy(real.getLong(NBTENERGYS));
     }
 }

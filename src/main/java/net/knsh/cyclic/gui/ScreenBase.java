@@ -1,7 +1,7 @@
 package net.knsh.cyclic.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.knsh.cyclic.api.IHasTooltip;
+import net.knsh.cyclic.util.IHasTooltip;
 import net.knsh.cyclic.registry.CyclicTextures;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.events.GuiEventListener;

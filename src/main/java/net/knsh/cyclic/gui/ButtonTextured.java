@@ -1,6 +1,6 @@
 package net.knsh.cyclic.gui;
 
-import net.knsh.cyclic.api.IHasTooltip;
+import net.knsh.cyclic.util.IHasTooltip;
 import net.knsh.cyclic.registry.CyclicTextures;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;

@@ -33,7 +33,7 @@ public class AnvilMagmaScreen extends ScreenBase<AnvilMagmaContainer> {
         this.renderBackground(ms);
         super.render(ms, mouseX, mouseY, partialTicks);
         this.renderTooltip(ms, mouseX, mouseY);
-        fluid.renderHoveredToolTip(ms, mouseX, mouseY, menu.tile.getFluid());
+        fluid.renderHoveredToolTip(ms, mouseX, mouseY, menu.tile.getTank());
     }
 
     @Override
@@ -48,6 +48,6 @@ public class AnvilMagmaScreen extends ScreenBase<AnvilMagmaContainer> {
         this.drawBackground(ms, CyclicTextures.INVENTORY);
         this.drawSlot(ms, 54, 34);
         this.drawSlotLarge(ms, 104, 30);
-        fluid.draw(ms, menu.tile.getFluid());
+        fluid.draw(ms, menu.tile.getTank());
     }
 }

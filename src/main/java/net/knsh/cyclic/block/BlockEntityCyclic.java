@@ -1,6 +1,7 @@
 package net.knsh.cyclic.block;
 
 import com.google.common.collect.Lists;
+import io.github.fabricators_of_create.porting_lib.util.FluidStack;
 import net.fabricmc.fabric.api.lookup.v1.block.BlockApiLookup;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
@@ -23,6 +24,7 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -36,7 +38,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 import java.util.Iterator;
 
-public abstract class BlockEntityCyclic extends BlockEntity implements IHasFluid {
+public abstract class BlockEntityCyclic extends BlockEntity implements Container, IHasFluid {
+
+    public static final String NBTINV = "inv";
+    public static final String NBTFLUID = "fluid";
+    public static final String NBTENERGY = "energy";
     public static final int MENERGY = 64 * 1000;
     protected int flowing = 1;
     protected int needsRedstone = 1;
@@ -244,18 +250,53 @@ public abstract class BlockEntityCyclic extends BlockEntity implements IHasFluid
         }
     }
 
-    @Override
-    public FluidTankBase getFluid() {
-        return null;
+    public FluidStack getFluid() {
+        return FluidStack.EMPTY;
     }
 
-    @Override
-    public void setFluid(FluidVariant fluid) {
+    public void setFluid(FluidStack fluid) {}
 
+    @Deprecated
+    @Override
+    public int getContainerSize() {
+        return 0;
     }
 
+    @Deprecated
     @Override
-    public void setFluidAmount(long amount) {
-
+    public boolean isEmpty() {
+        return true;
     }
+
+    @Deprecated
+    @Override
+    public ItemStack getItem(int index) {
+        return ItemStack.EMPTY;
+    }
+
+    @Deprecated
+    @Override
+    public ItemStack removeItem(int index, int count) {
+        return ItemStack.EMPTY;
+    }
+
+    @Deprecated
+    @Override
+    public ItemStack removeItemNoUpdate(int index) {
+        return ItemStack.EMPTY;
+    }
+
+    @Deprecated
+    @Override
+    public void setItem(int index, ItemStack stack) {}
+
+    @Deprecated
+    @Override
+    public boolean stillValid(Player player) {
+        return false;
+    }
+
+    @Deprecated
+    @Override
+    public void clearContent() {}
 }

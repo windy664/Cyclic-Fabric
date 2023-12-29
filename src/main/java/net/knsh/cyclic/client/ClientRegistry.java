@@ -16,6 +16,7 @@ import net.knsh.cyclic.block.cable.item.ItemCableScreen;
 import net.knsh.cyclic.block.conveyor.ConveyorItemRenderer;
 import net.knsh.cyclic.block.crafter.CrafterScreen;
 import net.knsh.cyclic.block.generatorfuel.GeneratorFuelScreen;
+import net.knsh.cyclic.block.melter.ScreenMelter;
 import net.knsh.cyclic.fluid.FluidMagmaHolder;
 import net.knsh.cyclic.fluid.FluidXpJuiceHolder;
 import net.knsh.cyclic.item.crafting.CraftingBagScreen;
@@ -69,5 +70,6 @@ public class ClientRegistry {
         MenuScreens.register(CyclicScreens.BATTERY, BatteryScreen::new);
         MenuScreens.register(CyclicScreens.CRAFTING_BAG, CraftingBagScreen::new);
         MenuScreens.register(CyclicScreens.CRAFTING_STICK, CraftingStickScreen::new);
+        MenuScreens.register(CyclicScreens.MELTER, ScreenMelter::new);
     }
 }

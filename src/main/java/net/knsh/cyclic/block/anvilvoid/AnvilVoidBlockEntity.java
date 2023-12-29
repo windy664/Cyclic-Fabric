@@ -1,5 +1,6 @@
 package net.knsh.cyclic.block.anvilvoid;
 
+import io.github.fabricators_of_create.porting_lib.util.FluidStack;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
@@ -130,18 +131,14 @@ public class AnvilVoidBlockEntity extends BlockEntityCyclic implements ExtendedS
         }
     }
 
-    public FluidTankBase getFluid() {
-        return tank;
+    @Override
+    public FluidStack getFluid() {
+        return FluidStack.EMPTY;
     }
 
     @Override
-    public void setFluid(FluidVariant fluid) {
-        tank.variant = fluid;
-    }
+    public void setFluid(FluidStack fluid) {
 
-    @Override
-    public void setFluidAmount(long amount) {
-        tank.amount = amount;
     }
 
     private boolean vaildRecipe() {

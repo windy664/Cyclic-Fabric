@@ -1,6 +1,6 @@
-package net.knsh.cyclic.api;
+package net.knsh.cyclic.lookups.types;
 
 import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandler;
-public interface ItemHandlerCap {
+public interface ItemHandlerLookup {
     ItemStackHandler getItemHandler();
 }

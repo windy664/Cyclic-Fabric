@@ -24,6 +24,9 @@
 		],
 		"fabric-datagen": [
 			"net.knsh.cyclic.datagen.CyclicDataGenerator"
+		],
+		"jei_mod_plugin": [
+			"net.knsh.cyclic.compat.jei.CyclicPluginJEI"
 		]
 	},
 	"mixins": [
