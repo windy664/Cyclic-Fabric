@@ -1737,6 +1737,6 @@
   "button.fan.sound.tooltip": "Enable or disable sound",
   "block.cyclic.solidifier": "Solidification Chamber",
   "block.cyclic.solidifier.tooltip": "Craft fluid into items",
-  "block.cyclic.solidifier.guide": "The Solidifier combines various fluids and ingredients to solidify them into something else, usually to make new crafting ingredients."
-
+  "block.cyclic.solidifier.guide": "The Solidifier combines various fluids and ingredients to solidify them into something else, usually to make new crafting ingredients.",
+  "emi.category.cyclic.melter": "Melting Chamber"
 }
