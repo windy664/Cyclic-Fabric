@@ -12,11 +12,11 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
-public class BeaconPotionScreen extends ScreenBase<BeaconPotionScreenHandler> {
+public class BeaconPotionScreen extends ScreenBase<BeaconPotionContainer> {
     private ButtonMachine btnEntity;
     private ButtonMachineField btnRedstone;
 
-    public BeaconPotionScreen(BeaconPotionScreenHandler handler, Inventory inventory, Component title) {
+    public BeaconPotionScreen(BeaconPotionContainer handler, Inventory inventory, Component title) {
         super(handler, inventory, title);
     }
 

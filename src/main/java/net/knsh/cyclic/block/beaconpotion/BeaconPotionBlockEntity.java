@@ -230,7 +230,7 @@ public class BeaconPotionBlockEntity extends BlockEntityCyclic implements Extend
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player player) {
-        return new BeaconPotionScreenHandler(i, playerInventory, this, level, worldPosition);
+        return new BeaconPotionContainer(i, playerInventory, this, level, worldPosition);
     }
 
     public List<String> getPotionDisplay() {

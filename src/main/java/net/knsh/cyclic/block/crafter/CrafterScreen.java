@@ -10,12 +10,12 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
-public class CrafterScreen extends ScreenBase<CrafterScreenHandler> {
+public class CrafterScreen extends ScreenBase<CrafterContainer> {
     private EnergyBar energy;
     private ButtonMachineField btnRedstone;
     private TexturedProgress progress;
 
-    public CrafterScreen(CrafterScreenHandler handler, Inventory inventory, Component title) {
+    public CrafterScreen(CrafterContainer handler, Inventory inventory, Component title) {
         super(handler, inventory, title);
         this.imageHeight = 256;
     }
@@ -25,7 +25,7 @@ public class CrafterScreen extends ScreenBase<CrafterScreenHandler> {
         super.init();
         this.energy = new EnergyBar(this.font, CrafterBlockEntity.MAX);
         this.energy.setHeight(120);
-        this.progress = new TexturedProgress(this.font, CrafterScreenHandler.PREVIEW_START_X - 3, CrafterScreenHandler.PREVIEW_START_Y + Const.SQ, 24, 17, CyclicTextures.ARROW);
+        this.progress = new TexturedProgress(this.font, CrafterContainer.PREVIEW_START_X - 3, CrafterContainer.PREVIEW_START_Y + Const.SQ, 24, 17, CyclicTextures.ARROW);
         this.progress.max = CrafterBlockEntity.TIMER_FULL;
         this.progress.setTopDown(false);
         int x, y;
@@ -58,17 +58,17 @@ public class CrafterScreen extends ScreenBase<CrafterScreenHandler> {
         energy.draw(ms, menu.tile.getEnergy().amount);
         for (int rowPos = 0; rowPos < CrafterBlockEntity.IO_NUM_ROWS; rowPos++) {
             for (int colPos = 0; colPos < CrafterBlockEntity.IO_NUM_COLS; colPos++) {
-                this.drawSlot(ms, CrafterScreenHandler.INPUT_START_X - 1 + colPos * Const.SQ,
-                        CrafterScreenHandler.INPUT_START_Y - 1 + rowPos * Const.SQ);
-                this.drawSlot(ms, CrafterScreenHandler.OUTPUT_START_X - 1 + colPos * Const.SQ,
-                        CrafterScreenHandler.OUTPUT_START_Y - 1 + rowPos * Const.SQ);
+                this.drawSlot(ms, CrafterContainer.INPUT_START_X - 1 + colPos * Const.SQ,
+                        CrafterContainer.INPUT_START_Y - 1 + rowPos * Const.SQ);
+                this.drawSlot(ms, CrafterContainer.OUTPUT_START_X - 1 + colPos * Const.SQ,
+                        CrafterContainer.OUTPUT_START_Y - 1 + rowPos * Const.SQ);
             }
         }
         for (int colPos = 0; colPos < CrafterBlockEntity.GRID_NUM_ROWS; colPos++) {
             for (int rowPos = 0; rowPos < CrafterBlockEntity.GRID_NUM_ROWS; rowPos++) {
                 this.drawSlot(ms,
-                        CrafterScreenHandler.GRID_START_X - 1 + colPos * Const.SQ,
-                        CrafterScreenHandler.GRID_START_Y - 1 + rowPos * Const.SQ);
+                        CrafterContainer.GRID_START_X - 1 + colPos * Const.SQ,
+                        CrafterContainer.GRID_START_Y - 1 + rowPos * Const.SQ);
             }
         }
         progress.draw(ms, menu.tile.getField(CrafterBlockEntity.Fields.TIMER.ordinal()));

@@ -7,7 +7,6 @@ import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
-import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.BlockEntityCyclic;
 import net.knsh.cyclic.block.cable.CableBase;
 import net.knsh.cyclic.block.cable.EnumConnectType;
@@ -165,7 +164,7 @@ public class ItemCableBlockEntity extends BlockEntityCyclic implements ExtendedS
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player player) {
-        return new ItemCableScreenHandler(i, playerInventory, this, level, worldPosition);
+        return new ItemCableContainer(i, playerInventory, this, level, worldPosition);
     }
 
     @Override

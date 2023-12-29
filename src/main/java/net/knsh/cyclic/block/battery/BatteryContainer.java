@@ -1,6 +1,6 @@
 package net.knsh.cyclic.block.battery;
 
-import net.knsh.cyclic.gui.ScreenHandlerBase;
+import net.knsh.cyclic.gui.ContainerBase;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -9,15 +9,15 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.level.Level;
 
-public class BatteryScreenHandler extends ScreenHandlerBase {
+public class BatteryContainer extends ContainerBase {
     protected BatteryBlockEntity tile;
     private final Container inventory;
 
-    public BatteryScreenHandler(int syncId, Inventory playerInventory, Level world, BlockPos pos) {
+    public BatteryContainer(int syncId, Inventory playerInventory, Level world, BlockPos pos) {
         this(syncId, playerInventory, new SimpleContainer(1), world, pos);
     }
 
-    public BatteryScreenHandler(int syncId, Inventory playerInventory, Container inventorysent, Level world, BlockPos pos) {
+    public BatteryContainer(int syncId, Inventory playerInventory, Container inventorysent, Level world, BlockPos pos) {
         super(null, syncId);
         this.inventory = inventorysent;
         this.tile = (BatteryBlockEntity) world.getBlockEntity(pos);

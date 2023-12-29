@@ -1,7 +1,7 @@
 package net.knsh.cyclic.block.anvilvoid;
 
 import net.knsh.cyclic.Cyclic;
-import net.knsh.cyclic.gui.ScreenHandlerBase;
+import net.knsh.cyclic.gui.ContainerBase;
 import net.knsh.cyclic.registry.CyclicScreens;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;
@@ -13,15 +13,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
-public class AnvilVoidScreenHandler extends ScreenHandlerBase {
+public class AnvilVoidContainer extends ContainerBase {
     AnvilVoidBlockEntity tile;
     private final Container inventory;
 
-    public AnvilVoidScreenHandler(int syncId, Inventory playerInventory, Level world, BlockPos pos) {
+    public AnvilVoidContainer(int syncId, Inventory playerInventory, Level world, BlockPos pos) {
         this(syncId, playerInventory, new SimpleContainer(2), world, pos);
     }
 
-    public AnvilVoidScreenHandler(int syncId, Inventory playerInventory, Container inventorysent, Level world, BlockPos pos) {
+    public AnvilVoidContainer(int syncId, Inventory playerInventory, Container inventorysent, Level world, BlockPos pos) {
         super(CyclicScreens.ANVIL_VOID, syncId);
 
         Cyclic.LOGGER.info(String.valueOf(inventorysent.getContainerSize()) + world.isClientSide());

@@ -8,11 +8,11 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
-public class AnvilVoidScreen extends ScreenBase<AnvilVoidScreenHandler> {
+public class AnvilVoidScreen extends ScreenBase<AnvilVoidContainer> {
     private ButtonMachineField btnRedstone;
     private FluidBar fluid;
 
-    public AnvilVoidScreen(AnvilVoidScreenHandler handler, Inventory inventory, Component title) {
+    public AnvilVoidScreen(AnvilVoidContainer handler, Inventory inventory, Component title) {
         super(handler, inventory, title);
     }
 

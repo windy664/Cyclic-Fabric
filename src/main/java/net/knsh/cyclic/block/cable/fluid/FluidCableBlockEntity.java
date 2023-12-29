@@ -144,6 +144,6 @@ public class FluidCableBlockEntity extends BlockEntityCyclic implements Extended
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player player) {
-        return new FluidCableScreenHandler(i, playerInventory, this, level, worldPosition);
+        return new FluidCableContainer(i, playerInventory, this, level, worldPosition);
     }
 }

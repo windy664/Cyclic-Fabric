@@ -1,6 +1,6 @@
 package net.knsh.cyclic.block.crafter;
 
-import net.knsh.cyclic.gui.ScreenHandlerBase;
+import net.knsh.cyclic.gui.ContainerBase;
 import net.knsh.cyclic.library.core.Const;
 import net.knsh.cyclic.registry.CyclicScreens;
 import net.minecraft.core.BlockPos;
@@ -13,7 +13,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class CrafterScreenHandler extends ScreenHandlerBase {
+public class CrafterContainer extends ContainerBase {
     CrafterBlockEntity tile;
     public static final int INPUT_START_X = 8;
     public static final int INPUT_START_Y = 35;
@@ -25,11 +25,11 @@ public class CrafterScreenHandler extends ScreenHandlerBase {
     public static final int PREVIEW_START_Y = 35;
     private final Container inventory;
 
-    public CrafterScreenHandler(int syncId, Inventory playerInventory, Level world, BlockPos pos) {
+    public CrafterContainer(int syncId, Inventory playerInventory, Level world, BlockPos pos) {
         this(syncId, playerInventory, new SimpleContainer(21), world, pos);
     }
 
-    public CrafterScreenHandler(int syncId, Inventory playerInventory, Container inventorysent, Level world, BlockPos pos) {
+    public CrafterContainer(int syncId, Inventory playerInventory, Container inventorysent, Level world, BlockPos pos) {
         super(CyclicScreens.CRAFTER, syncId);
         tile = (CrafterBlockEntity) world.getBlockEntity(pos);
         this.endInv = CrafterBlockEntity.IO_NUM_COLS * CrafterBlockEntity.IO_NUM_ROWS;

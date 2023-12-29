@@ -28,7 +28,7 @@ public interface BatteryImplementation extends EnergyStorage {
         return tag;
     }
 
-    default void deserializeNBT(net.minecraft.nbt.Tag nbt) {
+    default void deserializeNBTT(net.minecraft.nbt.Tag nbt) {
         CompoundTag real = (CompoundTag) nbt;
         setEnergy(real.getLong(NBTENERGY));
     }

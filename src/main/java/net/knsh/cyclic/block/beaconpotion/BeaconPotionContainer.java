@@ -1,6 +1,6 @@
 package net.knsh.cyclic.block.beaconpotion;
 
-import net.knsh.cyclic.gui.ScreenHandlerBase;
+import net.knsh.cyclic.gui.ContainerBase;
 import net.knsh.cyclic.registry.CyclicItems;
 import net.knsh.cyclic.registry.CyclicScreens;
 import net.minecraft.core.BlockPos;
@@ -16,15 +16,15 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 
-public class BeaconPotionScreenHandler extends ScreenHandlerBase {
+public class BeaconPotionContainer extends ContainerBase {
     BeaconPotionBlockEntity tile;
     private final Container inventory;
 
-    public BeaconPotionScreenHandler(int syncId, Inventory playerInventory, Level world, BlockPos pos) {
+    public BeaconPotionContainer(int syncId, Inventory playerInventory, Level world, BlockPos pos) {
         this(syncId, playerInventory, new SimpleContainer(2), world, pos);
     }
 
-    public BeaconPotionScreenHandler(int syncId, Inventory playerInventory, Container inventorysent, Level world, BlockPos pos) {
+    public BeaconPotionContainer(int syncId, Inventory playerInventory, Container inventorysent, Level world, BlockPos pos) {
         super(CyclicScreens.BEACON, syncId);
         tile = (BeaconPotionBlockEntity) world.getBlockEntity(pos);
         this.playerEntity = playerInventory.player;

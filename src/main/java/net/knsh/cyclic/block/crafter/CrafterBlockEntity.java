@@ -307,6 +307,6 @@ public class CrafterBlockEntity extends BlockEntityCyclic implements ExtendedScr
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new CrafterScreenHandler(i, inventory, this, level, worldPosition);
+        return new CrafterContainer(i, inventory, this, level, worldPosition);
     }
 }

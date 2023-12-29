@@ -56,7 +56,7 @@ public class AnvilVoidBlockEntity extends BlockEntityCyclic implements ExtendedS
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int syncId, Inventory playerInventory, Player player) {
-        return new AnvilVoidScreenHandler(syncId, playerInventory, this, level, worldPosition);
+        return new AnvilVoidContainer(syncId, playerInventory, this, level, worldPosition);
     }
 
     @Override

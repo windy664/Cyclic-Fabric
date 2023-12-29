@@ -11,14 +11,14 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-public abstract class ScreenHandlerBase extends AbstractContainerMenu {
+public abstract class ContainerBase extends AbstractContainerMenu {
     public static final int PLAYERSIZE = 4 * 9;
     protected Player playerEntity;
     protected Container playerInventory;
     protected int startInv = 0;
     protected int endInv = 17;
 
-    protected ScreenHandlerBase(MenuType<?> type, int id) {
+    protected ContainerBase(MenuType<?> type, int id) {
         super(type, id);
     }
 

@@ -8,11 +8,11 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
-public class AnvilAutoScreen extends ScreenBase<AnvilAutoScreenHandler> {
+public class AnvilAutoScreen extends ScreenBase<AnvilAutoContainer> {
     private ButtonMachineField btnRedstone;
     private EnergyBar energy;
 
-    public AnvilAutoScreen(AnvilAutoScreenHandler screenContainer, Inventory inv, Component titleIn) {
+    public AnvilAutoScreen(AnvilAutoContainer screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);
     }
 

@@ -147,7 +147,7 @@ public class AnvilAutoBlockEntity extends BlockEntityCyclic implements ExtendedS
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player player) {
-        return new AnvilAutoScreenHandler(i, playerInventory, this, level, worldPosition);
+        return new AnvilAutoContainer(i, playerInventory, this, level, worldPosition);
     }
 
     public int getEnergyMax() {

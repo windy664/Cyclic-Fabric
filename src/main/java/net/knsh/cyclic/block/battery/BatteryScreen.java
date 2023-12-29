@@ -13,7 +13,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
-public class BatteryScreen extends ScreenBase<BatteryScreenHandler> {
+public class BatteryScreen extends ScreenBase<BatteryContainer> {
     private ButtonMachine btnToggle;
     private EnergyBar energy;
     private ButtonMachine btnU;
@@ -23,7 +23,7 @@ public class BatteryScreen extends ScreenBase<BatteryScreenHandler> {
     private ButtonMachine btnE;
     private ButtonMachine btnW;
 
-    public BatteryScreen(BatteryScreenHandler screenContainer, Inventory inv, Component titleIn) {
+    public BatteryScreen(BatteryContainer screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);
     }
 

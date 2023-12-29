@@ -1,12 +1,8 @@
 package net.knsh.cyclic.enchant;
 
 import net.knsh.cyclic.library.enchant.EnchantmentCyclic;
-import net.knsh.cyclic.library.util.EnchantUtil;
 import net.knsh.cyclic.library.util.EntityUtil;
 import net.knsh.cyclic.library.util.SoundUtil;
-import net.knsh.cyclic.porting.neoforge.NeoForge;
-import net.knsh.cyclic.porting.neoforge.bus.api.SubscribeEvent;
-import net.knsh.cyclic.porting.neoforge.events.entity.player.PlayerInteractEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -17,6 +13,9 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.NeoForge;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 public class EnderPearlEnchant extends EnchantmentCyclic {
     public static final int COOLDOWN = 6 * 20;

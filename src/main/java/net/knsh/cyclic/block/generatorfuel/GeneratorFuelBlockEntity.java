@@ -151,7 +151,7 @@ public class GeneratorFuelBlockEntity extends BlockEntityCyclic implements Exten
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player player) {
-        return new GeneratorFuelScreenHandler(i, playerInventory, this, level, worldPosition);
+        return new GeneratorFuelContainer(i, playerInventory, this, level, worldPosition);
     }
 
     @Override

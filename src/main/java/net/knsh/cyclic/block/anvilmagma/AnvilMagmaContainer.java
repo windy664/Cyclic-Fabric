@@ -1,33 +1,32 @@
-package net.knsh.cyclic.block.anvil;
+package net.knsh.cyclic.block.anvilmagma;
 
-import net.knsh.cyclic.gui.ScreenHandlerBase;
+import net.knsh.cyclic.gui.ContainerBase;
 import net.knsh.cyclic.registry.CyclicScreens;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class AnvilAutoScreenHandler extends ScreenHandlerBase {
-    AnvilAutoBlockEntity tile;
+public class AnvilMagmaContainer extends ContainerBase {
+    AnvilMagmaBlockEntity tile;
     private final Container inventory;
 
-    public AnvilAutoScreenHandler(int syncId, Inventory playerInventory, Level world, BlockPos pos) {
+    public AnvilMagmaContainer(int syncId, Inventory playerInventory, Level world, BlockPos pos) {
         this(syncId, playerInventory, new SimpleContainer(2), world, pos);
     }
 
-    protected AnvilAutoScreenHandler(int syncId, Inventory playerInventory, Container inventorysent, Level world, BlockPos pos) {
-        super(CyclicScreens.ANVIL, syncId);
-        tile = (AnvilAutoBlockEntity) world.getBlockEntity(pos);
-        this.inventory = inventorysent;
+    public AnvilMagmaContainer(int syncId, Inventory playerInventory, Container inventorysent, Level world, BlockPos pos) {
+        super(CyclicScreens.ANVIL_MAGMA, syncId);
+        tile = (AnvilMagmaBlockEntity) world.getBlockEntity(pos);
         this.playerEntity = playerInventory.player;
         this.playerInventory = playerInventory;
+        this.inventory = inventorysent;
 
-        addSlot(new Slot(inventorysent, 0, 55, 35) {
+        addSlot(new Slot(inventory, 0, 55, 35) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return !stack.isEmpty() && stack.getDamageValue() != 0;
@@ -38,7 +37,7 @@ public class AnvilAutoScreenHandler extends ScreenHandlerBase {
                 tile.setChanged();
             }
         });
-        addSlot(new Slot(inventorysent, 1, 109, 35) {
+        addSlot(new Slot(inventory, 1, 109, 35) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return false;
@@ -49,9 +48,10 @@ public class AnvilAutoScreenHandler extends ScreenHandlerBase {
                 tile.setChanged();
             }
         });
+
         this.endInv = 2;
         layoutPlayerInventorySlots(playerInventory, 8, 84);
-        this.trackAllIntFields(tile, AnvilAutoBlockEntity.Fields.values().length);
+        this.trackAllIntFields(tile, AnvilMagmaBlockEntity.Fields.values().length);
     }
 
     @Override

@@ -5,7 +5,6 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.knsh.cyclic.block.BlockEntityCyclic;
-import net.knsh.cyclic.fluid.FluidMagmaHolder;
 import net.knsh.cyclic.library.capabilities.FluidTankBase;
 import net.knsh.cyclic.library.util.ItemStackUtil;
 import net.knsh.cyclic.porting.neoforge.items.ForgeImplementedInventory;
@@ -158,7 +157,7 @@ public class AnvilMagmaBlockEntity extends BlockEntityCyclic implements Extended
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player player) {
-        return new AnvilMagmaScreenHandler(i, playerInventory, this, level, worldPosition);
+        return new AnvilMagmaContainer(i, playerInventory, this, level, worldPosition);
     }
 
     public FluidTankBase getTank() {

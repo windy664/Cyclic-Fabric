@@ -6,8 +6,8 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
-public class ItemCableScreen extends ScreenBase<ItemCableScreenHandler> {
-    public ItemCableScreen(ItemCableScreenHandler screenContainer, Inventory inv, Component titleIn) {
+public class ItemCableScreen extends ScreenBase<ItemCableContainer> {
+    public ItemCableScreen(ItemCableContainer screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);
     }
 

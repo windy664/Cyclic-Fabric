@@ -1,6 +1,5 @@
 package net.knsh.cyclic.block.battery;
 
-import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
@@ -40,6 +39,11 @@ public class BatteryBlockEntity extends BlockEntityCyclic implements ExtendedScr
     private Map<Direction, Boolean> poweredSides;
     SimpleEnergyStorage energy = new SimpleEnergyStorage(MAX, MAX /4, MAX / 4);
     private final NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
+
+    @Override
+    public CompoundTag serializeNBT() {
+        return super.serializeNBT();
+    }
 
     enum Fields {
         FLOWING, N, E, S, W, U, D;
@@ -247,7 +251,7 @@ public class BatteryBlockEntity extends BlockEntityCyclic implements ExtendedScr
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player player) {
-        return new BatteryScreenHandler(i, playerInventory, this, level, worldPosition);
+        return new BatteryContainer(i, playerInventory, this, level, worldPosition);
     }
 
     @Override

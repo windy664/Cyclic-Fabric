@@ -1,11 +1,6 @@
 package net.knsh.cyclic.enchant;
 
 import net.knsh.cyclic.library.enchant.EnchantmentCyclic;
-import net.knsh.cyclic.porting.neoforge.NeoForge;
-import net.knsh.cyclic.porting.neoforge.bus.api.EventPriority;
-import net.knsh.cyclic.porting.neoforge.bus.api.SubscribeEvent;
-import net.knsh.cyclic.porting.neoforge.events.entity.living.LivingChangeTargetEvent;
-import net.knsh.cyclic.porting.neoforge.events.entity.living.LivingDamageEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -14,6 +9,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.NeoForge;
+import net.neoforged.neoforge.event.entity.living.LivingChangeTargetEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
 public class BeekeeperEnchant extends EnchantmentCyclic {
     public static final String ID = "beekeeper";

@@ -8,11 +8,11 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
-public class AnvilMagmaScreen extends ScreenBase<AnvilMagmaScreenHandler> {
+public class AnvilMagmaScreen extends ScreenBase<AnvilMagmaContainer> {
     private ButtonMachineField btnRedstone;
     private FluidBar fluid;
 
-    public AnvilMagmaScreen(AnvilMagmaScreenHandler screenContainer, Inventory inv, Component titleIn) {
+    public AnvilMagmaScreen(AnvilMagmaContainer screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);
     }
 

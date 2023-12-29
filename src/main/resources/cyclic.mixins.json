@@ -5,11 +5,6 @@
   "mixins": [
     "common.BlockMixin",
     "common.LivingEntityMixin",
-    "common.MobMixin",
-    "common.PlayerMixin",
-    "common.ServerPlayerGameModeMixin",
-    "common.ServerPlayerMixin",
-    "common.StartAttackingMixin",
     "common.ThrownEnderpearlMixin"
   ],
   "injectors": {

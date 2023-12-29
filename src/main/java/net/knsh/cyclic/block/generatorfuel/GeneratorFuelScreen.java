@@ -9,13 +9,13 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
-public class GeneratorFuelScreen extends ScreenBase<GeneratorFuelScreenHandler> {
+public class GeneratorFuelScreen extends ScreenBase<GeneratorFuelContainer> {
     private ButtonMachineField btnRedstone;
     private ButtonMachine btnToggle;
     private EnergyBar energy;
     private TexturedProgress progress;
 
-    public GeneratorFuelScreen(GeneratorFuelScreenHandler handler, Inventory inventory, Component title) {
+    public GeneratorFuelScreen(GeneratorFuelContainer handler, Inventory inventory, Component title) {
         super(handler, inventory, title);
     }
 
