@@ -1,6 +1,6 @@
 {
     "textures": {
-        "particle": "block/water_still"
+        "particle": "cyclic:block/fluid/xpjuice_still"
     }
 }
 

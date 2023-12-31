@@ -1,5 +1,7 @@
 package net.knsh.cyclic.block.melter;
 
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
+import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.knsh.cyclic.block.BlockCyclic;
 import net.knsh.cyclic.lookups.CyclicLookup;
 import net.knsh.cyclic.lookups.Lookup;
@@ -14,6 +16,7 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import team.reborn.energy.api.EnergyStorage;
 
 public class BlockMelter extends BlockCyclic implements Lookup {
     public BlockMelter(Properties properties) {
@@ -54,6 +57,10 @@ public class BlockMelter extends BlockCyclic implements Lookup {
 
     @Override
     public void registerLookups() {
+        EnergyStorage.SIDED.registerForBlockEntity(((blockEntity, direction) -> blockEntity.energy), CyclicBlocks.MELTER.blockEntity());
+        ItemStorage.SIDED.registerForBlockEntity(((blockEntity, direction) -> blockEntity.getItemHandler()), CyclicBlocks.MELTER.blockEntity());
+        FluidStorage.SIDED.registerForBlockEntity(((blockEntity, direction) -> blockEntity.getFluidTank()), CyclicBlocks.MELTER.blockEntity());
+
         CyclicLookup.ITEM_HANDLER.registerSelf(CyclicBlocks.MELTER.blockEntity());
         CyclicLookup.FLUID_HANDLER.registerSelf(CyclicBlocks.MELTER.blockEntity());
     }

@@ -46,7 +46,7 @@ public class ForgeFluidTankBase extends FluidTank {
             return Math.min(capacity - stack.getAmount(), resource.getAmount());
         }
         if (stack.isEmpty()) {
-            stack = new FluidStack(resource, Math.min(capacity, resource.getAmount()));
+            setFluid(new FluidStack(resource, Math.min(capacity, resource.getAmount())));
             onContentsChanged();
             return stack.getAmount();
         }

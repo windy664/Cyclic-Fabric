@@ -5,6 +5,7 @@ import io.github.fabricators_of_create.porting_lib.util.FluidStack;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
+import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.BlockEntityCyclic;
 import net.knsh.cyclic.library.cap.CustomEnergyStorageUtil;
 import net.knsh.cyclic.library.capabilities.FluidAction;
@@ -38,8 +39,23 @@ public class TileMelter extends BlockEntityCyclic implements ExtendedScreenHandl
     static final int MAX = 64000;
     public static final int CAPACITY = (int) (64 * FluidConstants.BUCKET);
     public static final int TRANSFER_FLUID_PER_TICK = (int) (FluidConstants.BUCKET / 20);
-    public ForgeFluidTankBase tank = new ForgeFluidTankBase(this, CAPACITY, isFluidValid());
-    SimpleEnergyStorage energy = new SimpleEnergyStorage(MAX, MAX, MAX);
+    public ForgeFluidTankBase tank = new ForgeFluidTankBase(this, CAPACITY, isFluidValid()) {
+        @Override
+        protected void onFinalCommit() {
+            TileMelter.this.setChanged();
+        }
+    };
+    SimpleEnergyStorage energy = new SimpleEnergyStorage(MAX, MAX, MAX) {
+        @Override
+        protected void onFinalCommit() {
+            TileMelter.this.setChanged();
+        }
+
+        @Override
+        public boolean supportsExtraction() {
+            return false;
+        }
+    };
     ItemStackHandler inventory = new ItemStackHandler(2);
     private RecipeMelter currentRecipe;
     private int burnTimeMax = 0;
@@ -206,13 +222,20 @@ public class TileMelter extends BlockEntityCyclic implements ExtendedScreenHandl
     }
 
     private boolean tryProcessRecipe() {
-        long test = tank.fill(this.currentRecipe.getRecipeFluid(), FluidAction.SIMULATE);
+        long test;
+        try (Transaction transaction = Transaction.openOuter()) {
+            test = tank.insert(this.currentRecipe.getRecipeFluid().getType(), this.currentRecipe.getRecipeFluid().getAmount(), transaction);
+            transaction.abort();
+        }
         if (test == this.currentRecipe.getRecipeFluid().getAmount()
                 && currentRecipe.matches(this, level)) {
             //ok it has room for all the fluid none will be wasted
             inventory.getStackInSlot(0).shrink(1);
             inventory.getStackInSlot(1).shrink(1);
-            tank.fill(this.currentRecipe.getRecipeFluid(), FluidAction.EXECUTE);
+            try (Transaction transaction = Transaction.openOuter()) {
+                tank.insert(this.currentRecipe.getRecipeFluid().getType(), this.currentRecipe.getRecipeFluid().getAmount(), transaction);
+                transaction.commit();
+            }
             return true;
         }
         return false;

@@ -17,37 +17,39 @@ import net.knsh.cyclic.block.conveyor.ConveyorItemRenderer;
 import net.knsh.cyclic.block.crafter.CrafterScreen;
 import net.knsh.cyclic.block.generatorfuel.GeneratorFuelScreen;
 import net.knsh.cyclic.block.melter.ScreenMelter;
-import net.knsh.cyclic.fluid.FluidMagmaHolder;
-import net.knsh.cyclic.fluid.FluidXpJuiceHolder;
+import net.knsh.cyclic.fluid.*;
 import net.knsh.cyclic.item.crafting.CraftingBagScreen;
 import net.knsh.cyclic.item.crafting.simple.CraftingStickScreen;
 import net.knsh.cyclic.registry.CyclicBlocks;
 import net.knsh.cyclic.registry.CyclicEntities;
-import net.knsh.cyclic.registry.CyclicFluids;
 import net.knsh.cyclic.registry.CyclicScreens;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
-import net.minecraft.resources.ResourceLocation;
 
 public class ClientRegistry {
     public static void register() {
         // Fluids
-        FluidRenderHandlerRegistry.INSTANCE.register(CyclicFluids.STILL_XP, CyclicFluids.FLOWING_XP, new SimpleFluidRenderHandler(
-                new ResourceLocation("cyclic:block/fluid/xpjuice_still"),
-                new ResourceLocation("cyclic:block/fluid/xpjuice_flow"),
-                FluidXpJuiceHolder.COLOR
+        FluidRenderHandlerRegistry.INSTANCE.register(FluidXpJuiceHolder.STILL, FluidXpJuiceHolder.FLOWING, new SimpleFluidRenderHandler(
+                FluidXpJuiceHolder.FLUID_STILL, FluidXpJuiceHolder.FLUID_FLOWING
         ));
-        FluidRenderHandlerRegistry.INSTANCE.register(CyclicFluids.STILL_MAGMA, CyclicFluids.FLOWING_MAGMA, new SimpleFluidRenderHandler(
-                new ResourceLocation("cyclic:block/fluid/magma_still"),
-                new ResourceLocation("cyclic:block/fluid/magma_flow"),
-                FluidMagmaHolder.COLOR
+        FluidRenderHandlerRegistry.INSTANCE.register(FluidMagmaHolder.STILL, FluidMagmaHolder.FLOWING, new SimpleFluidRenderHandler(
+                FluidMagmaHolder.FLUID_STILL, FluidMagmaHolder.FLUID_FLOWING
+        ));
+        FluidRenderHandlerRegistry.INSTANCE.register(FluidBiomassHolder.STILL, FluidBiomassHolder.FLOWING, new SimpleFluidRenderHandler(
+                FluidBiomassHolder.FLUID_STILL, FluidBiomassHolder.FLUID_FLOWING
+        ));
+        FluidRenderHandlerRegistry.INSTANCE.register(FluidHoneyHolder.STILL, FluidHoneyHolder.FLOWING, new SimpleFluidRenderHandler(
+                FluidHoneyHolder.FLUID_STILL, FluidHoneyHolder.FLUID_FLOWING
+        ));
+        FluidRenderHandlerRegistry.INSTANCE.register(FluidSlimeHolder.STILL, FluidSlimeHolder.FLOWING, new SimpleFluidRenderHandler(
+                FluidSlimeHolder.FLUID_STILL, FluidSlimeHolder.FLUID_FLOWING
+        ));
+        FluidRenderHandlerRegistry.INSTANCE.register(FluidWaxHolder.STILL, FluidWaxHolder.FLOWING, new SimpleFluidRenderHandler(
+                FluidWaxHolder.FLUID_STILL, FluidWaxHolder.FLUID_FLOWING
         ));
 
         // Block Render Layers
-        BlockRenderLayerMap.INSTANCE.putFluids(RenderType.solid(),
-                CyclicFluids.STILL_XP, CyclicFluids.FLOWING_XP,
-                CyclicFluids.STILL_MAGMA, CyclicFluids.FLOWING_MAGMA);
         BlockRenderLayerMap.INSTANCE.putBlock(CyclicBlocks.BEACON.block(), RenderType.translucent());
         BlockRenderLayerMap.INSTANCE.putBlock(CyclicBlocks.ANTI_BEACON.block(), RenderType.cutout());
 

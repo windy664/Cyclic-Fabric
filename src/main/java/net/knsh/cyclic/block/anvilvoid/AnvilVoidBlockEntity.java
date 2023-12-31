@@ -46,7 +46,7 @@ public class AnvilVoidBlockEntity extends BlockEntityCyclic implements ExtendedS
     public AnvilVoidBlockEntity(BlockPos pos, BlockState state) {
         super(CyclicBlocks.ANVILVOID.blockEntity(), pos, state);
         this.needsRedstone = 1;
-        tank.fluidBlockIdentifier = FluidXpJuiceHolder.NAME;
+        //tank.fluidBlockIdentifier = FluidXpJuiceHolder.NAME;
     }
 
     @Override
@@ -123,9 +123,9 @@ public class AnvilVoidBlockEntity extends BlockEntityCyclic implements ExtendedS
         }
         if (FLUIDPAY > 0) {
             level.playSound(null, worldPosition, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 1f, 1f);
-            Fluid newFluid = CyclicFluids.STILL_XP.getSource();
+            //Fluid newFluid = CyclicFluids.STILL_XP.getSource();
             try (Transaction transaction = Transaction.openOuter()) {
-                long insertAmount = tank.insert(FluidVariant.of(newFluid), FluidFabricToForge.toDroplets(FLUIDPAY), transaction);
+                //long insertAmount = tank.insert(FluidVariant.of(newFluid), FluidFabricToForge.toDroplets(FLUIDPAY), transaction);
                 transaction.commit();
             }
         }

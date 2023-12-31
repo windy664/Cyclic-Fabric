@@ -1,0 +1,12 @@
+{
+  "sources": [
+    {
+      "type": "single",
+      "resource": "cyclic:block/fluid/xpjuice_still"
+    },
+    {
+      "type": "single",
+      "resource": "cyclic:block/fluid/xpjuice_flow"
+    }
+  ]
+}

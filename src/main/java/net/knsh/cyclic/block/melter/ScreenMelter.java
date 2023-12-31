@@ -35,7 +35,7 @@ public class ScreenMelter extends ScreenBase<ContainerMelter> {
         super.render(ms, mouseX, mouseY, partialTicks);
         this.renderTooltip(ms, mouseX, mouseY);
         energy.renderHoveredToolTip(ms, mouseX, mouseY, (int) menu.tile.energy.getAmount());
-        fluid.renderHoveredToolTip(ms, mouseX, mouseY, menu.tile.tank);
+        fluid.renderHoveredToolTip(ms, mouseX, mouseY, menu.tile.getFluid());
     }
 
     @Override

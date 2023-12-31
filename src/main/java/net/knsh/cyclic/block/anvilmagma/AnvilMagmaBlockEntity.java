@@ -6,14 +6,10 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.knsh.cyclic.block.BlockEntityCyclic;
-import net.knsh.cyclic.fluid.FluidMagmaHolder;
-import net.knsh.cyclic.fluid.FluidXpJuiceHolder;
-import net.knsh.cyclic.library.capabilities.FluidTankBase;
 import net.knsh.cyclic.library.capabilities.ForgeFluidTankBase;
 import net.knsh.cyclic.library.util.ItemStackUtil;
 import net.knsh.cyclic.porting.neoforge.items.ForgeImplementedInventory;
 import net.knsh.cyclic.registry.CyclicBlocks;
-import net.knsh.cyclic.registry.CyclicFluids;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -28,7 +24,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.ForgeConfigSpec;
 import org.jetbrains.annotations.Nullable;
 
@@ -158,8 +153,9 @@ public class AnvilMagmaBlockEntity extends BlockEntityCyclic implements Extended
 
     public Predicate<FluidStack> isFluidValid() {
         return p -> {
-            Fluid fluid = p.getFluid();
-            return fluid == CyclicFluids.STILL_MAGMA;
+            //Fluid fluid = p.getFluid();
+            //return fluid == CyclicFluids.STILL_MAGMA;
+            return true;
         };
     }
 

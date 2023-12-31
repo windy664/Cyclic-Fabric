@@ -33,7 +33,7 @@ public class AnvilMagmaScreen extends ScreenBase<AnvilMagmaContainer> {
         this.renderBackground(ms);
         super.render(ms, mouseX, mouseY, partialTicks);
         this.renderTooltip(ms, mouseX, mouseY);
-        fluid.renderHoveredToolTip(ms, mouseX, mouseY, menu.tile.getTank());
+        fluid.renderHoveredToolTip(ms, mouseX, mouseY, menu.tile.getFluid());
     }
 
     @Override

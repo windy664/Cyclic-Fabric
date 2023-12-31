@@ -3,8 +3,10 @@ package net.knsh.cyclic.network.packets;
 import io.github.fabricators_of_create.porting_lib.util.FluidStack;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.library.core.IHasFluid;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -22,9 +24,9 @@ public class PacketSyncFluid {
         this.fluid = fluid;
     }
 
-    public static void handle(MinecraftServer server, ServerPlayer sender, ServerGamePacketListenerImpl handler, FriendlyByteBuf buf, PacketSender responseSender) {
+    public static void handle(Minecraft client, ClientPacketListener handler, FriendlyByteBuf buf, PacketSender responseSender) {
         PacketSyncFluid message = decode(buf);
-        server.execute(() -> {
+        client.execute(() -> {
             doWork(message);
         });
     }
@@ -32,6 +34,7 @@ public class PacketSyncFluid {
     private static void doWork(PacketSyncFluid message) {
         BlockEntity te = Minecraft.getInstance().level.getBlockEntity(message.pos);
         if (te instanceof IHasFluid tile) {
+            Cyclic.LOGGER.info("Setting fluid");
             tile.setFluid(message.fluid);
         }
     }

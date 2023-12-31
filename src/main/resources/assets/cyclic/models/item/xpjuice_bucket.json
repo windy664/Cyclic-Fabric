@@ -1,5 +1,7 @@
 {
-  "parent": "forge:item/bucket_drip",
-  "loader": "forge:fluid_container",
-  "fluid": "cyclic:xpjuice"
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "item/bucket",
+    "layer1": "cyclic:item/fluid/xpjuice_drip"
+  }
 }
