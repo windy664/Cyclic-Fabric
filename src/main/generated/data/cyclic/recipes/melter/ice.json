@@ -1,0 +1,19 @@
+{
+  "type": "cyclic:melter",
+  "energy": {
+    "rfpertick": 80,
+    "ticks": 60
+  },
+  "ingredients": [
+    {
+      "item": "minecraft:ice"
+    },
+    {
+      "item": "minecraft:ice"
+    }
+  ],
+  "result": {
+    "count": 162000,
+    "fluid": "minecraft:water"
+  }
+}

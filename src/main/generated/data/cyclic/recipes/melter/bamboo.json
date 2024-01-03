@@ -1,0 +1,19 @@
+{
+  "type": "cyclic:melter",
+  "energy": {
+    "rfpertick": 80,
+    "ticks": 60
+  },
+  "ingredients": [
+    {
+      "item": "cyclic:biomass"
+    },
+    {
+      "item": "minecraft:bamboo"
+    }
+  ],
+  "result": {
+    "count": 81000,
+    "fluid": "cyclic:biomass"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "cyclic:melter",
+  "energy": {
+    "rfpertick": 100,
+    "ticks": 160
+  },
+  "ingredients": [
+    {
+      "tag": "c:slimeballs"
+    },
+    {
+      "tag": "c:slimeballs"
+    }
+  ],
+  "result": {
+    "count": 40500,
+    "fluid": "cyclic:slime"
+  }
+}

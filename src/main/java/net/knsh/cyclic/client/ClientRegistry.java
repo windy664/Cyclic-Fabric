@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.knsh.cyclic.block.BlockCyclic;
 import net.knsh.cyclic.block.antipotion.RenderAntiBeacon;
 import net.knsh.cyclic.block.anvil.AnvilAutoScreen;
 import net.knsh.cyclic.block.anvilmagma.AnvilMagmaScreen;
@@ -29,6 +30,13 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 
 public class ClientRegistry {
     public static void register() {
+        // Auto Register
+        CyclicBlocks.BLOCK_INSTANCE.forEach(block -> {
+            if (block instanceof BlockCyclic cyclicBlock) {
+                cyclicBlock.registerClient();
+            }
+        });
+
         // Fluids
         FluidRenderHandlerRegistry.INSTANCE.register(FluidXpJuiceHolder.STILL, FluidXpJuiceHolder.FLOWING, new SimpleFluidRenderHandler(
                 FluidXpJuiceHolder.FLUID_STILL, FluidXpJuiceHolder.FLUID_FLOWING
@@ -72,6 +80,5 @@ public class ClientRegistry {
         MenuScreens.register(CyclicScreens.BATTERY, BatteryScreen::new);
         MenuScreens.register(CyclicScreens.CRAFTING_BAG, CraftingBagScreen::new);
         MenuScreens.register(CyclicScreens.CRAFTING_STICK, CraftingStickScreen::new);
-        MenuScreens.register(CyclicScreens.MELTER, ScreenMelter::new);
     }
 }

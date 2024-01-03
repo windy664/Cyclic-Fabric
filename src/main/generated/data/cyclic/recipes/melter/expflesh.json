@@ -1,0 +1,19 @@
+{
+  "type": "cyclic:melter",
+  "energy": {
+    "rfpertick": 100,
+    "ticks": 160
+  },
+  "ingredients": [
+    {
+      "item": "cyclic:experience_food"
+    },
+    {
+      "item": "minecraft:rotten_flesh"
+    }
+  ],
+  "result": {
+    "count": 85050,
+    "fluid": "cyclic:xpjuice"
+  }
+}

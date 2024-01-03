@@ -1,0 +1,19 @@
+{
+  "type": "cyclic:melter",
+  "energy": {
+    "rfpertick": 80,
+    "ticks": 60
+  },
+  "ingredients": [
+    {
+      "item": "minecraft:honey_block"
+    },
+    {
+      "item": "minecraft:honey_block"
+    }
+  ],
+  "result": {
+    "count": 162000,
+    "fluid": "cyclic:honey"
+  }
+}

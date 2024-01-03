@@ -52,6 +52,11 @@ public class BlockCyclic extends BaseEntityBlock implements EntityBlock {
         return null;
     }
 
+    @Environment(EnvType.CLIENT)
+    public void registerClient() {
+
+    }
+
     @SuppressWarnings("deprecation")
     @Override
     public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean movedByPiston) {

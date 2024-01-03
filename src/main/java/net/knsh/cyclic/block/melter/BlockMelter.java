@@ -1,11 +1,15 @@
 package net.knsh.cyclic.block.melter;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.knsh.cyclic.block.BlockCyclic;
 import net.knsh.cyclic.lookups.CyclicLookup;
 import net.knsh.cyclic.lookups.Lookup;
 import net.knsh.cyclic.registry.CyclicBlocks;
+import net.knsh.cyclic.registry.CyclicScreens;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -48,6 +52,12 @@ public class BlockMelter extends BlockCyclic implements Lookup {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
         return createTickerHelper(type, CyclicBlocks.MELTER.blockEntity(), world.isClientSide ? TileMelter::clientTick : TileMelter::serverTick);
+    }
+
+    @Environment(EnvType.CLIENT)
+    @Override
+    public void registerClient() {
+        MenuScreens.register(CyclicScreens.MELTER, ScreenMelter::new);
     }
 
     @Override

@@ -1,0 +1,19 @@
+{
+  "type": "cyclic:melter",
+  "energy": {
+    "rfpertick": 100,
+    "ticks": 160
+  },
+  "ingredients": [
+    {
+      "item": "minecraft:slime_block"
+    },
+    {
+      "item": "minecraft:slime_block"
+    }
+  ],
+  "result": {
+    "count": 364500,
+    "fluid": "cyclic:slime"
+  }
+}

@@ -61,6 +61,11 @@ public class RecipeMelter implements Recipe<TileMelter> {
         }
     }
 
+    public static class Type implements RecipeType<RecipeMelter> {
+        public static final Type INSTANCE = new Type();
+        public static final String ID = "melter";
+    }
+
     public boolean matches(ItemStack current, Ingredient ing) {
         if (ing == Ingredient.EMPTY) {
             //it must be empty

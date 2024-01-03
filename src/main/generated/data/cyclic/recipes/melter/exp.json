@@ -1,0 +1,19 @@
+{
+  "type": "cyclic:melter",
+  "energy": {
+    "rfpertick": 100,
+    "ticks": 160
+  },
+  "ingredients": [
+    {
+      "item": "cyclic:experience_food"
+    },
+    {
+      "item": "cyclic:experience_food"
+    }
+  ],
+  "result": {
+    "count": 162000,
+    "fluid": "cyclic:xpjuice"
+  }
+}

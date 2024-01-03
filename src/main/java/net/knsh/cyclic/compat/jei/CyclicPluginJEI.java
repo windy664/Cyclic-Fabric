@@ -9,6 +9,7 @@ import mezz.jei.api.runtime.IJeiRuntime;
 import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.melter.ContainerMelter;
 import net.knsh.cyclic.block.melter.ScreenMelter;
+import net.knsh.cyclic.compat.jei.categories.MelterRecipeCategory;
 import net.knsh.cyclic.registry.CyclicBlocks;
 import net.knsh.cyclic.registry.CyclicItems;
 import net.knsh.cyclic.registry.CyclicRecipeTypes;

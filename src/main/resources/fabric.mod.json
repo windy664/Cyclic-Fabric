@@ -28,6 +28,9 @@
 		"jei_mod_plugin": [
 			"net.knsh.cyclic.compat.jei.CyclicPluginJEI"
 		],
+		"rei_client": [
+			"net.knsh.cyclic.compat.rei.CyclicPluginREI"
+		],
 		"emi": [
 			"net.knsh.cyclic.compat.emi.CyclicPluginEMI"
 		]
