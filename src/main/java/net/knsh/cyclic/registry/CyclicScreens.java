@@ -8,7 +8,7 @@ import net.knsh.cyclic.block.anvilvoid.AnvilVoidContainer;
 import net.knsh.cyclic.block.battery.BatteryContainer;
 import net.knsh.cyclic.block.beaconpotion.BeaconPotionContainer;
 import net.knsh.cyclic.block.cable.fluid.FluidCableContainer;
-import net.knsh.cyclic.block.cable.item.ItemCableContainer;
+import net.knsh.cyclic.block.cable.item.ContainerCableItem;
 import net.knsh.cyclic.block.crafter.CrafterContainer;
 import net.knsh.cyclic.block.generatorfuel.GeneratorFuelContainer;
 import net.knsh.cyclic.block.melter.ContainerMelter;
@@ -33,8 +33,8 @@ public class CyclicScreens {
             new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new AnvilMagmaContainer(syncId, inventory, inventory.player.level(), buf.readBlockPos()))));
     public static MenuType<AnvilAutoContainer> ANVIL = registerScreen("anvil",
             new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new AnvilAutoContainer(syncId, inventory, inventory.player.level(), buf.readBlockPos()))));
-    public static MenuType<ItemCableContainer> ITEM_PIPE = registerScreen("item_pipe",
-            new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new ItemCableContainer(syncId, inventory, inventory.player.level(), buf.readBlockPos()))));
+    public static MenuType<ContainerCableItem> ITEM_PIPE = registerScreen("item_pipe",
+            new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new ContainerCableItem(syncId, inventory.player.level(), buf.readBlockPos(), inventory, inventory.player))));
     public static MenuType<FluidCableContainer> FLUID_PIPE = registerScreen("fluid_pipe",
             new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new FluidCableContainer(syncId, inventory, inventory.player.level(), buf.readBlockPos()))));
     public static MenuType<BatteryContainer> BATTERY = registerScreen("battery",

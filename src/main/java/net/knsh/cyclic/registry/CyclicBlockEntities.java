@@ -8,7 +8,6 @@ public class CyclicBlockEntities {
     public static void register() {
         ItemStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.getStorage(), CyclicBlocks.HOPPERGOLD.blockEntity());
         ItemStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.getStorage(), CyclicBlocks.HOPPER.blockEntity());
-        ItemStorage.SIDED.registerForBlockEntity(((blockEntity, direction) -> blockEntity.getFlow().get(direction)), CyclicBlocks.ITEM_PIPE.blockEntity());
 
         FluidStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.getStorage(), CyclicBlocks.FLUIDHOPPER.blockEntity());
         FluidStorage.SIDED.registerForBlockEntity(((blockEntity, direction) -> blockEntity.flow.get(direction)), CyclicBlocks.FLUID_PIPE.blockEntity());

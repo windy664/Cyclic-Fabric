@@ -14,7 +14,7 @@ import net.minecraft.world.item.ItemStack;
 public abstract class ContainerBase extends AbstractContainerMenu {
     public static final int PLAYERSIZE = 4 * 9;
     protected Player playerEntity;
-    protected Container playerInventory;
+    protected Inventory playerInventory;
     protected int startInv = 0;
     protected int endInv = 17;
 
@@ -95,6 +95,10 @@ public abstract class ContainerBase extends AbstractContainerMenu {
             y += dy;
         }
         return index;
+    }
+
+    protected void layoutPlayerInventorySlots(int leftCol, int topRow) {
+        layoutPlayerInventorySlots(playerInventory, leftCol, topRow);
     }
 
     protected void layoutPlayerInventorySlots(Inventory playerInventory, int leftCol, int topRow) {

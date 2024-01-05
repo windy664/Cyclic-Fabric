@@ -1,7 +1,7 @@
 package net.knsh.cyclic.block.melter;
 
-import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandler;
 import io.github.fabricators_of_create.porting_lib.transfer.item.SlotItemHandler;
+import io.github.fabricators_of_create.porting_lib.transfer.item.SlottedStackStorage;
 import net.knsh.cyclic.gui.ContainerBase;
 import net.knsh.cyclic.lookups.CyclicLookup;
 import net.knsh.cyclic.lookups.types.ItemHandlerLookup;
@@ -23,7 +23,7 @@ public class ContainerMelter extends ContainerBase {
         this.playerInventory = playerInventory;
         ItemHandlerLookup lookup = CyclicLookup.ITEM_HANDLER.find(world, pos, null);
         if (lookup != null) {
-            ItemStackHandler h = lookup.getItemHandler();
+            SlottedStackStorage h = lookup.getItemHandler();
             this.endInv = h.getSlotCount();
             addSlot(new SlotItemHandler(h, 0, 17, 31) {
 

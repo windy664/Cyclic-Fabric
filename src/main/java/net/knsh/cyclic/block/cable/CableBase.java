@@ -1,6 +1,7 @@
 package net.knsh.cyclic.block.cable;
 
 import com.google.common.collect.Maps;
+import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.BlockCyclic;
 import net.knsh.cyclic.library.util.SoundUtil;
 import net.knsh.cyclic.registry.CyclicBlocks;
@@ -247,6 +248,6 @@ public class CableBase extends BlockCyclic implements SimpleWaterloggedBlock {
         EnumProperty<EnumConnectType> property = CableBase.FACING_TO_PROPERTY_MAP.get(side);
         return blockState.getBlock() instanceof CableBase
                 && blockState.hasProperty(property)
-                && blockState.getValue(property).isUnBlocked() == false;
+                && !blockState.getValue(property).isUnBlocked();
     }
 }

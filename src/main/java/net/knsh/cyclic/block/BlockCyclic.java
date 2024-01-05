@@ -119,4 +119,19 @@ public class BlockCyclic extends BaseEntityBlock implements EntityBlock {
         }
         super.appendHoverText(stack, level, tooltip, flag);
     }
+
+    public static boolean isItem(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor world, BlockPos currentPos, BlockPos facingPos) {
+        return hasCapabilityDir(facing, world, facingPos, ItemStorage.SIDED);
+    }
+
+    private static boolean hasCapabilityDir(Direction facing, LevelAccessor world, BlockPos facingPos, BlockApiLookup<?, @Nullable Direction> cap) {
+        if (facing == null) {
+            return false;
+        }
+        BlockEntity neighbor = world.getBlockEntity(facingPos);
+        if (neighbor != null && cap.find(neighbor.getLevel(), facingPos, facing.getOpposite()) != null) {
+            return true;
+        }
+        return false;
+    }
 }

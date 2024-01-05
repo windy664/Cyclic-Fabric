@@ -1,21 +1,19 @@
 package net.knsh.cyclic.block;
 
 import com.google.common.collect.Lists;
+import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandler;
+import io.github.fabricators_of_create.porting_lib.transfer.item.SlottedStackStorage;
 import io.github.fabricators_of_create.porting_lib.util.FluidStack;
-import net.fabricmc.fabric.api.lookup.v1.block.BlockApiLookup;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
-import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.SlottedStorage;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
-import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
+import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleSlotStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.knsh.cyclic.block.beaconpotion.BeamParams;
-import net.knsh.cyclic.library.capabilities.FluidTankBase;
 import net.knsh.cyclic.library.core.IHasFluid;
 import net.knsh.cyclic.library.util.SoundUtil;
-import net.knsh.cyclic.porting.neoforge.items.ForgeImplementedInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -36,10 +34,8 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
-import java.util.Iterator;
 
 public abstract class BlockEntityCyclic extends BlockEntity implements Container, IHasFluid {
-
     public static final String NBTINV = "inv";
     public static final String NBTFLUID = "fluid";
     public static final String NBTENERGY = "energy";
@@ -76,11 +72,11 @@ public abstract class BlockEntityCyclic extends BlockEntity implements Container
         }
     }
 
-    public boolean moveItems(Direction myFacingDir, int max, InventoryStorage handlerHere) {
+    public boolean moveItems(Direction myFacingDir, int max, SlottedStackStorage handlerHere) {
         return moveItems(myFacingDir, worldPosition.relative(myFacingDir), max, handlerHere, 0);
     }
 
-    public boolean moveItems(Direction myFacingDir, BlockPos posTarget, int max, InventoryStorage handlerHere, int theslot) {
+    public boolean moveItems(Direction myFacingDir, BlockPos posTarget, int max, SlottedStackStorage handlerHere, int theslot) {
         if (this.level.isClientSide()) {
             return false;
         }
@@ -92,40 +88,20 @@ public abstract class BlockEntityCyclic extends BlockEntity implements Container
         if (tileTarget == null) {
             return false;
         }
-        Storage<ItemVariant> handlerOutput = ItemStorage.SIDED.find(level, tileTarget.getBlockPos(), themFacingMe);
+
+        Storage<ItemVariant> handlerOutput = ItemStorage.SIDED.find(tileTarget.getLevel(), tileTarget.getBlockPos(), themFacingMe);
         if (handlerOutput == null) {
             return false;
         }
-        //first simulate/
-        ItemStack drain;
-        try (Transaction transaction = Transaction.openOuter()) {
-            drain = handlerHere.getSlot(theslot).getResource().toStack();
-            if (drain.isEmpty()) {
-                transaction.abort();
-            } else {
-                long amount = handlerHere.getSlot(theslot).extract(ItemVariant.of(drain), max, transaction);
-                drain.shrink((int) amount);
-                transaction.commit();
-            }
-        }
-        //ItemStack drain = handlerHere.extractItem(theslot, max, true); // handlerHere.getStackInSlot(theslot).copy();
-        int sizeStarted = drain.getCount();
-        if (!drain.isEmpty()) {
-            //now push it into output, but find out what was ACTUALLY taken
-            try (Transaction transaction = Transaction.openOuter()) {
-                long amount = handlerOutput.insert(ItemVariant.of(drain), 64, transaction);
-                drain.shrink((int) amount);
-                transaction.commit();
-            }
-        }
-        int sizeAfter = sizeStarted - drain.getCount();
-        if (sizeAfter > 0) {
-            try (Transaction transaction = Transaction.openOuter()) {
-                handlerHere.getSlot(theslot).extract(handlerHere.getSlot(theslot).getResource(), sizeAfter, transaction);
-                transaction.commit();
-            }
-        }
-        return sizeAfter > 0;
+
+        long sizeafter = StorageUtil.move(
+                handlerHere,
+                handlerOutput,
+                itemVariant -> true,
+                max,
+                null
+        );
+        return sizeafter > 0;
     }
 
     @Nullable
@@ -165,34 +141,50 @@ public abstract class BlockEntityCyclic extends BlockEntity implements Container
 
     public abstract int getField(int field);
 
-    public void tryExtract(BlockApiLookup<Storage<ItemVariant>, @Nullable Direction> blockApiLookup, InventoryStorage myself, Direction extractSide, int qty) {
+    public void tryExtract(SlottedStackStorage myself, Direction extractSide, int qty, @Nullable ItemStackHandler nullableFilter) {
         if (extractSide == null) {
             return;
         }
-        if (!myself.getSlot(0).isResourceBlank()) {
+        if (extractSide == null || !myself.getStackInSlot(0).isEmpty()) {
             return;
         }
         BlockPos posTarget = worldPosition.relative(extractSide);
         BlockEntity tile = level.getBlockEntity(posTarget);
         if (tile != null) {
-            Storage<ItemVariant> itemHandlerFrom = blockApiLookup.find(level, posTarget, extractSide.getOpposite());
+            Storage<ItemVariant> itemHandlerFrom = ItemStorage.SIDED.find(tile.getLevel(), posTarget, extractSide.getOpposite());
+
             if (itemHandlerFrom != null) {
-                itemHandlerFrom.forEach((itemVariantStorageView -> {
-                    if (!itemVariantStorageView.getResource().isBlank()){
-                        long moved;
-                        ItemStack simStack = itemVariantStorageView.getResource().toStack();
-                        try (Transaction transaction = Transaction.openOuter()) {
-                            moved = StorageUtil.simulateExtract(itemVariantStorageView, itemVariantStorageView.getResource(), qty, transaction);
+                try (Transaction transaction = Transaction.openOuter()) {
+                    long itemTarget;
+                    if (itemHandlerFrom instanceof SlottedStorage<ItemVariant> slottedStorage) {
+                        for (int i = 0; i < slottedStorage.getSlotCount(); i++) {
+                            SingleSlotStorage<ItemVariant> slot = slottedStorage.getSlot(i);
+                            ItemVariant slotResource = slot.getResource();
+
+                            if (slotResource.isBlank()) {
+                                continue;
+                            }
+
+                            try (Transaction simulatedTransaction = Transaction.openNested(transaction)) {
+                                itemTarget = slot.extract(slotResource, qty, simulatedTransaction);
+                            }
+
+                            if (itemTarget <= 0) {
+                                continue;
+                            }
+
+                            itemTarget = slot.extract(slotResource, qty, transaction);
+                            itemTarget = myself.insertSlot(0, slotResource, itemTarget, transaction);
                             transaction.commit();
-                        }
-                        simStack.shrink((int) moved);
-                        if (simStack.isEmpty()) {
                             return;
                         }
-                        StorageUtil.move(itemHandlerFrom, myself, itemVariant -> true, qty, null);
+                    } else {
+                        ItemVariant slotResource = itemHandlerFrom.iterator().next().getResource();
+                        itemTarget = itemHandlerFrom.extract(slotResource, qty, transaction);
+                        myself.insertSlot(0, slotResource, itemTarget, transaction);
+                        transaction.commit();
                     }
-
-                }));
+                }
             }
         }
     }

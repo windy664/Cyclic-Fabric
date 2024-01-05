@@ -1,17 +1,22 @@
 package net.knsh.cyclic.block.cable.item;
 
-import net.fabricmc.fabric.api.lookup.v1.block.BlockApiLookup;
+import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandler;
+import io.github.fabricators_of_create.porting_lib.transfer.item.SlottedStackStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
-import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
+import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.cable.CableBase;
 import net.knsh.cyclic.block.cable.EnumConnectType;
 import net.knsh.cyclic.block.cable.ShapeCache;
+import net.knsh.cyclic.lookups.CyclicLookup;
+import net.knsh.cyclic.lookups.Lookup;
+import net.knsh.cyclic.lookups.types.ItemHandlerLookup;
 import net.knsh.cyclic.registry.CyclicBlocks;
+import net.knsh.cyclic.registry.CyclicScreens;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -27,33 +32,37 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.Nullable;
 
-public class ItemCableBlock extends CableBase {
-    private final BlockApiLookup<Storage<ItemVariant>, @Nullable Direction> blockApiLookup = ItemStorage.SIDED;
-    public ItemCableBlock(Properties settings) {
-        super(settings.strength(0.5F));
+public class BlockCableItem extends CableBase implements Lookup {
+    public BlockCableItem(Properties properties) {
+        super(properties.strength(0.5F));
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    public void registerClient() {
+        MenuScreens.register(CyclicScreens.ITEM_PIPE, ScreenCableItem::new);
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         return ShapeCache.getOrCreate(state, CableBase::createShape);
     }
 
     @Override
     public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            ItemCableBlockEntity tileentity = (ItemCableBlockEntity) worldIn.getBlockEntity(pos);
+            TileCableItem tileentity = (TileCableItem) worldIn.getBlockEntity(pos);
             if (tileentity != null) {
-                if (tileentity.getItems() != null) {
-                    Containers.dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileentity.getItems().get(0));
+                if (tileentity.filter != null) {
+                    Containers.dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileentity.filter.getStackInSlot(0));
                 }
                 for (Direction dir : Direction.values()) {
-                    Storage<ItemVariant> items = blockApiLookup.find(worldIn, pos.relative(dir), dir.getOpposite());
-                    if (items != null) {
-                        items.forEach((itemVariantStorageView -> {
-                            Containers.dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), itemVariantStorageView.getResource().toStack());
-                        }));
+                    ItemHandlerLookup lookup = CyclicLookup.ITEM_HANDLER_SIDED.find(worldIn, pos, dir);
+                    if (lookup != null) {
+                        SlottedStackStorage items = lookup.getItemHandler();
+                        for (int i = 0; i < items.getSlotCount(); ++i) {
+                            Containers.dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), items.getStackInSlot(i));
+                        }
                     }
                 }
             }
@@ -64,12 +73,12 @@ public class ItemCableBlock extends CableBase {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new ItemCableBlockEntity(pos, state);
+        return new TileCableItem(pos, state);
     }
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-        return createTickerHelper(type, CyclicBlocks.ITEM_PIPE.blockEntity(), world.isClientSide ? ItemCableBlockEntity::clientTick : ItemCableBlockEntity::serverTick);
+        return createTickerHelper(type, CyclicBlocks.ITEM_PIPE.blockEntity(), world.isClientSide ? TileCableItem::clientTick : TileCableItem::serverTick);
     }
 
     @Override
@@ -79,16 +88,17 @@ public class ItemCableBlock extends CableBase {
     }
 
     @Override
-    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+    public void setPlacedBy(Level worldIn, BlockPos pos, BlockState stateIn, LivingEntity placer, ItemStack stack) {
         for (Direction d : Direction.values()) {
-            BlockEntity facingTile = level.getBlockEntity(pos.relative(d));
-            Storage<ItemVariant> cap = facingTile == null ? null : blockApiLookup.find(level, facingTile.getBlockPos(), d.getOpposite());
+            BlockEntity facingTile = worldIn.getBlockEntity(pos.relative(d));
+
+            Storage<ItemVariant> cap = facingTile == null ? null : ItemStorage.SIDED.find(worldIn, pos.relative(d), d.getOpposite());
             if (cap != null) {
-                state = state.setValue(FACING_TO_PROPERTY_MAP.get(d), EnumConnectType.INVENTORY);
-                level.setBlockAndUpdate(pos, state);
+                stateIn = stateIn.setValue(FACING_TO_PROPERTY_MAP.get(d), EnumConnectType.INVENTORY);
+                worldIn.setBlockAndUpdate(pos, stateIn);
             }
         }
-        super.setPlacedBy(level, pos, state, placer, stack);
+        super.setPlacedBy(worldIn, pos, stateIn, placer, stack);
     }
 
     @Override
@@ -99,10 +109,10 @@ public class ItemCableBlock extends CableBase {
             //  updateConnection(world, currentPos, facing, oldProp);
             return stateIn;
         }
-
         if (isItem(stateIn, facing, facingState, world, currentPos, facingPos)) {
             BlockState with = stateIn.setValue(property, EnumConnectType.INVENTORY);
             if (world instanceof Level && world.getBlockState(currentPos).getBlock() == this) {
+                //hack to force {any} -> inventory IF its here
                 ((Level) world).setBlockAndUpdate(currentPos, with);
             }
             return with;
@@ -112,16 +122,14 @@ public class ItemCableBlock extends CableBase {
         }
     }
 
-    private boolean isItem(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor world, BlockPos currentPos, BlockPos facingPos) {
-        if (facing == null) {
-            return false;
-        }
-        BlockEntity neighbor = world.getBlockEntity(facingPos);
-        if (world.isClientSide() || neighbor == null) return false;
-        Storage<ItemVariant> cap = blockApiLookup.find(world.getServer().getLevel(Level.OVERWORLD), neighbor.getBlockPos(), facing.getOpposite());
-        if (cap != null) {
-            return true;
-        }
-        return false;
+    @Override
+    public void registerLookups() {
+        ItemStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> {
+            if (!CableBase.isCableBlocked(blockEntity.getBlockState(), direction)) {
+                return blockEntity.flow.get(direction);
+            }
+            Cyclic.LOGGER.info("GAB!");
+            return null;
+        }, CyclicBlocks.ITEM_PIPE.blockEntity());
     }
 }

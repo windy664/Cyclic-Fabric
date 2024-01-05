@@ -1,6 +1,7 @@
 package net.knsh.cyclic.item.crafting;
 
 import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandler;
+import io.github.fabricators_of_create.porting_lib.transfer.item.SlottedStackStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.knsh.cyclic.Cyclic;
@@ -61,7 +62,7 @@ public class CraftingBagContainer extends ContainerBase implements IContainerCra
         ItemHandlerLookup handler = CyclicItemLookup.ITEM_HANDLER.find(bag, null);
 
         if (handler != null) {
-            ItemStackHandler h = handler.getItemHandler();
+            SlottedStackStorage h = handler.getItemHandler();
             for (int j = 0; j < h.getSlotCount(); j++) {
                 ItemStack inBag = h.getStackInSlot(j);
                 if (!inBag.isEmpty()) {
@@ -79,11 +80,11 @@ public class CraftingBagContainer extends ContainerBase implements IContainerCra
         if (player.level().isClientSide == false) {
             ItemHandlerLookup parentHandler = CyclicItemLookup.ITEM_HANDLER.find(bag, null);
             if (parentHandler != null) {
-                ItemStackHandler handler = parentHandler.getItemHandler();
+                SlottedStackStorage handler = parentHandler.getItemHandler();
                 for (int i = 0; i < 9; i++) {
                     ItemStack crafty = this.craftMatrix.getItem(i);
                     try (Transaction transaction = Transaction.openOuter()) {
-                        if (!handler.getVariantInSlot(i).isBlank()) handler.extractSlot(i, handler.getVariantInSlot(i), 64, transaction);
+                        if (!handler.getStackInSlot(i).isEmpty()) handler.extractSlot(i, handler.getSlot(i).getResource(), 64, transaction);
                         if (!crafty.isEmpty()) handler.insertSlot(i, ItemVariant.of(crafty), crafty.getCount(), transaction);
                         transaction.commit();
                     }

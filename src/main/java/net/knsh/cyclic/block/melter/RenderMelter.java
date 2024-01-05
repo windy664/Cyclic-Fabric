@@ -3,11 +3,8 @@ package net.knsh.cyclic.block.melter;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
-import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandler;
+import io.github.fabricators_of_create.porting_lib.transfer.item.SlottedStackStorage;
 import io.github.fabricators_of_create.porting_lib.util.FluidStack;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
-import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.knsh.cyclic.library.render.type.FluidTankRenderType;
 import net.knsh.cyclic.library.util.RenderBlockUtils;
 import net.knsh.cyclic.lookups.CyclicLookup;
@@ -30,7 +27,7 @@ public class RenderMelter implements BlockEntityRenderer<TileMelter> {
         ItemHandlerLookup lookup = CyclicLookup.ITEM_HANDLER_SIDED.find(tankHere.getLevel(), tankHere.getBlockPos(), Direction.UP);
         var level = tankHere.getLevel();
         if (lookup != null) {
-            ItemStackHandler itemHandler = lookup.getItemHandler();
+            SlottedStackStorage itemHandler = lookup.getItemHandler();
             ItemStack stack = itemHandler.getStackInSlot(0);
             if (!stack.isEmpty()) {
                 matrixStack.pushPose();
