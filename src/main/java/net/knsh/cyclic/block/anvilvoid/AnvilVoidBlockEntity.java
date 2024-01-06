@@ -6,11 +6,8 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.knsh.cyclic.block.BlockEntityCyclic;
-import net.knsh.cyclic.fluid.FluidXpJuiceHolder;
 import net.knsh.cyclic.library.capabilities.FluidTankBase;
 import net.knsh.cyclic.registry.CyclicBlocks;
-import net.knsh.cyclic.registry.CyclicFluids;
-import net.knsh.cyclic.porting.neoforge.FluidFabricToForge;
 import net.knsh.cyclic.library.ImplementedInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
@@ -30,7 +27,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluid;
 import org.jetbrains.annotations.Nullable;
 
 public class AnvilVoidBlockEntity extends BlockEntityCyclic implements ExtendedScreenHandlerFactory, ImplementedInventory {

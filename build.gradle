@@ -90,7 +90,7 @@ dependencies {
 	modApi("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${project.forgeconfig_version}")
 	modApi(include("com.jamieswhiteshirt:reach-entity-attributes:${project.reachentityattributes_version}"))
 	modApi(include("teamreborn:energy:${project.teamreborn_energy}")) { transitive = false }
-	modApi(include("com.github.knownsh:forgeeventapi:${project.forgeeventapi_version}"))
+	//modApi(include("com.github.knownsh:forgeeventapi:${project.forgeeventapi_version}"))
 	include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.2.1")))
 }
 

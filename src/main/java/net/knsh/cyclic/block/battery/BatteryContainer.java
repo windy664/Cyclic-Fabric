@@ -41,7 +41,7 @@ public class BatteryContainer extends ContainerBase {
     }
 
     public int getEnergy() {
-        return (int) tile.getEnergy().getAmount();
+        return (int) tile.getBattery().getAmount();
     }
 
     @Override

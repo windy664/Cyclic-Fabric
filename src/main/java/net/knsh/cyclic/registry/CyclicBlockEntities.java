@@ -11,9 +11,5 @@ public class CyclicBlockEntities {
 
         FluidStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.getStorage(), CyclicBlocks.FLUIDHOPPER.blockEntity());
         FluidStorage.SIDED.registerForBlockEntity(((blockEntity, direction) -> blockEntity.flow.get(direction)), CyclicBlocks.FLUID_PIPE.blockEntity());
-
-        EnergyStorage.SIDED.registerForBlockEntity(((blockEntity, direction) -> blockEntity.getEnergy()), CyclicBlocks.CRAFTER.blockEntity());
-        EnergyStorage.SIDED.registerForBlockEntity(((blockEntity, direction) -> blockEntity.energy), CyclicBlocks.ENERGY_PIPE.blockEntity());
-        EnergyStorage.SIDED.registerForBlockEntity(((blockEntity, direction) -> blockEntity.getEnergy()), CyclicBlocks.GENERATOR_FUEL.blockEntity());
     }
 }

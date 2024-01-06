@@ -7,10 +7,10 @@ import net.knsh.cyclic.block.anvilmagma.AnvilMagmaContainer;
 import net.knsh.cyclic.block.anvilvoid.AnvilVoidContainer;
 import net.knsh.cyclic.block.battery.BatteryContainer;
 import net.knsh.cyclic.block.beaconpotion.BeaconPotionContainer;
-import net.knsh.cyclic.block.cable.fluid.FluidCableContainer;
+import net.knsh.cyclic.block.cable.fluid.ContainerCableFluid;
 import net.knsh.cyclic.block.cable.item.ContainerCableItem;
 import net.knsh.cyclic.block.crafter.CrafterContainer;
-import net.knsh.cyclic.block.generatorfuel.GeneratorFuelContainer;
+import net.knsh.cyclic.block.generatorfuel.ContainerGeneratorFuel;
 import net.knsh.cyclic.block.melter.ContainerMelter;
 import net.knsh.cyclic.gui.ContainerBase;
 import net.knsh.cyclic.item.crafting.CraftingBagContainer;
@@ -23,8 +23,8 @@ import net.minecraft.world.inventory.MenuType;
 public class CyclicScreens {
     public static MenuType<AnvilVoidContainer> ANVIL_VOID = registerScreen("anvil_void",
             new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new AnvilVoidContainer(syncId, inventory, inventory.player.level(), buf.readBlockPos()))));
-    public static MenuType<GeneratorFuelContainer> GENERATOR_FUEL = registerScreen("generator_fuel",
-            new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new GeneratorFuelContainer(syncId, inventory, inventory.player.level(), buf.readBlockPos()))));
+    public static MenuType<ContainerGeneratorFuel> GENERATOR_FUEL = registerScreen("generator_fuel",
+            new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new ContainerGeneratorFuel(syncId, inventory.player.level(), buf.readBlockPos(), inventory, inventory.player))));
     public static MenuType<CrafterContainer> CRAFTER = registerScreen("crafter",
             new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new CrafterContainer(syncId, inventory, inventory.player.level(), buf.readBlockPos()))));
     public static MenuType<BeaconPotionContainer> BEACON = registerScreen("beacon",
@@ -35,8 +35,8 @@ public class CyclicScreens {
             new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new AnvilAutoContainer(syncId, inventory, inventory.player.level(), buf.readBlockPos()))));
     public static MenuType<ContainerCableItem> ITEM_PIPE = registerScreen("item_pipe",
             new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new ContainerCableItem(syncId, inventory.player.level(), buf.readBlockPos(), inventory, inventory.player))));
-    public static MenuType<FluidCableContainer> FLUID_PIPE = registerScreen("fluid_pipe",
-            new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new FluidCableContainer(syncId, inventory, inventory.player.level(), buf.readBlockPos()))));
+    public static MenuType<ContainerCableFluid> FLUID_PIPE = registerScreen("fluid_pipe",
+            new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new ContainerCableFluid(syncId, inventory.player.level(), buf.readBlockPos(), inventory, inventory.player))));
     public static MenuType<BatteryContainer> BATTERY = registerScreen("battery",
             new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new BatteryContainer(syncId, inventory, inventory.player.level(), buf.readBlockPos()))));
     public static MenuType<CraftingBagContainer> CRAFTING_BAG = registerScreen("crafting_bag",

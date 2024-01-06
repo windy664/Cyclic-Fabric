@@ -1,9 +1,11 @@
 package net.knsh.cyclic.block;
 
 import com.google.common.collect.Lists;
+import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
 import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandler;
 import io.github.fabricators_of_create.porting_lib.transfer.item.SlottedStackStorage;
 import io.github.fabricators_of_create.porting_lib.util.FluidStack;
+import net.fabricmc.fabric.api.lookup.v1.block.BlockApiCache;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.SlottedStorage;
@@ -11,15 +13,25 @@ import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleSlotStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
+import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.beaconpotion.BeamParams;
+import net.knsh.cyclic.block.cable.energy.TileCableEnergy;
+import net.knsh.cyclic.library.cap.CustomEnergyStorageUtil;
+import net.knsh.cyclic.library.capabilities.ForgeFluidTankBase;
+import net.knsh.cyclic.library.core.IHasEnergy;
 import net.knsh.cyclic.library.core.IHasFluid;
 import net.knsh.cyclic.library.util.SoundUtil;
+import net.knsh.cyclic.network.CyclicS2C;
+import net.knsh.cyclic.network.PacketIdentifiers;
+import net.knsh.cyclic.network.packets.PacketSyncEnergy;
+import net.knsh.cyclic.util.FluidHelpers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
@@ -32,14 +44,21 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
 import org.jetbrains.annotations.Nullable;
+import team.reborn.energy.api.EnergyStorage;
+import team.reborn.energy.api.EnergyStorageUtil;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-public abstract class BlockEntityCyclic extends BlockEntity implements Container, IHasFluid {
+public abstract class BlockEntityCyclic extends BlockEntity implements Container, IHasFluid, IHasEnergy {
     public static final String NBTINV = "inv";
     public static final String NBTFLUID = "fluid";
     public static final String NBTENERGY = "energy";
     public static final int MENERGY = 64 * 1000;
+    protected BlockApiCache<EnergyStorage, @Nullable Direction> energyCache;
     protected int flowing = 1;
     protected int needsRedstone = 1;
     protected int render = 0;
@@ -70,6 +89,83 @@ public abstract class BlockEntityCyclic extends BlockEntity implements Container
         if (previous != lit) {
             this.level.setBlockAndUpdate(worldPosition, state.setValue(BlockCyclic.LIT, lit));
         }
+    }
+
+    public @Nullable BlockApiCache<EnergyStorage, @Nullable Direction> getEnergyCache() {
+        if (!level.isClientSide()) {
+            if (energyCache == null) {
+                energyCache = BlockApiCache.create(EnergyStorage.SIDED, (ServerLevel) level, worldPosition);
+            }
+            return energyCache;
+        }
+        return null;
+    }
+
+    // kinda scuffed cause it just hooks onto onFinalCommit 🤷
+    protected void syncEnergy() {
+        if (!level.isClientSide && level.getGameTime() % 20 == 0) { //if serverside then
+            EnergyStorage energ = getEnergyCache().find(null);
+            if (energ != null) {
+                CyclicS2C.sendToAllClients(
+                        this.getLevel(),
+                        PacketSyncEnergy.encode(new PacketSyncEnergy(this.getBlockPos(), energ.getAmount())),
+                        PacketIdentifiers.SYNC_ENERGY
+                );
+            }
+        }
+    }
+
+    protected boolean moveEnergy(Direction myFacingDir, int quantity, BlockState blockState, BlockEntity blockEntity) {
+        return moveEnergy(myFacingDir, worldPosition.relative(myFacingDir), quantity, blockState, blockEntity);
+    }
+
+    protected boolean moveEnergy(Direction myFacingDir, BlockPos posTarget, int quantity, BlockState blockState, BlockEntity blockEntity) {
+        if (this.level.isClientSide) {
+            return false; //important to not desync cables
+        }
+        EnergyStorage handlerHere = EnergyStorage.SIDED.find(level, worldPosition, blockState, blockEntity, myFacingDir);
+        if (handlerHere == null || handlerHere.getAmount() == 0) {
+            return false;
+        }
+        if (myFacingDir == null) {
+            myFacingDir = Direction.UP;
+        }
+        Direction themFacingMe = myFacingDir.getOpposite();
+        BlockEntity tileTarget = level.getBlockEntity(posTarget);
+        if (tileTarget == null) {
+            return false;
+        }
+        EnergyStorage handlerOutput = EnergyStorage.SIDED.find(level, posTarget, themFacingMe);
+        if (handlerOutput == null) {
+            return false;
+        }
+        if (handlerHere != null && handlerOutput != null
+                && handlerHere.supportsExtraction() && handlerOutput.supportsInsertion()) {
+            //first simulate
+            long filled = EnergyStorageUtil.move(
+                    handlerHere,
+                    handlerOutput,
+                    quantity,
+                    null
+            );
+
+            if (filled > 0 && tileTarget instanceof TileCableEnergy) {
+                // not so compatible with other fluid systems. itl do i guess
+                TileCableEnergy cable = (TileCableEnergy) tileTarget;
+                cable.updateIncomingEnergyFace(themFacingMe);
+            }
+            return filled > 0;
+        }
+        return false;
+    }
+
+    public void moveFluids(Direction myFacingDir, BlockPos posTarget, int toFlow, ForgeFluidTankBase tank) {
+        // posTarget = pos.offset(myFacingDir);
+        if (tank == null || tank.getSlot(0).getAmount() <= 0) {
+            return;
+        }
+        Direction themFacingMe = myFacingDir.getOpposite();
+        FluidHelpers.tryFillPositionFromTank(level, posTarget, themFacingMe, tank, toFlow);
     }
 
     public boolean moveItems(Direction myFacingDir, int max, SlottedStackStorage handlerHere) {
@@ -239,6 +335,34 @@ public abstract class BlockEntityCyclic extends BlockEntity implements Container
         if (beamParams.lastCheckY >= surfaceHeight) {
             beamParams.lastCheckY = level.getMinBuildHeight() - 1;
             beamParams.beamSections = beamParams.checkingBeamSections;
+        }
+    }
+
+    public void exportEnergyAllSides() {
+        List<Integer> rawList = IntStream.rangeClosed(0, 5).boxed().collect(Collectors.toList());
+        Collections.shuffle(rawList);
+        for (Integer i : rawList) {
+            Direction exportToSide = Direction.values()[i];
+            moveEnergy(exportToSide, MENERGY / 2, this.getBlockState(), this);
+        }
+    }
+
+    @Override
+    public long getEnergy() {
+        EnergyStorage energyLookup = getEnergyCache().find(null);
+        return energyLookup != null ? energyLookup.getAmount() : 0;
+    }
+
+    public long getCrafterEnergy() {
+        return getEnergy();
+    }
+
+    @Override
+    public void setEnergy(long value) {
+        var localEnergyCache = getEnergyCache();
+        EnergyStorage energ = localEnergyCache != null ? localEnergyCache.find(null) : EnergyStorage.SIDED.find(level, worldPosition, null);
+        if (energ != null) {
+            CustomEnergyStorageUtil.setEnergy(value, energ);
         }
     }
 

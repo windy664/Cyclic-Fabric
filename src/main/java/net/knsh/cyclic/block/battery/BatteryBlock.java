@@ -48,19 +48,19 @@ public class BatteryBlock extends BlockCyclic {
         super.playerDestroy(level, player, pos, state, blockEntity, tool);
         ItemStack newStackBattery = new ItemStack(this);
         if (blockEntity instanceof BatteryBlockEntity battery) {
-            EnergyStorage newStackEnergy = CyclicItemLookup.BATTERY_ITEM.find(newStackBattery, null).getEnergy();
+            EnergyStorage newStackEnergy = CyclicItemLookup.BATTERY_ITEM.find(newStackBattery, null).getBattery();
             if (newStackEnergy instanceof BatteryImplementation) {
-                ((BatteryImplementation) newStackEnergy).setEnergy(battery.getEnergy().getAmount());
+                ((BatteryImplementation) newStackEnergy).setEnergy(battery.getBattery().getAmount());
             } else {
                 try (Transaction transaction = Transaction.openOuter()) {
-                    newStackEnergy.insert(battery.getEnergy().getAmount(), transaction);
+                    newStackEnergy.insert(battery.getBattery().getAmount(), transaction);
                     transaction.commit();
                 }
             }
 
-            if (battery.getEnergy().getAmount() > 0) {
-                newStackBattery.getOrCreateTag().putLong(BatteryBlockItem.ENERGYTT, battery.getEnergy().getAmount());
-                newStackBattery.getOrCreateTag().putLong(BatteryBlockItem.ENERGYTTMAX, battery.getEnergy().getCapacity());
+            if (battery.getBattery().getAmount() > 0) {
+                newStackBattery.getOrCreateTag().putLong(BatteryBlockItem.ENERGYTT, battery.getBattery().getAmount());
+                newStackBattery.getOrCreateTag().putLong(BatteryBlockItem.ENERGYTTMAX, battery.getBattery().getCapacity());
             }
         }
     }
@@ -80,14 +80,14 @@ public class BatteryBlock extends BlockCyclic {
     @Override
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         long current = 0;
-        EnergyStorage storage = CyclicItemLookup.BATTERY_ITEM.find(stack, null).getEnergy();
+        EnergyStorage storage = CyclicItemLookup.BATTERY_ITEM.find(stack, null).getBattery();
         if (stack.hasTag() && stack.getTag().contains(BatteryImplementation.NBTENERGYS)) {
             current = stack.getTag().getLong(BatteryImplementation.NBTENERGYS);
         } else if (storage != null) {
             current = storage.getAmount();
         }
         BatteryBlockEntity container = (BatteryBlockEntity) level.getBlockEntity(pos);
-        BatteryImplementation storageTile = container.getEnergy();
+        BatteryImplementation storageTile = container.getBattery();
         if (storageTile != null) {
             storageTile.setEnergy(current);
         }

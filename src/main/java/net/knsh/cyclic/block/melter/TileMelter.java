@@ -49,6 +49,7 @@ public class TileMelter extends BlockEntityCyclic implements ExtendedScreenHandl
         @Override
         protected void onFinalCommit() {
             TileMelter.this.setChanged();
+            TileMelter.this.syncEnergy();
         }
 
         @Override

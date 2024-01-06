@@ -7,7 +7,7 @@ import team.reborn.energy.api.EnergyStorage;
 public interface BatteryImplementation extends EnergyStorage {
     String NBTENERGYS = "energy";
 
-    BatteryImplementation getEnergy();
+    BatteryImplementation getBattery();
 
     default void setEnergy(long energyIn) {
         if (energyIn < 0) {
@@ -17,7 +17,7 @@ public interface BatteryImplementation extends EnergyStorage {
             energyIn = getAmount();
         }
         try (Transaction transaction = Transaction.openOuter()) {
-            this.getEnergy().insert(energyIn, transaction);
+            this.getBattery().insert(energyIn, transaction);
             transaction.commit();
         }
     }

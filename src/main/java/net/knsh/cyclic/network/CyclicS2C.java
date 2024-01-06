@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.knsh.cyclic.library.core.IHasFluid;
+import net.knsh.cyclic.network.packets.PacketSyncEnergy;
 import net.knsh.cyclic.network.packets.PacketSyncFluid;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -16,10 +17,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 public class CyclicS2C {
     public static void register() {
         ClientPlayNetworking.registerGlobalReceiver(PacketIdentifiers.SYNC_FLUID, PacketSyncFluid::handle);
+        ClientPlayNetworking.registerGlobalReceiver(PacketIdentifiers.SYNC_ENERGY, PacketSyncEnergy::handle);
 
-        ClientPlayNetworking.registerGlobalReceiver(PacketIdentifiers.FLUID_DATA, (client, handler, buf, responseSender) -> {
-
-        });
+        ClientPlayNetworking.registerGlobalReceiver(PacketIdentifiers.FLUID_DATA, (client, handler, buf, responseSender) -> {});
     }
 
     public static void sendToAllClients(Level level, FriendlyByteBuf buf, ResourceLocation packetId) {

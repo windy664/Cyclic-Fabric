@@ -26,7 +26,7 @@ public class BatteryBlockItem extends BlockItem implements BatteryImplementation
 
     @Override
     public boolean isBarVisible(ItemStack stack) {
-        EnergyStorage energy = CyclicItemLookup.BATTERY_ITEM.find(stack, null).getEnergy();
+        EnergyStorage energy = CyclicItemLookup.BATTERY_ITEM.find(stack, null).getBattery();
         return energy != null && energy.getAmount() > 0;
     }
 
@@ -34,7 +34,7 @@ public class BatteryBlockItem extends BlockItem implements BatteryImplementation
     public int getBarWidth(ItemStack stack) {
         float current = 0;
         float max = 0;
-        EnergyStorage energy = CyclicItemLookup.BATTERY_ITEM.find(stack, null).getEnergy();
+        EnergyStorage energy = CyclicItemLookup.BATTERY_ITEM.find(stack, null).getBattery();
         if (energy != null) {
             current = energy.getAmount();
             max = energy.getCapacity();
@@ -54,7 +54,7 @@ public class BatteryBlockItem extends BlockItem implements BatteryImplementation
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
         long current = 0;
         long energyttmax = 0;
-        EnergyStorage storage = CyclicItemLookup.BATTERY_ITEM.find(stack, null).getEnergy();
+        EnergyStorage storage = CyclicItemLookup.BATTERY_ITEM.find(stack, null).getBattery();
         if (storage != null) {
             current = storage.getAmount();
             energyttmax = storage.getCapacity();
@@ -67,12 +67,6 @@ public class BatteryBlockItem extends BlockItem implements BatteryImplementation
             tooltipComponents.add(Component.translatable(current + "/" + energyttmax).withStyle(ChatFormatting.BLUE));
         }
         super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
-    }
-
-
-    @Override
-    public BatteryImplementation getEnergy() {
-        return this;
     }
 
     @Override
@@ -93,5 +87,10 @@ public class BatteryBlockItem extends BlockItem implements BatteryImplementation
     @Override
     public long getCapacity() {
         return energyCap.energy.getCapacity();
+    }
+
+    @Override
+    public BatteryImplementation getBattery() {
+        return this;
     }
 }

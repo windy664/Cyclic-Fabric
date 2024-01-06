@@ -42,7 +42,7 @@ public class CrafterScreen extends ScreenBase<CrafterContainer> {
         super.renderBackground(ms);
         super.render(ms, mouseX, mouseY, partialTicks);
         this.renderTooltip(ms, mouseX, mouseY);
-        energy.renderHoveredToolTip(ms, mouseX, mouseY, (int) menu.tile.getEnergy().amount);
+        //energy.renderHoveredToolTip(ms, mouseX, mouseY, (int) menu.tile.getCrafterEnergy().amount);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class CrafterScreen extends ScreenBase<CrafterContainer> {
     @Override
     protected void renderBg(GuiGraphics ms, float partialTicks, int mouseX, int mouseY) {
         this.drawBackground(ms, CyclicTextures.INVENTORY_LARGE_PLAIN);
-        energy.draw(ms, menu.tile.getEnergy().amount);
+        //energy.draw(ms, menu.tile.getCrafterEnergy().amo);
         for (int rowPos = 0; rowPos < CrafterBlockEntity.IO_NUM_ROWS; rowPos++) {
             for (int colPos = 0; colPos < CrafterBlockEntity.IO_NUM_COLS; colPos++) {
                 this.drawSlot(ms, CrafterContainer.INPUT_START_X - 1 + colPos * Const.SQ,

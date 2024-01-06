@@ -1,7 +1,7 @@
 package net.knsh.cyclic.library.core;
 
 public interface IHasEnergy {
-    int getEnergy();
+    long getEnergy();
 
-    void setEnergy(int value);
+    void setEnergy(long value);
 }

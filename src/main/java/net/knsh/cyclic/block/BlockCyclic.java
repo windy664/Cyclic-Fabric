@@ -3,11 +3,13 @@ package net.knsh.cyclic.block;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.lookup.v1.block.BlockApiLookup;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.TransferVariant;
 import net.knsh.cyclic.library.ImplementedInventory;
+import net.knsh.cyclic.lookups.Lookup;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -31,10 +33,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
+import team.reborn.energy.api.EnergyStorage;
 
 import java.util.List;
 
-public class BlockCyclic extends BaseEntityBlock implements EntityBlock {
+public class BlockCyclic extends BaseEntityBlock implements EntityBlock, Lookup {
     public static final BooleanProperty LIT = BooleanProperty.create("lit");
     private boolean hasGui = false;
     private boolean hasTooltip = true;
@@ -124,6 +127,14 @@ public class BlockCyclic extends BaseEntityBlock implements EntityBlock {
         return hasCapabilityDir(facing, world, facingPos, ItemStorage.SIDED);
     }
 
+    public static boolean isFluid(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor world, BlockPos currentPos, BlockPos facingPos) {
+        return hasCapabilityDir(facing, world, facingPos, FluidStorage.SIDED);
+    }
+
+    public static boolean isEnergy(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor world, BlockPos currentPos, BlockPos facingPos) {
+        return hasCapabilityDir(facing, world, facingPos, EnergyStorage.SIDED);
+    }
+
     private static boolean hasCapabilityDir(Direction facing, LevelAccessor world, BlockPos facingPos, BlockApiLookup<?, @Nullable Direction> cap) {
         if (facing == null) {
             return false;
@@ -134,4 +145,7 @@ public class BlockCyclic extends BaseEntityBlock implements EntityBlock {
         }
         return false;
     }
+
+    @Override
+    public void registerLookups() {}
 }

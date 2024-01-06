@@ -1,11 +1,9 @@
 package net.knsh.cyclic.block.cable.energy;
 
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
-import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.knsh.cyclic.block.cable.CableBase;
 import net.knsh.cyclic.block.cable.EnumConnectType;
 import net.knsh.cyclic.block.cable.ShapeCache;
+import net.knsh.cyclic.lookups.Lookup;
 import net.knsh.cyclic.registry.CyclicBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -26,9 +24,9 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import team.reborn.energy.api.EnergyStorage;
 
-public class EnergyCableBlock extends CableBase {
-    public EnergyCableBlock(Properties settings) {
-        super(settings.strength(0.5F));
+public class BlockCableEnergy extends CableBase {
+    public BlockCableEnergy(Properties properties) {
+        super(properties.strength(0.5F));
     }
 
     @Override
@@ -37,14 +35,13 @@ public class EnergyCableBlock extends CableBase {
     }
 
     @Override
-    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new EnergyCableBlockEntity(pos, state);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new TileCableEnergy(pos, state);
     }
 
-    @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return createTickerHelper(blockEntityType, CyclicBlocks.ENERGY_PIPE.blockEntity(), level.isClientSide ? EnergyCableBlockEntity::clientTick : EnergyCableBlockEntity::serverTick);
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
+        return createTickerHelper(type, CyclicBlocks.ENERGY_PIPE.blockEntity(), world.isClientSide ? TileCableEnergy::clientTick : TileCableEnergy::serverTick);
     }
 
     @Override
@@ -54,16 +51,16 @@ public class EnergyCableBlock extends CableBase {
     }
 
     @Override
-    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+    public void setPlacedBy(Level worldIn, BlockPos pos, BlockState stateIn, LivingEntity placer, ItemStack stack) {
         for (Direction d : Direction.values()) {
-            BlockEntity facingTile = level.getBlockEntity(pos.relative(d));
-            EnergyStorage energy = facingTile == null ? null : EnergyStorage.SIDED.find(level, facingTile.getBlockPos(), d.getOpposite());
+            BlockEntity facingTile = worldIn.getBlockEntity(pos.relative(d));
+            EnergyStorage energy = facingTile == null ? null : EnergyStorage.SIDED.find(worldIn, pos.relative(d), d.getOpposite());
             if (energy != null) {
-                state = state.setValue(FACING_TO_PROPERTY_MAP.get(d), EnumConnectType.INVENTORY);
-                level.setBlockAndUpdate(pos, state);
+                stateIn = stateIn.setValue(FACING_TO_PROPERTY_MAP.get(d), EnumConnectType.INVENTORY);
+                worldIn.setBlockAndUpdate(pos, stateIn);
             }
         }
-        super.setPlacedBy(level, pos, state, placer, stack);
+        super.setPlacedBy(worldIn, pos, stateIn, placer, stack);
     }
 
     @Override
@@ -87,16 +84,13 @@ public class EnergyCableBlock extends CableBase {
         }
     }
 
-    private boolean isEnergy(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor world, BlockPos currentPos, BlockPos facingPos) {
-        if (facing == null) {
-            return false;
-        }
-        BlockEntity neighbor = world.getBlockEntity(facingPos);
-        if (world.isClientSide() || neighbor == null) return false;
-        EnergyStorage cap = EnergyStorage.SIDED.find(world.getServer().getLevel(Level.OVERWORLD), neighbor.getBlockPos(), facing.getOpposite());
-        if (cap != null) {
-            return true;
-        }
-        return false;
+    @Override
+    public void registerLookups() {
+        EnergyStorage.SIDED.registerForBlockEntity(((blockEntity, direction) -> {
+            if (!CableBase.isCableBlocked(blockEntity.getBlockState(), direction)) {
+                return blockEntity.energy;
+            }
+            return null;
+        }), CyclicBlocks.ENERGY_PIPE.blockEntity());
     }
 }

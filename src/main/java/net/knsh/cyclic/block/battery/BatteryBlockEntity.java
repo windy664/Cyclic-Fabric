@@ -85,7 +85,7 @@ public class BatteryBlockEntity extends BlockEntityCyclic implements ExtendedScr
         if (batteryImplementation == null) {
             return;
         }
-        EnergyStorage itemStackStorage = batteryImplementation.getEnergy();
+        EnergyStorage itemStackStorage = batteryImplementation.getBattery();
         if (itemStackStorage != null) {
             try (Transaction transaction = Transaction.openOuter()) {
                 long extracted = energy.extract(SLOT_CHARGING_RATE.get(), transaction);
@@ -159,7 +159,7 @@ public class BatteryBlockEntity extends BlockEntityCyclic implements ExtendedScr
                 }
                 BlockState targetBlockState = level.getBlockState(getBlockPos().relative(exportToSide));
                 EnergyStorageUtil.move(
-                        getEnergy(),
+                        getBattery(),
                         target,
                         MAX / 4,
                         null
@@ -255,7 +255,7 @@ public class BatteryBlockEntity extends BlockEntityCyclic implements ExtendedScr
     }
 
     @Override
-    public BatteryImplementation getEnergy() {
+    public BatteryImplementation getBattery() {
         return this;
     }
 

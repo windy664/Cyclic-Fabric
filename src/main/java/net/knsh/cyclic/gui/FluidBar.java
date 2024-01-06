@@ -3,10 +3,9 @@ package net.knsh.cyclic.gui;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.fabricators_of_create.porting_lib.util.FluidStack;
 import net.knsh.cyclic.Cyclic;
-import net.knsh.cyclic.library.capabilities.FluidTankBase;
 import net.knsh.cyclic.library.capabilities.ForgeFluidTankBase;
 import net.knsh.cyclic.library.render.FluidRenderMap;
-import net.knsh.cyclic.porting.neoforge.FluidFabricToForge;
+import net.knsh.cyclic.util.FabricHelper;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -112,7 +111,7 @@ public class FluidBar {
     public void renderTooltip(GuiGraphics gg, int mouseX, int mouseY, FluidStack current) {
         String tt = emtpyTooltip;
         if (current.getAmount() > 0) {
-            tt = FluidFabricToForge.toMiliBuckets(current.getAmount()) + "/" + FluidFabricToForge.toMiliBuckets(getCapacity())  + " " + current.getDisplayName().getString();;
+            tt = FabricHelper.toMiliBuckets(current.getAmount()) + "/" + FabricHelper.toMiliBuckets(getCapacity())  + " " + current.getDisplayName().getString();;
         }
         List<Component> list = new ArrayList<>();
         list.add(Component.translatable(tt));

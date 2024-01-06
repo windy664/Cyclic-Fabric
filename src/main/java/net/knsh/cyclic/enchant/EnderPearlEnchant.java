@@ -13,9 +13,6 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.NeoForge;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 public class EnderPearlEnchant extends EnchantmentCyclic {
     public static final int COOLDOWN = 6 * 20;
@@ -26,7 +23,6 @@ public class EnderPearlEnchant extends EnchantmentCyclic {
 
     public EnderPearlEnchant() {
         super(Enchantment.Rarity.RARE, EnchantmentCategory.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
-        NeoForge.EVENT_BUS.register(this);
     }
 
     @Override
@@ -54,6 +50,7 @@ public class EnderPearlEnchant extends EnchantmentCyclic {
         return 3;
     }
 
+    /*
     @SubscribeEvent
     public void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
         if (!isEnabled()) {
@@ -79,5 +76,5 @@ public class EnderPearlEnchant extends EnchantmentCyclic {
                 event.setCanceled(true);
             }
         }
-    }
+    }*/
 }

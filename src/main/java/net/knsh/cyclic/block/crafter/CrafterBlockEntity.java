@@ -245,9 +245,9 @@ public class CrafterBlockEntity extends BlockEntityCyclic implements ExtendedScr
 
     private final TransientCraftingContainer craftMatrix = new TransientCraftingContainer(new FakeContainer(MenuType.CRAFTING, 18291238), 3, 3);
 
-    public SimpleEnergyStorage getEnergy() {
-        return energy;
-    }
+    //public SimpleEnergyStorage getCrafterEnergy() {
+    //    return energy;
+    //}
 
     @Override
     public void load(CompoundTag tag) {

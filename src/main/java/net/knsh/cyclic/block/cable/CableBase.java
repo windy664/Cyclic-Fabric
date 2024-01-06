@@ -137,8 +137,7 @@ public class CableBase extends BlockCyclic implements SimpleWaterloggedBlock {
                     break;
                 }
             }
-            //if (hasExtractor && (this == CyclicBlocks.ITEM_PIPE.get() || this == CyclicBlocks.FLUID_PIPE.get())) {
-            if (hasExtractor && (this == CyclicBlocks.ITEM_PIPE.block())) {
+            if (hasExtractor && (this == CyclicBlocks.ITEM_PIPE.block() || this == CyclicBlocks.FLUID_PIPE.block())) {
                 //if has extractor
                 if (!world.isClientSide) {
                     BlockEntity tileEntity = world.getBlockEntity(pos);
@@ -206,13 +205,12 @@ public class CableBase extends BlockCyclic implements SimpleWaterloggedBlock {
                     case BLOCKED:
                         newState = state.setValue(prop, EnumConnectType.NONE);
                         updatePost = true;
-                        break;
+                    break;
                     default: //anything to blocked
                         newState = state.setValue(prop, EnumConnectType.BLOCKED);
-                        break;
+                    break;
                 }
-            }
-            else {
+            } else {
                 switch (status) {
                     case BLOCKED:
                         newState = state.setValue(prop, EnumConnectType.NONE);
@@ -246,6 +244,10 @@ public class CableBase extends BlockCyclic implements SimpleWaterloggedBlock {
             return false;
         }
         EnumProperty<EnumConnectType> property = CableBase.FACING_TO_PROPERTY_MAP.get(side);
+        if (!blockState.getValue(property).isUnBlocked()) {
+            Cyclic.LOGGER.info("VICOTRY!");
+        }
+
         return blockState.getBlock() instanceof CableBase
                 && blockState.hasProperty(property)
                 && !blockState.getValue(property).isUnBlocked();

@@ -3,6 +3,7 @@ package net.knsh.cyclic.library.cap;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.nbt.CompoundTag;
 import team.reborn.energy.api.EnergyStorage;
+import team.reborn.energy.api.EnergyStorageUtil;
 import team.reborn.energy.api.base.SimpleEnergyStorage;
 
 public class CustomEnergyStorageUtil {
@@ -16,7 +17,11 @@ public class CustomEnergyStorageUtil {
             energy = storage.getAmount();
         }
         try (Transaction transaction = Transaction.openOuter()) {
-            storage.insert(energy - storage.getAmount(), transaction);
+            if (storage.getAmount() > energy) {
+                storage.extract(storage.getAmount() - energy, transaction);
+            } else {
+                storage.insert(energy - storage.getAmount(), transaction);
+            }
             transaction.commit();
         }
     }

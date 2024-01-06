@@ -18,9 +18,6 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.NeoForge;
-import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -33,7 +30,6 @@ public class BeheadingEnchant extends EnchantmentCyclic {
 
     public BeheadingEnchant() {
         super(Enchantment.Rarity.VERY_RARE, EnchantmentCategory.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
-        NeoForge.EVENT_BUS.register(this);
     }
 
     @Override
@@ -65,6 +61,7 @@ public class BeheadingEnchant extends EnchantmentCyclic {
         return PERCDROP.get() + (level - 1) * PERCPERLEVEL.get();
     }
 
+    /*
     @SubscribeEvent
     public void onEntityKill(LivingDeathEvent event) {
         if (!isEnabled()) {
@@ -119,5 +116,5 @@ public class BeheadingEnchant extends EnchantmentCyclic {
                 ItemStackUtil.drop(world, pos, TagDataUtil.buildNamedPlayerSkull(mappedBeheading.get(key)));
             }
         }
-    }
+    }*/
 }

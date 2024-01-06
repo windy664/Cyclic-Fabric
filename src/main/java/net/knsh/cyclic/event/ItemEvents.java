@@ -1,7 +1,7 @@
 package net.knsh.cyclic.event;
 
-import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
+import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.cable.CableBase;
 import net.knsh.cyclic.enchant.TravellerEnchant;
 import net.knsh.cyclic.event.fabric.BeforeDamageCallback;
@@ -19,6 +19,7 @@ import net.minecraft.world.item.ElytraItem;
 public class ItemEvents {
     public static void register() {
         UseBlockCallback.EVENT.register(((player, world, hand, hitResult) -> {
+            Cyclic.LOGGER.info(String.valueOf(world.isClientSide));
             if (player.getItemInHand(hand).isEmpty()) return InteractionResult.PASS;
 
             //TODO scaffolding
@@ -28,7 +29,6 @@ public class ItemEvents {
                     player.swing(hand);
                     CableBase.crouchClick(world.getBlockState(hitResult.getBlockPos()), world, hitResult.getBlockPos(), player, hitResult);
                     SoundUtil.playSound(player, CyclicSounds.THUNK, 0.2F, 1F);
-                    return InteractionResult.CONSUME;
                 }
             }
             return InteractionResult.PASS;

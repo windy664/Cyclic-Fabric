@@ -9,11 +9,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.neoforged.bus.api.EventPriority;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.NeoForge;
-import net.neoforged.neoforge.event.entity.living.LivingChangeTargetEvent;
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
 public class BeekeeperEnchant extends EnchantmentCyclic {
     public static final String ID = "beekeeper";
@@ -21,7 +16,6 @@ public class BeekeeperEnchant extends EnchantmentCyclic {
 
     public BeekeeperEnchant() {
         super(Enchantment.Rarity.VERY_RARE, EnchantmentCategory.ARMOR_HEAD, new EquipmentSlot[]{EquipmentSlot.HEAD});
-        NeoForge.EVENT_BUS.register(this);
     }
 
     @Override
@@ -49,6 +43,7 @@ public class BeekeeperEnchant extends EnchantmentCyclic {
         return 2;
     }
 
+    /*
     @SubscribeEvent
     public void onEntityTick(LivingChangeTargetEvent event) {
         if (!isEnabled()) {
@@ -86,5 +81,5 @@ public class BeekeeperEnchant extends EnchantmentCyclic {
                 }
             }
         }
-    }
+    }*/
 }

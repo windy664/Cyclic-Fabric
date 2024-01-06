@@ -2,10 +2,17 @@ package net.knsh.cyclic.util;
 
 import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
 import io.github.fabricators_of_create.porting_lib.util.FluidStack;
+import io.github.fabricators_of_create.porting_lib.util.FluidUtil;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
+import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
+import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
+import net.knsh.cyclic.Cyclic;
+import net.knsh.cyclic.fluid.*;
 import net.knsh.cyclic.library.capabilities.FluidAction;
 import net.knsh.cyclic.library.capabilities.ForgeFluidTankBase;
 import net.knsh.cyclic.library.data.Model3D;
@@ -32,37 +39,36 @@ public class FluidHelpers {
     public static final FluidRenderMap<Int2ObjectMap<Model3D>> CACHED_FLUIDS = new FluidRenderMap<>();
     public static final int STAGES = 1400;
 
-    /*
     public static int getColorFromFluid(FluidStack fstack) {
         if (fstack != null && fstack.getFluid() != null) {
             //first check mine
-            if (fstack.getFluid() == FluidBiomassHolder.STILL.get()) {
+            if (fstack.getFluid() == FluidBiomassHolder.STILL) {
                 return FluidBiomassHolder.COLOR;
             }
-            else if (fstack.getFluid() == FluidHoneyHolder.STILL.get()) {
+            else if (fstack.getFluid() == FluidHoneyHolder.STILL) {
                 return FluidHoneyHolder.COLOR;
             }
-            else if (fstack.getFluid() == FluidMagmaHolder.STILL.get()) {
+            else if (fstack.getFluid() == FluidMagmaHolder.STILL) {
                 return FluidMagmaHolder.COLOR;
             }
-            else if (fstack.getFluid() == FluidSlimeHolder.STILL.get()) {
+            else if (fstack.getFluid() == FluidSlimeHolder.STILL) {
                 return FluidSlimeHolder.COLOR;
             }
-            else if (fstack.getFluid() == FluidXpJuiceHolder.STILL.get()) {
+            else if (fstack.getFluid() == FluidXpJuiceHolder.STILL) {
                 return FluidXpJuiceHolder.COLOR;
             } //now check if the fluid has a color
             //      else if (fstack.getFluid().getAttributes().getColor() > 0) {
             //        return fstack.getFluid().getAttributes().getColor();
             //      }
-            else if (fstack.getFluid() == ForgeMod.MILK.get()) {
-                return COLOUR_MILK;
-            }
+           // else if (fstack.getFluid() == ForgeMod.MILK.get()) {
+            //    return COLOUR_MILK;
+            //}
             else if (fstack.getFluid() == Fluids.LAVA) {
                 return COLOUR_LAVA;
             }
         }
         return COLOUR_DEFAULT;
-    }*/
+    }
 
     public static void extractSourceWaterloggedCauldron(Level level, BlockPos posTarget, ForgeFluidTankBase tank) {
         if (tank == null) {
@@ -156,47 +162,41 @@ public class FluidHelpers {
         return targetScale;
     }
 
-    /*
-    public static FluidTank getTank(Level world, BlockPos pos, Direction side) {
+
+    public static Storage<FluidVariant> getTank(Level world, BlockPos pos, Direction side) {
         BlockEntity tile = world.getBlockEntity(pos);
         if (tile == null) {
             return null;
         }
-        return tile.getCapability(ForgeCapabilities.FLUID_HANDLER, side).orElse(null);
-    }*/
+        return FluidStorage.SIDED.find(world, pos, side);
+    }
 
-    /*
-    public static boolean tryFillPositionFromTank(Level world, BlockPos posSide, Direction sideOpp, IFluidHandler tankFrom, final int amount) {
+
+    public static boolean tryFillPositionFromTank(Level world, BlockPos posSide, Direction sideOpp, Storage<FluidVariant> tankFrom, final int amount) {
         if (tankFrom == null || amount <= 0) {
             return false;
         }
         try {
-            IFluidHandler fluidTo = FluidUtil.getFluidHandler(world, posSide, sideOpp).orElse(null);
+            Storage<FluidVariant> fluidTo = FluidStorage.SIDED.find(world, posSide, sideOpp);
             if (fluidTo == null) {
                 return false;
             }
-            FluidStack toBeDrained = tankFrom.drain(amount, FluidAction.SIMULATE);
-            if (toBeDrained == null || toBeDrained.isEmpty()) {
-                return false;
-            }
-            final int filledAmount = fluidTo.fill(toBeDrained, FluidAction.EXECUTE);
-            if (filledAmount <= 0) {
-                return false;
-            }
-            final FluidStack drained = tankFrom.drain(filledAmount, FluidAction.EXECUTE);
-            final int drainedAmount = drained.getAmount();
-            //sanity check
-            if (filledAmount != drainedAmount) {
-                ModCyclic.LOGGER.error("Imbalance filling fluids, filled " + filledAmount + " drained " + drainedAmount);
-            }
-            return true;
+
+            long result = StorageUtil.move(
+                    tankFrom,
+                    fluidTo,
+                    fluidVariant -> true,
+                    amount,
+                    null
+            );
+            return result <= 0;
         }
         catch (Exception e) {
-            ModCyclic.LOGGER.error("A fluid tank had an issue when we tried to fill", e);
+            Cyclic.LOGGER.error("A fluid tank had an issue when we tried to fill", e);
             //charset crashes here i guess
             //https://github.com/PrinceOfAmber/Cyclic/issues/605
             // https://github.com/PrinceOfAmber/Cyclic/issues/605https://pastebin.com/YVtMYsF6
             return false;
         }
-    }*/
+    }
 }
