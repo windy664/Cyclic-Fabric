@@ -15,6 +15,7 @@ import net.knsh.cyclic.block.melter.ContainerMelter;
 import net.knsh.cyclic.gui.ContainerBase;
 import net.knsh.cyclic.item.crafting.CraftingBagContainer;
 import net.knsh.cyclic.item.crafting.simple.CraftingStickContainer;
+import net.knsh.cyclic.item.datacard.filter.ContainerFilterCard;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -45,6 +46,8 @@ public class CyclicScreens {
             new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new CraftingStickContainer(syncId, inventory, inventory.player, buf.readInt()))));
     public static MenuType<ContainerMelter> MELTER = registerScreen("melter",
             new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new ContainerMelter(syncId, inventory.player.level(), buf.readBlockPos(), inventory, inventory.player))));
+    public static MenuType<ContainerFilterCard> FILTER_DATA = registerScreen("filter_data",
+            new ExtendedScreenHandlerType(((syncId, inventory, buf) -> new ContainerFilterCard(syncId, inventory, inventory.player))));
 
     private static <T extends ContainerBase> MenuType<T> registerScreen(String id, ExtendedScreenHandlerType factory) {
         return Registry.register(BuiltInRegistries.MENU, new ResourceLocation(Cyclic.MOD_ID, id), factory);

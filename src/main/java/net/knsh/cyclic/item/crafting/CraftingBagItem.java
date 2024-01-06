@@ -2,8 +2,11 @@ package net.knsh.cyclic.item.crafting;
 
 import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandler;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.knsh.cyclic.lookups.CyclicItemLookup;
+import net.knsh.cyclic.lookups.Lookup;
 import net.knsh.cyclic.lookups.types.ItemHandlerLookup;
 import net.knsh.cyclic.item.ItemCyclic;
+import net.knsh.cyclic.registry.CyclicItems;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.MenuProvider;
@@ -11,14 +14,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class CraftingBagItem extends ItemCyclic implements ItemHandlerLookup {
+public class CraftingBagItem extends ItemCyclic implements Lookup {
     private final int slots = 9;
-    private final ItemStackHandler inventory = new ItemStackHandler(slots) {
-        @Override
-        public boolean isItemValid(int slot, ItemVariant stack) {
-            return !(stack.getItem() instanceof CraftingBagItem) && super.isItemValid(slot, stack);
-        }
-    };
 
     public CraftingBagItem(Properties properties) {
         super(properties);
@@ -35,7 +32,14 @@ public class CraftingBagItem extends ItemCyclic implements ItemHandlerLookup {
     }
 
     @Override
-    public ItemStackHandler getItemHandler() {
-        return inventory;
+    public void registerLookups() {
+        ItemStackHandler inventory = new ItemStackHandler(slots) {
+            @Override
+            public boolean isItemValid(int slot, ItemVariant stack) {
+                return !(stack.getItem() instanceof CraftingBagItem) && super.isItemValid(slot, stack);
+            }
+        };
+
+        CyclicItemLookup.ITEM_HANDLER.registerForItems(((itemStack, context) -> getInventoryFromTag(itemStack, inventory)), CyclicItems.CRAFTING_BAG);
     }
 }

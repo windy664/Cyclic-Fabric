@@ -19,7 +19,6 @@ import net.minecraft.world.item.ElytraItem;
 public class ItemEvents {
     public static void register() {
         UseBlockCallback.EVENT.register(((player, world, hand, hitResult) -> {
-            Cyclic.LOGGER.info(String.valueOf(world.isClientSide));
             if (player.getItemInHand(hand).isEmpty()) return InteractionResult.PASS;
 
             //TODO scaffolding

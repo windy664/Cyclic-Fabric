@@ -11,5 +11,6 @@ public class CyclicClient implements ClientModInitializer {
     public void onInitializeClient() {
         ClientRegistry.register();
         CyclicS2C.register();
+        ClientRenderer.register();
     }
 }

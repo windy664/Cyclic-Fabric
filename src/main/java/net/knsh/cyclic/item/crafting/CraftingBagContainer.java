@@ -5,6 +5,7 @@ import io.github.fabricators_of_create.porting_lib.transfer.item.SlottedStackSto
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.knsh.cyclic.Cyclic;
+import net.knsh.cyclic.item.ItemCyclic;
 import net.knsh.cyclic.lookups.CyclicItemLookup;
 import net.knsh.cyclic.lookups.types.ItemHandlerLookup;
 import net.knsh.cyclic.data.IContainerCraftingAction;
@@ -47,10 +48,16 @@ public class CraftingBagContainer extends ContainerBase implements IContainerCra
         if (bag.isEmpty()) {
             this.bag = super.findBag(playerInventory, CyclicItems.CRAFTING_BAG);
         }
+        ItemStackHandler inventory = ItemCyclic.getInventoryFromTag(bag, new ItemStackHandler(9));
         //grid
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 addSlot(new Slot(craftMatrix, j + i * 3, 30 + j * 18, 17 + i * 18) {
+                    @Override
+                    public void setChanged() {
+                        bag.setTag(inventory.serializeNBT());
+                        super.setChanged();
+                    }
 
                     @Override
                     public boolean mayPlace(ItemStack stack) {
@@ -59,15 +66,11 @@ public class CraftingBagContainer extends ContainerBase implements IContainerCra
                 });
             }
         }
-        ItemHandlerLookup handler = CyclicItemLookup.ITEM_HANDLER.find(bag, null);
 
-        if (handler != null) {
-            SlottedStackStorage h = handler.getItemHandler();
-            for (int j = 0; j < h.getSlotCount(); j++) {
-                ItemStack inBag = h.getStackInSlot(j);
-                if (!inBag.isEmpty()) {
-                    this.craftMatrix.setItem(j, h.getStackInSlot(j));
-                }
+        for (int j = 0; j < inventory.getSlotCount(); j++) {
+            ItemStack inBag = inventory.getStackInSlot(j);
+            if (!inBag.isEmpty()) {
+                this.craftMatrix.setItem(j, inventory.getStackInSlot(j));
             }
         }
         layoutPlayerInventorySlots(playerInventory, 8, 84);
@@ -78,9 +81,8 @@ public class CraftingBagContainer extends ContainerBase implements IContainerCra
         super.removed(player);
         this.craftResult.setItem(0, ItemStack.EMPTY);
         if (player.level().isClientSide == false) {
-            ItemHandlerLookup parentHandler = CyclicItemLookup.ITEM_HANDLER.find(bag, null);
-            if (parentHandler != null) {
-                SlottedStackStorage handler = parentHandler.getItemHandler();
+            SlottedStackStorage handler = CyclicItemLookup.ITEM_HANDLER.find(bag, null);
+            if (handler != null) {
                 for (int i = 0; i < 9; i++) {
                     ItemStack crafty = this.craftMatrix.getItem(i);
                     try (Transaction transaction = Transaction.openOuter()) {

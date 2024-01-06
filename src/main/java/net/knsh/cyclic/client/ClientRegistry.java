@@ -16,10 +16,12 @@ import net.knsh.cyclic.block.conveyor.ConveyorItemRenderer;
 import net.knsh.cyclic.block.crafter.CrafterScreen;
 import net.knsh.cyclic.block.generatorfuel.ScreenGeneratorFuel;
 import net.knsh.cyclic.fluid.*;
+import net.knsh.cyclic.item.ItemCyclic;
 import net.knsh.cyclic.item.crafting.CraftingBagScreen;
 import net.knsh.cyclic.item.crafting.simple.CraftingStickScreen;
 import net.knsh.cyclic.registry.CyclicBlocks;
 import net.knsh.cyclic.registry.CyclicEntities;
+import net.knsh.cyclic.registry.CyclicItems;
 import net.knsh.cyclic.registry.CyclicScreens;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
@@ -31,6 +33,12 @@ public class ClientRegistry {
         CyclicBlocks.BLOCK_INSTANCE.forEach(block -> {
             if (block instanceof BlockCyclic cyclicBlock) {
                 cyclicBlock.registerClient();
+            }
+        });
+
+        CyclicItems.INSTANCE.forEach(itemLike -> {
+            if (itemLike instanceof ItemCyclic cyclicItem) {
+                cyclicItem.registerClient();
             }
         });
 

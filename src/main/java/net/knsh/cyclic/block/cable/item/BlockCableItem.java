@@ -57,9 +57,8 @@ public class BlockCableItem extends CableBase implements Lookup {
                     Containers.dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileentity.filter.getStackInSlot(0));
                 }
                 for (Direction dir : Direction.values()) {
-                    ItemHandlerLookup lookup = CyclicLookup.ITEM_HANDLER_SIDED.find(worldIn, pos, dir);
-                    if (lookup != null) {
-                        SlottedStackStorage items = lookup.getItemHandler();
+                    SlottedStackStorage items = CyclicLookup.ITEM_HANDLER_SIDED.find(worldIn, pos, dir);
+                    if (items != null) {
                         for (int i = 0; i < items.getSlotCount(); ++i) {
                             Containers.dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), items.getStackInSlot(i));
                         }

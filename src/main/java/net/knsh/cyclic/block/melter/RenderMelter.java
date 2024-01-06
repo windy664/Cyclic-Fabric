@@ -24,10 +24,9 @@ public class RenderMelter implements BlockEntityRenderer<TileMelter> {
 
     @Override
     public void render(TileMelter tankHere, float v, PoseStack matrixStack, MultiBufferSource buffer, int light, int overlayLight) {
-        ItemHandlerLookup lookup = CyclicLookup.ITEM_HANDLER_SIDED.find(tankHere.getLevel(), tankHere.getBlockPos(), Direction.UP);
+        SlottedStackStorage itemHandler = CyclicLookup.ITEM_HANDLER_SIDED.find(tankHere.getLevel(), tankHere.getBlockPos(), Direction.UP);
         var level = tankHere.getLevel();
-        if (lookup != null) {
-            SlottedStackStorage itemHandler = lookup.getItemHandler();
+        if (itemHandler != null) {
             ItemStack stack = itemHandler.getStackInSlot(0);
             if (!stack.isEmpty()) {
                 matrixStack.pushPose();

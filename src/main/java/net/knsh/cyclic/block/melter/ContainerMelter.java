@@ -21,9 +21,8 @@ public class ContainerMelter extends ContainerBase {
         tile = (TileMelter) world.getBlockEntity(pos);
         this.playerEntity = player;
         this.playerInventory = playerInventory;
-        ItemHandlerLookup lookup = CyclicLookup.ITEM_HANDLER.find(world, pos, null);
-        if (lookup != null) {
-            SlottedStackStorage h = lookup.getItemHandler();
+        SlottedStackStorage h = CyclicLookup.ITEM_HANDLER.find(world, pos, null);
+        if (h != null) {
             this.endInv = h.getSlotCount();
             addSlot(new SlotItemHandler(h, 0, 17, 31) {
 

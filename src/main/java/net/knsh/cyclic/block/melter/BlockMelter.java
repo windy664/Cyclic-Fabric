@@ -71,7 +71,7 @@ public class BlockMelter extends BlockCyclic implements Lookup {
         ItemStorage.SIDED.registerForBlockEntity(((blockEntity, direction) -> blockEntity.getItemHandler()), CyclicBlocks.MELTER.blockEntity());
         FluidStorage.SIDED.registerForBlockEntity(((blockEntity, direction) -> blockEntity.getFluidTank()), CyclicBlocks.MELTER.blockEntity());
 
-        CyclicLookup.ITEM_HANDLER.registerSelf(CyclicBlocks.MELTER.blockEntity());
+        CyclicLookup.ITEM_HANDLER.registerForBlockEntity(((blockEntity, unused) -> blockEntity.getItemHandler()), CyclicBlocks.MELTER.blockEntity());
         CyclicLookup.FLUID_HANDLER.registerSelf(CyclicBlocks.MELTER.blockEntity());
     }
 }
