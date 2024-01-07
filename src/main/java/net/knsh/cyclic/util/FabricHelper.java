@@ -1,5 +1,8 @@
 package net.knsh.cyclic.util;
 
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 
 public class FabricHelper {
@@ -15,4 +18,6 @@ public class FabricHelper {
         var burnTime = AbstractFurnaceBlockEntity.getFuel().get(object);
         return burnTime != null ? burnTime : 0;
     }
+
+    //public static void readTank(CompoundTag tag, SingleVariantStorage<FluidVariant> )
 }

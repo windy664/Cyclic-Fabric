@@ -6,7 +6,7 @@ import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.knsh.cyclic.block.BlockEntityCyclic;
 import net.knsh.cyclic.registry.CyclicBlocks;
-import net.knsh.cyclic.library.ImplementedInventory;
+import net.knsh.flib.ImplementedInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;

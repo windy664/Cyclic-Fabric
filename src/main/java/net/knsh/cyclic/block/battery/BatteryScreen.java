@@ -5,7 +5,7 @@ import net.knsh.cyclic.gui.ButtonMachine;
 import net.knsh.cyclic.gui.EnergyBar;
 import net.knsh.cyclic.gui.ScreenBase;
 import net.knsh.cyclic.gui.TextureEnum;
-import net.knsh.cyclic.library.util.ChatUtil;
+import net.knsh.flib.util.ChatUtil;
 import net.knsh.cyclic.network.PacketIdentifiers;
 import net.knsh.cyclic.network.packets.PacketTileData;
 import net.knsh.cyclic.registry.CyclicTextures;

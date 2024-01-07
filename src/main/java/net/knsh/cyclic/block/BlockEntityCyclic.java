@@ -1,7 +1,6 @@
 package net.knsh.cyclic.block;
 
 import com.google.common.collect.Lists;
-import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
 import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandler;
 import io.github.fabricators_of_create.porting_lib.transfer.item.SlottedStackStorage;
 import io.github.fabricators_of_create.porting_lib.util.FluidStack;
@@ -13,14 +12,14 @@ import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleSlotStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
-import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.beaconpotion.BeamParams;
 import net.knsh.cyclic.block.cable.energy.TileCableEnergy;
-import net.knsh.cyclic.library.cap.CustomEnergyStorageUtil;
-import net.knsh.cyclic.library.capabilities.ForgeFluidTankBase;
-import net.knsh.cyclic.library.core.IHasEnergy;
-import net.knsh.cyclic.library.core.IHasFluid;
-import net.knsh.cyclic.library.util.SoundUtil;
+import net.knsh.cyclic.item.datacard.filter.FilterCardItem;
+import net.knsh.flib.cap.CustomEnergyStorageUtil;
+import net.knsh.flib.capabilities.ForgeFluidTankBase;
+import net.knsh.flib.core.IHasEnergy;
+import net.knsh.flib.core.IHasFluid;
+import net.knsh.flib.util.SoundUtil;
 import net.knsh.cyclic.network.CyclicS2C;
 import net.knsh.cyclic.network.PacketIdentifiers;
 import net.knsh.cyclic.network.packets.PacketSyncEnergy;
@@ -149,9 +148,8 @@ public abstract class BlockEntityCyclic extends BlockEntity implements Container
                     null
             );
 
-            if (filled > 0 && tileTarget instanceof TileCableEnergy) {
+            if (filled > 0 && tileTarget instanceof TileCableEnergy cable) {
                 // not so compatible with other fluid systems. itl do i guess
-                TileCableEnergy cable = (TileCableEnergy) tileTarget;
                 cable.updateIncomingEnergyFace(themFacingMe);
             }
             return filled > 0;
@@ -257,7 +255,9 @@ public abstract class BlockEntityCyclic extends BlockEntity implements Container
                             SingleSlotStorage<ItemVariant> slot = slottedStorage.getSlot(i);
                             ItemVariant slotResource = slot.getResource();
 
-                            if (slotResource.isBlank()) {
+                            if (slotResource.isBlank()) continue;
+                            if (nullableFilter !=  null
+                                    && !FilterCardItem.filterAllowsExtract(nullableFilter.getStackInSlot(0), slot.getResource().toStack())) {
                                 continue;
                             }
 
@@ -265,10 +265,7 @@ public abstract class BlockEntityCyclic extends BlockEntity implements Container
                                 itemTarget = slot.extract(slotResource, qty, simulatedTransaction);
                             }
 
-                            if (itemTarget <= 0) {
-                                continue;
-                            }
-
+                            if (itemTarget <= 0) continue;
                             itemTarget = slot.extract(slotResource, qty, transaction);
                             itemTarget = myself.insertSlot(0, slotResource, itemTarget, transaction);
                             transaction.commit();
@@ -276,6 +273,13 @@ public abstract class BlockEntityCyclic extends BlockEntity implements Container
                         }
                     } else {
                         ItemVariant slotResource = itemHandlerFrom.iterator().next().getResource();
+
+                        if (slotResource.isBlank()) return;
+                        if (nullableFilter !=  null
+                                && !FilterCardItem.filterAllowsExtract(nullableFilter.getStackInSlot(0), slotResource.toStack())) {
+                            return;
+                        }
+
                         itemTarget = itemHandlerFrom.extract(slotResource, qty, transaction);
                         myself.insertSlot(0, slotResource, itemTarget, transaction);
                         transaction.commit();

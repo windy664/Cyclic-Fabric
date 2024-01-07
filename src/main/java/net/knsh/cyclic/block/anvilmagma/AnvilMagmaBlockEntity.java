@@ -6,8 +6,8 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.knsh.cyclic.block.BlockEntityCyclic;
-import net.knsh.cyclic.library.capabilities.ForgeFluidTankBase;
-import net.knsh.cyclic.library.util.ItemStackUtil;
+import net.knsh.flib.capabilities.ForgeFluidTankBase;
+import net.knsh.flib.util.ItemStackUtil;
 import net.knsh.cyclic.porting.neoforge.items.ForgeImplementedInventory;
 import net.knsh.cyclic.registry.CyclicBlocks;
 import net.minecraft.core.BlockPos;
@@ -31,7 +31,7 @@ import java.util.function.Predicate;
 
 public class AnvilMagmaBlockEntity extends BlockEntityCyclic implements ExtendedScreenHandlerFactory, ForgeImplementedInventory {
     enum Fields {
-        TIMER, REDSTONE;
+        TIMER, REDSTONE
     }
 
     public static final int CAPACITY = (int) (64 * FluidConstants.BUCKET);

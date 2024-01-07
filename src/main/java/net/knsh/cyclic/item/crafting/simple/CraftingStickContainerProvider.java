@@ -9,7 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 
 public class CraftingStickContainerProvider implements ExtendedScreenHandlerFactory {
-    private int slot;
+    private final int slot;
 
     public CraftingStickContainerProvider(int s) {
         this.slot = s;

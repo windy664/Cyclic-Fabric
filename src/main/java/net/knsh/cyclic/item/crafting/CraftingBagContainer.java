@@ -12,6 +12,7 @@ import net.knsh.cyclic.data.IContainerCraftingAction;
 import net.knsh.cyclic.gui.ContainerBase;
 import net.knsh.cyclic.registry.CyclicItems;
 import net.knsh.cyclic.registry.CyclicScreens;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
@@ -28,6 +29,13 @@ import java.util.Optional;
 public class CraftingBagContainer extends ContainerBase implements IContainerCraftingAction {
     private final TransientCraftingContainer craftMatrix = new TransientCraftingContainer(this, 3, 3);
     private final ResultContainer craftResult = new ResultContainer();
+
+    private final ItemStackHandler inventory = new ItemStackHandler(9) {
+        @Override
+        protected int getStackLimit(int slot, ItemVariant resource) {
+            return 1;
+        }
+    };
 
     public int slot = -1;
     public ItemStack bag;
@@ -48,7 +56,13 @@ public class CraftingBagContainer extends ContainerBase implements IContainerCra
         if (bag.isEmpty()) {
             this.bag = super.findBag(playerInventory, CyclicItems.CRAFTING_BAG);
         }
-        ItemStackHandler inventory = ItemCyclic.getInventoryFromTag(bag, new ItemStackHandler(9));
+
+        CompoundTag nbt = bag.getTag();
+
+        if (nbt != null) {
+            this.inventory.deserializeNBT(nbt);
+        }
+
         //grid
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -80,19 +94,20 @@ public class CraftingBagContainer extends ContainerBase implements IContainerCra
     public void removed(Player player) {
         super.removed(player);
         this.craftResult.setItem(0, ItemStack.EMPTY);
-        if (player.level().isClientSide == false) {
-            SlottedStackStorage handler = CyclicItemLookup.ITEM_HANDLER.find(bag, null);
-            if (handler != null) {
-                for (int i = 0; i < 9; i++) {
-                    ItemStack crafty = this.craftMatrix.getItem(i);
-                    try (Transaction transaction = Transaction.openOuter()) {
-                        if (!handler.getStackInSlot(i).isEmpty()) handler.extractSlot(i, handler.getSlot(i).getResource(), 64, transaction);
-                        if (!crafty.isEmpty()) handler.insertSlot(i, ItemVariant.of(crafty), crafty.getCount(), transaction);
-                        transaction.commit();
-                    }
+        if (!player.level().isClientSide) {
+            SlottedStackStorage handler = inventory;
+            for (int i = 0; i < 9; i++) {
+                ItemStack crafty = this.craftMatrix.getItem(i);
+                try (Transaction transaction = Transaction.openOuter()) {
+                    if (!handler.getStackInSlot(i).isEmpty())
+                        handler.extractSlot(i, handler.getSlot(i).getResource(), 64, transaction);
+                    if (!crafty.isEmpty())
+                        handler.insertSlot(i, ItemVariant.of(crafty), crafty.getCount(), transaction);
+                    transaction.commit();
                 }
             }
         }
+        bag.setTag(inventory.serializeNBT());
     }
 
     @Override

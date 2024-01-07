@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import org.jetbrains.annotations.NotNull;
 import team.reborn.energy.api.EnergyStorage;
 
 public class BlockMelter extends BlockCyclic implements Lookup {
@@ -45,7 +46,7 @@ public class BlockMelter extends BlockCyclic implements Lookup {
     }
 
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         return new TileMelter(pos, state);
     }
 

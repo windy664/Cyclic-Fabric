@@ -2,8 +2,8 @@ package net.knsh.cyclic.block.antipotion;
 
 import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.BlockCyclic;
-import net.knsh.cyclic.library.util.EntityUtil;
-import net.knsh.cyclic.library.util.SoundUtil;
+import net.knsh.flib.util.EntityUtil;
+import net.knsh.flib.util.SoundUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;

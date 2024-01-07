@@ -2,7 +2,7 @@ package net.knsh.cyclic.network.packets;
 
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
-import net.knsh.cyclic.library.core.IHasEnergy;
+import net.knsh.flib.core.IHasEnergy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.core.BlockPos;
@@ -10,8 +10,8 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class PacketSyncEnergy {
-    private BlockPos pos;
-    private long energy;
+    private final BlockPos pos;
+    private final long energy;
 
     public PacketSyncEnergy(BlockPos p, long fluid) {
         pos = p;

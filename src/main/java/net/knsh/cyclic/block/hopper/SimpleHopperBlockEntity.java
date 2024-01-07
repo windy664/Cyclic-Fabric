@@ -109,7 +109,7 @@ public class SimpleHopperBlockEntity extends BlockEntityCyclic implements Hopper
     }
 
     public static void serverTick(Level level, BlockPos blockPos, BlockState blockState, SimpleHopperBlockEntity e) {
-        e.tick(level, blockPos, blockState);
+        //e.tick(level, blockPos, blockState);
     }
 
     public static <E extends BlockEntity> void clientTick(Level level, BlockPos blockPos, BlockState blockState, SimpleHopperBlockEntity e) {}
@@ -138,15 +138,13 @@ public class SimpleHopperBlockEntity extends BlockEntityCyclic implements Hopper
         if (target != null) {
             BlockEntity blockEntityTarget = level.getBlockEntity(targetPos);
             boolean targetIsEmpty = StorageUtil.findStoredResource(target) == null;
-            if (StorageUtil.move(
+            return StorageUtil.move(
                     getStorage(),
                     target,
                     itemVariant -> true,
                     getFlow(),
                     null
-            ) == 1) {
-                return true;
-            }
+            ) == 1;
         }
         return false;
     }

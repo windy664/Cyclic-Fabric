@@ -1,6 +1,6 @@
 package net.knsh.cyclic.enchant;
 
-import net.knsh.cyclic.library.enchant.EnchantmentCyclic;
+import net.knsh.flib.enchant.EnchantmentCyclic;
 import net.knsh.cyclic.registry.CyclicEnchants;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;

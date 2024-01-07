@@ -2,10 +2,10 @@ package net.knsh.cyclic.item.datacard;
 
 import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.item.ItemCyclic;
-import net.knsh.cyclic.library.core.BlockPosDim;
-import net.knsh.cyclic.library.util.ChatUtil;
-import net.knsh.cyclic.library.util.LevelWorldUtil;
-import net.knsh.cyclic.library.util.TagDataUtil;
+import net.knsh.flib.core.BlockPosDim;
+import net.knsh.flib.util.ChatUtil;
+import net.knsh.flib.util.LevelWorldUtil;
+import net.knsh.flib.util.TagDataUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;

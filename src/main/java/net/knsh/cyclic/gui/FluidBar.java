@@ -3,8 +3,8 @@ package net.knsh.cyclic.gui;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.fabricators_of_create.porting_lib.util.FluidStack;
 import net.knsh.cyclic.Cyclic;
-import net.knsh.cyclic.library.capabilities.ForgeFluidTankBase;
-import net.knsh.cyclic.library.render.FluidRenderMap;
+import net.knsh.flib.capabilities.ForgeFluidTankBase;
+import net.knsh.flib.render.FluidRenderMap;
 import net.knsh.cyclic.util.FabricHelper;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -18,10 +18,10 @@ import java.util.List;
 public class FluidBar {
     public static final ResourceLocation FLUID_WIDGET = new ResourceLocation(Cyclic.MOD_ID, "textures/gui/fluid.png");
     public String emtpyTooltip = "0";
-    private Font font;
-    private int x;
-    private int y;
-    private int capacity;
+    private final Font font;
+    private final int x;
+    private final int y;
+    private final int capacity;
     private int width = 18;
     private int height = 62;
     public int guiLeft;
@@ -65,7 +65,7 @@ public class FluidBar {
         float amount = tank.getAmount();
         float scale = amount / capacity;
         int fluidAmount = (int) (scale * height);
-        TextureAtlasSprite sprite = FluidRenderMap.getFluidTexture(tank.getResource(), FluidRenderMap.FluidFlow.STILL);
+        TextureAtlasSprite sprite = FluidRenderMap.getFluidTexture(tank.getFluid(), FluidRenderMap.FluidFlow.STILL);
         if (tank.getResource().getFluid() == Fluids.WATER) {
             //hack in the blue because water is grey and is filled in by the biome when in-world
             RenderSystem.setShaderColor(0, 0, 1, 1);
@@ -111,7 +111,7 @@ public class FluidBar {
     public void renderTooltip(GuiGraphics gg, int mouseX, int mouseY, FluidStack current) {
         String tt = emtpyTooltip;
         if (current.getAmount() > 0) {
-            tt = FabricHelper.toMiliBuckets(current.getAmount()) + "/" + FabricHelper.toMiliBuckets(getCapacity())  + " " + current.getDisplayName().getString();;
+            tt = FabricHelper.toMiliBuckets(current.getAmount()) + "/" + FabricHelper.toMiliBuckets(getCapacity())  + " " + current.getDisplayName().getString();
         }
         List<Component> list = new ArrayList<>();
         list.add(Component.translatable(tt));

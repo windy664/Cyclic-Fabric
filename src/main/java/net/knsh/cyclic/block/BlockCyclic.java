@@ -1,19 +1,28 @@
 package net.knsh.cyclic.block;
 
+import io.github.fabricators_of_create.porting_lib.util.FluidUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.lookup.v1.block.BlockApiLookup;
+import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorageUtil;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
-import net.fabricmc.fabric.api.transfer.v1.storage.TransferVariant;
-import net.knsh.cyclic.library.ImplementedInventory;
+import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
+import net.knsh.cyclic.config.ClientConfigCyclic;
+import net.knsh.flib.block.EntityBlockFlib;
+import net.knsh.flib.ImplementedInventory;
 import net.knsh.cyclic.lookups.Lookup;
+import net.knsh.flib.util.SoundUtil;
+import net.knsh.flib.util.StringParseUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -25,25 +34,31 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import team.reborn.energy.api.EnergyStorage;
 
 import java.util.List;
 
-public class BlockCyclic extends BaseEntityBlock implements EntityBlock, Lookup {
+public class BlockCyclic extends EntityBlockFlib implements Lookup {
     public static final BooleanProperty LIT = BooleanProperty.create("lit");
     private boolean hasGui = false;
-    private boolean hasTooltip = true;
+    private boolean hasFluidInteract = false;
 
     public BlockCyclic(Properties settings) {
         super(settings);
+    }
+
+    public static boolean never(BlockState bs, BlockGetter bg, BlockPos pos) {
+        return false;
     }
 
     protected BlockCyclic setHasGui() {
@@ -51,8 +66,88 @@ public class BlockCyclic extends BaseEntityBlock implements EntityBlock, Lookup 
         return this;
     }
 
+    protected BlockCyclic setHasFluidInteract() {
+        this.hasFluidInteract = true;
+        return this;
+    }
+
     public float[] getBeaconColorMultiplier(BlockState state, LevelReader level, BlockPos pos, BlockPos beaconPos) {
         return null;
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
+        return null;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public @NotNull BlockState rotate(BlockState state, @NotNull Rotation direction) {
+        if (state.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
+            Direction oldDir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            Direction newDir = direction.rotate(oldDir);
+            //still rotate on axis, if its valid
+            if (newDir != Direction.UP && newDir != Direction.DOWN) {
+                return state.setValue(BlockStateProperties.HORIZONTAL_FACING, newDir);
+            }
+        }
+        if (state.hasProperty(BlockStateProperties.FACING)) {
+            Direction oldDir = state.getValue(BlockStateProperties.FACING);
+            Direction newDir = direction.rotate(oldDir);
+            // rotate state on axis dir
+            return state.setValue(BlockStateProperties.FACING, newDir);
+        }
+        // default doesnt do much
+        BlockState newState = state.rotate(direction);
+        return newState;
+    }
+
+    @Override
+    public @NotNull InteractionResult use(
+            @NotNull BlockState state, @NotNull Level world, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit
+    ) {
+        if (hasFluidInteract) {
+            if (!world.isClientSide) {
+                BlockEntity tankHere = world.getBlockEntity(pos);
+                if (tankHere != null) {
+                    Storage<FluidVariant> handler = FluidStorage.SIDED.find(world, pos, hit.getDirection());
+                    if (handler != null) {
+                        if (FluidStorageUtil.interactWithFluidStorage(handler, player, hand)) {
+                            if (player instanceof ServerPlayer) {
+                                SoundUtil.playSoundFromServer((ServerPlayer) player, SoundEvents.BUCKET_FILL, 1F, 1F);
+                            }
+
+                            if (StorageUtil.findStoredResource(handler, s -> true) != null) {
+                                displayClientFluidMessage(player, handler);
+                            }
+                        } else {
+                            displayClientFluidMessage(player, handler);
+                        }
+                    }
+                }
+            }
+            if (ContainerItemContext.ofPlayerHand(player, hand).find(FluidStorage.ITEM) != null) {
+                return InteractionResult.SUCCESS;
+            }
+        }
+        if (this.hasGui) {
+            if (!world.isClientSide) {
+                MenuProvider screenHandlerFactory = state.getMenuProvider(world, pos);
+
+                if (screenHandlerFactory != null) {
+                    player.openMenu(screenHandlerFactory);
+                }
+            }
+            return InteractionResult.SUCCESS;
+        }
+        return super.use(state, world, pos, player, hand, hit);
+    }
+
+    private void displayClientFluidMessage(Player player, Storage<FluidVariant> handler) {
+        if (ClientConfigCyclic.FLUID_BLOCK_STATUS.get()) {
+            player.displayClientMessage(Component.translatable(StringParseUtil.getFluidRatioName(handler)), true);
+        }
     }
 
     @Environment(EnvType.CLIENT)
@@ -76,25 +171,10 @@ public class BlockCyclic extends BaseEntityBlock implements EntityBlock, Lookup 
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (this.hasGui) {
-            if (!world.isClientSide) {
-                MenuProvider screenHandlerFactory = state.getMenuProvider(world, pos);
-
-                if (screenHandlerFactory != null) {
-                    player.openMenu(screenHandlerFactory);
-                }
-            }
-            return InteractionResult.SUCCESS;
-        }
-        return super.use(state, world, pos, player, hand, hit);
-    }
-
-    @Override
     public boolean triggerEvent(BlockState state, Level level, BlockPos pos, int id, int param) {
         super.triggerEvent(state, level, pos, id, param);
         BlockEntity blockentity = level.getBlockEntity(pos);
-        return blockentity == null ? false : blockentity.triggerEvent(id, param);
+        return blockentity != null && blockentity.triggerEvent(id, param);
     }
 
     @Override
@@ -103,24 +183,9 @@ public class BlockCyclic extends BaseEntityBlock implements EntityBlock, Lookup 
         return blockentity instanceof MenuProvider ? (MenuProvider) blockentity : null;
     }
 
-    @Nullable
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return null;
-    }
-
     @Override
     public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
-    }
-
-    @Override
-    @Environment(EnvType.CLIENT)
-    public void appendHoverText(ItemStack stack, @Nullable BlockGetter level, List<Component> tooltip, TooltipFlag flag) {
-        if (hasTooltip) {
-            tooltip.add(Component.translatable(this.getDescriptionId() + ".tooltip").withStyle(ChatFormatting.GRAY));
-        }
-        super.appendHoverText(stack, level, tooltip, flag);
     }
 
     public static boolean isItem(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor world, BlockPos currentPos, BlockPos facingPos) {
@@ -140,10 +205,7 @@ public class BlockCyclic extends BaseEntityBlock implements EntityBlock, Lookup 
             return false;
         }
         BlockEntity neighbor = world.getBlockEntity(facingPos);
-        if (neighbor != null && cap.find(neighbor.getLevel(), facingPos, facing.getOpposite()) != null) {
-            return true;
-        }
-        return false;
+        return neighbor != null && cap.find(neighbor.getLevel(), facingPos, facing.getOpposite()) != null;
     }
 
     @Override

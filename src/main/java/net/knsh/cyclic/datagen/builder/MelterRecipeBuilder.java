@@ -5,7 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import io.github.fabricators_of_create.porting_lib.util.FluidStack;
 import net.knsh.cyclic.Cyclic;
-import net.knsh.cyclic.library.recipe.ingredient.EnergyIngredient;
+import net.knsh.flib.ingredient.EnergyIngredient;
 import net.knsh.cyclic.registry.CyclicRecipeTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;

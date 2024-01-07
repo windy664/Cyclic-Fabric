@@ -1,7 +1,7 @@
 package net.knsh.cyclic.block.expcollect;
 
 import net.knsh.cyclic.item.ItemCyclic;
-import net.knsh.cyclic.library.util.SoundUtil;
+import net.knsh.flib.util.SoundUtil;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;

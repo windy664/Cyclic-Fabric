@@ -82,10 +82,10 @@ public class CrafterBlockEntity extends BlockEntityCyclic implements ExtendedScr
 
     enum ItemHandlers {
         INPUT, OUTPUT, GRID, PREVIEW
-    };
+    }
 
     enum Fields {
-        TIMER, REDSTONE, RENDER;
+        TIMER, REDSTONE, RENDER
     }
 
     public CrafterBlockEntity(BlockPos pos, BlockState state) {

@@ -9,14 +9,14 @@ public interface IHasTooltip {
      *
      * @return tooltips as a list
      */
-    public List<Component> getTooltips();
+    List<Component> getTooltips();
 
     /**
      * Override the tooltip and set it to a new list containing this string
      *
      * @param tooltip
      */
-    public void setTooltip(String tooltip);
+    void setTooltip(String tooltip);
 
     /**
      * Add a tooltip to the list
@@ -24,5 +24,5 @@ public interface IHasTooltip {
      * @param tooltip
      *          tooltip string in
      */
-    public void addTooltip(String tooltip);
+    void addTooltip(String tooltip);
 }

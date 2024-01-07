@@ -220,6 +220,6 @@ public class RenderBeaconPotion implements BlockEntityRenderer<BeaconPotionBlock
     }
 
     public boolean shouldRender(BeaconPotionBlockEntity blockEntity, Vec3 cameraPos) {
-        return Vec3.atCenterOf(blockEntity.getBlockPos()).multiply(1.0, 0.0, 1.0).closerThan(cameraPos.multiply(1.0, 0.0, 1.0), (double)this.getViewDistance());
+        return Vec3.atCenterOf(blockEntity.getBlockPos()).multiply(1.0, 0.0, 1.0).closerThan(cameraPos.multiply(1.0, 0.0, 1.0), this.getViewDistance());
     }
 }

@@ -1,9 +1,9 @@
 package net.knsh.cyclic.enchant;
 
 import net.knsh.cyclic.config.ConfigRegistry;
-import net.knsh.cyclic.library.enchant.EnchantmentCyclic;
-import net.knsh.cyclic.library.util.ItemStackUtil;
-import net.knsh.cyclic.library.util.TagDataUtil;
+import net.knsh.flib.enchant.EnchantmentCyclic;
+import net.knsh.flib.util.ItemStackUtil;
+import net.knsh.flib.util.TagDataUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;

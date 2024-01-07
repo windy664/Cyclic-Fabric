@@ -60,9 +60,9 @@ public class MelterRecipeEMI implements EmiRecipe {
     @Override
     public void addWidgets(WidgetHolder widgets) {
         var font = Minecraft.getInstance().font;
-        widgets.addText(Component.literal(recipe.getEnergy().getTicks() + " t"), 70, 40, FONT, true);
-        widgets.addText(Component.literal(recipe.getEnergy().getRfPertick() + " RF/t"), 70, 50, FONT, true);
-        widgets.addText(Component.literal(recipe.getEnergy().getEnergyTotal() + " RF"), 70, 60, FONT, true);
+        widgets.addText(Component.literal(recipe.getEnergy().getTicks() + " t"), 70, 40, FONT, false);
+        widgets.addText(Component.literal(recipe.getEnergy().getRfPertick() + " RF/t"), 70, 50, FONT, false);
+        widgets.addText(Component.literal(recipe.getEnergy().getEnergyTotal() + " RF"), 70, 60, FONT, false);
 
         widgets.addFillingArrow(75, 19, recipe.getEnergyCost());
 

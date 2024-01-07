@@ -218,8 +218,7 @@ public class ConveyorBlock extends BaseEntityBlock implements SimpleWaterloggedB
         ItemStack heldStack = player.getItemInHand(hand);
         Item heldItem = heldStack.getItem();
 
-        if (heldItem instanceof DyeItem) {
-            DyeItem dye = (DyeItem) heldItem;
+        if (heldItem instanceof DyeItem dye) {
             DyeColor newc = dye.getDyeColor();
             world.setBlockAndUpdate(pos, state.setValue(COLOUR, newc));
             this.setConnectedColor(world, pos, newc, 0);

@@ -4,20 +4,17 @@ import io.github.fabricators_of_create.porting_lib.util.FluidStack;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.knsh.cyclic.Cyclic;
-import net.knsh.cyclic.library.core.IHasFluid;
+import net.knsh.flib.core.IHasFluid;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class PacketSyncFluid {
-    private BlockPos pos;
-    private FluidStack fluid;
+    private final BlockPos pos;
+    private final FluidStack fluid;
 
     public PacketSyncFluid(BlockPos p, FluidStack fluid) {
         pos = p;

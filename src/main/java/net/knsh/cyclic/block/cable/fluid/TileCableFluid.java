@@ -4,13 +4,12 @@ import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandle
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariantAttributes;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.knsh.cyclic.block.BlockEntityCyclic;
 import net.knsh.cyclic.block.cable.CableBase;
 import net.knsh.cyclic.block.cable.EnumConnectType;
-import net.knsh.cyclic.library.capabilities.ForgeFluidTankBase;
+import net.knsh.flib.capabilities.ForgeFluidTankBase;
 import net.knsh.cyclic.registry.CyclicBlocks;
 import net.knsh.cyclic.util.FluidHelpers;
 import net.knsh.cyclic.util.UtilDirection;
@@ -129,7 +128,7 @@ public class TileCableFluid extends BlockEntityCyclic implements ExtendedScreenH
         for (Direction dir : Direction.values()) {
             fluidh = flow.get(dir);
             if (tag.contains("fluid" + dir.toString())) {
-                fluidh.readFromNBT(tag.getCompound("fluid" + dir.toString()));
+                fluidh.readFromNBT(tag.getCompound("fluid" + dir));
             }
         }
         super.load(tag);

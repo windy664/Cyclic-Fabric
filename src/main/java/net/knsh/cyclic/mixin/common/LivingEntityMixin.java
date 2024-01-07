@@ -4,8 +4,8 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.knsh.cyclic.enchant.ReachEnchant;
 import net.knsh.cyclic.event.fabric.BeforeDamageCallback;
-import net.knsh.cyclic.library.util.AttributesUtil;
-import net.knsh.cyclic.library.util.EnchantUtil;
+import net.knsh.flib.util.AttributesUtil;
+import net.knsh.flib.util.EnchantUtil;
 import net.knsh.cyclic.registry.CyclicEnchants;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -35,8 +35,7 @@ public abstract class LivingEntityMixin {
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void tick(CallbackInfo ci) {
-        if (!(entity instanceof Player)) return;
-        Player player = (Player) entity;
+        if (!(entity instanceof Player player)) return;
 
         if (ReachEnchant.CFG.get()) {
             ItemStack armor = EnchantUtil.getFirstArmorStackWithEnchant(player, CyclicEnchants.REACH);

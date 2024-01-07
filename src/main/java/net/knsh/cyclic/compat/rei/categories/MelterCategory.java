@@ -13,7 +13,7 @@ import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.melter.RecipeMelter;
 import net.knsh.cyclic.compat.rei.CyclicDisplayREI;
 import net.knsh.cyclic.compat.rei.CyclicPluginREI;
-import net.knsh.cyclic.library.util.ChatUtil;
+import net.knsh.flib.util.ChatUtil;
 import net.knsh.cyclic.registry.CyclicBlocks;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -49,11 +49,11 @@ public class MelterCategory implements DisplayCategory<CyclicDisplayREI<RecipeMe
         widgets.add(Widgets.createRecipeBase(new Rectangle(startPosition.x, startPosition.y, 169, 69)));
 
         widgets.add(Widgets.createLabel(new Point(startPosition.x + 95, startPosition.y + 30),
-                Component.literal(display.getRecipe().getEnergy().getTicks() + " t")).color(FONT).shadow());
+                Component.literal(display.getRecipe().getEnergy().getTicks() + " t")).color(FONT));
         widgets.add(Widgets.createLabel(new Point(startPosition.x + 95, startPosition.y + 40),
-                Component.literal(display.getRecipe().getEnergy().getRfPertick() + " RF/t")).color(FONT).shadow());
+                Component.literal(display.getRecipe().getEnergy().getRfPertick() + " RF/t")).color(FONT));
         widgets.add(Widgets.createLabel(new Point(startPosition.x + 95, startPosition.y + 50),
-                Component.literal(display.getRecipe().getEnergy().getEnergyTotal() + " RF")).color(FONT).shadow());
+                Component.literal(display.getRecipe().getEnergy().getEnergyTotal() + " RF")).color(FONT));
 
         widgets.add(Widgets.createSlot(new Point(startPosition.x + 12, startPosition.y + 19)).entries(display.getInputEntries().get(0)));
         if (display.getInputEntries().size() > 1) {

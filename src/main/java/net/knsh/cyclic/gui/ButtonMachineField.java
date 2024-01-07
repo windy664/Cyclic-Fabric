@@ -10,10 +10,10 @@ import net.minecraft.network.FriendlyByteBuf;
 
 public class ButtonMachineField extends ButtonMachine {
     BlockPos tilePos;
-    private TextureEnum textureZero;
-    private TextureEnum textureOne;
-    private TextureEnum textureTwo = TextureEnum.RENDER_OUTLINE;
-    private String tooltipPrefix;
+    private final TextureEnum textureZero;
+    private final TextureEnum textureOne;
+    private final TextureEnum textureTwo = TextureEnum.RENDER_OUTLINE;
+    private final String tooltipPrefix;
 
     public ButtonMachineField(int xPos, int yPos, int field, BlockPos pos) {
         this(xPos, yPos, field, pos, TextureEnum.REDSTONE_ON, TextureEnum.REDSTONE_NEEDED, "gui.cyclic.redstone");

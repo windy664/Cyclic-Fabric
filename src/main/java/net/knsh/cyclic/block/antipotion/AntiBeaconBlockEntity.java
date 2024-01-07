@@ -21,7 +21,7 @@ public class AntiBeaconBlockEntity extends BlockEntityCyclic {
     public static IntValue TICKS;
     public static ConfigValue<List<? extends String>> POTIONS;
     public static BooleanValue HARMFUL_POTIONS;
-    private BeamParams beamParams = new BeamParams();
+    private final BeamParams beamParams = new BeamParams();
 
     public AntiBeaconBlockEntity(BlockPos pos, BlockState state) {
         super(CyclicBlocks.ANTI_BEACON.blockEntity(), pos, state);

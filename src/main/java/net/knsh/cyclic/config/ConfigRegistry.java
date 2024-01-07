@@ -10,7 +10,7 @@ import net.knsh.cyclic.block.cable.fluid.TileCableFluid;
 import net.knsh.cyclic.block.crafter.CrafterBlockEntity;
 import net.knsh.cyclic.block.generatorfuel.TileGeneratorFuel;
 import net.knsh.cyclic.enchant.*;
-import net.knsh.cyclic.library.config.ConfigTemplate;
+import net.knsh.flib.config.ConfigTemplate;
 import net.knsh.cyclic.util.FabricHelper;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.config.ModConfig;
@@ -26,16 +26,16 @@ public class ConfigRegistry extends ConfigTemplate {
         ForgeConfigRegistry.INSTANCE.register(Cyclic.MOD_ID, ModConfig.Type.COMMON, ConfigRegistry.COMMON_CONFIG);
     }
 
+    public void setupClient() {
+        CLIENT_CONFIG.setConfig(setup(Cyclic.MOD_ID + "-client"));
+        ForgeConfigRegistry.INSTANCE.register(Cyclic.MOD_ID, ModConfig.Type.CLIENT, ConfigRegistry.CLIENT_CONFIG);
+    }
+
     // Defaults
     private static final List<String> BEHEADING = new ArrayList<>();
     private static ForgeConfigSpec.ConfigValue<List<? extends String>> BEHEADING_SKINS;
     private static final List<String> DISARM_IGNORE = new ArrayList<>();
     private static ForgeConfigSpec.ConfigValue<List<? extends String>> DISARM_IGNORE_LIST;
-
-    public void setupClient() {
-        //CLIENT_CONFIG.setConfig(setup(Cyclic.MOD_ID + "-client"));
-        //ForgeConfigRegistry.ITEM_INSTANCE.register(Cyclic.MOD_ID, ModConfig.Type.CLIENT, ConfigRegistry.CLIENT_CONFIG);
-    }
 
     private static final String WALL = "####################################################################################";
 
@@ -124,6 +124,44 @@ public class ConfigRegistry extends ConfigTemplate {
                 .defineInRange("cables.energy.flow", 10000, 1000, 32 * 10000);
 
         COMMON_CONFIG = CFG.build();
+        initClientConfig();
+    }
+
+    private static void initClientConfig() {
+        final ForgeConfigSpec.Builder CFGC = builder();
+        CFGC.comment(WALL, "Client-side properties", WALL)
+                .push(Cyclic.MOD_ID);
+        CFGC.comment(WALL, "Block Rendering properties.  Color MUST have one # symbol and then six spots after so #000000 up to #FFFFFF", WALL)
+                .push("blocks");
+        CFGC.push("colors");
+        ClientConfigCyclic.COLLECTOR_ITEM = CFGC.comment("Specify hex color of preview mode.  default #444044").define("collector_item", "#444044");
+        ClientConfigCyclic.COLLECTOR_FLUID = CFGC.comment("Specify hex color of preview mode.  default #444044").define("collector_fluid", "#444044");
+        ClientConfigCyclic.DETECTOR_ENTITY = CFGC.comment("Specify hex color of preview mode.  default #00FF00").define("detector_entity", "#00FF00");
+        ClientConfigCyclic.DETECTOR_ITEM = CFGC.comment("Specify hex color of preview mode.  default #00AA00").define("detector_item", "#00AA00");
+        ClientConfigCyclic.PEAT_FARM = CFGC.comment("Specify hex color of preview mode.  default #404040").define("peat_farm", "#404040");
+        ClientConfigCyclic.MINER = CFGC.comment("Specify hex color of preview mode.  default #0000AA").define("miner", "#0000AA");
+        ClientConfigCyclic.DROPPER = CFGC.comment("Specify hex color of preview mode.  default #AA0011").define("dropper", "#AA0011");
+        ClientConfigCyclic.FORESTER = CFGC.comment("Specify hex color of preview mode.  default #11BB00").define("forester", "#11BB00");
+        ClientConfigCyclic.HARVESTER = CFGC.comment("Specify hex color of preview mode.  default #00EE00").define("harvester", "#00EE00");
+        ClientConfigCyclic.STRUCTURE = CFGC.comment("Specify hex color of preview mode.  default #FF0000").define("structure", "#FF0000");
+        CFGC.pop();
+        CFGC.push("text");
+        ClientConfigCyclic.FLUID_BLOCK_STATUS = CFGC.comment("True means this will hide the fluid contents chat message (right click) on relevant blocks (pylon, fluid generator, fluid hopper, solidifier, sprinkler, tank, cask)").define("FluidContents", true);
+        CFGC.pop();
+        CFGC.pop(); //end of blocks
+        CFGC.comment(WALL, "Item Rendering properties.  Color MUST have one # symbol and then six spots after so #000000 up to #FFFFFF", WALL)
+                .push("items");
+        CFGC.push("colors");
+        ClientConfigCyclic.LOCATION = CFGC.comment("Specify hex color of preview mode for the GPS data card.  default #0000FF").define("location", "#0000FF");
+        ClientConfigCyclic.SHAPE_DATA = CFGC.comment("Specify hex color of preview mode.  default #FFC800").define("shape_data", "#FFC800"); // orange
+        ClientConfigCyclic.RANDOMIZE_SCEPTER = CFGC.comment("Specify hex color of preview mode.  default #0000FF").define("randomize_scepter", "#00EE00");
+        ClientConfigCyclic.OFFSET_SCEPTER = CFGC.comment("Specify hex color of preview mode.  default #0000FF").define("offset_scepter", "#00FF00");
+        ClientConfigCyclic.REPLACE_SCEPTER = CFGC.comment("Specify hex color of preview mode.  default #0000FF").define("replace_scepter", "#FFFF00");
+        ClientConfigCyclic.BUILD_SCEPTER = CFGC.comment("Specify hex color of preview mode.  default #0000FF").define("build_scepter", "#0000FF");
+        CFGC.pop();
+        CFGC.pop(); //end of items
+        CFGC.pop();
+        CLIENT_CONFIG = CFGC.build();
     }
 
     @SuppressWarnings("unchecked")

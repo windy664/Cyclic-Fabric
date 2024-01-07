@@ -2,8 +2,8 @@ package net.knsh.cyclic.block.antipotion;
 
 import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.BlockCyclic;
-import net.knsh.cyclic.library.util.EntityUtil;
-import net.knsh.cyclic.library.util.StringParseUtil;
+import net.knsh.flib.util.EntityUtil;
+import net.knsh.flib.util.StringParseUtil;
 import net.knsh.cyclic.registry.CyclicBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class AntiBeaconBlock extends BlockCyclic {
     }
 
     @Override
-    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    public @Nullable BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         return new AntiBeaconBlockEntity(pos, state);
     }
 
@@ -86,7 +87,7 @@ public class AntiBeaconBlock extends BlockCyclic {
             return true;
         }
         ResourceLocation potionId = Registries.MOB_EFFECT.registry().withPath(mobEffect.getDescriptionId());
-        return StringParseUtil.isInList((List<String>) AntiBeaconBlockEntity.POTIONS.get(), potionId);
+        return StringParseUtil.isInList(AntiBeaconBlockEntity.POTIONS.get(), potionId);
     }
 
     /*

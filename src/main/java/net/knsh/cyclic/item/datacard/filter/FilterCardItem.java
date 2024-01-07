@@ -95,7 +95,7 @@ public class FilterCardItem extends ItemCyclic implements Lookup {
     }
 
     public static FluidStack getFluidStack(ItemStack filterStack) {
-        if (filterStack.getItem() instanceof FilterCardItem == false) {
+        if (!(filterStack.getItem() instanceof FilterCardItem)) {
             return FluidStack.EMPTY; //filter is air, everything allowed
         }
         SlottedStackStorage myFilter = CyclicItemLookup.ITEM_HANDLER.find(filterStack, null);
@@ -113,7 +113,7 @@ public class FilterCardItem extends ItemCyclic implements Lookup {
     }
 
     public static boolean filterAllowsExtract(ItemStack filterStack, ItemStack itemTarget) {
-        if (filterStack.getItem() instanceof FilterCardItem == false) {
+        if (!(filterStack.getItem() instanceof FilterCardItem)) {
             return true; //filter is air, everything allowed
         }
         //does my filter allow extract
@@ -150,7 +150,7 @@ public class FilterCardItem extends ItemCyclic implements Lookup {
     }
 
     public static boolean filterAllowsExtract(ItemStack filterStack, FluidStack fluidInTank) {
-        if (filterStack.getItem() instanceof FilterCardItem == false) {
+        if (!(filterStack.getItem() instanceof FilterCardItem)) {
             return true; //filter is air, everything allowed
         }
         FluidStack fluidFilter = getFluidStack(filterStack);

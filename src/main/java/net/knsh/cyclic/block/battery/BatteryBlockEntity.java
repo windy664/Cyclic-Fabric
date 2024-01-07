@@ -36,7 +36,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class BatteryBlockEntity extends BlockEntityCyclic implements ExtendedScreenHandlerFactory, ForgeImplementedInventory, BatteryImplementation {
     public static final int MAX = 6400000;
     public static ForgeConfigSpec.IntValue SLOT_CHARGING_RATE;
-    private Map<Direction, Boolean> poweredSides;
+    private final Map<Direction, Boolean> poweredSides;
     SimpleEnergyStorage energy = new SimpleEnergyStorage(MAX, MAX /4, MAX / 4);
     private final NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
 
@@ -46,7 +46,7 @@ public class BatteryBlockEntity extends BlockEntityCyclic implements ExtendedScr
     }
 
     enum Fields {
-        FLOWING, N, E, S, W, U, D;
+        FLOWING, N, E, S, W, U, D
     }
 
     public BatteryBlockEntity(BlockPos pos, BlockState state) {

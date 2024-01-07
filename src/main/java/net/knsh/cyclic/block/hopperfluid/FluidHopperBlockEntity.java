@@ -102,15 +102,13 @@ public class FluidHopperBlockEntity extends BlockEntityCyclic {
         if (target != null) {
             BlockEntity blockEntityTarget = level.getBlockEntity(targetPos);
             boolean targetIsEmpty = StorageUtil.findStoredResource(target) == null;
-            if (StorageUtil.move(
+            return StorageUtil.move(
                     getStorage(),
                     target,
                     itemVariant -> true,
                     FluidConstants.BUCKET,
                     null
-            ) == 1) {
-                return true;
-            }
+            ) == 1;
         }
         return false;
     }

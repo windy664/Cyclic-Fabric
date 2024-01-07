@@ -51,7 +51,7 @@ public class MagmaFluidBlock extends LiquidBlock {
         }
     }
 
-    VoxelShape shapes[] = new VoxelShape[16];
+    VoxelShape[] shapes = new VoxelShape[16];
 
     public MagmaFluidBlock(FlowingFluid fluid, Properties properties) {
         super(fluid, properties);
@@ -74,10 +74,9 @@ public class MagmaFluidBlock extends LiquidBlock {
 
     @Override
     public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
-        if (entityIn instanceof LivingEntity) {
-            LivingEntity ent = (LivingEntity) entityIn;
-            if (ent.isOnFire() == false
-                    && ent.fireImmune() == false) {
+        if (entityIn instanceof LivingEntity ent) {
+            if (!ent.isOnFire()
+                    && !ent.fireImmune()) {
                 int level = EnchantmentHelper.getEnchantmentLevel(Enchantments.FIRE_PROTECTION, ent);
                 if (level < 4) {
                     ent.setSecondsOnFire(Mth.floor(worldIn.random.nextDouble() * 10));

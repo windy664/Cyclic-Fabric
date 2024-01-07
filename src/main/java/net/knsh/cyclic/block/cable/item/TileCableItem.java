@@ -9,6 +9,7 @@ import net.knsh.cyclic.block.BlockEntityCyclic;
 import net.knsh.cyclic.block.cable.CableBase;
 import net.knsh.cyclic.block.cable.EnumConnectType;
 import net.knsh.cyclic.registry.CyclicBlocks;
+import net.knsh.cyclic.registry.CyclicItems;
 import net.knsh.cyclic.util.UtilDirection;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,19 +23,20 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+@SuppressWarnings("UnstableApiUsage")
 public class TileCableItem extends BlockEntityCyclic implements ExtendedScreenHandlerFactory {
     private static final int FLOW_QTY = 64; // fixed, for non-extract motion
     private int extractQty = FLOW_QTY; // default
     ItemStackHandler filter = new ItemStackHandler(1) {
         @Override
         public boolean isItemValid(int slot, ItemVariant resource) {
-            return super.isItemValid(slot, resource);
-            //return resource.getItem() == CyclicItems.FILTER_DATA.get();
+            return resource.getItem() == CyclicItems.FILTER_DATA;
         }
     };
     public Map<Direction, SlottedStackStorage> flow = new ConcurrentHashMap<>();
@@ -46,11 +48,11 @@ public class TileCableItem extends BlockEntityCyclic implements ExtendedScreenHa
         }
     }
 
-    public static void serverTick(Level level, BlockPos blockPos, BlockState blockState, TileCableItem e) {
+    public static void serverTick(Level ignoredLevel, BlockPos ignoredblockPos, BlockState ignoredblockState, TileCableItem e) {
         e.tick();
     }
 
-    public static <E extends BlockEntity> void clientTick(Level level, BlockPos blockPos, BlockState blockState, TileCableItem e) {
+    public static <E extends BlockEntity> void clientTick(Level ignoredlevel, BlockPos ignoredblockPos, BlockState ignoredblockState, TileCableItem e) {
         e.tick();
     }
 
@@ -91,6 +93,7 @@ public class TileCableItem extends BlockEntityCyclic implements ExtendedScreenHa
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void load(CompoundTag tag) {
         extractQty = tag.getInt("extractCount");
@@ -104,6 +107,7 @@ public class TileCableItem extends BlockEntityCyclic implements ExtendedScreenHa
         super.load(tag);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void saveAdditional(CompoundTag tag) {
         tag.put("filter", filter.serializeNBT());
@@ -133,13 +137,14 @@ public class TileCableItem extends BlockEntityCyclic implements ExtendedScreenHa
     }
 
     @Override
-    public Component getDisplayName() {
+    public @NotNull Component getDisplayName() {
         return CyclicBlocks.ITEM_PIPE.block().getName();
     }
 
     @Nullable
     @Override
-    public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+    public AbstractContainerMenu createMenu(int i, @NotNull Inventory inventory, @NotNull Player player) {
+        assert level != null;
         return new ContainerCableItem(i, level, worldPosition, inventory, player);
     }
 }

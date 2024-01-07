@@ -6,9 +6,9 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.knsh.cyclic.block.BlockEntityCyclic;
-import net.knsh.cyclic.library.capabilities.FluidTankBase;
+import net.knsh.flib.capabilities.FluidTankBase;
 import net.knsh.cyclic.registry.CyclicBlocks;
-import net.knsh.cyclic.library.ImplementedInventory;
+import net.knsh.flib.ImplementedInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -31,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class AnvilVoidBlockEntity extends BlockEntityCyclic implements ExtendedScreenHandlerFactory, ImplementedInventory {
     enum Fields {
-        TIMER, REDSTONE;
+        TIMER, REDSTONE
     }
     public static final long CAPACITY = 16 * FluidConstants.BUCKET;
     public static int FLUIDPAY = 25;

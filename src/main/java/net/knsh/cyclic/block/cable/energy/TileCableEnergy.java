@@ -1,10 +1,9 @@
 package net.knsh.cyclic.block.cable.energy;
 
-import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.BlockEntityCyclic;
 import net.knsh.cyclic.block.cable.CableBase;
 import net.knsh.cyclic.block.cable.EnumConnectType;
-import net.knsh.cyclic.library.cap.CustomEnergyStorageUtil;
+import net.knsh.flib.cap.CustomEnergyStorageUtil;
 import net.knsh.cyclic.registry.CyclicBlocks;
 import net.knsh.cyclic.util.UtilDirection;
 import net.minecraft.core.BlockPos;
@@ -27,7 +26,7 @@ public class TileCableEnergy extends BlockEntityCyclic {
     public static IntValue TRANSFER_RATE;
     SimpleEnergyStorage energy;
     private final Map<Direction, Integer> mapIncomingEnergy = new ConcurrentHashMap<>();
-    private int energyLastSynced = -1;
+    private final int energyLastSynced = -1;
 
     public TileCableEnergy(BlockPos pos, BlockState state) {
         super(CyclicBlocks.ENERGY_PIPE.blockEntity(), pos, state);

@@ -2,12 +2,9 @@ package net.knsh.cyclic.item.datacard.filter;
 
 import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandler;
 import io.github.fabricators_of_create.porting_lib.transfer.item.SlotItemHandler;
-import io.github.fabricators_of_create.porting_lib.transfer.item.SlottedStackStorage;
-import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.knsh.cyclic.gui.ContainerBase;
-import net.knsh.cyclic.library.core.Const;
-import net.knsh.cyclic.lookups.CyclicItemLookup;
+import net.knsh.flib.core.Const;
 import net.knsh.cyclic.registry.CyclicItems;
 import net.knsh.cyclic.registry.CyclicScreens;
 import net.minecraft.nbt.CompoundTag;
@@ -76,6 +73,12 @@ public class ContainerFilterCard extends ContainerBase {
             });
         }
         layoutPlayerInventorySlots(8, 84);
+    }
+
+    @Override
+    public void removed(Player player) {
+        super.removed(player);
+        bag.setTag(inventory.serializeNBT());
     }
 
     @Override

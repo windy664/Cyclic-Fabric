@@ -3,8 +3,8 @@ package net.knsh.cyclic.block.melter;
 import com.google.gson.JsonObject;
 import io.github.fabricators_of_create.porting_lib.util.FluidStack;
 import net.knsh.cyclic.Cyclic;
-import net.knsh.cyclic.library.recipe.ingredient.EnergyIngredient;
-import net.knsh.cyclic.library.util.RecipeUtil;
+import net.knsh.flib.ingredient.EnergyIngredient;
+import net.knsh.flib.util.RecipeUtil;
 import net.knsh.cyclic.registry.CyclicRecipeTypes;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
@@ -20,7 +20,7 @@ import net.minecraft.world.level.Level;
 public class RecipeMelter implements Recipe<TileMelter> {
     private final ResourceLocation id;
     private NonNullList<Ingredient> ingredients = NonNullList.create();
-    private FluidStack outFluid;
+    private final FluidStack outFluid;
     private final EnergyIngredient energy;
 
     public RecipeMelter(ResourceLocation id, NonNullList<Ingredient> ingredientsIn, FluidStack out, EnergyIngredient energy) {

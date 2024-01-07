@@ -52,7 +52,7 @@ public class SlimeFluidBlock extends LiquidBlock {
         }
     }
 
-    VoxelShape shapes[] = new VoxelShape[16];
+    VoxelShape[] shapes = new VoxelShape[16];
 
     public SlimeFluidBlock(FlowingFluid supplier, Block.Properties props) {
         super(supplier, props);

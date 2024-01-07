@@ -14,7 +14,7 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.melter.RecipeMelter;
 import net.knsh.cyclic.compat.jei.FluidToJEI;
-import net.knsh.cyclic.library.util.ChatUtil;
+import net.knsh.flib.util.ChatUtil;
 import net.knsh.cyclic.registry.CyclicBlocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -28,8 +28,8 @@ public class MelterRecipeCategory implements IRecipeCategory<RecipeMelter> {
     private static final int FONT = 10592673;
     private static final ResourceLocation ID = new ResourceLocation(Cyclic.MOD_ID, "melter");
     public static final RecipeType<RecipeMelter> TYPE = new RecipeType<>(ID, RecipeMelter.class);
-    private IDrawable gui;
-    private IDrawable icon;
+    private final IDrawable gui;
+    private final IDrawable icon;
 
     public MelterRecipeCategory(IGuiHelper helper) {
         gui = helper.drawableBuilder(new ResourceLocation(Cyclic.MOD_ID, "textures/jei/melter_recipe.png"), 0, 0, 169, 69).setTextureSize(169, 69).build();

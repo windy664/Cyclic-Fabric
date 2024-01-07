@@ -2,21 +2,20 @@ package net.knsh.cyclic.util;
 
 import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
 import io.github.fabricators_of_create.porting_lib.util.FluidStack;
-import io.github.fabricators_of_create.porting_lib.util.FluidUtil;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
-import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.fluid.*;
-import net.knsh.cyclic.library.capabilities.FluidAction;
-import net.knsh.cyclic.library.capabilities.ForgeFluidTankBase;
-import net.knsh.cyclic.library.data.Model3D;
-import net.knsh.cyclic.library.render.FluidRenderMap;
+import net.knsh.flib.capabilities.FluidAction;
+import net.knsh.flib.capabilities.ForgeFluidTankBase;
+import net.knsh.flib.data.Model3D;
+import net.knsh.flib.render.FluidRenderMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
@@ -78,7 +77,7 @@ public class FluidHelpers {
         //test if its a source block, or a waterlogged block
         BlockState targetState = level.getBlockState(posTarget);
         FluidState fluidState = level.getFluidState(posTarget);
-        if (targetState.hasProperty(BlockStateProperties.WATERLOGGED) && targetState.getValue(BlockStateProperties.WATERLOGGED) == true) {
+        if (targetState.hasProperty(BlockStateProperties.WATERLOGGED) && targetState.getValue(BlockStateProperties.WATERLOGGED)) {
             //for waterlogged it is hardcoded to water
             long simFill = tank.fill(new FluidStack(new FluidStack(Fluids.WATER, FluidConstants.BUCKET), FluidConstants.BUCKET), FluidAction.SIMULATE);
             if (simFill == FluidConstants.BUCKET
@@ -119,7 +118,7 @@ public class FluidHelpers {
      * @return
      */
     public static TextureAtlasSprite getBaseFluidTexture(Fluid fluid, FluidRenderMap.FluidFlow type) {
-        return FluidRenderMap.getFluidTexture(FluidVariant.blank(), type);
+        return FluidRenderMap.getFluidTexture(FluidStack.EMPTY, type);
     }
 
     public static TextureAtlasSprite getSprite(ResourceLocation spriteLocation) {
@@ -131,8 +130,8 @@ public class FluidHelpers {
             return CACHED_FLUIDS.get(fluid).get(stage);
         }
         Model3D model = new Model3D();
-        //model.setTexture(FluidRenderMap.getFluidTexture(fluid, FluidRenderMap.FluidFlow.STILL));
-        /*if (IClientFluidTypeExtensions.of(fluid).getStillTexture(fluid) != null) {
+        model.setTexture(FluidRenderMap.getFluidTexture(fluid, FluidRenderMap.FluidFlow.STILL));
+        if (FluidVariantRendering.getSprite(fluid.getType()) != null) {
             double sideSpacing = 0.00625;
             double belowSpacing = 0.0625 / 4;
             model.minX = sideSpacing;
@@ -141,14 +140,14 @@ public class FluidHelpers {
             model.maxX = 1 - sideSpacing;
             model.maxY = 1 - belowSpacing;
             model.maxZ = 1 - sideSpacing;
-        }*/
+        }
         if (CACHED_FLUIDS.containsKey(fluid)) {
             CACHED_FLUIDS.get(fluid).put(stage, model);
         }
         else {
             Int2ObjectMap<Model3D> map = new Int2ObjectOpenHashMap<>();
             map.put(stage, model);
-            CACHED_FLUIDS.put(fluid.getType(), map);
+            CACHED_FLUIDS.put(fluid, map);
         }
         return model;
     }

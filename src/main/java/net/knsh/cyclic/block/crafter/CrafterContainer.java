@@ -1,7 +1,7 @@
 package net.knsh.cyclic.block.crafter;
 
 import net.knsh.cyclic.gui.ContainerBase;
-import net.knsh.cyclic.library.core.Const;
+import net.knsh.flib.core.Const;
 import net.knsh.cyclic.registry.CyclicScreens;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;

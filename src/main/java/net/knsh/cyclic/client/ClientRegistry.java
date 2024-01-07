@@ -15,6 +15,7 @@ import net.knsh.cyclic.block.beaconpotion.RenderBeaconPotion;
 import net.knsh.cyclic.block.conveyor.ConveyorItemRenderer;
 import net.knsh.cyclic.block.crafter.CrafterScreen;
 import net.knsh.cyclic.block.generatorfuel.ScreenGeneratorFuel;
+import net.knsh.cyclic.block.tank.RenderTank;
 import net.knsh.cyclic.fluid.*;
 import net.knsh.cyclic.item.ItemCyclic;
 import net.knsh.cyclic.item.crafting.CraftingBagScreen;
@@ -69,6 +70,7 @@ public class ClientRegistry {
         // Block Entity Renderers
         BlockEntityRenderers.register(CyclicBlocks.BEACON.blockEntity(), RenderBeaconPotion::new);
         BlockEntityRenderers.register(CyclicBlocks.ANTI_BEACON.blockEntity(), RenderAntiBeacon::new);
+        BlockEntityRenderers.register(CyclicBlocks.TANK.blockEntity(), RenderTank::new);
 
         // Entity Model Renderers
         EntityRendererRegistry.register(CyclicEntities.CONVEYOR_ITEM, ConveyorItemRenderer::new);

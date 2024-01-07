@@ -3,7 +3,7 @@ package net.knsh.cyclic.block.anvil;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.knsh.cyclic.block.BlockEntityCyclic;
-import net.knsh.cyclic.library.util.ItemStackUtil;
+import net.knsh.flib.util.ItemStackUtil;
 import net.knsh.cyclic.porting.neoforge.items.ForgeImplementedInventory;
 import net.knsh.cyclic.registry.CyclicBlocks;
 import net.minecraft.core.BlockPos;
@@ -26,7 +26,7 @@ import team.reborn.energy.api.base.SimpleEnergyStorage;
 
 public class AnvilAutoBlockEntity extends BlockEntityCyclic implements ExtendedScreenHandlerFactory, ForgeImplementedInventory {
     enum Fields {
-        TIMER, REDSTONE;
+        TIMER, REDSTONE
     }
 
     static final int MAX = 64000;

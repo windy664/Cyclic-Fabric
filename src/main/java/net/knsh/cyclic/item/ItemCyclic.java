@@ -1,11 +1,9 @@
 package net.knsh.cyclic.item;
 
 import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandler;
-import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandlerContainerItemContext;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
-import net.knsh.cyclic.library.cap.CustomEnergyStorageUtil;
+import net.knsh.flib.cap.CustomEnergyStorageUtil;
 import net.knsh.cyclic.lookups.types.ItemShareTag;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;

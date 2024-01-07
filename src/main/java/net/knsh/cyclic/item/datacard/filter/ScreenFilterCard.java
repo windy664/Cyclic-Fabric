@@ -5,7 +5,7 @@ import net.knsh.cyclic.data.CraftingActionEnum;
 import net.knsh.cyclic.gui.ButtonTextured;
 import net.knsh.cyclic.gui.ScreenBase;
 import net.knsh.cyclic.gui.TextureEnum;
-import net.knsh.cyclic.library.core.Const;
+import net.knsh.flib.core.Const;
 import net.knsh.cyclic.registry.CyclicTextures;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;

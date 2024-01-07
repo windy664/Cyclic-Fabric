@@ -1,8 +1,8 @@
 package net.knsh.cyclic.enchant;
 
-import net.knsh.cyclic.library.enchant.EnchantmentCyclic;
-import net.knsh.cyclic.library.util.EntityUtil;
-import net.knsh.cyclic.library.util.SoundUtil;
+import net.knsh.flib.enchant.EnchantmentCyclic;
+import net.knsh.flib.util.EntityUtil;
+import net.knsh.flib.util.SoundUtil;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;

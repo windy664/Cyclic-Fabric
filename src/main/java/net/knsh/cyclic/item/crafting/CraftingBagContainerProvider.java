@@ -11,7 +11,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import org.jetbrains.annotations.Nullable;
 
 public class CraftingBagContainerProvider implements ExtendedScreenHandlerFactory {
-    private int slot;
+    private final int slot;
 
     public CraftingBagContainerProvider(int s) {
         this.slot = s;

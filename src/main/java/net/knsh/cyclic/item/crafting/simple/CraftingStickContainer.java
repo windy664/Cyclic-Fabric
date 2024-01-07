@@ -2,7 +2,7 @@ package net.knsh.cyclic.item.crafting.simple;
 
 import net.knsh.cyclic.data.IContainerCraftingAction;
 import net.knsh.cyclic.gui.ContainerBase;
-import net.knsh.cyclic.library.core.Const;
+import net.knsh.flib.core.Const;
 import net.knsh.cyclic.registry.CyclicScreens;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerPlayer;

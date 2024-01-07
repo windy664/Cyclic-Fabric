@@ -38,7 +38,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class PacketCraftAction {
-    private CraftingActionEnum action;
+    private final CraftingActionEnum action;
 
     public PacketCraftAction(CraftingActionEnum s) {
         action = s;
@@ -58,9 +58,8 @@ public class PacketCraftAction {
         PacketCraftAction message = decode(buf);
         server.execute(() -> {
             //rotate type
-            if (sender.containerMenu instanceof IContainerCraftingAction) {
+            if (sender.containerMenu instanceof IContainerCraftingAction c) {
                 //do the thing
-                IContainerCraftingAction c = (IContainerCraftingAction) sender.containerMenu;
                 performAction(c, sender, message.action);
             }
         });

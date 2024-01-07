@@ -2,8 +2,8 @@ package net.knsh.cyclic.enchant;
 
 import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.config.ConfigRegistry;
-import net.knsh.cyclic.library.enchant.EnchantmentCyclic;
-import net.knsh.cyclic.library.util.StringParseUtil;
+import net.knsh.flib.enchant.EnchantmentCyclic;
+import net.knsh.flib.util.StringParseUtil;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -60,10 +60,9 @@ public class DisarmEnchant extends EnchantmentCyclic {
 
     @Override
     public void doPostAttack(@NotNull LivingEntity user, @NotNull Entity target, int level) {
-        if (!(target instanceof LivingEntity)) {
+        if (!(target instanceof LivingEntity livingTarget)) {
             return;
         }
-        LivingEntity livingTarget = (LivingEntity) target;
         if (!canDisarm(livingTarget)) {
             return;
         }

@@ -1,6 +1,6 @@
 package net.knsh.cyclic.enchant;
 
-import net.knsh.cyclic.library.enchant.EnchantmentCyclic;
+import net.knsh.flib.enchant.EnchantmentCyclic;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;

@@ -3,7 +3,7 @@ package net.knsh.cyclic.block.beaconpotion;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.knsh.cyclic.block.BlockEntityCyclic;
 import net.knsh.cyclic.item.datacard.EntityDataCard;
-import net.knsh.cyclic.library.data.EntityFilterType;
+import net.knsh.flib.data.EntityFilterType;
 import net.knsh.cyclic.registry.CyclicBlocks;
 import net.knsh.cyclic.porting.neoforge.items.ForgeImplementedInventory;
 import net.minecraft.core.BlockPos;
@@ -32,7 +32,7 @@ import java.util.List;
 
 public class BeaconPotionBlockEntity extends BlockEntityCyclic implements ExtendedScreenHandlerFactory, ForgeImplementedInventory {
     enum Fields {
-        TIMER, REDSTONE, RANGE, ENTITYTYPE;
+        TIMER, REDSTONE, RANGE, ENTITYTYPE
     }
 
     static final int MAX = 64000;
@@ -44,9 +44,9 @@ public class BeaconPotionBlockEntity extends BlockEntityCyclic implements Extend
 
     private final NonNullList<ItemStack> inventory = NonNullList.withSize(2, ItemStack.EMPTY);
 
-    private List<MobEffectInstance> effects = new ArrayList<>();
+    private final List<MobEffectInstance> effects = new ArrayList<>();
     EntityFilterType entityFilter = EntityFilterType.PLAYERS;
-    private BeamParams beamParams = new BeamParams();
+    private final BeamParams beamParams = new BeamParams();
 
     public BeaconPotionBlockEntity(BlockPos pos, BlockState state) {
         super(CyclicBlocks.BEACON.blockEntity(), pos, state);

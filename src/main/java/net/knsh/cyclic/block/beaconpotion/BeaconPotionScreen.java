@@ -4,7 +4,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.knsh.cyclic.gui.ButtonMachine;
 import net.knsh.cyclic.gui.ButtonMachineField;
 import net.knsh.cyclic.gui.ScreenBase;
-import net.knsh.cyclic.library.util.ChatUtil;
+import net.knsh.flib.util.ChatUtil;
 import net.knsh.cyclic.network.PacketIdentifiers;
 import net.knsh.cyclic.network.packets.PacketTileData;
 import net.knsh.cyclic.registry.CyclicTextures;

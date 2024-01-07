@@ -15,7 +15,7 @@ import net.minecraft.world.item.ItemStack;
 public class PacketFilterCard {
     public static final ResourceLocation IDENTIFIER = new ResourceLocation(Cyclic.MOD_ID, "packet_filter_card");
 
-    private CraftingActionEnum action;
+    private final CraftingActionEnum action;
 
     public PacketFilterCard(CraftingActionEnum s) {
         action = s;

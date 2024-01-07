@@ -46,8 +46,7 @@ public class PacketTileData {
         server.execute(() -> {
             Level world = player.getCommandSenderWorld();
             BlockEntity tile = world.getBlockEntity(message.pos);
-            if (tile instanceof BlockEntityCyclic) {
-                BlockEntityCyclic base = (BlockEntityCyclic) tile;
+            if (tile instanceof BlockEntityCyclic base) {
                 if (message.autoIncrement) {
                     int incr = base.getField(message.field) + 1;
                     base.setField(message.field, incr);

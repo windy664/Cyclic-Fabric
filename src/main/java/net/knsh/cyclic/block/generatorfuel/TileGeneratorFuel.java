@@ -6,8 +6,8 @@ import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.knsh.cyclic.block.BlockEntityCyclic;
 import net.knsh.cyclic.block.battery.BatteryBlockEntity;
-import net.knsh.cyclic.library.cap.CustomEnergyStorageUtil;
-import net.knsh.cyclic.library.cap.ItemStackHandlerWrapper;
+import net.knsh.flib.cap.CustomEnergyStorageUtil;
+import net.knsh.flib.cap.ItemStackHandlerWrapper;
 import net.knsh.cyclic.registry.CyclicBlocks;
 import net.knsh.cyclic.util.FabricHelper;
 import net.minecraft.core.BlockPos;
@@ -23,15 +23,20 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
+import org.jetbrains.annotations.NotNull;
 import team.reborn.energy.api.base.SimpleEnergyStorage;
 
 public class TileGeneratorFuel extends BlockEntityCyclic implements ExtendedScreenHandlerFactory {
     enum Fields {
-        TIMER, REDSTONE, BURNMAX, FLOWING;
+        TIMER, REDSTONE, BURNMAX, FLOWING
     }
 
     static final int MAX = BatteryBlockEntity.MENERGY * 10;
     public static IntValue RF_PER_TICK;
+    private int burnTimeMax = 0; //only non zero if processing
+    private int burnTime = 0; //how much of current fuel is left
+
+    @SuppressWarnings("UnstableApiUsage")
     protected SimpleEnergyStorage energy = new SimpleEnergyStorage(MAX, MAX, MAX) {
         @Override
         protected void onFinalCommit() {
@@ -39,6 +44,7 @@ public class TileGeneratorFuel extends BlockEntityCyclic implements ExtendedScre
             TileGeneratorFuel.this.syncEnergy();
         }
     };
+    @SuppressWarnings("UnstableApiUsage")
     protected ItemStackHandler inputSlots = new ItemStackHandler(1) {
         @Override
         public boolean isItemValid(int slot, ItemVariant resource) {
@@ -47,23 +53,21 @@ public class TileGeneratorFuel extends BlockEntityCyclic implements ExtendedScre
     };
     ItemStackHandler outputSlots = new ItemStackHandler(0);
     ItemStackHandlerWrapper inventory = new ItemStackHandlerWrapper(inputSlots, outputSlots);
-    final int factor = 1;
-    private int burnTimeMax = 0; //only non zero if processing
-    private int burnTime = 0; //how much of current fuel is left
 
     public TileGeneratorFuel(BlockPos pos, BlockState state) {
         super(CyclicBlocks.GENERATOR_FUEL.blockEntity(), pos, state);
         this.needsRedstone = 0;
     }
 
-    public static void serverTick(Level level, BlockPos blockPos, BlockState blockState, TileGeneratorFuel e) {
+    public static void serverTick(Level ignoredLevel, BlockPos ignoredBlockPos, BlockState ignoredBlockState, TileGeneratorFuel e) {
         e.tick();
     }
 
-    public static <E extends BlockEntity> void clientTick(Level level, BlockPos blockPos, BlockState blockState, TileGeneratorFuel e) {
+    public static <E extends BlockEntity> void clientTick(Level ignoredLevel, BlockPos ignoredBlockPos, BlockState ignoredBlockState, TileGeneratorFuel e) {
         e.tick();
     }
 
+    @SuppressWarnings("UnstableApiUsage")
     public void tick() {
         if (this.flowing == 1) {
             this.exportEnergyAllSides();
@@ -114,12 +118,12 @@ public class TileGeneratorFuel extends BlockEntityCyclic implements ExtendedScre
     }
 
     @Override
-    public Component getDisplayName() {
+    public @NotNull Component getDisplayName() {
         return CyclicBlocks.GENERATOR_FUEL.block().getName();
     }
 
     @Override
-    public AbstractContainerMenu createMenu(int i, Inventory playerInventory, Player playerEntity) {
+    public AbstractContainerMenu createMenu(int i, @NotNull Inventory playerInventory, @NotNull Player playerEntity) {
         return new ContainerGeneratorFuel(i, level, worldPosition, playerInventory, playerEntity);
     }
 
@@ -144,19 +148,13 @@ public class TileGeneratorFuel extends BlockEntityCyclic implements ExtendedScre
 
     @Override
     public int getField(int id) {
-        switch (Fields.values()[id]) {
-            case REDSTONE:
-                return this.needsRedstone;
-            case TIMER:
-                return this.burnTime;
-            case BURNMAX:
-                return this.burnTimeMax;
-            case FLOWING:
-                return this.flowing;
-            default:
-                break;
-        }
-        return 0;
+        return switch (Fields.values()[id]) {
+            case REDSTONE -> this.needsRedstone;
+            case TIMER -> this.burnTime;
+            case BURNMAX -> this.burnTimeMax;
+            case FLOWING -> this.flowing;
+            default -> 0;
+        };
     }
 
     @Override

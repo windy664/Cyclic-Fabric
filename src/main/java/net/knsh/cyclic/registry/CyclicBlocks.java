@@ -37,6 +37,9 @@ import net.knsh.cyclic.block.hoppergold.GoldHopperBlock;
 import net.knsh.cyclic.block.hoppergold.GoldHopperBlockEntity;
 import net.knsh.cyclic.block.melter.BlockMelter;
 import net.knsh.cyclic.block.melter.TileMelter;
+import net.knsh.cyclic.block.tank.BlockFluidTank;
+import net.knsh.cyclic.block.tank.ItemBlockTank;
+import net.knsh.cyclic.block.tank.TileTank;
 import net.knsh.cyclic.block.trash.TrashBlock;
 import net.knsh.cyclic.block.trash.TrashBlockEntity;
 import net.minecraft.core.Registry;
@@ -46,6 +49,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -74,7 +78,7 @@ public class CyclicBlocks {
     public static ItemBlockEntity<TileCableEnergy> ENERGY_PIPE = registerBlockEntity("energy_pipe", TileCableEnergy::new, new BlockCableEnergy(FabricBlockSettings.create()));
     public static BaseBlockEntity<BatteryBlockEntity> BATTERY = registerBaseBlockEntity("battery", BatteryBlockEntity::new, new BatteryBlock(FabricBlockSettings.create()));
     public static ItemBlockEntity<TileMelter> MELTER = registerBlockEntity("melter", TileMelter::new, new BlockMelter(FabricBlockSettings.create()));
-
+    public static BaseBlockEntity<TileTank> TANK = registerBaseBlockEntity("tank", TileTank::new, new BlockFluidTank(FabricBlockSettings.create()));
     public static ItemBlock SPONGE_MILK = registerBlock("sponge_milk", new MilkSpongeBlock(FabricBlockSettings.create().luminance(p -> 1)));
 
     public static void register() {}

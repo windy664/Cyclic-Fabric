@@ -4,7 +4,7 @@ import net.knsh.cyclic.gui.ButtonMachineField;
 import net.knsh.cyclic.gui.EnergyBar;
 import net.knsh.cyclic.gui.ScreenBase;
 import net.knsh.cyclic.gui.TexturedProgress;
-import net.knsh.cyclic.library.core.Const;
+import net.knsh.flib.core.Const;
 import net.knsh.cyclic.registry.CyclicTextures;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;

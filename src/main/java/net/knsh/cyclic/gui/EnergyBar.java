@@ -11,10 +11,10 @@ import java.util.List;
 
 public class EnergyBar {
     public static final ResourceLocation ENERGY_BAR = new ResourceLocation(Cyclic.MOD_ID, "textures/gui/energy_bar.png");
-    private int x = 154;
-    private int y = 8;
+    private final int x = 154;
+    private final int y = 8;
     public int capacity;
-    private int width = 16;
+    private final int width = 16;
     private int height = 62;
     public int guiLeft;
     public int guiTop;

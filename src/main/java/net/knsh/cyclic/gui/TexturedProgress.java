@@ -1,6 +1,6 @@
 package net.knsh.cyclic.gui;
 
-import net.knsh.cyclic.library.core.Const;
+import net.knsh.flib.core.Const;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
