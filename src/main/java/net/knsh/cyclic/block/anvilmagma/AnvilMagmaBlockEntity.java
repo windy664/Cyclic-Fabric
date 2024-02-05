@@ -6,7 +6,7 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.knsh.cyclic.block.BlockEntityCyclic;
-import net.knsh.flib.capabilities.ForgeFluidTankBase;
+import net.knsh.flib.capabilities.FluidTankBase;
 import net.knsh.flib.util.ItemStackUtil;
 import net.knsh.cyclic.porting.neoforge.items.ForgeImplementedInventory;
 import net.knsh.cyclic.registry.CyclicBlocks;
@@ -37,7 +37,7 @@ public class AnvilMagmaBlockEntity extends BlockEntityCyclic implements Extended
     public static final int CAPACITY = (int) (64 * FluidConstants.BUCKET);
     public static ForgeConfigSpec.IntValue FLUIDCOST;
     private final NonNullList<ItemStack> inventory = NonNullList.withSize(2, ItemStack.EMPTY);
-    public ForgeFluidTankBase tank = new ForgeFluidTankBase(this, CAPACITY, isFluidValid());
+    public FluidTankBase tank = new FluidTankBase(this, CAPACITY, isFluidValid());
 
     public AnvilMagmaBlockEntity(BlockPos pos, BlockState state) {
         super(CyclicBlocks.ANVIL_MAGMA.blockEntity(), pos, state);
@@ -147,7 +147,7 @@ public class AnvilMagmaBlockEntity extends BlockEntityCyclic implements Extended
         return new AnvilMagmaContainer(i, playerInventory, this, level, worldPosition);
     }
 
-    public ForgeFluidTankBase getTank() {
+    public FluidTankBase getTank() {
         return tank;
     }
 

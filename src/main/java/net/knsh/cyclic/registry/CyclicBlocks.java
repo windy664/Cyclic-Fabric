@@ -42,6 +42,12 @@ import net.knsh.cyclic.block.tank.ItemBlockTank;
 import net.knsh.cyclic.block.tank.TileTank;
 import net.knsh.cyclic.block.trash.TrashBlock;
 import net.knsh.cyclic.block.trash.TrashBlockEntity;
+import net.knsh.cyclic.block.wireless.energy.BlockWirelessEnergy;
+import net.knsh.cyclic.block.wireless.energy.TileWirelessEnergy;
+import net.knsh.cyclic.block.wireless.fluid.BlockWirelessFluid;
+import net.knsh.cyclic.block.wireless.fluid.TileWirelessFluid;
+import net.knsh.cyclic.block.wireless.item.BlockWirelessItem;
+import net.knsh.cyclic.block.wireless.item.TileWirelessItem;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -80,6 +86,9 @@ public class CyclicBlocks {
     public static ItemBlockEntity<TileMelter> MELTER = registerBlockEntity("melter", TileMelter::new, new BlockMelter(FabricBlockSettings.create()));
     public static BaseBlockEntity<TileTank> TANK = registerBaseBlockEntity("tank", TileTank::new, new BlockFluidTank(FabricBlockSettings.create()));
     public static ItemBlock SPONGE_MILK = registerBlock("sponge_milk", new MilkSpongeBlock(FabricBlockSettings.create().luminance(p -> 1)));
+    public static ItemBlockEntity<TileWirelessEnergy> WIRELESS_ENERGY = registerBlockEntity("wireless_energy", TileWirelessEnergy::new, new BlockWirelessEnergy(FabricBlockSettings.create()));
+    public static ItemBlockEntity<TileWirelessItem> WIRELESS_ITEM = registerBlockEntity("wireless_item", TileWirelessItem::new, new BlockWirelessItem(FabricBlockSettings.create()));
+    public static ItemBlockEntity<TileWirelessFluid> WIRELESS_FLUID = registerBlockEntity("wireless_fluid", TileWirelessFluid::new, new BlockWirelessFluid(FabricBlockSettings.create()));
 
     public static void register() {}
 

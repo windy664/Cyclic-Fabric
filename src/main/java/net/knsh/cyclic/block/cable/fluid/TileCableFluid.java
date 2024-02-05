@@ -6,10 +6,11 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
+import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import net.knsh.cyclic.block.BlockEntityCyclic;
 import net.knsh.cyclic.block.cable.CableBase;
 import net.knsh.cyclic.block.cable.EnumConnectType;
-import net.knsh.flib.capabilities.ForgeFluidTankBase;
+import net.knsh.flib.capabilities.FluidTankBase;
 import net.knsh.cyclic.registry.CyclicBlocks;
 import net.knsh.cyclic.util.FluidHelpers;
 import net.knsh.cyclic.util.UtilDirection;
@@ -43,12 +44,12 @@ public class TileCableFluid extends BlockEntityCyclic implements ExtendedScreenH
             return super.isItemValid(slot, resource);
         }
     };
-    public final Map<Direction, ForgeFluidTankBase> flow = new ConcurrentHashMap<>();
+    public final Map<Direction, FluidTankBase> flow = new ConcurrentHashMap<>();
 
     public TileCableFluid(BlockPos pos, BlockState state) {
         super(CyclicBlocks.FLUID_PIPE.blockEntity(), pos, state);
         for (Direction f : Direction.values()) {
-            flow.put(f, new ForgeFluidTankBase(this, (int) (BUFFERSIZE.get() * FluidConstants.BUCKET), p -> true));
+            flow.put(f, new FluidTankBase(this, (int) (BUFFERSIZE.get() * FluidConstants.BUCKET), p -> true));
         }
     }
 
@@ -83,12 +84,6 @@ public class TileCableFluid extends BlockEntityCyclic implements ExtendedScreenH
         if (tankTarget == null) {
             return;
         }
-        /*
-        if (tankTarget != null
-                && tankTarget.getTanks() > 0
-                && !FilterCardItem.filterAllowsExtract(filter.getStackInSlot(0), tankTarget.getFluidInTank(0))) {
-            return;
-        }*/
         //first try standard fluid transfer
         if (FluidHelpers.tryFillPositionFromTank(level, worldPosition, extractSide, tankTarget, TRANSFER_RATE.get())) {
             return;
@@ -96,7 +91,7 @@ public class TileCableFluid extends BlockEntityCyclic implements ExtendedScreenH
         //handle special cases
         //waterlogged
         //cauldron
-        ForgeFluidTankBase sideHandler = flow.get(extractSide);
+        FluidTankBase sideHandler = flow.get(extractSide);
         if (sideHandler != null && sideHandler.getSpace() >= FluidConstants.BUCKET) {
             FluidHelpers.extractSourceWaterloggedCauldron(level, target, sideHandler);
         }
@@ -104,7 +99,7 @@ public class TileCableFluid extends BlockEntityCyclic implements ExtendedScreenH
 
     private void normalFlow() {
         for (Direction incomingSide : Direction.values()) {
-            final ForgeFluidTankBase sideHandler = flow.get(incomingSide);
+            final FluidTankBase sideHandler = flow.get(incomingSide);
             for (final Direction outgoingSide : UtilDirection.getAllInDifferentOrder()) {
                 if (outgoingSide == incomingSide) {
                     continue;
@@ -124,7 +119,7 @@ public class TileCableFluid extends BlockEntityCyclic implements ExtendedScreenH
     @Override
     public void load(CompoundTag tag) {
         filter.deserializeNBT(tag.getCompound("filter"));
-        ForgeFluidTankBase fluidh;
+        FluidTankBase fluidh;
         for (Direction dir : Direction.values()) {
             fluidh = flow.get(dir);
             if (tag.contains("fluid" + dir.toString())) {
@@ -137,7 +132,7 @@ public class TileCableFluid extends BlockEntityCyclic implements ExtendedScreenH
     @Override
     public void saveAdditional(CompoundTag tag) {
         tag.put("filter", filter.serializeNBT());
-        ForgeFluidTankBase fluidh;
+        FluidTankBase fluidh;
         for (Direction dir : Direction.values()) {
             fluidh = flow.get(dir);
             CompoundTag fluidtag = new CompoundTag();

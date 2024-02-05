@@ -42,7 +42,7 @@ public class EnergyBar {
         gg.blit(ENERGY_BAR, relX, relY, 0, 0, width, getHeight() - (int) (getHeight() * pct), 32, getHeight());
     }
 
-    public void renderHoveredToolTip(GuiGraphics ms, int mouseX, int mouseY, int energ) {
+    public void renderHoveredToolTip(GuiGraphics ms, int mouseX, int mouseY, long energ) {
         if (visible && this.isMouseover(mouseX, mouseY)) {
             String tt = energ + "/" + this.capacity;
             List<Component> list = new ArrayList<>();

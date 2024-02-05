@@ -5,8 +5,7 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.knsh.cyclic.block.BlockEntityCyclic;
 import net.knsh.cyclic.registry.CyclicBlocks;
 import net.knsh.cyclic.util.FluidHelpers;
-import net.knsh.flib.capabilities.ForgeFluidTankBase;
-import net.minecraft.client.multiplayer.ClientLevel;
+import net.knsh.flib.capabilities.FluidTankBase;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -22,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 public class TileTank extends BlockEntityCyclic {
     public static final long CAPACITY = 64 * FluidConstants.BUCKET;
     public static final long TRANSFER_FLUID_PER_TICK = FluidConstants.BUCKET / 20;
-    public ForgeFluidTankBase tank = new ForgeFluidTankBase(this, CAPACITY, p -> true) {
+    public FluidTankBase tank = new FluidTankBase(this, CAPACITY, p -> true) {
         @Override
         protected void onFinalCommit() {
             TileTank.this.setChanged();

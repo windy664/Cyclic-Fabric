@@ -13,7 +13,7 @@ import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.fluid.*;
 import net.knsh.flib.capabilities.FluidAction;
-import net.knsh.flib.capabilities.ForgeFluidTankBase;
+import net.knsh.flib.capabilities.FluidTankBase;
 import net.knsh.flib.data.Model3D;
 import net.knsh.flib.render.FluidRenderMap;
 import net.minecraft.client.Minecraft;
@@ -69,7 +69,7 @@ public class FluidHelpers {
         return COLOUR_DEFAULT;
     }
 
-    public static void extractSourceWaterloggedCauldron(Level level, BlockPos posTarget, ForgeFluidTankBase tank) {
+    public static void extractSourceWaterloggedCauldron(Level level, BlockPos posTarget, FluidTankBase tank) {
         if (tank == null) {
             return;
         }

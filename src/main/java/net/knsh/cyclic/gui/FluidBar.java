@@ -3,7 +3,7 @@ package net.knsh.cyclic.gui;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.fabricators_of_create.porting_lib.util.FluidStack;
 import net.knsh.cyclic.Cyclic;
-import net.knsh.flib.capabilities.ForgeFluidTankBase;
+import net.knsh.flib.capabilities.FluidTankBase;
 import net.knsh.flib.render.FluidRenderMap;
 import net.knsh.cyclic.util.FabricHelper;
 import net.minecraft.client.gui.Font;
@@ -54,7 +54,7 @@ public class FluidBar {
         this.width = width;
     }
 
-    public void draw(GuiGraphics gg, ForgeFluidTankBase tank) {
+    public void draw(GuiGraphics gg, FluidTankBase tank) {
         final int u = 0, v = 0, x = guiLeft + getX(), y = guiTop + getY();
         gg.blit(FLUID_WIDGET,
                 x, y, u, v,
@@ -78,7 +78,10 @@ public class FluidBar {
         //the .getBlitOffset() no longer exists.
         //good news we can drop vertexbuilder sprites and use gg blit this way
         //RenderUtils.drawTiledSprite(gg, xPosition,yPosition,yOffset, width - 2, fluidAmount - 2, sprite);
-        gg.blit(xPosition, yPosition + (maximum - desiredHeight), 0, desiredWidth, desiredHeight, sprite);
+        if (sprite != null) {
+            gg.blit(xPosition, yPosition + (maximum - desiredHeight), 0, desiredWidth, desiredHeight, sprite);
+        }
+
         if (tank.getResource().getFluid() == Fluids.WATER) {
            RenderSystem.setShaderColor(1, 1, 1, 1); //un-apply the water filter
         }

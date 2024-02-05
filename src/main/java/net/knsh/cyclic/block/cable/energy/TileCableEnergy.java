@@ -93,7 +93,7 @@ public class TileCableEnergy extends BlockEntityCyclic {
                 continue;
             }
             if (!this.isEnergyIncomingFromFace(outgoingSide)) {
-                moveEnergy(outgoingSide, TRANSFER_RATE.get(), this.getBlockState(), this);
+                moveEnergy(outgoingSide, TRANSFER_RATE.get());
             }
         }
     }

@@ -1,5 +1,6 @@
 package net.knsh.flib.util;
 
+import net.knsh.flib.core.BlockPosDim;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -22,4 +23,10 @@ public class LevelWorldUtil {
         return world.dimension().location().toString();
     }
 
+    public static boolean dimensionIsEqual(BlockPosDim targetPos, Level world) {
+        if (targetPos == null || targetPos.getDimension() == null) {
+            return false;
+        }
+        return targetPos.getDimension().equalsIgnoreCase(LevelWorldUtil.dimensionToString(world));
+    }
 }

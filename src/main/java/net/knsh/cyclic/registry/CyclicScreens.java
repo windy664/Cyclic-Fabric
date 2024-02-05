@@ -12,6 +12,9 @@ import net.knsh.cyclic.block.cable.item.ContainerCableItem;
 import net.knsh.cyclic.block.crafter.CrafterContainer;
 import net.knsh.cyclic.block.generatorfuel.ContainerGeneratorFuel;
 import net.knsh.cyclic.block.melter.ContainerMelter;
+import net.knsh.cyclic.block.wireless.energy.ContainerWirelessEnergy;
+import net.knsh.cyclic.block.wireless.fluid.ContainerWirelessFluid;
+import net.knsh.cyclic.block.wireless.item.ContainerWirelessItem;
 import net.knsh.cyclic.gui.ContainerBase;
 import net.knsh.cyclic.item.crafting.CraftingBagContainer;
 import net.knsh.cyclic.item.crafting.simple.CraftingStickContainer;
@@ -48,6 +51,12 @@ public class CyclicScreens {
             new ExtendedScreenHandlerType<>(((syncId, inventory, buf) -> new ContainerMelter(syncId, inventory.player.level(), buf.readBlockPos(), inventory, inventory.player))));
     public static MenuType<ContainerFilterCard> FILTER_DATA = registerScreen("filter_data",
             new ExtendedScreenHandlerType(((syncId, inventory, buf) -> new ContainerFilterCard(syncId, inventory, inventory.player))));
+    public static MenuType<ContainerWirelessEnergy> WIRELESS_ENERGY = registerScreen("wireless_energy",
+            new ExtendedScreenHandlerType(((syncId, inventory, buf) -> new ContainerWirelessEnergy(syncId, inventory.player.level(), buf.readBlockPos(), inventory, inventory.player))));
+    public static MenuType<ContainerWirelessItem> WIRELESS_ITEM = registerScreen("wireless_item",
+            new ExtendedScreenHandlerType(((syncId, inventory, buf) -> new ContainerWirelessItem(syncId, inventory.player.level(), buf.readBlockPos(), inventory, inventory.player))));
+    public static MenuType<ContainerWirelessFluid> WIRELESS_FLUID = registerScreen("wireless_fluid",
+            new ExtendedScreenHandlerType(((syncId, inventory, buf) -> new ContainerWirelessFluid(syncId, inventory.player.level(), buf.readBlockPos(), inventory, inventory.player))));
 
     private static <T extends ContainerBase> MenuType<T> registerScreen(String id, ExtendedScreenHandlerType factory) {
         return Registry.register(BuiltInRegistries.MENU, new ResourceLocation(Cyclic.MOD_ID, id), factory);

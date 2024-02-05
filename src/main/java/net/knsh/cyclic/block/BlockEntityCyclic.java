@@ -16,7 +16,7 @@ import net.knsh.cyclic.block.beaconpotion.BeamParams;
 import net.knsh.cyclic.block.cable.energy.TileCableEnergy;
 import net.knsh.cyclic.item.datacard.filter.FilterCardItem;
 import net.knsh.flib.cap.CustomEnergyStorageUtil;
-import net.knsh.flib.capabilities.ForgeFluidTankBase;
+import net.knsh.flib.capabilities.FluidTankBase;
 import net.knsh.flib.core.IHasEnergy;
 import net.knsh.flib.core.IHasFluid;
 import net.knsh.flib.util.SoundUtil;
@@ -114,15 +114,15 @@ public abstract class BlockEntityCyclic extends BlockEntity implements Container
         }
     }
 
-    protected boolean moveEnergy(Direction myFacingDir, int quantity, BlockState blockState, BlockEntity blockEntity) {
-        return moveEnergy(myFacingDir, worldPosition.relative(myFacingDir), quantity, blockState, blockEntity);
+    protected boolean moveEnergy(Direction myFacingDir, int quantity) {
+        return moveEnergy(myFacingDir, worldPosition.relative(myFacingDir), quantity);
     }
 
-    protected boolean moveEnergy(Direction myFacingDir, BlockPos posTarget, int quantity, BlockState blockState, BlockEntity blockEntity) {
+    protected boolean moveEnergy(Direction myFacingDir, BlockPos posTarget, int quantity) {
         if (this.level.isClientSide) {
             return false; //important to not desync cables
         }
-        EnergyStorage handlerHere = EnergyStorage.SIDED.find(level, worldPosition, blockState, blockEntity, myFacingDir);
+        EnergyStorage handlerHere = EnergyStorage.SIDED.find(level, worldPosition, myFacingDir);
         if (handlerHere == null || handlerHere.getAmount() == 0) {
             return false;
         }
@@ -157,7 +157,7 @@ public abstract class BlockEntityCyclic extends BlockEntity implements Container
         return false;
     }
 
-    public void moveFluids(Direction myFacingDir, BlockPos posTarget, int toFlow, ForgeFluidTankBase tank) {
+    public void moveFluids(Direction myFacingDir, BlockPos posTarget, int toFlow, FluidTankBase tank) {
         // posTarget = pos.offset(myFacingDir);
         if (tank == null || tank.getSlot(0).getAmount() <= 0) {
             return;
@@ -347,13 +347,14 @@ public abstract class BlockEntityCyclic extends BlockEntity implements Container
         Collections.shuffle(rawList);
         for (Integer i : rawList) {
             Direction exportToSide = Direction.values()[i];
-            moveEnergy(exportToSide, MENERGY / 2, this.getBlockState(), this);
+            moveEnergy(exportToSide, worldPosition, MENERGY / 2);
         }
     }
 
     @Override
     public long getEnergy() {
-        EnergyStorage energyLookup = getEnergyCache().find(null);
+        EnergyStorage energyLookup = EnergyStorage.SIDED.find(level, worldPosition, null);
+        //EnergyStorage energyLookup = getEnergyCache().find(null);
         return energyLookup != null ? energyLookup.getAmount() : 0;
     }
 

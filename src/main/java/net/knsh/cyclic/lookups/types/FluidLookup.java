@@ -1,7 +1,7 @@
 package net.knsh.cyclic.lookups.types;
 
-import net.knsh.flib.capabilities.ForgeFluidTankBase;
+import net.knsh.flib.capabilities.FluidTankBase;
 
 public interface FluidLookup {
-    ForgeFluidTankBase getFluidTank();
+    FluidTankBase getFluidTank();
 }

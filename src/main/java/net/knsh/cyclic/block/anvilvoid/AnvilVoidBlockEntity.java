@@ -6,7 +6,7 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.knsh.cyclic.block.BlockEntityCyclic;
-import net.knsh.flib.capabilities.FluidTankBase;
+import net.knsh.flib.capabilities.LegacyFluidTankBase;
 import net.knsh.cyclic.registry.CyclicBlocks;
 import net.knsh.flib.ImplementedInventory;
 import net.minecraft.core.BlockPos;
@@ -37,7 +37,7 @@ public class AnvilVoidBlockEntity extends BlockEntityCyclic implements ExtendedS
     public static int FLUIDPAY = 25;
 
     private final NonNullList<ItemStack> inventory = NonNullList.withSize(2, ItemStack.EMPTY);
-    private final FluidTankBase tank = new FluidTankBase(this, (int) CAPACITY) {};
+    private final LegacyFluidTankBase tank = new LegacyFluidTankBase(this, (int) CAPACITY) {};
 
     public AnvilVoidBlockEntity(BlockPos pos, BlockState state) {
         super(CyclicBlocks.ANVILVOID.blockEntity(), pos, state);

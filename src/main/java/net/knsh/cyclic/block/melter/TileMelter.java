@@ -7,7 +7,7 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.knsh.cyclic.block.BlockEntityCyclic;
 import net.knsh.flib.cap.CustomEnergyStorageUtil;
-import net.knsh.flib.capabilities.ForgeFluidTankBase;
+import net.knsh.flib.capabilities.FluidTankBase;
 import net.knsh.cyclic.lookups.types.FluidLookup;
 import net.knsh.cyclic.lookups.types.ItemHandlerLookup;
 import net.knsh.cyclic.registry.CyclicBlocks;
@@ -37,7 +37,7 @@ public class TileMelter extends BlockEntityCyclic implements ExtendedScreenHandl
     static final int MAX = 64000;
     public static final int CAPACITY = (int) (64 * FluidConstants.BUCKET);
     public static final int TRANSFER_FLUID_PER_TICK = (int) (FluidConstants.BUCKET / 20);
-    public ForgeFluidTankBase tank = new ForgeFluidTankBase(this, CAPACITY, isFluidValid()) {
+    public FluidTankBase tank = new FluidTankBase(this, CAPACITY, isFluidValid()) {
         @Override
         protected void onFinalCommit() {
             TileMelter.this.setChanged();
@@ -139,7 +139,7 @@ public class TileMelter extends BlockEntityCyclic implements ExtendedScreenHandl
     }
 
     @Override
-    public ForgeFluidTankBase getFluidTank() {
+    public FluidTankBase getFluidTank() {
         return this.tank;
     }
 

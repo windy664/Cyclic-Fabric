@@ -1,6 +1,5 @@
 package net.knsh.cyclic.block.tank;
 
-import io.github.fabricators_of_create.porting_lib.util.FluidStack;
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
@@ -13,7 +12,6 @@ import net.knsh.cyclic.Cyclic;
 import net.knsh.cyclic.block.BlockCyclic;
 import net.knsh.cyclic.registry.CyclicBlocks;
 import net.knsh.cyclic.registry.CyclicItems;
-import net.knsh.flib.cap.item.FluidHandlerLookupStack;
 import net.knsh.flib.util.ItemStackUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -151,8 +149,7 @@ public class BlockFluidTank extends BlockCyclic {
 
     @Override
     public void registerLookups() {
-        // Who knew porting item fluid containers would be so challenging
-        FluidStorage.ITEM.registerForItems((ItemBlockTank::getFluidStorage), CyclicItems.TANK);
+        FluidStorage.ITEM.registerForItems(ItemBlockTank::getFluidStorage, CyclicItems.TANK);
         FluidStorage.SIDED.registerForBlockEntity(((blockEntity, direction) -> blockEntity.tank), CyclicBlocks.TANK.blockEntity());
     }
 }
