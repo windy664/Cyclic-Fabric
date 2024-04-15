@@ -9,6 +9,11 @@ public class CyclicBlockEntities {
         ItemStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.getStorage(), CyclicBlocks.HOPPER.blockEntity());
 
         FluidStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.getStorage(), CyclicBlocks.FLUIDHOPPER.blockEntity());
-        FluidStorage.SIDED.registerForBlockEntity(((blockEntity, direction) -> blockEntity.flow.get(direction)), CyclicBlocks.FLUID_PIPE.blockEntity());
+        FluidStorage.SIDED.registerForBlockEntity(((blockEntity, direction) -> {
+            if (direction != null) {
+                return blockEntity.flow.get(direction);
+            }
+            return null;
+        }), CyclicBlocks.FLUID_PIPE.blockEntity());
     }
 }
