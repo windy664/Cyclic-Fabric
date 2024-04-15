@@ -17,22 +17,22 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"net.knsh.cyclic.Cyclic"
+			"com.lothrazar.cyclic.Cyclic"
 		],
 		"client": [
-			"net.knsh.cyclic.client.CyclicClient"
+			"com.lothrazar.cyclic.client.CyclicClient"
 		],
 		"fabric-datagen": [
-			"net.knsh.cyclic.datagen.CyclicDataGenerator"
+			"com.lothrazar.cyclic.datagen.CyclicDataGenerator"
 		],
 		"jei_mod_plugin": [
-			"net.knsh.cyclic.compat.jei.CyclicPluginJEI"
+			"com.lothrazar.cyclic.compat.jei.CyclicPluginJEI"
 		],
 		"rei_client": [
-			"net.knsh.cyclic.compat.rei.CyclicPluginREI"
+			"com.lothrazar.cyclic.compat.rei.CyclicPluginREI"
 		],
 		"emi": [
-			"net.knsh.cyclic.compat.emi.CyclicPluginEMI"
+			"com.lothrazar.cyclic.compat.emi.CyclicPluginEMI"
 		]
 	},
 	"mixins": [

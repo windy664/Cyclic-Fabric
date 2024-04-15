@@ -64,7 +64,7 @@ dependencies {
 
 	//// Dev env tweaks
 	modLocalRuntime "com.terraformersmc:modmenu:${project.modmenu_version}"
-	modRuntimeOnly "me.djtheredstoner:DevAuth-fabric:${project.devauth_version}"
+	//modRuntimeOnly "me.djtheredstoner:DevAuth-fabric:${project.devauth_version}"
 	modImplementation "maven.modrinth:5WeWGLoJ:v8.0.2-1.20.1-Fabric"
 
 	//// Recipe Viewers
