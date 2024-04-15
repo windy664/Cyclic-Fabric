@@ -1,7 +1,7 @@
 package com.lothrazar.cyclic.block.anvilvoid;
 
 import com.lothrazar.cyclic.gui.ContainerBase;
-import com.lothrazar.cyclic.Cyclic;
+import com.lothrazar.cyclic.ModCyclic;
 import com.lothrazar.cyclic.registry.CyclicScreens;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;
@@ -24,7 +24,7 @@ public class AnvilVoidContainer extends ContainerBase {
     public AnvilVoidContainer(int syncId, Inventory playerInventory, Container inventorysent, Level world, BlockPos pos) {
         super(CyclicScreens.ANVIL_VOID, syncId);
 
-        Cyclic.LOGGER.info(String.valueOf(inventorysent.getContainerSize()) + world.isClientSide());
+        ModCyclic.LOGGER.info(String.valueOf(inventorysent.getContainerSize()) + world.isClientSide());
         tile = (AnvilVoidBlockEntity) world.getBlockEntity(pos);
         this.playerEntity = playerInventory.player;
         this.playerInventory = playerInventory;

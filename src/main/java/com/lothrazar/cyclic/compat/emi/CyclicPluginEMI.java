@@ -5,7 +5,7 @@ import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.render.EmiRenderable;
 import dev.emi.emi.api.stack.EmiStack;
-import com.lothrazar.cyclic.Cyclic;
+import com.lothrazar.cyclic.ModCyclic;
 import com.lothrazar.cyclic.block.melter.RecipeMelter;
 import com.lothrazar.cyclic.registry.CyclicBlocks;
 import com.lothrazar.cyclic.registry.CyclicRecipeTypes;
@@ -36,7 +36,7 @@ public class CyclicPluginEMI implements EmiPlugin {
     }
 
     private static EmiRecipeCategory register(String name, EmiRenderable icon) {
-        ResourceLocation id = new ResourceLocation(Cyclic.MOD_ID, name);
+        ResourceLocation id = new ResourceLocation(ModCyclic.MODID, name);
         EmiRecipeCategory category = new EmiRecipeCategory(id, icon);
         ALL.put(id, category);
         return category;

@@ -1,9 +1,10 @@
 package com.lothrazar.cyclic.util;
 
+import com.lothrazar.cyclic.ModCyclic;
 import com.lothrazar.cyclic.fluid.*;
-import com.lothrazar.flib.data.Model3D;
+import com.lothrazar.library.data.Model3D;
 import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
-import io.github.fabricators_of_create.porting_lib.util.FluidStack;
+import io.github.fabricators_of_create.porting_lib.fluids.FluidStack;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering;
@@ -12,10 +13,9 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
-import com.lothrazar.cyclic.Cyclic;
-import com.lothrazar.flib.capabilities.FluidAction;
-import com.lothrazar.flib.capabilities.FluidTankBase;
-import com.lothrazar.flib.render.FluidRenderMap;
+import com.lothrazar.library.capabilities.FluidAction;
+import com.lothrazar.library.capabilities.FluidTankBase;
+import com.lothrazar.library.render.FluidRenderMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
@@ -191,7 +191,7 @@ public class FluidHelpers {
             return result <= 0;
         }
         catch (Exception e) {
-            Cyclic.LOGGER.error("A fluid tank had an issue when we tried to fill", e);
+            ModCyclic.LOGGER.error("A fluid tank had an issue when we tried to fill", e);
             //charset crashes here i guess
             //https://github.com/PrinceOfAmber/Cyclic/issues/605
             // https://github.com/PrinceOfAmber/Cyclic/issues/605https://pastebin.com/YVtMYsF6

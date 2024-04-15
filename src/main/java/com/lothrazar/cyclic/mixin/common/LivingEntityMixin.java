@@ -4,8 +4,8 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.lothrazar.cyclic.enchant.ReachEnchant;
 import com.lothrazar.cyclic.event.fabric.BeforeDamageCallback;
-import com.lothrazar.flib.util.AttributesUtil;
-import com.lothrazar.flib.util.EnchantUtil;
+import com.lothrazar.library.util.AttributesUtil;
+import com.lothrazar.library.util.EnchantUtil;
 import com.lothrazar.cyclic.registry.CyclicEnchants;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -38,10 +38,10 @@ public abstract class LivingEntityMixin {
         if (!(entity instanceof Player player)) return;
 
         if (ReachEnchant.CFG.get()) {
-            ItemStack armor = EnchantUtil.getFirstArmorStackWithEnchant(player, CyclicEnchants.REACH);
+            ItemStack armor = EnchantUtil.getFirstArmorStackWithEnchant(player, CyclicEnchants.REACH.get());
             int level = 0;
             if (!armor.isEmpty()) {
-                level = EnchantmentHelper.getItemEnchantmentLevel(CyclicEnchants.REACH, armor);
+                level = EnchantmentHelper.getItemEnchantmentLevel(CyclicEnchants.REACH.get(), armor);
             }
             if (level > 0) {
                 AttributesUtil.setPlayerReach(ReachEnchant.ENCHANTMENT_REACH_ID, player, ReachEnchant.REACH_BOOST.get());

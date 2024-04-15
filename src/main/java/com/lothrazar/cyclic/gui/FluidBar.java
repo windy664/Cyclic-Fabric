@@ -1,10 +1,10 @@
 package com.lothrazar.cyclic.gui;
 
+import com.lothrazar.cyclic.ModCyclic;
 import com.mojang.blaze3d.systems.RenderSystem;
-import io.github.fabricators_of_create.porting_lib.util.FluidStack;
-import com.lothrazar.cyclic.Cyclic;
-import com.lothrazar.flib.capabilities.FluidTankBase;
-import com.lothrazar.flib.render.FluidRenderMap;
+import io.github.fabricators_of_create.porting_lib.fluids.FluidStack;
+import com.lothrazar.library.capabilities.FluidTankBase;
+import com.lothrazar.library.render.FluidRenderMap;
 import com.lothrazar.cyclic.util.FabricHelper;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FluidBar {
-    public static final ResourceLocation FLUID_WIDGET = new ResourceLocation(Cyclic.MOD_ID, "textures/gui/fluid.png");
+    public static final ResourceLocation FLUID_WIDGET = new ResourceLocation(ModCyclic.MODID, "textures/gui/fluid.png");
     public String emtpyTooltip = "0";
     private final Font font;
     private final int x;

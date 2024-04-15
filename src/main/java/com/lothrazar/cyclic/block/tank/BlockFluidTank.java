@@ -1,5 +1,6 @@
 package com.lothrazar.cyclic.block.tank;
 
+import com.lothrazar.cyclic.ModCyclic;
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
@@ -8,11 +9,10 @@ import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
-import com.lothrazar.cyclic.Cyclic;
 import com.lothrazar.cyclic.block.BlockCyclic;
 import com.lothrazar.cyclic.registry.CyclicBlocks;
 import com.lothrazar.cyclic.registry.CyclicItems;
-import com.lothrazar.flib.util.ItemStackUtil;
+import com.lothrazar.library.util.ItemStackUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -121,7 +121,7 @@ public class BlockFluidTank extends BlockCyclic {
             }
         }
         catch (Exception e) {
-            Cyclic.LOGGER.error("Error during fill from item ", e);
+            ModCyclic.LOGGER.error("Error during fill from item ", e);
         }
         //set default state
         state = state.setValue(TANK_ABOVE, false).setValue(TANK_BELOW, false);
@@ -132,7 +132,7 @@ public class BlockFluidTank extends BlockCyclic {
     public void playerDestroy(Level world, Player player, BlockPos pos, BlockState state, BlockEntity ent, ItemStack stackTool) {
         super.playerDestroy(world, player, pos, state, ent, stackTool);
         ItemStack stack = new ItemStack(this);
-        Cyclic.LOGGER.info(stack.getDescriptionId());
+        ModCyclic.LOGGER.info(stack.getDescriptionId());
         ContainerItemContext ctx = ContainerItemContext.withConstant(stack);
         if (ent != null) {
             Storage<FluidVariant> fluidInStack = ctx.find(FluidStorage.ITEM);

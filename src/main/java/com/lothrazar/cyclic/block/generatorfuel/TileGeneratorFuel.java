@@ -8,8 +8,8 @@ import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandle
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
-import com.lothrazar.flib.cap.CustomEnergyStorageUtil;
-import com.lothrazar.flib.cap.ItemStackHandlerWrapper;
+import com.lothrazar.library.cap.CustomEnergyStorageUtil;
+import com.lothrazar.library.cap.ItemStackHandlerWrapper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;

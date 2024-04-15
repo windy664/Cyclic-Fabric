@@ -5,7 +5,7 @@ import com.lothrazar.cyclic.gui.EnergyBar;
 import com.lothrazar.cyclic.gui.ScreenBase;
 import com.lothrazar.cyclic.gui.TextureEnum;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import com.lothrazar.flib.util.ChatUtil;
+import com.lothrazar.library.util.ChatUtil;
 import com.lothrazar.cyclic.network.PacketIdentifiers;
 import com.lothrazar.cyclic.network.packets.PacketTileData;
 import com.lothrazar.cyclic.registry.CyclicTextures;

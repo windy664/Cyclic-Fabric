@@ -1,2 +1,3 @@
 accessWidener v2 named
 mutable field net/minecraft/world/entity/Mob target Lnet/minecraft/world/entity/LivingEntity;
+accessible method net/minecraft/world/level/block/Block popExperience (Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;I)V

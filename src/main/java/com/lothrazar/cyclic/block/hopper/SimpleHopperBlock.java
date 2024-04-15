@@ -1,6 +1,6 @@
 package com.lothrazar.cyclic.block.hopper;
 
-import com.lothrazar.cyclic.Cyclic;
+import com.lothrazar.cyclic.ModCyclic;
 import com.lothrazar.cyclic.block.BlockCyclic;
 import com.lothrazar.cyclic.registry.CyclicBlocks;
 import net.minecraft.core.BlockPos;
@@ -71,7 +71,7 @@ public class SimpleHopperBlock extends BlockCyclic {
             return Blocks.HOPPER.getShape(state, worldIn, pos, context);
         }
         catch (Exception e) {
-            Cyclic.LOGGER.error("An unknown has broken the vanilla hopper, causing compatibility issues", e);
+            ModCyclic.LOGGER.error("An unknown has broken the vanilla hopper, causing compatibility issues", e);
             return Shapes.block();
         }
     }
@@ -81,7 +81,7 @@ public class SimpleHopperBlock extends BlockCyclic {
             return Blocks.HOPPER.getInteractionShape(state, worldIn, pos);
         }
         catch (Exception e) {
-            Cyclic.LOGGER.error("An unknown has broken the vanilla hopper, causing compatibility issues", e);
+            ModCyclic.LOGGER.error("An unknown has broken the vanilla hopper, causing compatibility issues", e);
             return Shapes.block();
         }
     }

@@ -6,7 +6,7 @@ import io.github.fabricators_of_create.porting_lib.transfer.item.SlottedStackSto
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
-import com.lothrazar.cyclic.Cyclic;
+import com.lothrazar.cyclic.ModCyclic;
 import com.lothrazar.cyclic.block.cable.CableBase;
 import com.lothrazar.cyclic.block.cable.EnumConnectType;
 import com.lothrazar.cyclic.block.cable.ShapeCache;
@@ -146,7 +146,7 @@ public class BlockCableItem extends CableBase implements Lookup {
             if (!CableBase.isCableBlocked(blockEntity.getBlockState(), direction)) {
                 return blockEntity.flow.get(direction);
             }
-            Cyclic.LOGGER.info("GAB!");
+            ModCyclic.LOGGER.info("GAB!");
             return null;
         }, CyclicBlocks.ITEM_PIPE.blockEntity());
     }

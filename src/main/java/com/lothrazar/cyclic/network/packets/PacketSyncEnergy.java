@@ -1,6 +1,6 @@
 package com.lothrazar.cyclic.network.packets;
 
-import com.lothrazar.flib.core.IHasEnergy;
+import com.lothrazar.library.core.IHasEnergy;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.client.Minecraft;

@@ -3,7 +3,7 @@ package com.lothrazar.cyclic.block.hopperfluid;
 import com.lothrazar.cyclic.block.BlockCyclic;
 import com.lothrazar.cyclic.block.hopper.SimpleHopperBlock;
 import com.lothrazar.cyclic.registry.CyclicBlocks;
-import com.lothrazar.flib.block.EntityBlockFlib;
+import com.lothrazar.library.block.EntityBlockFlib;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;

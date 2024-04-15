@@ -1,6 +1,6 @@
 package com.lothrazar.cyclic.compat.jei;
 
-import io.github.fabricators_of_create.porting_lib.util.FluidStack;
+import io.github.fabricators_of_create.porting_lib.fluids.FluidStack;
 import mezz.jei.api.fabric.ingredients.fluids.IJeiFluidIngredient;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.material.Fluid;

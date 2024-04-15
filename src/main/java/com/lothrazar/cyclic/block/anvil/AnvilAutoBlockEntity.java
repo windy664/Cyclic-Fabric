@@ -2,7 +2,7 @@ package com.lothrazar.cyclic.block.anvil;
 
 import com.lothrazar.cyclic.porting.neoforge.items.ForgeImplementedInventory;
 import com.lothrazar.cyclic.registry.CyclicBlocks;
-import com.lothrazar.flib.util.ItemStackUtil;
+import com.lothrazar.library.util.ItemStackUtil;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import com.lothrazar.cyclic.block.BlockEntityCyclic;

@@ -1,13 +1,13 @@
 package com.lothrazar.cyclic.block.wireless.energy;
 
-import com.lothrazar.cyclic.Cyclic;
+import com.lothrazar.cyclic.ModCyclic;
 import com.lothrazar.cyclic.block.BlockEntityCyclic;
 import com.lothrazar.cyclic.data.PreviewOutlineType;
 import com.lothrazar.cyclic.item.datacard.LocationGpsCard;
 import com.lothrazar.cyclic.registry.CyclicBlocks;
-import com.lothrazar.flib.cap.CustomEnergyStorageUtil;
-import com.lothrazar.flib.core.BlockPosDim;
-import com.lothrazar.flib.util.LevelWorldUtil;
+import com.lothrazar.library.cap.CustomEnergyStorageUtil;
+import com.lothrazar.library.core.BlockPosDim;
+import com.lothrazar.library.util.LevelWorldUtil;
 import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandler;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
@@ -127,7 +127,7 @@ public class TileWirelessEnergy extends BlockEntityCyclic implements ExtendedScr
                             null
                     );
 
-                    Cyclic.LOGGER.info(String.valueOf(energy.getAmount()));
+                    ModCyclic.LOGGER.info(String.valueOf(energy.getAmount()));
                     if (transfered > 0) {
                         used.add(loc);
                         moved = true;

@@ -2,7 +2,7 @@ package com.lothrazar.cyclic.compat.rei.categories;
 
 import com.lothrazar.cyclic.compat.rei.CyclicDisplayREI;
 import com.lothrazar.cyclic.registry.CyclicBlocks;
-import com.lothrazar.flib.util.ChatUtil;
+import com.lothrazar.library.util.ChatUtil;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
@@ -11,7 +11,7 @@ import me.shedaniel.rei.api.client.gui.widgets.Widgets;
 import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
-import com.lothrazar.cyclic.Cyclic;
+import com.lothrazar.cyclic.ModCyclic;
 import com.lothrazar.cyclic.block.melter.RecipeMelter;
 import com.lothrazar.cyclic.compat.rei.CyclicPluginREI;
 import net.minecraft.network.chat.Component;
@@ -22,7 +22,7 @@ import java.util.List;
 
 public class MelterCategory implements DisplayCategory<CyclicDisplayREI<RecipeMelter>> {
     private static final int FONT = 10592673;
-    public static final ResourceLocation TEXTURE = new ResourceLocation(Cyclic.MOD_ID, "textures/jei/melter_recipe.png");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(ModCyclic.MODID, "textures/jei/melter_recipe.png");
 
     @Override
     public CategoryIdentifier<? extends CyclicDisplayREI<RecipeMelter>> getCategoryIdentifier() {

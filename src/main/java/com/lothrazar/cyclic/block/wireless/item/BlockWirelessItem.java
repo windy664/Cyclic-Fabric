@@ -3,7 +3,7 @@ package com.lothrazar.cyclic.block.wireless.item;
 import com.lothrazar.cyclic.block.BlockCyclic;
 import com.lothrazar.cyclic.registry.CyclicBlocks;
 import com.lothrazar.cyclic.registry.CyclicScreens;
-import com.lothrazar.flib.block.EntityBlockFlib;
+import com.lothrazar.library.block.EntityBlockFlib;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.BlockPos;

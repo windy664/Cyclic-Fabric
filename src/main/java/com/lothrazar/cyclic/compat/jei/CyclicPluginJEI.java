@@ -1,12 +1,12 @@
 package com.lothrazar.cyclic.compat.jei;
 
+import com.lothrazar.cyclic.ModCyclic;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.registration.*;
 import mezz.jei.api.runtime.IJeiRuntime;
-import com.lothrazar.cyclic.Cyclic;
 import com.lothrazar.cyclic.block.melter.ContainerMelter;
 import com.lothrazar.cyclic.block.melter.ScreenMelter;
 import com.lothrazar.cyclic.compat.jei.categories.MelterRecipeCategory;
@@ -27,7 +27,7 @@ import java.util.Objects;
 @JeiPlugin
 public class CyclicPluginJEI implements IModPlugin {
     private static final int PLAYER_INV_SIZE = 4 * 9;
-    private static final ResourceLocation ID = new ResourceLocation(Cyclic.MOD_ID, "jei");
+    private static final ResourceLocation ID = new ResourceLocation(ModCyclic.MODID, "jei");
 
     @Override
     public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {}

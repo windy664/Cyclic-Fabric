@@ -4,7 +4,7 @@ import com.lothrazar.cyclic.lookups.types.ItemShareTag;
 import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import com.lothrazar.flib.cap.CustomEnergyStorageUtil;
+import com.lothrazar.library.cap.CustomEnergyStorageUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;

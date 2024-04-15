@@ -3,7 +3,7 @@ package com.lothrazar.cyclic.block.wireless.energy;
 import com.lothrazar.cyclic.gui.ContainerBase;
 import com.lothrazar.cyclic.registry.CyclicBlocks;
 import com.lothrazar.cyclic.registry.CyclicScreens;
-import com.lothrazar.flib.core.Const;
+import com.lothrazar.library.core.Const;
 import io.github.fabricators_of_create.porting_lib.transfer.item.SlotItemHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;

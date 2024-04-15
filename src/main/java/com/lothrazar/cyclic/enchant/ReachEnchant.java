@@ -1,7 +1,8 @@
 package com.lothrazar.cyclic.enchant;
 
-import com.lothrazar.flib.enchant.EnchantmentCyclic;
+import com.lothrazar.library.enchant.EnchantmentCyclic;
 import com.lothrazar.cyclic.registry.CyclicEnchants;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -16,8 +17,8 @@ public class ReachEnchant extends EnchantmentCyclic {
 
     public static final UUID ENCHANTMENT_REACH_ID = UUID.fromString("1abcdef2-eff2-4a81-b92b-a1cb95f115c6");
 
-    public ReachEnchant() {
-        super(Enchantment.Rarity.RARE, EnchantmentCategory.WEARABLE, CyclicEnchants.ARMOR_SLOTS);
+    public ReachEnchant(Rarity rarity, EnchantmentCategory category, EquipmentSlot... applicableSlots) {
+        super(rarity, category, applicableSlots);
     }
 
     @Override

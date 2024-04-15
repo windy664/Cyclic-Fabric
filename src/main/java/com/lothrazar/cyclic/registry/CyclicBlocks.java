@@ -1,5 +1,6 @@
 package com.lothrazar.cyclic.registry;
 
+import com.lothrazar.cyclic.ModCyclic;
 import com.lothrazar.cyclic.block.anvilvoid.AnvilVoidBlockEntity;
 import com.lothrazar.cyclic.block.battery.BatteryBlock;
 import com.lothrazar.cyclic.block.battery.BatteryBlockEntity;
@@ -14,7 +15,6 @@ import com.lothrazar.cyclic.block.tank.TileTank;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
-import com.lothrazar.cyclic.Cyclic;
 import com.lothrazar.cyclic.block.antipotion.AntiBeaconBlock;
 import com.lothrazar.cyclic.block.antipotion.AntiBeaconBlockEntity;
 import com.lothrazar.cyclic.block.antipotion.MilkSpongeBlock;
@@ -92,7 +92,7 @@ public class CyclicBlocks {
 
     private static Block register(String id, Block block) {
         BLOCK_INSTANCE.add(block);
-        return Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Cyclic.MOD_ID, id), block);
+        return Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(ModCyclic.MODID, id), block);
     }
 
     private static <T extends BlockEntity> BaseBlockEntity<T> registerBaseBlockEntity(String id, FabricBlockEntityTypeBuilder.Factory<T> factory, Block block) {
@@ -100,7 +100,7 @@ public class CyclicBlocks {
         ITEM_INSTANCE.add(registeredBlock);
 
         return new BaseBlockEntity<>(
-                Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(Cyclic.MOD_ID, id), FabricBlockEntityTypeBuilder.create(factory, block).build()),
+                Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(ModCyclic.MODID, id), FabricBlockEntityTypeBuilder.create(factory, block).build()),
                 registeredBlock
         );
     }
@@ -110,9 +110,9 @@ public class CyclicBlocks {
         ITEM_INSTANCE.add(registeredBlock);
 
         ItemBlockEntity<T> itemBlockEntity = new ItemBlockEntity<>(
-                Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(Cyclic.MOD_ID, id), FabricBlockEntityTypeBuilder.create(factory, block).build()),
+                Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(ModCyclic.MODID, id), FabricBlockEntityTypeBuilder.create(factory, block).build()),
                 registeredBlock,
-                Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(Cyclic.MOD_ID, id), new BlockItem(block, new FabricItemSettings()))
+                Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(ModCyclic.MODID, id), new BlockItem(block, new FabricItemSettings()))
         );
 
         return itemBlockEntity;
@@ -124,7 +124,7 @@ public class CyclicBlocks {
 
         return new ItemBlock(
                 registeredBlock,
-                Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(Cyclic.MOD_ID, id), new BlockItem(block, new FabricItemSettings()))
+                Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(ModCyclic.MODID, id), new BlockItem(block, new FabricItemSettings()))
         );
     }
 

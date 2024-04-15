@@ -2,7 +2,7 @@ package com.lothrazar.cyclic.block.anvilvoid;
 
 import com.lothrazar.cyclic.block.BlockCyclic;
 import com.lothrazar.cyclic.registry.CyclicBlocks;
-import com.lothrazar.flib.block.EntityBlockFlib;
+import com.lothrazar.library.block.EntityBlockFlib;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.Containers;

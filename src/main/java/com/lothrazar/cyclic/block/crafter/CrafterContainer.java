@@ -1,7 +1,7 @@
 package com.lothrazar.cyclic.block.crafter;
 
 import com.lothrazar.cyclic.gui.ContainerBase;
-import com.lothrazar.flib.core.Const;
+import com.lothrazar.library.core.Const;
 import com.lothrazar.cyclic.registry.CyclicScreens;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;

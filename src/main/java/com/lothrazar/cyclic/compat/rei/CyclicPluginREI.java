@@ -1,8 +1,9 @@
 package com.lothrazar.cyclic.compat.rei;
 
+import com.lothrazar.cyclic.ModCyclic;
 import com.lothrazar.cyclic.compat.rei.categories.MelterCategory;
 import com.lothrazar.cyclic.registry.CyclicBlocks;
-import io.github.fabricators_of_create.porting_lib.util.FluidStack;
+import io.github.fabricators_of_create.porting_lib.fluids.FluidStack;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
@@ -11,7 +12,6 @@ import me.shedaniel.rei.api.client.registry.screen.ScreenRegistry;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import me.shedaniel.rei.api.common.util.EntryStacks;
-import com.lothrazar.cyclic.Cyclic;
 import com.lothrazar.cyclic.block.melter.RecipeMelter;
 import com.lothrazar.cyclic.block.melter.ScreenMelter;
 import com.lothrazar.cyclic.registry.CyclicRecipeTypes;
@@ -23,7 +23,7 @@ import java.util.Collections;
 import java.util.Objects;
 
 public class CyclicPluginREI implements REIClientPlugin {
-    public static final CategoryIdentifier<CyclicDisplayREI<RecipeMelter>> MELTER = CategoryIdentifier.of(Cyclic.MOD_ID, "melter");
+    public static final CategoryIdentifier<CyclicDisplayREI<RecipeMelter>> MELTER = CategoryIdentifier.of(ModCyclic.MODID, "melter");
 
     @Override
     public void registerCategories(CategoryRegistry registry) {

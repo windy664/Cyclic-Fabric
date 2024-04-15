@@ -1,11 +1,11 @@
 package com.lothrazar.cyclic.block.tank;
 
-import io.github.fabricators_of_create.porting_lib.util.FluidStack;
+import io.github.fabricators_of_create.porting_lib.fluids.FluidStack;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import com.lothrazar.cyclic.block.BlockEntityCyclic;
 import com.lothrazar.cyclic.registry.CyclicBlocks;
 import com.lothrazar.cyclic.util.FluidHelpers;
-import com.lothrazar.flib.capabilities.FluidTankBase;
+import com.lothrazar.library.capabilities.FluidTankBase;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

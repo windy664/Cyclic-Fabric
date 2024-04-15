@@ -4,7 +4,7 @@ import com.lothrazar.cyclic.gui.ButtonMachineField;
 import com.lothrazar.cyclic.gui.EnergyBar;
 import com.lothrazar.cyclic.gui.ScreenBase;
 import com.lothrazar.cyclic.registry.CyclicTextures;
-import com.lothrazar.flib.core.Const;
+import com.lothrazar.library.core.Const;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;

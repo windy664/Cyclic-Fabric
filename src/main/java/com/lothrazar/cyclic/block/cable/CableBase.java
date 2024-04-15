@@ -4,8 +4,8 @@ import com.google.common.collect.Maps;
 import com.lothrazar.cyclic.registry.CyclicBlocks;
 import com.lothrazar.cyclic.registry.CyclicItems;
 import com.lothrazar.cyclic.registry.CyclicSounds;
-import com.lothrazar.flib.util.SoundUtil;
-import com.lothrazar.cyclic.Cyclic;
+import com.lothrazar.library.util.SoundUtil;
+import com.lothrazar.cyclic.ModCyclic;
 import com.lothrazar.cyclic.block.BlockCyclic;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
@@ -246,7 +246,7 @@ public class CableBase extends BlockCyclic implements SimpleWaterloggedBlock {
         }
         EnumProperty<EnumConnectType> property = CableBase.FACING_TO_PROPERTY_MAP.get(side);
         if (!blockState.getValue(property).isUnBlocked()) {
-            Cyclic.LOGGER.info("VICOTRY!");
+            ModCyclic.LOGGER.info("VICOTRY!");
         }
 
         return blockState.getBlock() instanceof CableBase

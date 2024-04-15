@@ -1,11 +1,11 @@
 package com.lothrazar.cyclic.block.melter;
 
 import com.google.gson.JsonObject;
-import com.lothrazar.cyclic.Cyclic;
+import com.lothrazar.cyclic.ModCyclic;
 import com.lothrazar.cyclic.registry.CyclicRecipeTypes;
-import com.lothrazar.flib.ingredient.EnergyIngredient;
-import com.lothrazar.flib.util.RecipeUtil;
-import io.github.fabricators_of_create.porting_lib.util.FluidStack;
+import com.lothrazar.library.ingredient.EnergyIngredient;
+import com.lothrazar.library.util.RecipeUtil;
+import io.github.fabricators_of_create.porting_lib.fluids.FluidStack;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
@@ -137,7 +137,7 @@ public class RecipeMelter implements Recipe<TileMelter> {
                 r = new RecipeMelter(recipeId, list, fluid, new EnergyIngredient(json));
             }
             catch (Exception e) {
-                Cyclic.LOGGER.error("Error loading recipe " + recipeId, e);
+                ModCyclic.LOGGER.error("Error loading recipe " + recipeId, e);
             }
             return r;
         }

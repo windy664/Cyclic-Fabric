@@ -1,8 +1,8 @@
 package com.lothrazar.cyclic.item.datacard.filter;
 
+import com.lothrazar.cyclic.ModCyclic;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
-import com.lothrazar.cyclic.Cyclic;
 import com.lothrazar.cyclic.data.CraftingActionEnum;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -13,7 +13,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 
 public class PacketFilterCard {
-    public static final ResourceLocation IDENTIFIER = new ResourceLocation(Cyclic.MOD_ID, "packet_filter_card");
+    public static final ResourceLocation IDENTIFIER = new ResourceLocation(ModCyclic.MODID, "packet_filter_card");
 
     private final CraftingActionEnum action;
 

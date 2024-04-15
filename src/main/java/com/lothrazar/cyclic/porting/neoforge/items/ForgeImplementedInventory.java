@@ -1,6 +1,6 @@
 package com.lothrazar.cyclic.porting.neoforge.items;
 
-import com.lothrazar.flib.ImplementedInventory;
+import com.lothrazar.library.ImplementedInventory;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 

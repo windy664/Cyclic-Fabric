@@ -6,7 +6,7 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import com.lothrazar.cyclic.block.BlockEntityCyclic;
-import com.lothrazar.flib.ImplementedInventory;
+import com.lothrazar.library.ImplementedInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;

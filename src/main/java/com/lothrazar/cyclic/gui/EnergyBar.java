@@ -1,6 +1,6 @@
 package com.lothrazar.cyclic.gui;
 
-import com.lothrazar.cyclic.Cyclic;
+import com.lothrazar.cyclic.ModCyclic;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EnergyBar {
-    public static final ResourceLocation ENERGY_BAR = new ResourceLocation(Cyclic.MOD_ID, "textures/gui/energy_bar.png");
+    public static final ResourceLocation ENERGY_BAR = new ResourceLocation(ModCyclic.MODID, "textures/gui/energy_bar.png");
     private final int x = 154;
     private final int y = 8;
     public int capacity;

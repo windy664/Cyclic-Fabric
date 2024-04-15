@@ -4,7 +4,7 @@ import com.lothrazar.cyclic.block.BlockEntityCyclic;
 import com.lothrazar.cyclic.item.datacard.EntityDataCard;
 import com.lothrazar.cyclic.porting.neoforge.items.ForgeImplementedInventory;
 import com.lothrazar.cyclic.registry.CyclicBlocks;
-import com.lothrazar.flib.data.EntityFilterType;
+import com.lothrazar.library.data.EntityFilterType;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;

@@ -5,7 +5,7 @@ import com.lothrazar.cyclic.registry.CyclicItems;
 import com.lothrazar.cyclic.registry.CyclicScreens;
 import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandler;
 import io.github.fabricators_of_create.porting_lib.transfer.item.SlottedStackStorage;
-import io.github.fabricators_of_create.porting_lib.util.FluidStack;
+import io.github.fabricators_of_create.porting_lib.fluids.FluidStack;
 import io.github.fabricators_of_create.porting_lib.util.ItemStackUtil;
 import io.github.fabricators_of_create.porting_lib.util.NetworkHooks;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;

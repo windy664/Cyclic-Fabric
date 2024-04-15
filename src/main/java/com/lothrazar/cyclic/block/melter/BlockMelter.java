@@ -4,7 +4,7 @@ import com.lothrazar.cyclic.block.BlockCyclic;
 import com.lothrazar.cyclic.lookups.Lookup;
 import com.lothrazar.cyclic.registry.CyclicBlocks;
 import com.lothrazar.cyclic.registry.CyclicScreens;
-import com.lothrazar.flib.block.EntityBlockFlib;
+import com.lothrazar.library.block.EntityBlockFlib;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;

@@ -1,6 +1,6 @@
 package com.lothrazar.cyclic.config;
 
-import com.lothrazar.cyclic.Cyclic;
+import com.lothrazar.cyclic.ModCyclic;
 import com.lothrazar.cyclic.block.antipotion.AntiBeaconBlockEntity;
 import com.lothrazar.cyclic.block.anvil.AnvilAutoBlockEntity;
 import com.lothrazar.cyclic.block.anvilmagma.AnvilMagmaBlockEntity;
@@ -10,7 +10,7 @@ import com.lothrazar.cyclic.block.crafter.CrafterBlockEntity;
 import com.lothrazar.cyclic.block.generatorfuel.TileGeneratorFuel;
 import com.lothrazar.cyclic.enchant.*;
 import com.lothrazar.cyclic.util.FabricHelper;
-import com.lothrazar.flib.config.ConfigTemplate;
+import com.lothrazar.library.config.ConfigTemplate;
 import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.config.ModConfig;
@@ -22,13 +22,13 @@ public class ConfigRegistry extends ConfigTemplate {
     private static ForgeConfigSpec CLIENT_CONFIG;
 
     public void setupMain() {
-        COMMON_CONFIG.setConfig(setup(Cyclic.MOD_ID));
-        ForgeConfigRegistry.INSTANCE.register(Cyclic.MOD_ID, ModConfig.Type.COMMON, ConfigRegistry.COMMON_CONFIG);
+        COMMON_CONFIG.setConfig(setup(ModCyclic.MODID));
+        ForgeConfigRegistry.INSTANCE.register(ModCyclic.MODID, ModConfig.Type.COMMON, ConfigRegistry.COMMON_CONFIG);
     }
 
     public void setupClient() {
-        CLIENT_CONFIG.setConfig(setup(Cyclic.MOD_ID + "-client"));
-        ForgeConfigRegistry.INSTANCE.register(Cyclic.MOD_ID, ModConfig.Type.CLIENT, ConfigRegistry.CLIENT_CONFIG);
+        CLIENT_CONFIG.setConfig(setup(ModCyclic.MODID + "-client"));
+        ForgeConfigRegistry.INSTANCE.register(ModCyclic.MODID, ModConfig.Type.CLIENT, ConfigRegistry.CLIENT_CONFIG);
     }
 
     // Defaults
@@ -130,7 +130,7 @@ public class ConfigRegistry extends ConfigTemplate {
     private static void initClientConfig() {
         final ForgeConfigSpec.Builder CFGC = builder();
         CFGC.comment(WALL, "Client-side properties", WALL)
-                .push(Cyclic.MOD_ID);
+                .push(ModCyclic.MODID);
         CFGC.comment(WALL, "Block Rendering properties.  Color MUST have one # symbol and then six spots after so #000000 up to #FFFFFF", WALL)
                 .push("blocks");
         CFGC.push("colors");
@@ -179,7 +179,7 @@ public class ConfigRegistry extends ConfigTemplate {
                 mappedBeheading.put(entity, skin);
             }
             catch (Exception e) {
-                Cyclic.LOGGER.error("Beheading Enchantment: Invalid config entry " + s);
+                ModCyclic.LOGGER.error("Beheading Enchantment: Invalid config entry " + s);
             }
         }
         return mappedBeheading;

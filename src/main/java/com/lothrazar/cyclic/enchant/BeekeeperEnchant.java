@@ -1,8 +1,13 @@
 package com.lothrazar.cyclic.enchant;
 
-import com.lothrazar.flib.enchant.EnchantmentCyclic;
+import com.lothrazar.library.enchant.EnchantmentCyclic;
+import io.github.fabricators_of_create.porting_lib.entity.events.LivingEntityEvents;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.entity.animal.Bee;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraftforge.common.ForgeConfigSpec;
 
@@ -10,8 +15,45 @@ public class BeekeeperEnchant extends EnchantmentCyclic {
     public static final String ID = "beekeeper";
     public static ForgeConfigSpec.BooleanValue CFG;
 
-    public BeekeeperEnchant() {
-        super(Enchantment.Rarity.VERY_RARE, EnchantmentCategory.ARMOR_HEAD, new EquipmentSlot[]{EquipmentSlot.HEAD});
+    public BeekeeperEnchant(Rarity rarity, EnchantmentCategory category, EquipmentSlot... applicableSlots) {
+        super(rarity, category, applicableSlots);
+
+        LivingEntityEvents.CHANGE_TARGET.register((event -> {
+            if (!isEnabled()) {
+                return;
+            }
+            if (event.getOriginalTarget() instanceof Player && event.getEntity().getType() == EntityType.BEE && event.getEntity() instanceof Bee bee) {
+                int level = this.getCurrentArmorLevel(event.getOriginalTarget());
+                if (level > 0) {
+                    event.setCanceled(true);
+                    bee.setAggressive(false);
+                    bee.setRemainingPersistentAngerTime(0);
+                    bee.setPersistentAngerTarget(null);
+                }
+            }
+        }));
+
+        LivingDamageEvent.DAMAGE.register(event -> {
+            if (!isEnabled()) {
+                return;
+            }
+            int level = this.getCurrentArmorLevel(event.getEntity());
+            if (level >= 1 && event.getSource() != null
+                    && event.getSource().getDirectEntity() != null) {
+                // Beekeeper I+
+                Entity esrc = event.getSource().getDirectEntity();
+                if (esrc.getType() == EntityType.BEE ||
+                        esrc.getType() == EntityType.BAT ||
+                        esrc.getType() == EntityType.LLAMA_SPIT) {
+                    event.setAmount(0);
+                }
+                if (level >= 2) {
+                    if (esrc.getType() == EntityType.PHANTOM) {
+                        event.setAmount(0);
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -38,44 +80,4 @@ public class BeekeeperEnchant extends EnchantmentCyclic {
     public int getMaxLevel() {
         return 2;
     }
-
-    /*
-    @SubscribeEvent
-    public void onEntityTick(LivingChangeTargetEvent event) {
-        if (!isEnabled()) {
-            return;
-        }
-        if (event.getOriginalTarget() instanceof Player && event.getEntity().getType() == EntityType.BEE && event.getEntity() instanceof Bee bee) {
-            int level = this.getCurrentArmorLevel(event.getOriginalTarget());
-            if (level > 0) {
-                event.setCanceled(true);
-                bee.setAggressive(false);
-                bee.setRemainingPersistentAngerTime(0);
-                bee.setPersistentAngerTarget(null);
-            }
-        }
-    }
-
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void onLivingDamageEvent(LivingDamageEvent event) {
-        if (!isEnabled()) {
-            return;
-        }
-        int level = this.getCurrentArmorLevel(event.getEntity());
-        if (level >= 1 && event.getSource() != null && event.getSource().getDirectEntity() != null) {
-            Entity esrc = event.getSource().getDirectEntity();
-            if (esrc.getType() == EntityType.BEE ||
-                    esrc.getType() == EntityType.BAT ||
-                    esrc.getType() == EntityType.LLAMA_SPIT) {
-                event.setAmount(0);
-            }
-            if (level >= 2) {
-                //Beekeeper II+
-                //all of level I and also
-                if (esrc.getType() == EntityType.PHANTOM) {
-                    event.setAmount(0);
-                }
-            }
-        }
-    }*/
 }

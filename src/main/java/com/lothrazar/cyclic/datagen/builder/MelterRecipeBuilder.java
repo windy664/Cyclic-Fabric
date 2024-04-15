@@ -3,9 +3,9 @@ package com.lothrazar.cyclic.datagen.builder;
 import com.google.common.collect.Lists;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import io.github.fabricators_of_create.porting_lib.util.FluidStack;
-import com.lothrazar.cyclic.Cyclic;
-import com.lothrazar.flib.ingredient.EnergyIngredient;
+import io.github.fabricators_of_create.porting_lib.fluids.FluidStack;
+import com.lothrazar.cyclic.ModCyclic;
+import com.lothrazar.library.ingredient.EnergyIngredient;
 import com.lothrazar.cyclic.registry.CyclicRecipeTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -50,7 +50,7 @@ public class MelterRecipeBuilder implements CustomRecipeBuilder<FluidStack> {
 
     public MelterRecipeBuilder requires(Ingredient ingredient) {
         if (this.ingredients.size() > 2) {
-            Cyclic.LOGGER.error("placeholder");
+            ModCyclic.LOGGER.error("placeholder");
             return this;
         }
         this.ingredients.add(ingredient);

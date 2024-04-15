@@ -1,13 +1,13 @@
 package com.lothrazar.cyclic.block.melter;
 
 import com.lothrazar.cyclic.util.FluidHelpers;
-import com.lothrazar.flib.render.type.FluidTankRenderType;
-import com.lothrazar.flib.util.RenderBlockUtils;
+import com.lothrazar.library.render.type.FluidTankRenderType;
+import com.lothrazar.library.util.RenderBlockUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
 import io.github.fabricators_of_create.porting_lib.transfer.item.SlottedStackStorage;
-import io.github.fabricators_of_create.porting_lib.util.FluidStack;
+import io.github.fabricators_of_create.porting_lib.fluids.FluidStack;
 import com.lothrazar.cyclic.lookups.CyclicLookup;
 import com.lothrazar.cyclic.lookups.types.FluidLookup;
 import net.minecraft.client.Minecraft;

@@ -1,10 +1,10 @@
 package com.lothrazar.cyclic.block;
 
 import com.lothrazar.cyclic.config.ClientConfigCyclic;
-import com.lothrazar.flib.ImplementedInventory;
-import com.lothrazar.flib.block.EntityBlockFlib;
-import com.lothrazar.flib.util.SoundUtil;
-import com.lothrazar.flib.util.StringParseUtil;
+import com.lothrazar.library.ImplementedInventory;
+import com.lothrazar.library.block.EntityBlockFlib;
+import com.lothrazar.library.util.SoundUtil;
+import com.lothrazar.library.util.StringParseUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.lookup.v1.block.BlockApiLookup;

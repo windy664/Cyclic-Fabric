@@ -17,7 +17,7 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.lothrazar.cyclic.Cyclic"
+          "com.lothrazar.cyclic.ModCyclic"
 		],
 		"client": [
 			"com.lothrazar.cyclic.client.CyclicClient"

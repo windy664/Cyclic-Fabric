@@ -3,7 +3,7 @@ package com.lothrazar.cyclic.registry;
 import com.lothrazar.cyclic.block.battery.BatteryBlockItem;
 import com.lothrazar.cyclic.block.tank.ItemBlockTank;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import com.lothrazar.cyclic.Cyclic;
+import com.lothrazar.cyclic.ModCyclic;
 import com.lothrazar.cyclic.block.cable.CableWrench;
 import com.lothrazar.cyclic.block.expcollect.ExpItemGain;
 import com.lothrazar.cyclic.item.GemstoneItem;
@@ -39,13 +39,13 @@ public class CyclicItems {
         TANK = registerBlockItem("tank", new ItemBlockTank(CyclicBlocks.TANK.block(), new FabricItemSettings()));
 
     private static Item registerItem(String id, Item item) {
-        Item registeredItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(Cyclic.MOD_ID, id), item);
+        Item registeredItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(ModCyclic.MODID, id), item);
         INSTANCE.add(registeredItem);
         return registeredItem;
     }
 
     private static Item registerBlockItem(String id, Item item) {
-        return Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(Cyclic.MOD_ID, id), item);
+        return Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(ModCyclic.MODID, id), item);
     }
 
     public static void register() {}

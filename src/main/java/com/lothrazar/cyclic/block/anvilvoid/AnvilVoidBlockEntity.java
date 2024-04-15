@@ -1,14 +1,14 @@
 package com.lothrazar.cyclic.block.anvilvoid;
 
-import io.github.fabricators_of_create.porting_lib.util.FluidStack;
+import io.github.fabricators_of_create.porting_lib.fluids.FluidStack;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import com.lothrazar.cyclic.block.BlockEntityCyclic;
-import com.lothrazar.flib.capabilities.LegacyFluidTankBase;
+import com.lothrazar.library.capabilities.LegacyFluidTankBase;
 import com.lothrazar.cyclic.registry.CyclicBlocks;
-import com.lothrazar.flib.ImplementedInventory;
+import com.lothrazar.library.ImplementedInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;

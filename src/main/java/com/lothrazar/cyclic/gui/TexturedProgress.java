@@ -1,6 +1,6 @@
 package com.lothrazar.cyclic.gui;
 
-import com.lothrazar.flib.core.Const;
+import com.lothrazar.library.core.Const;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;

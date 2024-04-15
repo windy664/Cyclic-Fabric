@@ -1,5 +1,6 @@
 package com.lothrazar.cyclic.item.crafting;
 
+import com.lothrazar.cyclic.ModCyclic;
 import com.lothrazar.cyclic.gui.ContainerBase;
 import com.lothrazar.cyclic.registry.CyclicItems;
 import com.lothrazar.cyclic.registry.CyclicScreens;
@@ -7,7 +8,6 @@ import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandle
 import io.github.fabricators_of_create.porting_lib.transfer.item.SlottedStackStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
-import com.lothrazar.cyclic.Cyclic;
 import com.lothrazar.cyclic.data.IContainerCraftingAction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
@@ -40,7 +40,7 @@ public class CraftingBagContainer extends ContainerBase implements IContainerCra
     public CraftingBagContainer(int id, Inventory playerInventory, Player player, int slot) {
         super(CyclicScreens.CRAFTING_BAG, id);
         this.slot = slot;
-        Cyclic.LOGGER.info("bag slot " + slot);
+        ModCyclic.LOGGER.info("bag slot " + slot);
         this.playerEntity = player;
         this.playerInventory = playerInventory;
         this.endInv = 10;
@@ -48,7 +48,7 @@ public class CraftingBagContainer extends ContainerBase implements IContainerCra
         this.addSlot(new ResultSlot(playerInventory.player, this.craftMatrix, this.craftResult, 0, 124, 35));
         if (slot > -1) {
             this.bag = playerInventory.getItem(slot);
-            Cyclic.LOGGER.info("bag   " + bag);
+            ModCyclic.LOGGER.info("bag   " + bag);
         }
         if (bag.isEmpty()) {
             this.bag = super.findBag(playerInventory, CyclicItems.CRAFTING_BAG);

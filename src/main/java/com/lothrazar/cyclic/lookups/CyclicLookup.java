@@ -1,6 +1,6 @@
 package com.lothrazar.cyclic.lookups;
 
-import com.lothrazar.cyclic.Cyclic;
+import com.lothrazar.cyclic.ModCyclic;
 import com.lothrazar.cyclic.lookups.types.FluidLookup;
 import com.lothrazar.cyclic.registry.CyclicBlocks;
 import com.lothrazar.cyclic.registry.CyclicItems;
@@ -10,9 +10,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 
 public class CyclicLookup {
-    public static final BlockApiLookup<FluidLookup, Void> FLUID_HANDLER = BlockApiLookup.get(new ResourceLocation(Cyclic.MOD_ID, "fluid_handler"), FluidLookup.class, void.class);
-    public static final BlockApiLookup<SlottedStackStorage, Void> ITEM_HANDLER = BlockApiLookup.get(new ResourceLocation(Cyclic.MOD_ID, "item_handler"), SlottedStackStorage.class, void.class);
-    public static final BlockApiLookup<SlottedStackStorage, Direction> ITEM_HANDLER_SIDED = BlockApiLookup.get(new ResourceLocation(Cyclic.MOD_ID, "item_handler_sided"), SlottedStackStorage.class, Direction.class);
+    public static final BlockApiLookup<FluidLookup, Void> FLUID_HANDLER = BlockApiLookup.get(new ResourceLocation(ModCyclic.MODID, "fluid_handler"), FluidLookup.class, void.class);
+    public static final BlockApiLookup<SlottedStackStorage, Void> ITEM_HANDLER = BlockApiLookup.get(new ResourceLocation(ModCyclic.MODID, "item_handler"), SlottedStackStorage.class, void.class);
+    public static final BlockApiLookup<SlottedStackStorage, Direction> ITEM_HANDLER_SIDED = BlockApiLookup.get(new ResourceLocation(ModCyclic.MODID, "item_handler_sided"), SlottedStackStorage.class, Direction.class);
 
     public static void init() {
         CyclicBlocks.BLOCK_INSTANCE.forEach(block -> {

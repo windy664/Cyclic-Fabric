@@ -1,8 +1,8 @@
 package com.lothrazar.cyclic.network.packets;
 
-import com.lothrazar.cyclic.Cyclic;
-import com.lothrazar.flib.core.IHasFluid;
-import io.github.fabricators_of_create.porting_lib.util.FluidStack;
+import com.lothrazar.cyclic.ModCyclic;
+import com.lothrazar.library.core.IHasFluid;
+import io.github.fabricators_of_create.porting_lib.fluids.FluidStack;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.client.Minecraft;
@@ -31,7 +31,7 @@ public class PacketSyncFluid {
     private static void doWork(PacketSyncFluid message) {
         BlockEntity te = Minecraft.getInstance().level.getBlockEntity(message.pos);
         if (te instanceof IHasFluid tile) {
-            Cyclic.LOGGER.info("Setting fluid");
+            ModCyclic.LOGGER.info("Setting fluid");
             tile.setFluid(message.fluid);
         }
     }

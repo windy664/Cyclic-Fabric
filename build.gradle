@@ -17,8 +17,9 @@ repositories {
 	maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" } // Forge Config Port
 	maven { url = "https://maven.jamieswhiteshirt.com/libs-release" } // Reach Entity Attributes
 	maven { url = "https://api.modrinth.com/maven" } // Forge Config Screens
-	maven { url = "https://jitpack.io" } // Forge Event API
 	maven { url = "https://mvn.devos.one/snapshots/" } // Porting Lib
+	maven { url = "https://mvn.devos.one/releases/" }
+	maven { url = "https://jitpack.io" } // Forge Event API
 	maven { url = "https://maven.shedaniel.me/" } // REI
 	maven { url = "https://maven.terraformersmc.com/" } // ModMenu, EMI
 	maven { url = "https://modmaven.dev/" } // JEI
@@ -86,7 +87,11 @@ dependencies {
 
 	//// Actual mod dependencies
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	modImplementation(include("io.github.fabricators_of_create.Porting-Lib:Porting-Lib:${project.portinglib_version}"))
+
+	for (String module in port_lib_modules.split(",")) {
+		modImplementation(include("io.github.fabricators_of_create.Porting-Lib:$module:$portinglib_version+$minecraft_version"))
+	}
+
 	modApi("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${project.forgeconfig_version}")
 	modApi(include("com.jamieswhiteshirt:reach-entity-attributes:${project.reachentityattributes_version}"))
 	modApi(include("teamreborn:energy:${project.teamreborn_energy}")) { transitive = false }

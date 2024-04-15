@@ -5,7 +5,7 @@ import com.lothrazar.cyclic.gui.ScreenBase;
 import com.lothrazar.cyclic.gui.TextureEnum;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import com.lothrazar.cyclic.data.CraftingActionEnum;
-import com.lothrazar.flib.core.Const;
+import com.lothrazar.library.core.Const;
 import com.lothrazar.cyclic.registry.CyclicTextures;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;

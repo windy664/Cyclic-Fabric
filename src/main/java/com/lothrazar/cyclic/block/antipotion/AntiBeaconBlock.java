@@ -1,11 +1,11 @@
 package com.lothrazar.cyclic.block.antipotion;
 
-import com.lothrazar.cyclic.Cyclic;
+import com.lothrazar.cyclic.ModCyclic;
 import com.lothrazar.cyclic.block.BlockCyclic;
 import com.lothrazar.cyclic.registry.CyclicBlocks;
-import com.lothrazar.flib.block.EntityBlockFlib;
-import com.lothrazar.flib.util.EntityUtil;
-import com.lothrazar.flib.util.StringParseUtil;
+import com.lothrazar.library.block.EntityBlockFlib;
+import com.lothrazar.library.util.EntityUtil;
+import com.lothrazar.library.util.StringParseUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -76,7 +76,7 @@ public class AntiBeaconBlock extends BlockCyclic {
             }
         }
         for (MobEffect curedEffect : cureMe) {
-            Cyclic.LOGGER.info("[potion cured] " + curedEffect);
+            ModCyclic.LOGGER.info("[potion cured] " + curedEffect);
             e.removeEffect(curedEffect);
         }
     }

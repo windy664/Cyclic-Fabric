@@ -12,6 +12,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeConfigSpec;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import team.reborn.energy.api.EnergyStorage;
 import team.reborn.energy.api.EnergyStorageUtil;
@@ -39,6 +41,11 @@ public class BatteryBlockEntity extends BlockEntityCyclic implements ExtendedScr
     private final Map<Direction, Boolean> poweredSides;
     SimpleEnergyStorage energy = new SimpleEnergyStorage(MAX, MAX /4, MAX / 4);
     private final NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
+
+    @Override
+    public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+        return ForgeImplementedInventory.super.isItemValid(slot, stack);
+    }
 
     @Override
     public CompoundTag serializeNBT() {
@@ -257,6 +264,11 @@ public class BatteryBlockEntity extends BlockEntityCyclic implements ExtendedScr
     @Override
     public BatteryImplementation getBattery() {
         return this;
+    }
+
+    @Override
+    public void deserializeNBTT(Tag nbt) {
+        BatteryImplementation.super.deserializeNBTT(nbt);
     }
 
     @Override

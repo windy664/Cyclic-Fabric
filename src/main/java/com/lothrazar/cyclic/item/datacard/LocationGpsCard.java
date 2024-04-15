@@ -1,11 +1,11 @@
 package com.lothrazar.cyclic.item.datacard;
 
-import com.lothrazar.flib.util.LevelWorldUtil;
-import com.lothrazar.cyclic.Cyclic;
+import com.lothrazar.library.util.LevelWorldUtil;
+import com.lothrazar.cyclic.ModCyclic;
 import com.lothrazar.cyclic.item.ItemCyclic;
-import com.lothrazar.flib.core.BlockPosDim;
-import com.lothrazar.flib.util.ChatUtil;
-import com.lothrazar.flib.util.TagDataUtil;
+import com.lothrazar.library.core.BlockPosDim;
+import com.lothrazar.library.util.ChatUtil;
+import com.lothrazar.library.util.TagDataUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
@@ -98,7 +98,7 @@ public class LocationGpsCard extends ItemCyclic {
             dim.setHitVec(vec);
         }
         catch (Exception e) {
-            Cyclic.LOGGER.error("SIde error in GPS", e);
+            ModCyclic.LOGGER.error("SIde error in GPS", e);
         }
         return dim;
     }

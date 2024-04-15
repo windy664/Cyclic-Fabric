@@ -1,6 +1,6 @@
 package com.lothrazar.cyclic.enchant;
 
-import com.lothrazar.flib.enchant.EnchantmentCyclic;
+import com.lothrazar.library.enchant.EnchantmentCyclic;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
@@ -12,8 +12,8 @@ public class TravellerEnchant extends EnchantmentCyclic {
     public static final String ID = "traveler";
     public static ForgeConfigSpec.BooleanValue CFG;
 
-    public TravellerEnchant() {
-        super(Enchantment.Rarity.RARE, EnchantmentCategory.ARMOR_LEGS, new EquipmentSlot[] {EquipmentSlot.LEGS});
+    public TravellerEnchant(Rarity rarity, EnchantmentCategory category, EquipmentSlot... applicableSlots) {
+        super(rarity, category, applicableSlots);
     }
 
     @Override

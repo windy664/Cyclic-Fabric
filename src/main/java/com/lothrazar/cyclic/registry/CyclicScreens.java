@@ -6,7 +6,7 @@ import com.lothrazar.cyclic.block.crafter.CrafterContainer;
 import com.lothrazar.cyclic.gui.ContainerBase;
 import com.lothrazar.cyclic.item.datacard.filter.ContainerFilterCard;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
-import com.lothrazar.cyclic.Cyclic;
+import com.lothrazar.cyclic.ModCyclic;
 import com.lothrazar.cyclic.block.anvil.AnvilAutoContainer;
 import com.lothrazar.cyclic.block.anvilmagma.AnvilMagmaContainer;
 import com.lothrazar.cyclic.block.beaconpotion.BeaconPotionContainer;
@@ -59,7 +59,7 @@ public class CyclicScreens {
             new ExtendedScreenHandlerType(((syncId, inventory, buf) -> new ContainerWirelessFluid(syncId, inventory.player.level(), buf.readBlockPos(), inventory, inventory.player))));
 
     private static <T extends ContainerBase> MenuType<T> registerScreen(String id, ExtendedScreenHandlerType factory) {
-        return Registry.register(BuiltInRegistries.MENU, new ResourceLocation(Cyclic.MOD_ID, id), factory);
+        return Registry.register(BuiltInRegistries.MENU, new ResourceLocation(ModCyclic.MODID, id), factory);
     }
 
     public static void register() {}

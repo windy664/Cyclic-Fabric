@@ -1,11 +1,11 @@
 package com.lothrazar.cyclic.block.tank;
 
 import com.lothrazar.cyclic.util.FluidHelpers;
-import com.lothrazar.flib.render.type.FluidTankRenderType;
-import com.lothrazar.flib.util.RenderBlockUtils;
+import com.lothrazar.library.render.type.FluidTankRenderType;
+import com.lothrazar.library.util.RenderBlockUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import io.github.fabricators_of_create.porting_lib.util.FluidStack;
+import io.github.fabricators_of_create.porting_lib.fluids.FluidStack;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;

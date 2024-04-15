@@ -1,9 +1,9 @@
 package com.lothrazar.cyclic.block.antipotion;
 
-import com.lothrazar.cyclic.Cyclic;
+import com.lothrazar.cyclic.ModCyclic;
 import com.lothrazar.cyclic.block.BlockCyclic;
-import com.lothrazar.flib.util.SoundUtil;
-import com.lothrazar.flib.util.EntityUtil;
+import com.lothrazar.library.util.SoundUtil;
+import com.lothrazar.library.util.EntityUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
@@ -27,12 +27,12 @@ public class MilkSpongeBlock extends BlockCyclic {
 
     private void absorbPotions(Level world, BlockPos pos) {
         List<LivingEntity> all = world.getEntitiesOfClass(LivingEntity.class, EntityUtil.makeBoundingBox(pos, AntiBeaconBlockEntity.RADIUS.get(), 3));
-        Cyclic.LOGGER.info("SPONGE try absorb potions on " + all.size());
+        ModCyclic.LOGGER.info("SPONGE try absorb potions on " + all.size());
         for (LivingEntity e : all) {
             if (!e.getActiveEffects().isEmpty()) {
                 e.removeAllEffects();
                 SoundUtil.playSound(e, SoundEvents.GENERIC_DRINK);
-                Cyclic.LOGGER.info("try absorb potions on " + e);
+                ModCyclic.LOGGER.info("try absorb potions on " + e);
             }
         }
     }

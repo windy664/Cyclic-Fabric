@@ -1,9 +1,9 @@
 package com.lothrazar.cyclic.enchant;
 
-import com.lothrazar.cyclic.Cyclic;
+import com.lothrazar.cyclic.ModCyclic;
 import com.lothrazar.cyclic.config.ConfigRegistry;
-import com.lothrazar.flib.enchant.EnchantmentCyclic;
-import com.lothrazar.flib.util.StringParseUtil;
+import com.lothrazar.library.enchant.EnchantmentCyclic;
+import com.lothrazar.library.util.StringParseUtil;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -24,8 +24,8 @@ public class DisarmEnchant extends EnchantmentCyclic {
     public static ForgeConfigSpec.BooleanValue CFG;
     public static final String ID = "disarm";
 
-    public DisarmEnchant() {
-        super(Enchantment.Rarity.UNCOMMON, EnchantmentCategory.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
+    public DisarmEnchant(Rarity rarity, EnchantmentCategory category, EquipmentSlot... applicableSlots) {
+        super(rarity, category, applicableSlots);
     }
 
     @Override
@@ -93,7 +93,7 @@ public class DisarmEnchant extends EnchantmentCyclic {
     private boolean canDisarm(LivingEntity target) {
         String id = EntityType.getKey(target.getType()).toString();
         if (StringParseUtil.isInList(ConfigRegistry.getDisarmIgnoreList(), EntityType.getKey(target.getType()))) {
-            Cyclic.LOGGER.info("disenchant ignored by: CONFIG LIST" + id);
+            ModCyclic.LOGGER.info("disenchant ignored by: CONFIG LIST" + id);
             return false;
         }
         //default yes, its not in ignore list so canDisarm=true

@@ -11,7 +11,7 @@ import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import com.lothrazar.cyclic.block.BlockEntityCyclic;
 import com.lothrazar.cyclic.block.cable.CableBase;
 import com.lothrazar.cyclic.block.cable.EnumConnectType;
-import com.lothrazar.flib.capabilities.FluidTankBase;
+import com.lothrazar.library.capabilities.FluidTankBase;
 import com.lothrazar.cyclic.util.UtilDirection;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

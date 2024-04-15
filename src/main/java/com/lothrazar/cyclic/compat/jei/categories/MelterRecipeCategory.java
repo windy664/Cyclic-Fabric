@@ -1,5 +1,6 @@
 package com.lothrazar.cyclic.compat.jei.categories;
 
+import com.lothrazar.cyclic.ModCyclic;
 import com.lothrazar.cyclic.compat.jei.FluidToJEI;
 import com.lothrazar.cyclic.registry.CyclicBlocks;
 import mezz.jei.api.constants.VanillaTypes;
@@ -13,9 +14,8 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import com.lothrazar.cyclic.Cyclic;
 import com.lothrazar.cyclic.block.melter.RecipeMelter;
-import com.lothrazar.flib.util.ChatUtil;
+import com.lothrazar.library.util.ChatUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -26,13 +26,13 @@ import java.util.List;
 
 public class MelterRecipeCategory implements IRecipeCategory<RecipeMelter> {
     private static final int FONT = 10592673;
-    private static final ResourceLocation ID = new ResourceLocation(Cyclic.MOD_ID, "melter");
+    private static final ResourceLocation ID = new ResourceLocation(ModCyclic.MODID, "melter");
     public static final RecipeType<RecipeMelter> TYPE = new RecipeType<>(ID, RecipeMelter.class);
     private final IDrawable gui;
     private final IDrawable icon;
 
     public MelterRecipeCategory(IGuiHelper helper) {
-        gui = helper.drawableBuilder(new ResourceLocation(Cyclic.MOD_ID, "textures/jei/melter_recipe.png"), 0, 0, 169, 69).setTextureSize(169, 69).build();
+        gui = helper.drawableBuilder(new ResourceLocation(ModCyclic.MODID, "textures/jei/melter_recipe.png"), 0, 0, 169, 69).setTextureSize(169, 69).build();
         icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(CyclicBlocks.MELTER.block()));
     }
 

@@ -1,11 +1,11 @@
 package com.lothrazar.cyclic.client;
 
-import com.lothrazar.flib.util.LevelWorldUtil;
-import com.lothrazar.flib.util.RenderBlockUtils;
+import com.lothrazar.library.util.LevelWorldUtil;
+import com.lothrazar.library.util.RenderBlockUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import com.lothrazar.cyclic.item.datacard.LocationGpsCard;
-import com.lothrazar.flib.core.BlockPosDim;
+import com.lothrazar.library.core.BlockPosDim;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;

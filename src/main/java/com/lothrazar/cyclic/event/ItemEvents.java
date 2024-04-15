@@ -5,9 +5,9 @@ import com.lothrazar.cyclic.enchant.TravellerEnchant;
 import com.lothrazar.cyclic.event.fabric.BeforeDamageCallback;
 import com.lothrazar.cyclic.registry.CyclicItems;
 import com.lothrazar.cyclic.registry.CyclicSounds;
-import com.lothrazar.flib.util.SoundUtil;
+import com.lothrazar.library.util.SoundUtil;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
-import com.lothrazar.flib.util.EnchantUtil;
+import com.lothrazar.library.util.EnchantUtil;
 import com.lothrazar.cyclic.registry.CyclicEnchants;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSources;
@@ -35,7 +35,7 @@ public class ItemEvents {
         BeforeDamageCallback.BEFORE_DAMAGE.register((source, amount) -> {
             if (!TravellerEnchant.CFG.get()) return amount;
             if (source.getEntity() instanceof LivingEntity livingEntity) {
-                int level = EnchantUtil.getCurrentLevelSlot(livingEntity, EquipmentSlot.LEGS, CyclicEnchants.TRAVELLER);
+                int level = EnchantUtil.getCurrentLevelSlot(livingEntity, EquipmentSlot.LEGS, CyclicEnchants.TRAVELLER.get());
                 if (level > 0) {
                     DamageSources sources = livingEntity.level().damageSources();
                     if (source == sources.cactus() || source == sources.flyIntoWall() || source == sources.sweetBerryBush() || source == sources.sting(null)) {

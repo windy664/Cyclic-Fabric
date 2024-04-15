@@ -4,7 +4,7 @@ import com.lothrazar.cyclic.gui.ContainerBase;
 import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandler;
 import io.github.fabricators_of_create.porting_lib.transfer.item.SlotItemHandler;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
-import com.lothrazar.flib.core.Const;
+import com.lothrazar.library.core.Const;
 import com.lothrazar.cyclic.registry.CyclicItems;
 import com.lothrazar.cyclic.registry.CyclicScreens;
 import net.minecraft.nbt.CompoundTag;

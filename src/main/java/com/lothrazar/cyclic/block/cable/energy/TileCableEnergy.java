@@ -4,7 +4,7 @@ import com.lothrazar.cyclic.registry.CyclicBlocks;
 import com.lothrazar.cyclic.block.BlockEntityCyclic;
 import com.lothrazar.cyclic.block.cable.CableBase;
 import com.lothrazar.cyclic.block.cable.EnumConnectType;
-import com.lothrazar.flib.cap.CustomEnergyStorageUtil;
+import com.lothrazar.library.cap.CustomEnergyStorageUtil;
 import com.lothrazar.cyclic.util.UtilDirection;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
