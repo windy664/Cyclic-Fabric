@@ -8,5 +8,3 @@
 
 Currently focusing on implementing blocks before doing items.
 
-I may port this over to **1.19.2**, however it depends on if there is a decent amount of demand.
-If this does happen, it will happen after 1.20.1 is completed/nearly finished.
